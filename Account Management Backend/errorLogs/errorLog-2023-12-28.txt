@@ -1,0 +1,1 @@
+2023-12-28T05:04:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Incorrect decimal value: '' for column 'creditLimit' at row 1

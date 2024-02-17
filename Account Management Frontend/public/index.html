@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Premium Tailwind CSS Admin & Dashboard Template" />
+  <meta name="author" content="SRBThemes" />
+
+  <!-- Site Tiltle -->
+  <title>Sliced - Tailwind CSS Admin & Dashboard Template</title>
+
+  <!-- Favicon Icon -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Style Css -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <style>
+    .noti-area {
+      /* Define initial styles */
+      display: none;
+    }
+
+    .noti-area.open {
+      /* Define styles for open state with transition */
+      transition: opacity 5000ms;
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body id="app" x-data="main" data-body-class="initial-body-class"
+  class="font-cerebri antialiased relative text-black dark:text-white text-sm font-normal overflow-x-hidden vertical">
+
+  <div id="root"></div>
+</body>
+<script>
+  function toggleFullscreen() {
+    const doc = window.document;
+    const docEl = doc.documentElement;
+
+    const requestFullscreen =
+      docEl.requestFullscreen ||
+      docEl.mozRequestFullScreen ||
+      docEl.webkitRequestFullScreen ||
+      docEl.msRequestFullscreen;
+
+    const exitFullscreen =
+      doc.exitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen ||
+      doc.msExitFullscreen;
+
+    if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      requestFullscreen.call(docEl);
+    } else {
+      exitFullscreen.call(doc);
+    }
+  }
+</script>
+<!-- All javascirpt -->
+<!-- Alpine js -->
+<script src="/assets/js/alpine-collaspe.min.js"></script>
+<script src="/assets/js/alpine-persist.min.js"></script>
+<script src="/assets/js/alpine.min.js" defer></script>
+
+<!-- Custom js -->
+<script src="/assets/js/custom.js"></script>
+
+
+</html>

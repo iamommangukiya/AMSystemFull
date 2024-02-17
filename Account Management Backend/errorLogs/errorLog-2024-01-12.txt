@@ -1,0 +1,2 @@
+2024-01-12T10:59:5  : E:\projects\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'CompanyId' in 'where clause'
+2024-01-12T11:00:2  : E:\projects\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'companyId' in 'where clause'

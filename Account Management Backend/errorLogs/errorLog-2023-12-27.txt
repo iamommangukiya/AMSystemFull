@@ -1,0 +1,103 @@
+2023-12-27T04:36:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2023-12-27T04:36:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2023-12-27T05:49:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Table 'accounting.transactionmasterlog' doesn't exist
+2023-12-27T06:10:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Table 'accounting.transactionmasterlog' doesn't exist
+2023-12-27T06:10:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Table 'accounting.transactionmasterlog' doesn't exist
+2023-12-27T06:42:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Incorrect decimal value: 'Sint commodi reprehe' for column 'openingBalance' at row 1
+2023-12-27T06:49:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Incorrect decimal value: '' for column 'creditLimit' at row 1
+2023-12-27T06:49:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Incorrect decimal value: '' for column 'creditLimit' at row 1
+2023-12-27T06:50:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Incorrect decimal value: '' for column 'creditLimit' at row 1
+2023-12-27T09:50:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2023-12-27T10:04:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:04:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:04:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:05:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:06:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:06:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:06:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:07:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:07:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:07:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:07:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:08:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:09:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:10:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:10:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:10:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:10:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:10:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:11:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:11:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:11:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:12:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:12:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:14:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:15:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:15:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:15:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:16:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:16:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:17:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:17:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:17:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:17:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:18:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:18:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:18:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2023-12-27T10:21:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:22:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:22:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:22:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:22:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:22:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:23:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:23:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:23:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:23:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:23:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:24:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:24:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:24:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:24:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:24:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:25:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:25:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:25:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:25:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:26:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:26:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:26:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:26:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:27:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:27:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:27:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:27:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:28:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:28:5  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:29:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:29:1  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:29:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined
+2023-12-27T10:29:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : ReferenceError: responsedata is not defined

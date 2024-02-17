@@ -1,0 +1,1 @@
+2024-01-07T22:50:4  : E:\projects\GrowCode-main\GrowCode-main\Accounting Management System\Account Management Backend\errorLog.js : Error: Unknown column 'tsc' in 'field list'

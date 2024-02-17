@@ -1,0 +1,5 @@
+2024-01-01T09:09:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Column count doesn't match value count at row 1
+2024-01-01T09:13:3  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Incorrect date value: '2023' for column 'fromDate' at row 1
+2024-01-01T09:16:4  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Column count doesn't match value count at row 1
+2024-01-01T09:33:0  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
+2024-01-01T09:33:2  : D:\Projects\GrowCode\Om\Accounting Management System\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
