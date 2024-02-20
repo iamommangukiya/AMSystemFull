@@ -17,6 +17,7 @@ import ReciveAmount from "./component/ReciveAmountRecords";
 import Trasection_Records from "./component/Transection_Records";
 import PurchaseBill from "./pages/PurchaseBill";
 import SaleBilling from "./pages/SaleBilling";
+import ItemmasterRecords from "./pages/ItemmasterRecords";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -87,7 +88,10 @@ const App = () => {
         <Route path="/dashboard" element={<Layout />}>
           <Route path="" element={<CompanyDetail></CompanyDetail>}></Route>
           <Route path="party" element={<PartyRecord></PartyRecord>}></Route>
-          <Route path="itemmaster" element={<ItemMaster></ItemMaster>}></Route>
+          <Route
+            path="itemmaster"
+            element={<ItemmasterRecords></ItemmasterRecords>}
+          ></Route>
           <Route
             path="PurchaseBill"
             element={<PurchaseBill></PurchaseBill>}

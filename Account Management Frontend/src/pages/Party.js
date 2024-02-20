@@ -46,10 +46,10 @@ const Party = ({ data, mode }) => {
     TCSRate: "",
   });
 
+
   useEffect(() => {
     setInputs(data);
   }, [data]);
-  const successToastPosition = "top-center";
   const errorToastPosition = "top-right";
   const countryList = Object.values(coutry);
 
@@ -65,7 +65,6 @@ const Party = ({ data, mode }) => {
     panvalid: false,
   });
 
-  
   const partyName = useSelector(
     (state) => state.PartyReducer.resultparty?.flag
   );
@@ -172,6 +171,7 @@ const Party = ({ data, mode }) => {
 
   return (
     <>
+    
       <div className="  overflow-scroll flex items-center justify-center mt-0 ">
         <form
           className="bg-white shadow-md   rounded px-2 pt-6  "

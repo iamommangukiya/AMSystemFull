@@ -1,33 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { validGst } from "./Regex";
+
 import units from "./unit";
 import { useDispatch, useSelector } from "react-redux";
-import { items_create, items_get } from "../reducer/Item_reducer";
+import { items_create, items_get, items_update } from "../reducer/Item_reducer";
 import { ToastContainer, toast } from "react-toastify";
-import ItemmasterRecords from "./ItemmasterRecords";
 
-const ItemMaster = () => {
+const ItemMaster = ({ data, mode, closeBox }) => {
   const [inputs, setInput] = useState({
     name: "",
     unit: "",
-    openingStock: "",
-    closingStock: "",
-    hns: "",
-    gst: "",
+    openingStock: "0",
+    closingStock: "0",
+    HSN: "",
+    gst: "0",
   });
-  const [Valid, setValid] = useState({
-    gstValid: false,
-  });
-
+  useEffect(() => {
+    setInput(data);
+  }, [data]);
   const dispatch = useDispatch();
   const handelchange = (e) => {
     const { name, value } = e.target;
     setInput({ ...inputs, [name]: value });
   };
+  console.log(mode);
 
   const msg = useSelector((state) => state.ItemReducer.result["flag"]);
+  console.log(msg);
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +40,21 @@ const ItemMaster = () => {
       toast.success("Sucessfull", "sucess");
     }
   };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+
+    try {
+      dispatch(items_update(inputs));
+      dispatch(items_get());
+      closeBox();
+    } catch {}
+
+    if (msg === true) {
+      toast.success("Sucessfull", "sucess");
+    }
+  };
+
   const unitList = Object.values(units);
   return (
     <>
@@ -58,6 +72,7 @@ const ItemMaster = () => {
                 Name
               </label>
               <input
+                required
                 type="text"
                 className="form-input border border-primary w-full rounded-xl"
                 onChange={handelchange}
@@ -71,9 +86,10 @@ const ItemMaster = () => {
               </label>
               <input
                 type="text"
-                name="hsn"
+                required
+                name="HSN"
                 onChange={handelchange}
-                value={inputs.hsn}
+                value={inputs.HSN}
                 className="form-input border border-primary w-full rounded-xl"
               />
             </div>
@@ -82,6 +98,7 @@ const ItemMaster = () => {
                 Unit
               </label>
               <select
+                defaultValue={0}
                 name="unit"
                 onChange={handelchange}
                 className="form-input border border-primary w-30 rounded-xl"
@@ -103,6 +120,7 @@ const ItemMaster = () => {
               <div className="relative">
                 <input
                   type="number"
+                  defaultValue={0}
                   name="openingStock"
                   onChange={handelchange}
                   value={inputs.openingStock}
@@ -117,6 +135,7 @@ const ItemMaster = () => {
               <div className="relative">
                 <input
                   type="number"
+                  defaultValue={0}
                   name="closingStock"
                   onChange={handelchange}
                   value={inputs.closingStock}
@@ -131,6 +150,7 @@ const ItemMaster = () => {
               <div className="relative">
                 <input
                   type="number"
+                  defaultValue={0}
                   name="salePrice"
                   onChange={handelchange}
                   value={inputs.salePrice}
@@ -145,6 +165,7 @@ const ItemMaster = () => {
               <div className="relative">
                 <input
                   type="number"
+                  defaultValue={0}
                   name="purchasePrice"
                   onChange={handelchange}
                   value={inputs.purchasePrice}
@@ -159,6 +180,7 @@ const ItemMaster = () => {
               <div className="relative">
                 <input
                   type="number"
+                  defaultValue={0}
                   name="gst"
                   onChange={handelchange}
                   value={inputs.gst}
@@ -171,12 +193,23 @@ const ItemMaster = () => {
             </div>
           </div>
           <div className=" flex items-center m-auto justify-center">
-            <button
-              className="btn   flex items-center justify-center text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
-              type="submit"
-            >
-              Submit
-            </button>
+            {mode == "add" && (
+              <button
+                className="btn   flex items-center justify-center text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                type="submit"
+              >
+                Add Product
+              </button>
+            )}
+            {mode == "update" && (
+              <button
+                className="btn   flex items-center justify-center text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                type="button"
+                onClick={handleUpdate}
+              >
+                update
+              </button>
+            )}
           </div>
         </form>
         <ToastContainer
@@ -192,7 +225,6 @@ const ItemMaster = () => {
           theme="colored"
         />
       </div>
-      <ItemmasterRecords></ItemmasterRecords>
     </>
   );
 };

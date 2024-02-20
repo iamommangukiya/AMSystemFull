@@ -21,6 +21,7 @@ export const items_create = createAsyncThunk(
     }
   }
 );
+
 export const items_get = createAsyncThunk("items_get/items_api", async () => {
   try {
     const auth_token = localStorage.getItem("company");

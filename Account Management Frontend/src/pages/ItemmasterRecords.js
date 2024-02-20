@@ -4,40 +4,72 @@ import { items_delete, items_get, items_update } from "../reducer/Item_reducer";
 
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
+import ReactModal from "react-modal";
+import React_Modal from "../component/ReactModal";
+import ItemMaster from "./ItemMaster";
+import { disabledTime } from "rsuite/esm/utils/dateUtils";
 const ItemmasterRecords = () => {
   const [showDate, setShowData] = useState(false);
   const [editIndex, setIndex] = useState(-1);
   const [editValues, setValues] = useState({});
+
+  const [filterDate, setFilterDate] = useState([]);
+  const [Modal, setModal] = useState(false);
+  const [Mode, setMode] = useState("add");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(items_get());
   }, [dispatch]);
-
-  const result = useSelector((state) => state.ItemReducer.result?.data);
-
-  if (!result || !Array.isArray(result)) {
-    return <div className="justify-center text-center text-lg">No Data...</div>;
-  }
-
-  const handleDoubleClick = (index) => {
+  const closemodal = () => {
+    setModal(false);
+  };
+  const handleUpdateClick = (index) => {
     setIndex(index);
     setValues(result[index]);
+    setModal(true);
+    setMode("update");
   };
+
+  const result = useSelector((state) => state.ItemReducer.result?.data);
+  useEffect(() => {
+    if (result?.length > 0) {
+      setFilterDate(result);
+    }
+  }, [result]);
+
+  if (!result || !Array.isArray(result)) {
+    return (
+      <>
+        <div className=" flex justify-between text-lg">
+          <p></p>
+          <p>No Data...</p>
+          <button
+            onClick={() => {
+              setModal(true);
+              setMode("add");
+              console.log(Mode);
+            }}
+            className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+          >
+            Add Product
+          </button>
+        </div>
+        <div>
+          <React_Modal isOpen={Modal} closeModal={closemodal}>
+            <ItemMaster data={editValues} mode={Mode}></ItemMaster>
+          </React_Modal>
+        </div>
+      </>
+    );
+  }
 
   const onHandleChange = (e, key) => {
     setValues({ ...editValues, [key]: e.target.value });
   };
-  // const handleButtonClick = (index) => {
-  //   dispatch(items_delete(index));
 
-  //   // console.log(index);
-  //   dispatch(items_get());
-
-  //   setShowData(false);
-  // };
-
-  const handleButtonClick = async (index) => {
+  const handelDeletebtn = async (index) => {
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -67,22 +99,50 @@ const ItemmasterRecords = () => {
     dispatch(items_get());
     setIndex(-1);
   };
+  const handelSerchChange = (e) => {
+    filter(e.target.value);
+  };
+  const filter = (query) => {
+    var filteredDate = result.filter(
+      (item) =>
+        item &&
+        item.name &&
+        item.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilterDate(filteredDate);
+  };
 
   const displayedData = showDate ? result : result.slice(0, 10);
 
   return (
     <>
+      <div>
+        <React_Modal isOpen={Modal} closeModal={closemodal}>
+          <ItemMaster data={editValues} mode={Mode}></ItemMaster>
+        </React_Modal>
+      </div>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-white border border-black/10 p-5 rounded dark:bg-darklight dark:border-darkborder">
-            <h2 className="text-base font-semibold text-black dark:text-white/80 mb-4 capitalize">
-              Table Editable
-            </h2>
+            <div className="flex justify-between">
+              <input
+                type="text"
+                placeholder="serch"
+                className=" rounded-xl "
+                onChange={handelSerchChange}
+              />
+              <button
+                onClick={() => {
+                  setModal(true);
+                  setMode("add");
+                }}
+                className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+              >
+                Add Product
+              </button>
+            </div>
             <div className="overflow-auto">
-              <span className="text-muted">
-                Text Double Click To Edit Table.
-              </span>
-              <table className="min-w-[640px] w-full mt-4 table-hover justify-center text-center ">
+              <table className="min-w-[640px] w-full mt-4  table-auto justify-center text-center ">
                 <thead>
                   <tr className="border-separate">
                     <th className="w-20">Id</th>
@@ -94,28 +154,15 @@ const ItemmasterRecords = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {displayedData.map((item, index) => (
+                  {filterDate.map((item, index) => (
                     <tr key={index}>
                       {Object.entries(item).map(([key, value]) => (
-                        <td
-                          key={key}
-                          onDoubleClick={() => handleDoubleClick(index)}
-                        >
-                          {editIndex === index ? (
-                            <input
-                              type="text"
-                              value={editValues[key] || ""}
-                              onChange={(e) => onHandleChange(e, key)}
-                            />
-                          ) : (
-                            value
-                          )}
-                        </td>
+                        <td key={key}>{value == "undefined" ? "-" : value}</td>
                       ))}
                       <td>
                         <button
                           className="text-danger ms-2"
-                          onClick={() => handleButtonClick(item["id"])}
+                          onClick={() => handelDeletebtn(item["id"])}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -128,15 +175,22 @@ const ItemmasterRecords = () => {
                             ></path>
                           </svg>
                         </button>
-
-                        {editIndex === index && (
-                          <button
-                            className="text-danger ms-2"
-                            onClick={handleSave}
+                        <button
+                          className="text-black dark:text-white/80 px-3"
+                          onClick={() => handleUpdateClick(index)}
+                          type="submit"
+                        >
+                          <svg
+                            xmlns=" http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            className="w-5 h-5 inline-block"
                           >
-                            Save
-                          </button>
-                        )}
+                            <path
+                              fill="currentColor"
+                              d="M5 18.89H6.41421L15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89ZM21 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L9.24264 18.89H21V20.89ZM15.7279 6.74786L17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786Z"
+                            ></path>
+                          </svg>
+                        </button>
                       </td>
                     </tr>
                   ))}
