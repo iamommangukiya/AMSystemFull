@@ -160,8 +160,7 @@ class userServices {
       }
     });
   }
-  // featch Company
-
+  // featch CompanyFit
   async featchCompanybyid(userInputs, res) {
     let flag = false;
     var query = Query.featchCompanyid(userInputs);

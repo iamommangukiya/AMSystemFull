@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Layout from "./component/Layout";
 import AppContext from "./context/AppContext";
 import ItemMaster from "./pages/ItemMaster";
+import PrintBill from "./pages/PrintBill";
 import PartyRecord from "./component/PartyRecord";
 import ReciveAmount from "./component/ReciveAmountRecords";
 import Trasection_Records from "./component/Transection_Records";
@@ -92,6 +93,7 @@ const App = () => {
             path="itemmaster"
             element={<ItemmasterRecords></ItemmasterRecords>}
           ></Route>
+          <Route path="bill" element={<PrintBill></PrintBill>}></Route>
           <Route
             path="PurchaseBill"
             element={<PurchaseBill></PurchaseBill>}

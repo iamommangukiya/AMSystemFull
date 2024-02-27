@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer class="py-2 text-center text-black dark:text-darkmuted md:text-left">
+      {/* <footer class="py-2 text-center text-black dark:text-darkmuted md:text-left">
         &copy;
         <script>
           var year = new Date(); document.write(year.getFullYear());
@@ -23,7 +23,7 @@ const Footer = () => {
           </svg>
           by SRBThemes
         </span>
-      </footer>
+      </footer> */}
     </>
   );
 };

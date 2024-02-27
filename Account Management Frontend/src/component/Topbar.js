@@ -58,7 +58,7 @@ const Topbar = () => {
   const currentnextYear = new Date().getFullYear() + 1;
   return (
     <>
-      <div class="bg-white dark:bg-darklight dark:border-darkborder flex gap-4 lg:z-10 items-center justify-between px-4 h-[60px] border-b border-black/10 detached-topbar relative">
+      <div class="bg-white dark:bg-darklight dark:border-darkborder flex gap-4   items-center justify-between px-4 h-[60px] border-b border-black/10 detached-topbar relative">
         <div class="flex items-center gap-2 sm:gap-4 flex-1">
           <button
             type="button"

@@ -128,7 +128,7 @@ class Querys {
   };
   selectpartycmpId = (userdata) => {
     var { partyName, id } = userdata;
-    return `select * from accounting.party where partyName = '${partyName}' and Companyid= ${id}`;
+    return `select * from Accounting.party where partyName = '${partyName}' and Companyid= ${id}`;
   };
   createPartyquery = (userInputs) => {
     var {
@@ -163,7 +163,7 @@ class Querys {
     const replaceUndefinedWithNull = (value) =>
       value !== undefined ? `'${value}'` : "null";
 
-    return `INSERT INTO accounting.party(partyName, address, phoneNumber, statecode, pan, gstNumber,  deliveryAddress, creditLimit, openingBalance, CompanyId, accountGroup, city, postalCode, distance, transporterName, BrokerName, natureOfOrg, email, remarks, tds, paymentTerms, partyGroup, discount, brokerage, rf, TCSRate) VALUES (${replaceUndefinedWithNull(
+    return `INSERT INTO Accounting.party(partyName, address, phoneNumber, statecode, pan, gstNumber,  deliveryAddress, creditLimit, openingBalance, CompanyId, accountGroup, city, postalCode, distance, transporterName, BrokerName, natureOfOrg, email, remarks, tds, paymentTerms, partyGroup, discount, brokerage, rf, TCSRate) VALUES (${replaceUndefinedWithNull(
       partyName
     )}, ${replaceUndefinedWithNull(address)}, ${replaceUndefinedWithNull(
       phoneNumber
@@ -224,16 +224,16 @@ class Querys {
       paymentTerms,
     } = userInputs;
     // console.log(userInputs);
-    return `UPDATE accounting.party SET partyName = '${partyName}', address = '${address}', phoneNumber = '${phoneNumber}', statecode = '${statecode}', pan = '${pan}', gstNumber = '${gstNumber}',  deliveryAddress = '${deliveryAddress}', creditLimit = '${creditLimit}', openingBalance = '${openingBalance}', accountGroup = '${accountGroup}', city = '${city}', postalCode = '${postalCode}', distance = '${distance}', transporterName = '${transporterName}', brokerage = '${brokerage}', natureOfOrg = '${natureOfOrg}', email = '${email}', remarks = '${remarks}', tds = '${tds}', paymentTerms = '${paymentTerms}', partyGroup = '${partyGroup}', discount = '${discount}', brokerage = '${brokerage}', rf = '${rf}', TCSRate = '${TCSRate}' WHERE ID = ${ID};`;
-    // return `UPDATE accounting.party SET PartyName = '${PartyName}', Address = '${Address}', MobileNo = '${MobileNo}', StateCode = '${StateCode}', PAN = '${PAN}', CompanyId='${CompanyId}', GSTIN = '${GSTIN}',  DeliveryAddress = '${DeliveryAddress}', CreditLimit = '${CreditLimit}', OpeningBalance = '${OpeningBalance}', accountGroup = '${accountGroup}', City = '${City}', Pincode = '${Pincode}', Distance = '${Distance}', transporterName = '${transporterName}', BrokerName = '${BrokerName}', natureOfOrg = '${natureOfOrg}', EmailId = '${EmailId}', Remarks = '${Remarks}', TDS = '${TDS}', paymentterms = '${paymentterms}', partyGroup = '${partyGroup}', discount = '${discount}', brokerage = '${brokerage}', rf = '${rf}', TCSRate = '${TCSRate}' WHERE ID = ${ID};`;
+    return `UPDATE Accounting.party SET partyName = '${partyName}', address = '${address}', phoneNumber = '${phoneNumber}', statecode = '${statecode}', pan = '${pan}', gstNumber = '${gstNumber}',  deliveryAddress = '${deliveryAddress}', creditLimit = '${creditLimit}', openingBalance = '${openingBalance}', accountGroup = '${accountGroup}', city = '${city}', postalCode = '${postalCode}', distance = '${distance}', transporterName = '${transporterName}', brokerage = '${brokerage}', natureOfOrg = '${natureOfOrg}', email = '${email}', remarks = '${remarks}', tds = '${tds}', paymentTerms = '${paymentTerms}', partyGroup = '${partyGroup}', discount = '${discount}', brokerage = '${brokerage}', rf = '${rf}', TCSRate = '${TCSRate}' WHERE ID = ${ID};`;
+    // return `UPDATE Accounting.party SET PartyName = '${PartyName}', Address = '${Address}', MobileNo = '${MobileNo}', StateCode = '${StateCode}', PAN = '${PAN}', CompanyId='${CompanyId}', GSTIN = '${GSTIN}',  DeliveryAddress = '${DeliveryAddress}', CreditLimit = '${CreditLimit}', OpeningBalance = '${OpeningBalance}', accountGroup = '${accountGroup}', City = '${City}', Pincode = '${Pincode}', Distance = '${Distance}', transporterName = '${transporterName}', BrokerName = '${BrokerName}', natureOfOrg = '${natureOfOrg}', EmailId = '${EmailId}', Remarks = '${Remarks}', TDS = '${TDS}', paymentterms = '${paymentterms}', partyGroup = '${partyGroup}', discount = '${discount}', brokerage = '${brokerage}', rf = '${rf}', TCSRate = '${TCSRate}' WHERE ID = ${ID};`;
   }
 
   deleteParty = (id) => {
-    return `DELETE FROM accounting.party WHERE id = ${id.id};`;
+    return `DELETE FROM Accounting.party WHERE id = ${id.id};`;
   };
   selectParty = (id) => {
-    return `SELECT * FROM accounting.party WHERE CompanyId = ${id};`;
-    // return `select * from accounting.party`;/
+    return `SELECT * FROM Accounting.party WHERE CompanyId = ${id};`;
+    // return `select * from Accounting.party`;/
   };
 
   selectCompany = (id) => {
@@ -242,7 +242,7 @@ class Querys {
     return query;
   };
   selectFinancialYear = (userInputs) => {
-    return `select year FROM accounting.financialyear WHERE companyId = ${userInputs}`;
+    return `select year FROM Accounting.financialyear WHERE companyId = ${userInputs}`;
   };
 
   insertFinancialYaer = (userInputs) => {
@@ -265,7 +265,7 @@ class Querys {
 
     var year = fromDate + "/" + toDate;
 
-    return `INSERT INTO accounting.financialyear(companyId,year)VALUES(${insertId},'${year}');    `;
+    return `INSERT INTO Accounting.financialyear(companyId,year)VALUES(${insertId},'${year}');    `;
   };
   updateFinancialYaer = (userInputs) => {
     var {
@@ -279,11 +279,11 @@ class Querys {
       closingStock,
       capital,
     } = userInputs;
-    return `UPDATE accounting.financialyear SET companyId = ${companyId}, fromDate = ${fromDate}, toDate = ${toDate}, currentYear = ${currentYear}, status = ${status}, openingStock = ${openingStock}, closingStock = ${closingStock}, capital = ${capital} WHERE id = ${id};
+    return `UPDATE Accounting.financialyear SET companyId = ${companyId}, fromDate = ${fromDate}, toDate = ${toDate}, currentYear = ${currentYear}, status = ${status}, openingStock = ${openingStock}, closingStock = ${closingStock}, capital = ${capital} WHERE id = ${id};
     `;
   };
   deleteFinancialYear = (userDate) => {
-    return `DELETE FROM accounting.financialyear WHERE id = ${userDate.id};`;
+    return `DELETE FROM Accounting.financialyear WHERE id = ${userDate.id};`;
   };
   selectFinancialMaster = () => {
     return `SELECT * FROM transactionMaster`;
@@ -305,7 +305,7 @@ class Querys {
       invoiceNo,
     } = userData;
 
-    return `INSERT INTO accounting.transactionMaster
+    return `INSERT INTO Accounting.transactionMaster
     (
       transectionType,
       createDate,
@@ -400,16 +400,32 @@ class Querys {
   insertItemMaster = (userdata) => {
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
-    const { name, unit, hsn, gst, userId } = userdata;
-    // console.log(userdata);
-    return `INSERT INTO accounting.itemmaster(name,unit,HSN,GST,CompanyId,createDate,updateDate,LastModifidedBy)VALUES('${name}','${unit}','${hsn}','${gst}',${userId},'${formattedDate}','${formattedDate}',${userId});`;
+    const {
+      name,
+      unit,
+      HSN,
+      gst,
+      userId,
+      openingStock,
+      closingStock,
+      salePrice,
+      purchasePrice,
+    } = userdata;
+
+    const openingStockValue = openingStock !== undefined ? openingStock : null;
+    const closingStockValue = closingStock !== undefined ? closingStock : null;
+    const salePriceValue = salePrice !== undefined ? salePrice : null;
+    const purchasePriceValue =
+      purchasePrice !== undefined ? purchasePrice : null;
+
+    return `INSERT INTO Accounting.itemmaster (name, unit, HSN, GST, CompanyId, createDate, updateDate, LastModifidedBy, openingStock, closingStock, salePrice, purchasePrice) VALUES ('${name}', '${unit}', '${HSN}', '${gst}', ${userId}, '${formattedDate}', '${formattedDate}', ${userId}, ${openingStockValue}, ${closingStockValue}, ${salePriceValue}, ${purchasePriceValue});`;
   };
   UpdateItemMaster = (userInputs) => {
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
     const { id, name, unit, HSN, GST, userId } = userInputs;
 
-    return `UPDATE accounting.itemmaster
+    return `UPDATE Accounting.itemmaster
    SET
        name = '${name}',
        unit = '${unit}',
@@ -422,24 +438,24 @@ class Querys {
        id= ${id}`;
   };
   deleteitemMaster = (userdata) => {
-    return `DELETE FROM accounting.itemmaster where id =${userdata.id}`;
+    return `DELETE FROM Accounting.itemmaster where id =${userdata.id}`;
   };
   itmexistquery = (userdata) => {
-    let query = `SELECT * FROM accounting.itemmaster WHERE CompanyId = ${userdata.userId} AND name='${userdata.name}'`;
+    let query = `SELECT * FROM Accounting.itemmaster WHERE CompanyId = ${userdata.userId} AND name='${userdata.name}'`;
 
     return query;
   };
   seletItemMaster = (userdata) => {
-    let query = `SELECT id,name,unit,HSN,GST FROM accounting.itemmaster  where CompanyId = ${userdata}`;
+    let query = `SELECT * FROM Accounting.itemmaster  where CompanyId = ${userdata}`;
 
     return query;
   };
   report = (id) => {
-    return `SELECT sum(amount) as Amount,AccountTo,AccountFrom ,transectionType FROM accounting.transactionMaster where CompanyId=${id} group by transectionType , AccountTo,AccountFrom;`;
+    return `SELECT sum(amount) as Amount,AccountTo,AccountFrom ,transectionType FROM Accounting.transactionMaster where CompanyId=${id} group by transectionType , AccountTo,AccountFrom;`;
   };
 
   selectaccountGroupMaster = () => {
-    return `SELECT * FROM accounting.accountgroupmaster;`;
+    return `SELECT * FROM Accounting.accountgroupmaster;`;
   };
   inserbillLog = (userdata) => {
     const currentdate = moment();
@@ -467,11 +483,11 @@ class Querys {
       bookName,
       payAmount,
       panding,
-      kassar,
+      dueAmount,
       deliveryAdress,
     } = userdata;
 
-    return `INSERT INTO accounting.Billlog (
+    return `INSERT INTO Accounting.Billlog (
       ComapnyId,
       invoiceNo,
       invoiceDate,
@@ -494,7 +510,7 @@ class Querys {
       bookName,
       payAmount,
       panding,
-      kassar,
+      dueAmount,
       deliveryAdress,
       createDate,
       updateDate
@@ -521,7 +537,7 @@ class Querys {
       '${bookName}',
       '${payAmount}',
       '${panding}',
-      '${kassar}',
+      '${dueAmount}',
       '${deliveryAdress}',
       '${formattedDate}',
       '${formattedDate}'

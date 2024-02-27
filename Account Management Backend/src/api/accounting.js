@@ -2,7 +2,7 @@ const { response } = require("express");
 const logError = require("../../errorLog");
 const { AcountServices } = require("../services");
 const feactCompany = require("./middleware/featchCompany");
-const accounting = require("../services/Accounting");
+const Accounting = require("../services/Accounting");
 var AcountService = new AcountServices();
 
 module.exports = (app) => {
@@ -194,6 +194,7 @@ module.exports = (app) => {
   });
   app.post("/api/inserbillLog", feactCompany, (req, res) => {
     var data = req.body;
+    console.log(data);
     var id = req.cmp;
     var requestdata = {
       ...data,

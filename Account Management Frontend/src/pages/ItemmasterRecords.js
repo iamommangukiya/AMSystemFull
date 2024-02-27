@@ -65,10 +65,6 @@ const ItemmasterRecords = () => {
     );
   }
 
-  const onHandleChange = (e, key) => {
-    setValues({ ...editValues, [key]: e.target.value });
-  };
-
   const handelDeletebtn = async (index) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -93,12 +89,6 @@ const ItemmasterRecords = () => {
     });
   };
 
-  const handleSave = (e) => {
-    e.preventDefault();
-    dispatch(items_update(editValues));
-    dispatch(items_get());
-    setIndex(-1);
-  };
   const handelSerchChange = (e) => {
     filter(e.target.value);
   };
@@ -148,21 +138,26 @@ const ItemmasterRecords = () => {
                     <th className="w-20">Id</th>
                     <th className="w-32">Name</th>
                     <th className="w-24">Unit</th>
-                    <th className="w-32">Hsn</th>
-                    <th className="w-20">Gst</th>
+                    <th className="w-32">price</th>
+                    <th className="w-20">Gst%</th>
                     <th className="w-20">Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filterDate.map((item, index) => (
                     <tr key={index}>
-                      {Object.entries(item).map(([key, value]) => (
-                        <td key={key}>{value == "undefined" ? "-" : value}</td>
-                      ))}
+                      {console.log(item)}
+                      <td>{item.id}</td>
+                      <td>{item.name}</td>
+                      <td>{item.unit}</td>
+                      <td>
+                        {item.purchasePrice == null ? "-" : item.purchasePrice}
+                      </td>
+                      <td>{item.GST == "undefined" ? "-" : item.GST + "%"}</td>
                       <td>
                         <button
                           className="text-danger ms-2"
-                          onClick={() => handelDeletebtn(item["id"])}
+                          onClick={() => handelDeletebtn(item.id)}
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

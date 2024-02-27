@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="sidebar fixed z-[9999] flex-none w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
+      <nav className="sidebar fixed  flex-none w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
         <div className="bg-white dark:bg-darklight h-full">
           <div className="p-4">
             <a href="index.html" className="main-logo w-full">
@@ -38,8 +38,7 @@ const Sidebar = () => {
               <h2 className="my-2 text-black/50 text-sm dark:text-white/30">
                 <span>Menu</span>
               </h2>
-             
-             
+
               <li className="menu nav-item">
                 <a
                   href="javaScript:;"
@@ -164,13 +163,11 @@ const Sidebar = () => {
                   </li>
                   <li>
                     <NavLink to="/dashboard/PurchaseBill">
-                    Purchase Billing
+                      Purchase Billing
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/SaleBill">
-                    Sale Billing
-                    </NavLink>
+                    <NavLink to="/dashboard/SaleBill">Sale Billing</NavLink>
                   </li>
                   <li>
                     <a href="javascript:;">
@@ -183,7 +180,7 @@ const Sidebar = () => {
                 </ul>
               </li>
             </ul>
-            <div className="bg-purple p-4 pt-0 text-center rounded-md relative help-box">
+            {/* <div className="bg-purple p-4 pt-0 text-center rounded-md relative help-box">
               <div className="-top-6 relative">
                 <span className="text-black mx-auto border border-black/10 shadow-[0_0.75rem_1.5rem_rgba(18,38,63,.03)]  bg-white flex items-center justify-center h-12 w-12 rounded-full">
                   <svg
@@ -208,7 +205,7 @@ const Sidebar = () => {
                   Go to help
                 </a>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>

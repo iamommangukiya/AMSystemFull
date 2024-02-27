@@ -8,11 +8,16 @@ const db = (name) => {
     // password: "",
     // host: "localhost",
 
-    host: "barcodereder-syncajiodata.a.aivencloud.com",
+    host: "mysql-36fa19de-gkusomg-f004.a.aivencloud.com",
     user: "avnadmin",
-    password: "AVNS_2PtTBa2uXIwoxpWfl-u",
+    password: "AVNS_MAhUGaep67BF7EsKORG",
     database: name,
-    port: 26388,
+    port: 25429,
+    // host: "barcodereder-syncajiodata.a.aivencloud.com",
+    // user: "avnadmin",
+    // password: "AVNS_2PtTBa2uXIwoxpWfl-u",
+    // database: name,
+    // port: 26388,
   });
 
   connection.connect((err) => {

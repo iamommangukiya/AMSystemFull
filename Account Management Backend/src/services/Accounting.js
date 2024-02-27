@@ -2,10 +2,11 @@ const logError = require("../../errorLog");
 const Querys = require("../config/querys");
 const querys = require("../config/querys");
 const database = require("../database/index");
-const db = database("accounting");
+// const db = database("Accounting");
+const db = database("Accounting");
 const query = new querys();
 
-class accounting {
+class Accounting {
   async createParty(userInputs, res) {
     // console
 
@@ -174,7 +175,7 @@ class accounting {
     // var q = query.selectFinancialMaster();
 
     db.query(
-      `SELECT * FROM accounting.transactionMaster where  CompanyId=${cmpid} and transectionType = '${type}' `,
+      `SELECT * FROM Accounting.transactionMaster where  CompanyId=${cmpid} and transectionType = '${type}' `,
       (errr, data) => {
         if (errr) {
           logError(errr);
@@ -333,9 +334,11 @@ class accounting {
   }
   async insertItemMaster(userInputs, res) {
     var q = query.insertItemMaster(userInputs);
+
     var existitmquery = query.itmexistquery(userInputs);
 
     db.query(existitmquery, (err, data) => {
+      console.log(data);
       if (err) {
         res
           .status(200)
@@ -533,4 +536,4 @@ class accounting {
   }
 }
 
-module.exports = accounting;
+module.exports = Accounting;
