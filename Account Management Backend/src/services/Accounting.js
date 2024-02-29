@@ -496,24 +496,6 @@ class Accounting {
       }
     });
   }
-  // async inserbillLog(userInputs, res) {
-  //   var q = query.inserbillLog(userInputs);
-  //   db.query(q, (errr, data) => {
-  //     if (errr) {
-  //       logError(errr);
-  //       res.status(200).json({ flag: false, message: "Internal Server error" });
-  //     } else {
-  //       if (data.affectedRows > 0) {
-  //         res.status(200).json({
-  //           flag: true,
-  //           message: "insereted successfully",
-  //         });
-  //       } else {
-  //         res.status(200).json({ flag: false, message: "Not founded" });
-  //       }
-  //     }
-  //   });
-  // }
 
   async inserbillLog(userInputs, res) {
     try {
