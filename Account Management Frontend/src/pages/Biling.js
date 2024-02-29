@@ -22,8 +22,8 @@ const Biling = ({ mode }) => {
     pgstNo: "",
     totalQuantity: "",
     gtotalAmount: "",
-    discount: "",
-    totalTaxable: "",
+    discount: 0,
+    totalTaxable: 0,
     totalSgst: "",
     totalCgst: "",
     totalIGst: "",
@@ -32,7 +32,7 @@ const Biling = ({ mode }) => {
     flag: "",
     transportDate: "",
     bookName: "",
-    payAmount: "",
+  
     // panding: "",
     isGstBill: false,
     kasar: "",
@@ -71,14 +71,30 @@ const Biling = ({ mode }) => {
   };
 
   const selectItem = (selectedItems) => {
-    console.log(selectedItems);
     const newItems = selectedItems.map((selectedItem) => ({
-      id: Inputs.items.length + 1,
       ...selectedItem,
+      itmnumber: Inputs.items.length + 1,
     }));
+
+    const totalQuantity = newItems.reduce(
+      (totalQty, item) => totalQty + parseFloat(item.qty) || 0,
+      0
+    );
+
+    const totalTaxable = 0;
+
+    const totalAmount = newItems.reduce(
+      (total, item) => total + parseFloat(item.amount * item.qty),
+      0
+    );
+
     setInputs((prevInputs) => ({
       ...prevInputs,
       items: [...prevInputs.items, ...newItems],
+      totalQuantity: totalQuantity.toFixed(2),
+      totalTaxable: totalTaxable.toFixed(2),
+      gtotalAmount: totalAmount.toFixed(2),
+      totalAmount: totalAmount.toFixed(2),
     }));
   };
 
@@ -97,45 +113,41 @@ const Biling = ({ mode }) => {
 
   const handelchange = (e, index) => {
     const { name, value } = e.target;
-
-    // if (index >= 0) {
-    //   const updatedItems = Inputs.items.map((item, i) => {
-    //     if (i === index) {
-    //       const qty = name === "qty" ? parseFloat(value) || 0 : item.qty;
-    //       const GST = name === "GST" ? parseFloat(value) || 0 : item.GST;
-    //       const purchasePrice =
-    //         name === "purchasePrice"
-    //           ? parseFloat(value) || 0
-    //           : item.purchasePrice;
-
-    //       return {
-    //         ...item,
-    //         [name]: value,
-    //         amount: (qty * purchasePrice + qty * purchasePrice * GST).toFixed(
-    //           2
-    //         ), // Calculate amount based on qty and purchasePrice
-    //       };
-    //     }
-
+    // Ensure paid amount does not exceed total amount
+    if (
+      name === "paidAmount" &&
+      parseFloat(value) > parseFloat(Inputs.gtotalAmount)
+    ) {
+      // If paid amount exceeds total amount, set it to total amount
+      setInputs((prevInputs) => ({
+        ...prevInputs,
+        [name]: prevInputs.gtotalAmount,
+      }));
+      return; // Exit early to prevent further execution
+    }
     if (index >= 0) {
       const updatedItems = Inputs.items.map((item, i) => {
         if (i === index) {
           const qty = name === "qty" ? parseFloat(value) || 0 : item.qty;
           const purchasePrice = parseFloat(item.purchasePrice) || 0;
           const GST = name === "GST" ? parseFloat(value) || 0 : item.GST;
-
+          // Calculate the amount based on whether isGstBill is true or false
+          const amount = Inputs.isGstBill
+            ? (qty * purchasePrice + qty * purchasePrice * (GST / 100)).toFixed(
+                2
+              )
+            : (qty * purchasePrice).toFixed(2);
           return {
             ...item,
             [name]: value,
-            amount: (
-              qty * purchasePrice +
-              qty * purchasePrice * (GST / 100)
-            ).toFixed(2),
+            amount,
           };
         } else {
           return item;
         }
       });
+
+      const discountedAmount = Inputs.totalAmount * (Inputs.discount / 100);
 
       const totalAmount = updatedItems.reduce(
         (total, item) => total + parseFloat(item.amount) || 0,
@@ -147,11 +159,17 @@ const Biling = ({ mode }) => {
         0
       );
 
+      const calculatedGTotalAmount =
+        totalAmount -
+        discountedAmount +
+        (totalAmount * Inputs.totalTaxable) / 100;
+
       setInputs((prevInputs) => ({
         ...prevInputs,
         items: updatedItems,
         totalAmount: totalAmount.toFixed(2),
         totalQuantity: totalQuantity.toFixed(2),
+        gtotalAmount: calculatedGTotalAmount.toFixed(2),
         dueAmount: prevInputs.gtotalAmount - prevInputs.paidAmount,
       }));
     } else {
@@ -189,12 +207,28 @@ const Biling = ({ mode }) => {
       }));
     }
   };
+
   const handleRadioChange = (e) => {
-    setInputs((prevstate) => ({
-      ...prevstate,
-      transactionType: e.target.value,
-    }));
+    const selectedTransactionType = e.target.value;
+
+    if (selectedTransactionType === "unpaid") {
+      setInputs((prevInputs) => ({
+        ...prevInputs,
+        transactionType: selectedTransactionType,
+        dueAmount: parseFloat(prevInputs.gtotalAmount).toFixed(2), // Calculate due amount based on total amount and paid amount
+        paidAmount: 0,
+      }));
+    } else {
+      // For other transaction types, update the state normally
+      setInputs((prevInputs) => ({
+        ...prevInputs,
+        transactionType: selectedTransactionType,
+        paidAmount: prevInputs.gtotalAmount, // Set paid amount to total amount for other transaction types
+        dueAmount: 0, // Set due amount to 0 for other transaction types
+      }));
+    }
   };
+
   const navigate = useNavigate();
   const deleteRow = (id) => {
     const updatedItems = Inputs.items.filter((item) => item.id !== id);
@@ -246,6 +280,7 @@ const Biling = ({ mode }) => {
         <form className="grid grid-cols-1  gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
           {/* party start */}
           {/* // party name */}
+
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               PartyName:
@@ -287,7 +322,7 @@ const Biling = ({ mode }) => {
           {/* // GstIn Party */}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
-              GSTIN:
+              Party GSTIN:
             </label>
             <input
               type="text"
@@ -369,7 +404,7 @@ const Biling = ({ mode }) => {
           </div>
 
           {/* gst %? */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Total CGST:
             </label>
@@ -380,7 +415,7 @@ const Biling = ({ mode }) => {
               name="totalCgst"
               value={Inputs.totalCgst}
             />
-          </div>
+          </div> */}
           {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Total IGst:
@@ -459,7 +494,7 @@ const Biling = ({ mode }) => {
                 <th className="md:w-1/2 pr-4 pl-4">Description</th>
                 <th>Unit Cost</th>
                 <th>Qty</th>
-                <th>GST%</th>
+                {Inputs.isGstBill == true && <th>GST%</th>}
                 <th>Amount</th>
                 <th> </th>
               </tr>
@@ -506,15 +541,17 @@ const Biling = ({ mode }) => {
                       disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
                     />
                   </td>
-                  <td>
-                    <input
-                      type="number"
-                      name="GST"
-                      value={row.GST}
-                      onChange={(e) => handelchange(e, index)}
-                      disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
-                    />
-                  </td>
+                  {Inputs.isGstBill == true && (
+                    <td>
+                      <input
+                        type="number"
+                        name="GST"
+                        value={row.GST}
+                        onChange={(e) => handelchange(e, index)}
+                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                      />
+                    </td>
+                  )}
                   <td>
                     <input type="number" disabled value={row.amount} readOnly />
                   </td>

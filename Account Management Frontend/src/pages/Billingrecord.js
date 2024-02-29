@@ -1,0 +1,148 @@
+import React, { useEffect, useState } from "react";
+import React_Modal from "../component/ReactModal";
+import { useDispatch, useSelector } from "react-redux";
+import { getbilldata } from "../reducer/billing_reducer";
+
+const Billingrecord = ({ mode }) => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getbilldata());
+  }, []);
+  const [filterdata, setfilterDate] = useState([]);
+  const handleSearchInputChange = (e) => {
+    filter(e.target.value);
+  };
+  const filter = (query) => {
+    var data = records.filter((name) => {
+      return (
+        name &&
+        name.bPartyName &&
+        name.bPartyName.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+    setfilterDate(data);
+  };
+
+  let records = useSelector((state) => state.BillingReducer.resultData?.data);
+  console.log(records);
+
+  const displayFields = [
+    "invoiceNo",
+    "bPartyName",
+    "payAmount",
+    "dueAmount",
+    "invoiceDate",
+  ];
+  return (
+    <>
+      <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
+        <div className="grid grid-cols-1 gap-4">
+          <div className="bg-white border border-black/10 p-3 rounded dark:bg-darklight dark:border-darkborder">
+            <div className="flex  justify-between  text-center">
+              <input
+                type="text"
+                onChange={handleSearchInputChange}
+                class=" w-50 ml-4 rounded-xl mb-3"
+                placeholder="search "
+              />
+              <button
+                // onClick={() => {
+                //   setEditedValues("");
+                //   setMode("add");
+                //   setModal(true);
+                // }}
+                className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+              >
+                Create Bill
+              </button>
+            </div>
+            <div className="overflow-auto">
+              <table className="min-w-[640px] w-full  table-hover">
+                <thead>
+                  <tr className="border-separate">
+                    <th class="w-24 text-center">Index</th>
+                    <th class="w-32">Invoice No</th>
+                    <th class="w-32">PartyName</th>
+                    <th class="w-32">Paid Amount</th>
+                    <th class="w-32">Due Amount</th>
+                    <th class="w-32">Bill Date</th>
+                    <th class="w-32">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filterdata &&
+                    filterdata.map((item, index) => (
+                      <tr key={index}>
+                        <td className="text-center">{index + 1}</td>
+                        {displayFields.map((field) => (
+                          <td className="text-center " key={field}>
+                            {item[field] === "" ? "-" : item[field]}
+                          </td>
+                        ))}
+                        <td className=" space-x-5 justify-evenly  text-center ">
+                          <button
+                            className="text-black dark:text-white/80 px-3"
+                            onClick={() => {
+                              // handleshow(index);
+                            }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              className="w-5 h-5 inline-block"
+                              fill="none"
+                              stroke="#000000"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                              <rect x="6" y="14" width="12" height="8"></rect>
+                            </svg>
+                          </button>
+                          <button
+                            className="text-black dark:text-white/80 px-3"
+                            // onClick={() => handleUpdateClick(index)}
+                            type="submit"
+                          >
+                            <svg
+                              xmlns=" http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              className="w-5 h-5 inline-block"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M5 18.89H6.41421L15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89ZM21 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L9.24264 18.89H21V20.89ZM15.7279 6.74786L17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786Z"
+                              ></path>
+                            </svg>
+                          </button>
+                          <button
+                            className="text-danger ms-2 px-3 "
+                            // onClick={() => handleButtonClick(item["ID"])}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 24 24"
+                              className="w-5 h-5 inline-block"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"
+                              ></path>
+                            </svg>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Billingrecord;

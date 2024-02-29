@@ -473,6 +473,7 @@ class Querys {
       gtotalAmount,
       discount,
       totalTaxable,
+      paidAmount,
       totalSgst,
       totalCgst,
       totalIGst,
@@ -535,7 +536,7 @@ class Querys {
       '${flag}',
       '${transportDate}',
       '${bookName}',
-      '${payAmount}',
+      '${paidAmount}',
       '${panding}',
       '${dueAmount}',
       '${deliveryAdress}',
@@ -545,7 +546,8 @@ class Querys {
   `;
   };
   getbilling = (userdata) => {
-    return `select * from Billlog where ComapnyId =${userdata}  `;
+    //return `select * from Billlog where ComapnyId =${userdata}  `;
+    return `  SELECT * From Billlog WHERE ComapnyId = ${userdata}`;
   };
 }
 

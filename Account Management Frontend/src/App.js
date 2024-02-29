@@ -19,6 +19,7 @@ import Trasection_Records from "./component/Transection_Records";
 import PurchaseBill from "./pages/PurchaseBill";
 import SaleBilling from "./pages/SaleBilling";
 import ItemmasterRecords from "./pages/ItemmasterRecords";
+import Billingrecord from "./pages/Billingrecord";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -96,8 +97,12 @@ const App = () => {
           <Route path="bill" element={<PrintBill></PrintBill>}></Route>
           <Route
             path="PurchaseBill"
-            element={<PurchaseBill></PurchaseBill>}
+            element={<Billingrecord></Billingrecord>}
           ></Route>
+          {/* <Route
+            path="PurchaseBill"
+            element={<PurchaseBill></PurchaseBill>}
+          ></Route> */}
           <Route path="saleBill" element={<SaleBilling></SaleBilling>}></Route>
           <Route
             path="transectionrecord"

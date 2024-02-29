@@ -24,7 +24,7 @@ class userServices {
           flag = false;
           return res
             .status(200)
-            .json({ flag: flag, message: "Account already exists" });
+            .json({ flag: false, message: "Account already exists" });
         } else {
           // Create user if not already exists
           var creQuery = Query.singUp(userInputs);
@@ -59,6 +59,7 @@ class userServices {
     var Loginquery = Query.singIN(userInputs);
     db.query(Loginquery, (err, data) => {
       if (err) {
+        console.log(err);
         res.send(200).json({ message: "Internal Server Error ", flag: false });
 
         logError(err.message);

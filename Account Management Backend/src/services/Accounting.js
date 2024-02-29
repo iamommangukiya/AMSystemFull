@@ -496,22 +496,61 @@ class Accounting {
       }
     });
   }
+  // async inserbillLog(userInputs, res) {
+  //   var q = query.inserbillLog(userInputs);
+  //   db.query(q, (errr, data) => {
+  //     if (errr) {
+  //       logError(errr);
+  //       res.status(200).json({ flag: false, message: "Internal Server error" });
+  //     } else {
+  //       if (data.affectedRows > 0) {
+  //         res.status(200).json({
+  //           flag: true,
+  //           message: "insereted successfully",
+  //         });
+  //       } else {
+  //         res.status(200).json({ flag: false, message: "Not founded" });
+  //       }
+  //     }
+  //   });
+  // }
+
   async inserbillLog(userInputs, res) {
-    var q = query.inserbillLog(userInputs);
-    db.query(q, (errr, data) => {
-      if (errr) {
-        logError(errr);
-        res.status(200).json({ flag: false, message: "Internal Server error" });
+    try {
+      const q = query.inserbillLog(userInputs);
+      const data = await this.dbQuery(q);
+
+      if (data.affectedRows > 0) {
+        await Promise.all(
+          userInputs.items.map((item) =>
+            this.insertItemDetails(data.insertId, item)
+          )
+        );
+        res.status(200).json({ flag: true, message: "Inserted successfully" });
       } else {
-        if (data.affectedRows > 0) {
-          res.status(200).json({
-            flag: true,
-            message: "insereted successfully",
-          });
-        } else {
-          res.status(200).json({ flag: false, message: "Not founded" });
-        }
+        res.status(200).json({ flag: false, message: "Not found" });
       }
+    } catch (error) {
+      logError(error);
+      res.status(200).json({ flag: false, message: "Internal Server error" });
+    }
+  }
+
+  async insertItemDetails(billId, item) {
+    const q = `INSERT INTO Accounting.BillFullLog (billId, itemId, gst, amount, qty) VALUES (?, ?, ?, ?, ?)`;
+    const values = [billId, item.id, item.GST, item.amount, item.qty];
+    await this.dbQuery(q, values);
+  }
+
+  async dbQuery(sql, values = []) {
+    return new Promise((resolve, reject) => {
+      db.query(sql, values, (err, result) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(result);
+        }
+      });
     });
   }
   async getbilling(userrInputs, res) {
@@ -523,6 +562,9 @@ class Accounting {
         res.status(200).json({ flag: false, message: "Internal Server error" });
       } else {
         if (data.length > 0) {
+          // console.log(data);
+          var transformData = this.transformData(data);
+          console.log(transformData);
           res.status(200).json({
             flag: true,
             data: data,
@@ -534,6 +576,72 @@ class Accounting {
       }
     });
   }
+
+  // Transform function
+  // Transform function
+  transformData(inputData) {
+    const data = inputData;
+    if (!data || data.length === 0) {
+      throw new Error("Data array is empty or undefined");
+    }
+
+    const invoices = [];
+
+    // Iterate through each invoice data
+    for (const invoice of data) {
+      const invoiceObj = {
+        invoiceNo: invoice.invoiceNo,
+        invoiceDate: invoice.invoiceDate,
+        dueDate: invoice.dueDate,
+        bPartyName: invoice.bPartyName,
+        bPartyAddress: invoice.bPartyAdress, // Corrected key name
+        bStateCode: invoice.bStateCode,
+        gstNo: invoice.gstNo,
+        items: [],
+        totalQuantity: parseFloat(invoice.totalQuantity),
+        gtotalAmount: parseFloat(invoice.gtotalAmount),
+        discount: parseFloat(invoice.discount),
+        totalTaxable: parseFloat(invoice.totalTaxable),
+        totalSgst: parseFloat(invoice.totalSgst),
+        totalCgst: parseFloat(invoice.totalCgst),
+        totalIGst: parseFloat(invoice.totalIGst),
+        tsc: parseFloat(invoice.tcs),
+        totalAmount: parseFloat(invoice.totalAmount),
+        flag: invoice.flag,
+        transportDate: invoice.transportDate,
+        bookName: invoice.bookName,
+        payAmount: parseFloat(invoice.payAmount),
+        pending: parseFloat(invoice.panding), // Corrected key name
+        dueAmount: parseFloat(invoice.dueAmount), // Added handling for dueAmount
+        deliveryAddress: invoice.deliveryAdress, // Corrected key name
+      };
+
+      // Check if invoice.items exists before mapping
+      if (invoice.items && Array.isArray(invoice.items)) {
+        // Iterate through each item in the invoice
+        invoiceObj.items = invoice.items.map((item) => ({
+          itemId: parseInt(item.itemId), // Corrected key name
+          name: item.name,
+          unit: item.unit,
+          qty: parseFloat(item.qty),
+          amount: parseFloat(item.amount),
+          HSN: item.HSN,
+          GST: parseFloat(item.GST),
+          salePrice: parseFloat(item.salePrice),
+          purchasePrice: parseFloat(item.purchasePrice),
+          openingStock: parseInt(item.openingStock),
+          closingStock: parseInt(item.closingStock),
+        }));
+      }
+
+      // Push the constructed invoice object to the invoices array
+      invoices.push(invoiceObj);
+    }
+
+    return invoices;
+  }
+
+  // Usage
 }
 
 module.exports = Accounting;

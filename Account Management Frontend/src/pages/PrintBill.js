@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-const PrintBill = ({ bill }) => {
+const PrintBill = () => {
   const location = useLocation();
   const largeData = location.state?.Inputs;
   return (

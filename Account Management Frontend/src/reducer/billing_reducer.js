@@ -23,17 +23,14 @@ export const addbill = createAsyncThunk(
 export const getbilldata = createAsyncThunk(
   "billing_slice/getbilldata",
   async (data) => {
-    console.log("objectzdfsdf");
     const auth_token = localStorage.getItem("company");
-    const response = await axios.get(
-      process.env.REACT_APP_API + "/inserbillLog",
-      data,
-      {
-        headers: {
-          com_token: auth_token,
-        },
-      }
-    );
+    console.log(auth_token);
+    const response = await axios.get(process.env.REACT_APP_API + "/billlog", {
+      headers: {
+        com_token: auth_token,
+      },
+    });
+    console.log(response.data);
     const responseData = response.data;
     return responseData;
   }

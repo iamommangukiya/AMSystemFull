@@ -1,6 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
+// export const login = createAsyncThunk("userinfo/login", async (info) => {
+//   try {
+//     const request = await axios.post(
+//       process.env.REACT_APP_API + "/user/singIn",
+//       info
+//     );
+
+//     const response = await request.data;
+//     const token = response.data.auth_token;
+//     localStorage.clear();
+//     localStorage.setItem("authToken", token);
+
+//     return response;
+//   } catch (error) {
+//     throw error.request;
+//   }
+// });
 export const login = createAsyncThunk("userinfo/login", async (info) => {
   try {
     const request = await axios.post(
@@ -9,13 +26,20 @@ export const login = createAsyncThunk("userinfo/login", async (info) => {
     );
 
     const response = await request.data;
-    const token = response.data.auth_token;
-    localStorage.clear();
-    localStorage.setItem("authToken", token);
 
-    return response;
+    // Check if login was successful
+    if (response.flag) {
+      const token = response.data.auth_token;
+      localStorage.clear();
+      localStorage.setItem("authToken", token);
+      return response;
+    } else {
+      // If login failed, return the error message
+      return response;
+    }
   } catch (error) {
-    throw error.request.data;
+    // Handle network or other errors
+    throw error;
   }
 });
 
@@ -49,10 +73,8 @@ const UserSlice = createSlice({
     result: "",
   },
   reducers: {
-    Login(state, action) {
-      console.log(state.result);
-      const { email, password } = action.payload;
-      return { ...state, email, password };
+    clLogindata(state) {
+      state.result = "";
     },
     Logout(state) {
       state.email = null;

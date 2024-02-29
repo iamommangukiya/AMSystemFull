@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
-import { registation } from "../reducer/User_reducer";
+import { LoginAction, registation } from "../reducer/User_reducer";
 import { useDispatch, useSelector } from "react-redux";
 
 const Registration = () => {
@@ -12,6 +12,7 @@ const Registration = () => {
     firstName: "",
     lastName: "",
   });
+  const [err, seterr] = useState("");
   const dispatch = useDispatch();
 
   const handelchange = (e) => {
@@ -19,18 +20,25 @@ const Registration = () => {
     setInputs({ ...inputs, [name]: value });
   };
   const result = useSelector((state) => state.Loginreducer.result);
+
+  useEffect(() => {
+    if (result.flag === true) {
+      naviagte("/");
+    } else if (result.flag === false) {
+      seterr(result.message);
+    }
+    dispatch(LoginAction.clLogindata());
+  }, [result]);
   const handelsubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      await dispatch(registation(inputs));
-      if (result["flag"] === true) {
-        naviagte("/");
-      } else if (result["flag"] === false) {
-        naviagte("/");
+    if (inputs.password.length < 6) {
+      seterr("Password must be at least 6 characters long.");
+    } else {
+      try {
+        dispatch(registation(inputs));
+      } catch (error) {
+        console.log(error);
       }
-    } catch (error) {
-      console.log(error);
     }
   };
   const naviagte = useNavigate();
@@ -40,7 +48,10 @@ const Registration = () => {
       {/* <!-- Start Layout --> */}
       <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10">
         {/* <!-- Start Background Images -->/ */}
-        <div className="  bg-black dark:bg-purple min-h-[220px] sm:min-h-[50vh] bg-bottom w-full -z-10 absolute"  style={{ backgroundImage: 'url("../assets/images/bg-main.png")' }} ></div>
+        <div
+          className="  bg-black dark:bg-purple min-h-[220px] sm:min-h-[50vh] bg-bottom w-full -z-10 absolute"
+          style={{ backgroundImage: 'url("../assets/images/bg-main.png")' }}
+        ></div>
         {/* <!-- End Background Images --> */}
 
         {/* <!-- Start Header --> */}
@@ -59,14 +70,6 @@ const Registration = () => {
                   alt="logo"
                 />
               </a>
-              <div className="flex items-center lg:order-2">
-                <a
-                  href="signup.html"
-                  className="btn bg-purple dark:border-white dark:bg-white dark:text-black dark:hover:bg-white/90 border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
-                >
-                  Buy Now
-                </a>
-              </div>
             </div>
           </nav>
         </header>
@@ -178,24 +181,8 @@ const Registration = () => {
                   required
                 />
               </div>
-              <div className="sm:col-span-2">
-                <label className="inline-flex">
-                  <input
-                    type="checkbox"
-                    className="form-checkbox outborder-purple"
-                  />
-                  <span className="text-muted dark:text-darkmuted">
-                    I Accept the{" "}
-                    <a
-                      href="javaScript;"
-                      className="text-black dark:text-white"
-                    >
-                      Terms and Conditions
-                    </a>
-                    .
-                  </span>
-                </label>
-              </div>
+              <p className="text-red-600 col-span-2">{err}</p>
+
               <button
                 type="submit"
                 className="btn sm:col-span-2 w-full py-3.5 text-base bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
@@ -214,7 +201,7 @@ const Registration = () => {
         {/* <!-- End Main Content --> */}
 
         {/* <!-- Start Footer --> */}
-        <footer className="py-5 text-center text-black max-w-[1440px] mx-auto">
+        {/* <footer className="py-5 text-center text-black max-w-[1440px] mx-auto">
           <div>
             &copy;
             <script>
@@ -236,7 +223,7 @@ const Registration = () => {
               by SRBThemes
             </span>
           </div>
-        </footer>
+        </footer> */}
         {/* <!-- End Footer --> */}
       </div>
       {/* <!-- End Layout --> */}

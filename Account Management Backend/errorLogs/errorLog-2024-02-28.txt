@@ -1,0 +1,15 @@
+2024-02-28T09:46:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: You have tried to call .then(), .catch(), or invoked await on the result of query that is not a promise, which is a programming error. Try calling con.promise().query(), or require('mysql2/promise') instead of 'mysql2' for a promise-compatible version of the query interface. To learn how to use async/await or Promises check out documentation at https://www.npmjs.com/package/mysql2#using-promise-wrapper, or the mysql2 documentation at https://github.com/sidorares/node-mysql2/tree/master/documentation/en/Promise-Wrapper.md
+2024-02-28T09:53:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : ReferenceError: dbQuery is not defined
+2024-02-28T09:58:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : ReferenceError: dbQuery is not defined
+2024-02-28T10:32:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Table 'Accounting.billlog' doesn't exist
+2024-02-28T10:33:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Table 'Accounting.billlog' doesn't exist
+2024-02-28T10:35:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Table 'Accounting.itm' doesn't exist
+2024-02-28T10:36:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'Billlog.billid' in 'on clause'
+2024-02-28T17:53:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: read ECONNRESET
+2024-02-28T17:53:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: read ECONNRESET
+2024-02-28T17:54:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'BillLog.ComapnyId' in 'where clause'
+2024-02-28T17:56:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'BillLog.ComapnyId' in 'where clause'
+2024-02-28T17:56:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'BillLog.ComapnyId' in 'where clause'
+2024-02-28T17:57:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown table 'Billlog'
+2024-02-28T17:58:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Table 'Accounting.BillLog' doesn't exist
+2024-02-28T17:58:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown table 'Billlog'

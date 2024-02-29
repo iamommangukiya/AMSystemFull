@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="sidebar fixed  flex-none w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
+      <nav className="sidebar absolute z-10  flex-none w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
         <div className="bg-white dark:bg-darklight h-full">
           <div className="p-4">
             <a href="index.html" className="main-logo w-full">
