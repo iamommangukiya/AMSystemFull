@@ -75,8 +75,8 @@ const Login = () => {
         </header>
         {/* <!-- End Header --> */}
 
-        <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto ">
-          <div className="max-w-[550px] flex-none w-full text-white  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300">
+        <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto">
+          <div className="max-w-[550px] flex-none w-full text-white  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300 shadow-2xl">
             <h1 className="text-3xl font-semibold mb-2 text-center dark:text-white">
               Sign In
             </h1>
@@ -136,7 +136,7 @@ const Login = () => {
                   name="email"
                   value={Inputs.email}
                   placeholder="Email"
-                  className="form-input"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
                   required
                 />
               </div>
@@ -147,7 +147,7 @@ const Login = () => {
                   name="password"
                   value={Inputs.password}
                   placeholder="Password"
-                  className="form-input"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
                   required
                 />
               </div>
