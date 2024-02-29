@@ -49,8 +49,8 @@ const Registration = () => {
       <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10">
         {/* <!-- Start Background Images -->/ */}
         <div
-          className="  bg-black dark:bg-purple min-h-[220px] sm:min-h-[50vh] bg-bottom w-full -z-10 absolute"
-          style={{ backgroundImage: 'url("../assets/images/bg-main.png")' }}
+          className="  bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
+          style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}
         ></div>
         {/* <!-- End Background Images --> */}
 
@@ -77,11 +77,11 @@ const Registration = () => {
 
         {/* <!-- Start Main Content --> */}
         <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto">
-          <div className="max-w-[550px] flex-none w-full bg-white border border-black/10 p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl dark:bg-darklight dark:border-darkborder">
-            <h1 className="text-2xl font-semibold mb-2 text-center dark:text-white">
+          <div className="max-w-[550px] flex-none w-full p-6 text-white sm:p-10 lg:px-10 lg:py-14 rounded-2xl dark:bg-darklight dark:border-darkborder backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300">
+            <h1 className="text-3xl font-semibold mb-2 text-center dark:text-white">
               Sign Up
             </h1>
-            <p className="text-center text-muted mb-7 dark:text-darkmuted">
+            <p className="text-center mb-7 dark:text-darkmuted">
               Enter your email and password to sign up!
             </p>
             <div className="flex flex-wrap items-center gap-4 mb-7">
@@ -123,11 +123,11 @@ const Registration = () => {
               </a>
             </div>
             <div className="flex items-center mb-7">
-              <div className="w-full h-[2px] bg-black/10 dark:bg-darkborder"></div>
-              <div className="px-5 text-muted whitespace-nowrap capitalize dark:text-darkmuted">
+              <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
+              <div className="px-5  whitespace-nowrap capitalize dark:text-darkmuted">
                 Or with Email
               </div>
-              <div className="w-full h-[2px] bg-black/10 dark:bg-darkborder"></div>
+              <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
             </div>
             <form
               onSubmit={handelsubmit}
@@ -185,12 +185,12 @@ const Registration = () => {
 
               <button
                 type="submit"
-                className="btn sm:col-span-2 w-full py-3.5 text-base bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn sm:col-span-2 w-full py-3.5 text-base bg-[#3b82f680] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
               >
                 Create an account
               </button>
             </form>
-            <p className="text-center mt-5 text-muted dark:text-darkmuted">
+            <p className="text-center mt-5 dark:text-darkmuted">
               Already a member?{" "}
               <span className="text-black dark:text-white">
                 <Link to="/"> Sign In</Link>
