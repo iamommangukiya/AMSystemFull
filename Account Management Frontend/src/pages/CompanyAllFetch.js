@@ -51,10 +51,11 @@ const CompanyFetchacompany = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen w-3/5 h-80 mx-80">
-      <div className="bg-white border  border-black/10 p-5 rounded dark:bg-darklight dark:border-darkborder md:w-2/3 lg:w-1/2">
+    <div className="flex items-center justify-center min-h-screen h-80 relative z-10">
+       <div className=" bg-black dark:bg-purple min-h-[220px] sm:min-h-[70vh] bg-bottom w-full -z-10 absolute"  style={{ backgroundImage: 'url("../assets/images/bg-main.png")' }}></div>
+      <div className=" p-5 rounded dark:bg-darklight dark:border-darkborder md:w-2/3 lg:w-1/2 backdrop-blur-sm overflow-hidden bg-[#ffffff14]  border-2 border-[#ffffff14]">
         <div className="justify-between flex items-center space-x-2 ">
-          <h2 className="text-2xl font-semibold text-black dark:text-white/80 mb-4 px-4 capitalize flex justify-between">
+          <h2 className="text-3xl font-semibold text-white dark:text-white/80 mb-4 px-4 capitalize flex justify-between">
             Select Company
           </h2>
           <button
