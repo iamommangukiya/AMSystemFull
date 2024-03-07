@@ -126,7 +126,7 @@ const ItemmasterRecords = () => {
                   setModal(true);
                   setMode("add");
                 }}
-                className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn py-2 px-3 text-lg bg-[#03235780] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
               >
                 Add Product
               </button>

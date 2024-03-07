@@ -53,22 +53,22 @@ const CompanyFetchacompany = () => {
   return (
     <div className="flex items-center justify-center min-h-screen h-80 relative z-10">
        <div className=" bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"  style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}></div>
-      <div className=" p-5 rounded dark:bg-darklight dark:border-darkborder md:w-2/3 lg:w-1/2 backdrop-blur-xl overflow-hidden bg-[#ffffff14]  border-2 border-[#ffffff14]">
+      <div className=" p-5 rounded-xl dark:bg-darklight dark:border-darkborder md:w-2/3 lg:w-1/2 backdrop-blur-xl overflow-hidden bg-[#ffffff14] border-2 backdrop-brightness-110 border-gray-300 shadow-2xl">
         <div className="justify-between flex items-center space-x-2 ">
-          <h2 className="text-3xl font-semibold text-white dark:text-white/80 mb-4 px-4 capitalize flex justify-between">
+          <h2 className="text-3xl font-semibold text-[#03235780] dark:text-white/80 mb-4 px-4 capitalize flex justify-between">
             Select Company
           </h2>
           <button
             type="button"
             onClick={() => handelClick(true)}
-            className="btn py-2 mb-4 px-3 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+            className="btn py-2 mb-4 px-3 text-xl bg-[#03235780]  border-0 rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
           >
             Add Company
           </button>
         </div>
 
         <form>
-          <select className="form-select w-full" onChange={handleSelectChange}>
+          <select className="form-select text-white w-full bg-transparent backdrop-blur-3xl backdrop-brightness-200 border border-gray-50 rounded-md focus:border-gray-50 shadow-lg" onChange={handleSelectChange}>
             <option>Select option</option>
 
             {response &&

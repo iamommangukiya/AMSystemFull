@@ -58,9 +58,9 @@ const ItemMaster = ({ data, mode, closeBox }) => {
   const unitList = Object.values(units);
   return (
     <>
-      <div className="flex items-center  justify-center mb-8 bg-gray-100 ">
+      <div>
         <form
-          className=" bg-white shadow-md mt-10 rounded  pt-3 pb-2 mb-8   "
+          className=" bg-white mt-10 rounded  pt-3 pb-2 mb-8   "
           onSubmit={handelSubmit}
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-2 px-4">
@@ -74,7 +74,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               <input
                 required
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 onChange={handelchange}
                 name="name"
                 value={inputs.name}
@@ -90,7 +90,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                 name="HSN"
                 onChange={handelchange}
                 value={inputs.HSN}
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
               />
             </div>
             <div className="mb-4">
@@ -101,7 +101,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                 defaultValue={0}
                 name="unit"
                 onChange={handelchange}
-                className="form-input border border-primary w-30 rounded-xl"
+                className="form-input border border-gray-400 w-30 h-10 rounded-md"
               >
                 <option value="">Select unit</option>
                 {unitList.map((items, index) => {
@@ -124,7 +124,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                   name="openingStock"
                   onChange={handelchange}
                   value={inputs.openingStock}
-                  className="form-input border border-primary w-full  rounded-xl"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
                 />
               </div>
             </div>
@@ -139,7 +139,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                   name="closingStock"
                   onChange={handelchange}
                   value={inputs.closingStock}
-                  className="form-input border border-primary w-full  rounded-xl"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
                 />
               </div>
             </div>
@@ -154,7 +154,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                   name="salePrice"
                   onChange={handelchange}
                   value={inputs.salePrice}
-                  className="form-input border border-primary w-full  rounded-xl"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
                 />
               </div>
             </div>
@@ -169,7 +169,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                   name="purchasePrice"
                   onChange={handelchange}
                   value={inputs.purchasePrice}
-                  className="form-input border border-primary w-full  rounded-xl"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
                 />
               </div>
             </div>
@@ -184,7 +184,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                   name="gst"
                   onChange={handelchange}
                   value={inputs.gst}
-                  className="form-input border border-primary w-full  rounded-xl"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
                 />
                 <span className="absolute inset-y-0 right-2 flex items-center pr-6 text-gray-400 disabled:">
                   %
@@ -195,7 +195,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
           <div className=" flex items-center m-auto justify-center">
             {mode == "add" && (
               <button
-                className="btn   flex items-center justify-center text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn   flex items-center justify-center text-lg bg-[#03235780] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
                 type="submit"
               >
                 Add Product
@@ -203,7 +203,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
             )}
             {mode == "update" && (
               <button
-                className="btn   flex items-center justify-center text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn   flex items-center justify-center text-lg bg-[#03235780] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
                 type="button"
                 onClick={handleUpdate}
               >

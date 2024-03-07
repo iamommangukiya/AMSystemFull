@@ -5,7 +5,7 @@ const PrintBill = () => {
   const location = useLocation();
   const largeData = location.state?.Inputs;
   return (
-    <div className="flex h-full w-full flex justify-center">
+    <div className="flex h-full w-full justify-center">
       <div className="h-3/4 w-3/4 ">
         <section class="bill ">
           <div class="border-t-4 border border-red-700"></div>
