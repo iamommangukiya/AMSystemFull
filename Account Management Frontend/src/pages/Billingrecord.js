@@ -1,30 +1,69 @@
 import React, { useEffect, useState } from "react";
 import React_Modal from "../component/ReactModal";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getbilldata } from "../reducer/billing_reducer";
+import Biling from "./Biling";
 
 const Billingrecord = ({ mode }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getbilldata());
   }, []);
-  const [filterdata, setfilterDate] = useState([]);
-  const handleSearchInputChange = (e) => {
-    filter(e.target.value);
-  };
-  const filter = (query) => {
-    var data = records.filter((name) => {
-      return (
-        name &&
-        name.bPartyName &&
-        name.bPartyName.toLowerCase().includes(query.toLowerCase())
-      );
-    });
-    setfilterDate(data);
-  };
 
   let records = useSelector((state) => state.BillingReducer.resultData?.data);
-  console.log(records);
+
+  const [filterName, setFilterName] = useState("");
+  const history = useHistory();
+  const [filterDate, setFilterDate] = useState("latest");
+  const [Modal, setModal] = useState(false);
+  const [filteredData, setFilteredData] = useState(records || []);
+
+  const handleSearchInputChange = (e) => {
+    setFilterName(e.target.value);
+  };
+
+  const handleDateFilterChange = (e) => {
+    setFilterDate(e.target.value);
+  };
+  const closeModal = () => {
+    setModal(!Modal);
+  };
+  const applyFilters = (record) => {
+    if (
+      filterName &&
+      !record.bPartyName.toLowerCase().includes(filterName.toLowerCase())
+    ) {
+      return false;
+    }
+    return true;
+  };
+  useEffect(() => {
+    if (records) {
+      setFilteredData(records);
+    }
+  }, [records]);
+
+  const sortRecords = (a, b) => {
+    if (filterDate === "latest") {
+      return new Date(b.invoiceDate) - new Date(a.invoiceDate);
+    } else if (filterDate === "oldest") {
+      return new Date(a.invoiceDate) - new Date(b.invoiceDate);
+    }
+  };
+  const handlePaymentStatus = (status) => {
+    if (status === "All") {
+      setFilteredData(records);
+    } else if (records) {
+      const data = records.filter((data) => {
+        return (
+          (status === "paid" && parseFloat(data.dueAmount) === 0) ||
+          (status === "unpaid" && parseFloat(data.dueAmount) !== 0)
+        );
+      });
+      setFilteredData(data);
+    }
+  };
 
   const displayFields = [
     "invoiceNo",
@@ -35,23 +74,54 @@ const Billingrecord = ({ mode }) => {
   ];
   return (
     <>
+      {/* <React_Modal isOpen={Modal} closeModal={closeModal}></React_Modal> */}
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-white border border-black/10 p-3 rounded dark:bg-darklight dark:border-darkborder">
             <div className="flex  justify-between  text-center">
-              <input
-                type="text"
-                onChange={handleSearchInputChange}
-                class=" w-50 ml-4 rounded-xl mb-3"
-                placeholder="search "
-              />
+              <div className="space-x-3">
+                <input
+                  type="text"
+                  onChange={handleSearchInputChange}
+                  className=" w-50 ml-4 rounded-xl mb-3  dark:bg-darklight dark:text-white dark:border-darkborder"
+                  placeholder="search "
+                />
+                <select
+                  onChange={handleDateFilterChange}
+                  className="btn py-2 px-7 mb-4  dark:bg-darklight dark:text-white dark:border-darkborder  justify-start border border-purple rounded-md text-black transition-all  duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                >
+                  <option value="latest">Latest</option>
+                  <option value="oldest">Oldest</option>
+                </select>
+                <button
+                  className="text-lg"
+                  onClick={() => {
+                    handlePaymentStatus("All");
+                  }}
+                >
+                  all
+                </button>
+                <button
+                  className="text-lg "
+                  onClick={() => {
+                    handlePaymentStatus("paid");
+                  }}
+                >
+                  paid
+                </button>
+                <button
+                  className="text-lg"
+                  onClick={() => {
+                    handlePaymentStatus("unpaid");
+                  }}
+                >
+                  unpaid
+                </button>
+              </div>
+
               <button
-                // onClick={() => {
-                //   setEditedValues("");
-                //   setMode("add");
-                //   setModal(true);
-                // }}
                 className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                onClick={() => {}}
               >
                 Create Bill
               </button>
@@ -70,71 +140,74 @@ const Billingrecord = ({ mode }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filterdata &&
-                    filterdata.map((item, index) => (
-                      <tr key={index}>
-                        <td className="text-center">{index + 1}</td>
-                        {displayFields.map((field) => (
-                          <td className="text-center " key={field}>
-                            {item[field] === "" ? "-" : item[field]}
+                  {filteredData &&
+                    filteredData
+                      .filter(applyFilters)
+                      .sort(sortRecords)
+                      .map((item, index) => (
+                        <tr key={index}>
+                          <td className="text-center">{index + 1}</td>
+                          {displayFields.map((field) => (
+                            <td className="text-center " key={field}>
+                              {item[field] === "" ? "-" : item[field]}
+                            </td>
+                          ))}
+                          <td className=" space-x-5 justify-evenly  text-center ">
+                            <button
+                              className="text-black dark:text-white/80 px-3"
+                              onClick={() => {
+                                // handleshow(index);
+                              }}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                className="w-5 h-5 inline-block"
+                                fill="none"
+                                stroke="#000000"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                                <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                                <rect x="6" y="14" width="12" height="8"></rect>
+                              </svg>
+                            </button>
+                            <button
+                              className="text-black dark:text-white/80 px-3"
+                              // onClick={() => handleUpdateClick(index)}
+                              type="submit"
+                            >
+                              <svg
+                                xmlns=" http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                className="w-5 h-5 inline-block"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M5 18.89H6.41421L15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89ZM21 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L9.24264 18.89H21V20.89ZM15.7279 6.74786L17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786Z"
+                                ></path>
+                              </svg>
+                            </button>
+                            <button
+                              className="text-danger ms-2 px-3 "
+                              // onClick={() => handleButtonClick(item["ID"])}
+                            >
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                className="w-5 h-5 inline-block"
+                              >
+                                <path
+                                  fill="currentColor"
+                                  d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"
+                                ></path>
+                              </svg>
+                            </button>
                           </td>
-                        ))}
-                        <td className=" space-x-5 justify-evenly  text-center ">
-                          <button
-                            className="text-black dark:text-white/80 px-3"
-                            onClick={() => {
-                              // handleshow(index);
-                            }}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              className="w-5 h-5 inline-block"
-                              fill="none"
-                              stroke="#000000"
-                              strokeWidth="2"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <polyline points="6 9 6 2 18 2 18 9"></polyline>
-                              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
-                              <rect x="6" y="14" width="12" height="8"></rect>
-                            </svg>
-                          </button>
-                          <button
-                            className="text-black dark:text-white/80 px-3"
-                            // onClick={() => handleUpdateClick(index)}
-                            type="submit"
-                          >
-                            <svg
-                              xmlns=" http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              className="w-5 h-5 inline-block"
-                            >
-                              <path
-                                fill="currentColor"
-                                d="M5 18.89H6.41421L15.7279 9.57629L14.3137 8.16207L5 17.4758V18.89ZM21 20.89H3V16.6474L16.435 3.21233C16.8256 2.8218 17.4587 2.8218 17.8492 3.21233L20.6777 6.04075C21.0682 6.43128 21.0682 7.06444 20.6777 7.45497L9.24264 18.89H21V20.89ZM15.7279 6.74786L17.1421 8.16207L18.5563 6.74786L17.1421 5.33365L15.7279 6.74786Z"
-                              ></path>
-                            </svg>
-                          </button>
-                          <button
-                            className="text-danger ms-2 px-3 "
-                            // onClick={() => handleButtonClick(item["ID"])}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              viewBox="0 0 24 24"
-                              className="w-5 h-5 inline-block"
-                            >
-                              <path
-                                fill="currentColor"
-                                d="M17 6H22V8H20V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V8H2V6H7V3C7 2.44772 7.44772 2 8 2H16C16.5523 2 17 2.44772 17 3V6ZM18 8H6V20H18V8ZM9 11H11V17H9V11ZM13 11H15V17H13V11ZM9 4V6H15V4H9Z"
-                              ></path>
-                            </svg>
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                        </tr>
+                      ))}
                 </tbody>
               </table>
             </div>

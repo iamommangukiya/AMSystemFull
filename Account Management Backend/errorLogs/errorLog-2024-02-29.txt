@@ -6,7 +6,26 @@
 2024-02-29T05:51:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
 2024-02-29T05:51:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
 2024-02-29T05:53:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+<<<<<<< HEAD
 2024-02-29T11:25:4  : E:\AMSystemFull\Account Management Backend\errorLog.js : read ECONNRESET
 2024-02-29T11:25:4  : E:\AMSystemFull\Account Management Backend\errorLog.js : Can't add new command when connection is in closed state
 2024-02-29T11:44:1  : E:\AMSystemFull\Account Management Backend\errorLog.js : Can't add new command when connection is in closed state
 2024-02-29T11:45:0  : E:\AMSystemFull\Account Management Backend\errorLog.js : Can't add new command when connection is in closed state
+=======
+2024-02-29T07:16:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T07:16:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T08:23:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T08:24:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T08:24:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T08:24:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T08:24:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T08:24:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-02-29T08:24:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+>>>>>>> 4de7de866adf0aca191381871259d660c2c01376
