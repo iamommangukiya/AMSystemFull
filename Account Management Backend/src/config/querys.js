@@ -1,6 +1,7 @@
 const crypto = require("crypto-js");
 const moment = require("moment");
 const { updateLocale } = require("moment/moment");
+const { userServices } = require("../services");
 const currentdate = moment();
 class Querys {
   singUp = (userInputs) => {
@@ -458,6 +459,7 @@ class Querys {
     return `SELECT * FROM Accounting.accountgroupmaster;`;
   };
   inserbillLog = (userdata) => {
+    console.log(userdata);
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
     const {
@@ -482,7 +484,8 @@ class Querys {
       flag,
       transportDate,
       bookName,
-      payAmount,
+      isGstBill,
+
       panding,
       dueAmount,
       deliveryAdress,
@@ -511,10 +514,14 @@ class Querys {
       bookName,
       payAmount,
       panding,
+     
+  
       dueAmount,
       deliveryAdress,
       createDate,
-      updateDate
+      updateDate,
+      isGstBill
+ 
   ) VALUES (
       '${CompanyId}',
       '${invoiceNo}',
@@ -541,13 +548,22 @@ class Querys {
       '${dueAmount}',
       '${deliveryAdress}',
       '${formattedDate}',
-      '${formattedDate}'
+      '${formattedDate}',
+      '${isGstBill}'
+
   );
   `;
   };
   getbilling = (userdata) => {
     //return `select * from Billlog where ComapnyId =${userdata}  `;
     return `  SELECT * From Billlog WHERE ComapnyId = ${userdata}`;
+  };
+  getBillItem = (userinput) => {
+    console.log(userinput.id, "ahsdg");
+    return `SELECT * FROM BillFullLog WHERE billId ='${userinput.id}'`;
+  };
+  deleteBillLog = (data) => {
+    return `DELETE FROM Billlog where id=${data.id} and ComapnyId = ${data.cmpId}`;
   };
 }
 

@@ -2,8 +2,9 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 
 const PrintBill = () => {
-  const location = useLocation();
-  const largeData = location.state?.Inputs;
+  const location = useLocation(); // Hook to access the current location object
+  const insertId = location.state?.insertId || null; // Get the insertId from the state
+           
   return (
     <div className="flex h-full w-full justify-center">
       <div className="h-3/4 w-3/4 ">

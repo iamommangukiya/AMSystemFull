@@ -194,7 +194,7 @@ module.exports = (app) => {
   });
   app.post("/api/inserbillLog", feactCompany, (req, res) => {
     var data = req.body;
-    console.log(data);
+
     var id = req.cmp;
     var requestdata = {
       ...data,
@@ -207,5 +207,32 @@ module.exports = (app) => {
   app.get("/api/billlog", feactCompany, (req, res) => {
     var id = req.cmp;
     AcountService.getbilling(id, res);
+  });
+  app.delete("/api/billlog", feactCompany, (req, res) => {
+    var data = req.body;
+    var id = req.cmp;
+
+    var sData = {
+      ...data,
+      cmpId: id,
+    };
+
+    AcountService.deleteBilllog(sData, res);
+  });
+  app.put("/api/billlog",feactCompany,(req,res)=>{
+    var data = req.body;
+    var id = req.cmp;
+
+    var sData = {
+      ...data,
+      cmpId: id,
+    };
+
+    AcountService.deleteBilllog(sData, res);
+  })
+  app.post("/api/billItem", feactCompany, (req, res) => {
+    const id = req.body;
+
+    AcountService.getBillItem(id, res);
   });
 };

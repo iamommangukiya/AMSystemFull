@@ -1,5 +1,0 @@
-2024-02-24T16:39:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
-2024-02-24T17:36:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
-2024-02-24T17:38:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
-2024-02-24T17:38:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
-2024-02-24T17:42:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'

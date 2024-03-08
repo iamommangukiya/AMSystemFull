@@ -46,7 +46,6 @@ const Party = ({ data, mode }) => {
     TCSRate: "",
   });
 
-
   useEffect(() => {
     setInputs(data);
   }, [data]);
@@ -177,7 +176,7 @@ const Party = ({ data, mode }) => {
           className="bg-white shadow-md rounded px-2 pt-6"
           onSubmit={handelSubmit}
         >
-          <h2 className="col-span-full text-[#03235780]  text-center mb-10 text-primary text-2xl font-bold">
+          <h2 className="col-span-full text-purple   text-center mb-10 text-primary text-2xl font-bold">
             PartyMaster
           </h2>
           <div className="grid grid-cols-4 gap-3  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1">
@@ -626,7 +625,7 @@ const Party = ({ data, mode }) => {
             </button> */}
             {mode === "add" && (
               <button
-                className="btn  text-xl bg-[#03235780] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+                className="btn  text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
                 onClick={validation}
                 type="submit"
               >
@@ -635,7 +634,7 @@ const Party = ({ data, mode }) => {
             )}
             {mode === "update" && (
               <button
-                className="btn text-xl bg-[#03235780] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+                className="btn text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
                 onClick={validation}
                 type="submit"
               >

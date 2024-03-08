@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import React_Modal from "../component/ReactModal";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 import { useDispatch, useSelector } from "react-redux";
-import { getbilldata } from "../reducer/billing_reducer";
+import { deletebill, getbilldata } from "../reducer/billing_reducer";
 import Biling from "./Biling";
 
 const Billingrecord = ({ mode }) => {
@@ -14,21 +16,44 @@ const Billingrecord = ({ mode }) => {
   let records = useSelector((state) => state.BillingReducer.resultData?.data);
 
   const [filterName, setFilterName] = useState("");
-  const history = useHistory();
+  const navigate = useNavigate();
   const [filterDate, setFilterDate] = useState("latest");
-  const [Modal, setModal] = useState(false);
-  const [filteredData, setFilteredData] = useState(records || []);
 
+  const [filteredData, setFilteredData] = useState(records || []);
+  const handleCreateBill = () => {
+    navigate("/dashboard/createBill", { state: { mode: mode } });
+  };
   const handleSearchInputChange = (e) => {
     setFilterName(e.target.value);
+  };
+  const handleButtonClick = (index) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+        console.log("index");
+        console.log(index);
+        dispatch(deletebill(index));
+        dispatch(getbilldata());
+      }
+    });
   };
 
   const handleDateFilterChange = (e) => {
     setFilterDate(e.target.value);
   };
-  const closeModal = () => {
-    setModal(!Modal);
-  };
+
   const applyFilters = (record) => {
     if (
       filterName &&
@@ -65,6 +90,12 @@ const Billingrecord = ({ mode }) => {
     }
   };
 
+  const handleUpdateClick = (index) => {
+    navigate("/dashboard/createBill", {
+      state: { data: filteredData[index], mode: mode },
+    });
+  };
+  console.log(filteredData);
   const displayFields = [
     "invoiceNo",
     "bPartyName",
@@ -121,7 +152,7 @@ const Billingrecord = ({ mode }) => {
 
               <button
                 className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
-                onClick={() => {}}
+                onClick={handleCreateBill}
               >
                 Create Bill
               </button>
@@ -176,7 +207,7 @@ const Billingrecord = ({ mode }) => {
                             </button>
                             <button
                               className="text-black dark:text-white/80 px-3"
-                              // onClick={() => handleUpdateClick(index)}
+                              onClick={() => handleUpdateClick(index)}
                               type="submit"
                             >
                               <svg
@@ -192,7 +223,7 @@ const Billingrecord = ({ mode }) => {
                             </button>
                             <button
                               className="text-danger ms-2 px-3 "
-                              // onClick={() => handleButtonClick(item["ID"])}
+                              onClick={() => handleButtonClick(item["id"])}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

@@ -67,14 +67,14 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
 
   return (
     <>
-      <div className="flex items-center  justify-center mb-6  ">
+      <div className="flex items-center  justify-center mb-0">
         <form
-          className=" bg-white shadow-md  rounded  mb-4 lg:w-2/3 "
+          className=" bg-white rounded mb-4 lg:w-2/3 "
           onSubmit={handelSubmit}
         >
           <div className="grid grid-cols-2 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 ">
             
-            <h2 className="col-span-full text-center mb-4 text-primary text-2xl font-bold">
+            <h2 className="col-span-full text-center mb-4 text-purple text-2xl font-bold">
               {transectionType == "credit" && "Recipt"}
               {transectionType == "debit" && "Payment"}
             </h2>
@@ -90,7 +90,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 
                 name="AccountTo"
                 onChange={handelchange}
-                className="form-input border  border-primary w-30 rounded-xl"
+                className="form-input border  border-primary w-full h-10 rounded-md"
               >
                 <option value="">Select </option>
                 {party.map((items, index) => (
@@ -109,7 +109,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 name="AccountFrom"
                 value={inputs.AccountFrom}
                 onChange={handelchange}
-                className="form-input border border-primary w-30 rounded-xl"
+                className="form-input border border-primary w-full h-10 rounded-md"
               >
                 <option value="">Select </option>
                 {party.map((items, index) => (
@@ -128,7 +128,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 name="amount"
                 onChange={handelchange}
                 value={inputs.amount}
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
               />
             </div>
             <div className="mb-4">
@@ -140,7 +140,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 name="invoiceNo"
                 onChange={handelchange}
                 value={inputs.invoiceNo}
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
               />
             </div>
 
@@ -153,7 +153,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 name="chequeNo"
                 onChange={handelchange}
                 value={inputs.chequeNo}
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
               />
             </div>
             <div className="mb-4">
@@ -165,7 +165,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 name="narration"
                 onChange={handelchange}
                 value={inputs.narration}
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
               />
             </div>
           </div>

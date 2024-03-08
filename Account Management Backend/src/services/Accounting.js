@@ -8,7 +8,7 @@ const query = new querys();
 
 class Accounting {
   async createParty(userInputs, res) {
-    // console
+    // const partyArray = Array.isArray(parties) ? parties : [parties];
 
     var quer = query.createPartyquery(userInputs);
     var selectquery = query.selectpartycmpId(userInputs);
@@ -508,7 +508,11 @@ class Accounting {
             this.insertItemDetails(data.insertId, item)
           )
         );
-        res.status(200).json({ flag: true, message: "Inserted successfully" });
+        res.status(200).json({
+          flag: true,
+          message: "Inserted successfully",
+          insertId: data.insertId,
+        });
       } else {
         res.status(200).json({ flag: false, message: "Not found" });
       }
@@ -545,8 +549,29 @@ class Accounting {
       } else {
         if (data.length > 0) {
           // console.log(data);
-          var transformData = this.transformData(data);
-          console.log(transformData);
+
+          res.status(200).json({
+            flag: true,
+            data: data,
+            message: "Featch successfully",
+          });
+        } else {
+          res.status(200).json({ flag: false, message: "Not founded" });
+        }
+      }
+    });
+  }
+  async getBillItem(userrInputs, res) {
+    var q = query.getBillItem(userrInputs);
+
+    db.query(q, (errr, data) => {
+      if (errr) {
+        logError(errr);
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      } else {
+        if (data.length > 0) {
+          // console.log(data);
+
           res.status(200).json({
             flag: true,
             data: data,
@@ -559,68 +584,24 @@ class Accounting {
     });
   }
 
-  // Transform function
-  // Transform function
-  transformData(inputData) {
-    const data = inputData;
-    if (!data || data.length === 0) {
-      throw new Error("Data array is empty or undefined");
-    }
-
-    const invoices = [];
-
-    // Iterate through each invoice data
-    for (const invoice of data) {
-      const invoiceObj = {
-        invoiceNo: invoice.invoiceNo,
-        invoiceDate: invoice.invoiceDate,
-        dueDate: invoice.dueDate,
-        bPartyName: invoice.bPartyName,
-        bPartyAddress: invoice.bPartyAdress, // Corrected key name
-        bStateCode: invoice.bStateCode,
-        gstNo: invoice.gstNo,
-        items: [],
-        totalQuantity: parseFloat(invoice.totalQuantity),
-        gtotalAmount: parseFloat(invoice.gtotalAmount),
-        discount: parseFloat(invoice.discount),
-        totalTaxable: parseFloat(invoice.totalTaxable),
-        totalSgst: parseFloat(invoice.totalSgst),
-        totalCgst: parseFloat(invoice.totalCgst),
-        totalIGst: parseFloat(invoice.totalIGst),
-        tsc: parseFloat(invoice.tcs),
-        totalAmount: parseFloat(invoice.totalAmount),
-        flag: invoice.flag,
-        transportDate: invoice.transportDate,
-        bookName: invoice.bookName,
-        payAmount: parseFloat(invoice.payAmount),
-        pending: parseFloat(invoice.panding), // Corrected key name
-        dueAmount: parseFloat(invoice.dueAmount), // Added handling for dueAmount
-        deliveryAddress: invoice.deliveryAdress, // Corrected key name
-      };
-
-      // Check if invoice.items exists before mapping
-      if (invoice.items && Array.isArray(invoice.items)) {
-        // Iterate through each item in the invoice
-        invoiceObj.items = invoice.items.map((item) => ({
-          itemId: parseInt(item.itemId), // Corrected key name
-          name: item.name,
-          unit: item.unit,
-          qty: parseFloat(item.qty),
-          amount: parseFloat(item.amount),
-          HSN: item.HSN,
-          GST: parseFloat(item.GST),
-          salePrice: parseFloat(item.salePrice),
-          purchasePrice: parseFloat(item.purchasePrice),
-          openingStock: parseInt(item.openingStock),
-          closingStock: parseInt(item.closingStock),
-        }));
+  async deleteBilllog(userInputs, res) {
+    console.log(userInputs);
+    var q = query.deleteBillLog(userInputs);
+    db.query(q, (errr, data) => {
+      if (errr) {
+        logError(errr);
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      } else {
+        if (data.affectedRows > 0) {
+          res.status(200).json({
+            flag: true,
+            message: "deleted successfully",
+          });
+        } else {
+          res.status(200).json({ flag: false, message: "Not founded" });
+        }
       }
-
-      // Push the constructed invoice object to the invoices array
-      invoices.push(invoiceObj);
-    }
-
-    return invoices;
+    });
   }
 
   // Usage

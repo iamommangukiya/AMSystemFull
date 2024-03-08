@@ -126,7 +126,7 @@ const ItemmasterRecords = () => {
                   setModal(true);
                   setMode("add");
                 }}
-                className="btn py-2 px-3 text-lg bg-[#03235780] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+                className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
               >
                 Add Product
               </button>
@@ -138,7 +138,7 @@ const ItemmasterRecords = () => {
                     <th className="w-20">Id</th>
                     <th className="w-32">Name</th>
                     <th className="w-24">Unit</th>
-                    <th className="w-32">price</th>
+                    <th className="w-32">purchase price</th>
                     <th className="w-20">Gst%</th>
                     <th className="w-20">Action</th>
                   </tr>
