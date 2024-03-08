@@ -1,6 +1,7 @@
 const express = require("express");
 const expressApp = require("./express-app");
 const app = express();
+const bodyParser = require("body-parser");
 
 require("dotenv").config();
 
@@ -10,7 +11,8 @@ app.get("/", (req, res) => {
 });
 
 expressApp(app);
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.listen(PORT, () => {
   console.log(`api listion on http://localhost:${PORT}`);
 });

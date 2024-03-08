@@ -138,7 +138,7 @@ const ItemmasterRecords = () => {
                     <th className="w-20">Id</th>
                     <th className="w-32">Name</th>
                     <th className="w-24">Unit</th>
-                    <th className="w-32">price</th>
+                    <th className="w-32">purchase price</th>
                     <th className="w-20">Gst%</th>
                     <th className="w-20">Action</th>
                   </tr>

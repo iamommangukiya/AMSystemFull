@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { addbill, billingaction } from "../reducer/billing_reducer";
+import {
+  addbill,
+  billingaction,
+  getItemsOfBill,
+} from "../reducer/billing_reducer";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import Slidover from "../component/Slidover";
 import { items_get } from "../reducer/Item_reducer";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { use } from "i18next";
 
-const Biling = ({ mode }) => {
+const Biling = () => {
+  const location = useLocation(); // Hook to access the current location object
+  const mode = location.state?.mode || ""; // Get the mode from the state
+  const editdata = location.state.data;
+  console.log(editdata);
+
   const [isOpen, setIsopen] = useState(false);
   const [Inputs, setInputs] = useState({
     invoiceNo: "",
     dueAmount: "",
     paidAmount: "",
     payAmount: "",
-    invoiceDate: "",
-    dueDate: "",
+    invoiceDate: new Date().toISOString().split("T")[0], // Set initial value to today's date
+    dueDate: new Date().toISOString().split("T")[0], // Set initial value to today's date
     bPartyName: "",
     bPartyAdress: "",
     oGSTIN: "",
@@ -30,9 +40,9 @@ const Biling = ({ mode }) => {
     tcs: "",
     totalAmount: "",
     flag: "",
-    transportDate: "",
+    transportDate: new Date().toISOString().split("T")[0],
     bookName: "",
-  
+    transactionStatus: "",
     // panding: "",
     isGstBill: false,
     kasar: "",
@@ -40,19 +50,27 @@ const Biling = ({ mode }) => {
     deliveryAdress: "",
     items: [
       {
-        // id: 1,
-        // item: "",
-        // description: "",
-        // purchasePrice: "",
-        // qty: "",
-        // amount: "",
+        id: 1, // Assigning an initial ID for the first item
+        item: "",
+        description: "",
+        purchasePrice: "",
+        qty: "",
+        amount: "",
       },
     ],
   });
+
   const [isChecked, setIsChecked] = useState(false);
   const [inventoryItems, setInventoryItems] = useState([]);
   const dispatch = useDispatch();
   // slider item
+  useEffect(() => {
+    if (editdata) {
+      dispatch(getItemsOfBill(editdata.id));
+      setInputs({ ...editdata });
+      console.log("object");
+    }
+  }, [editdata]);
 
   useEffect(() => {
     if (mode === "purchase") {
@@ -63,9 +81,57 @@ const Biling = ({ mode }) => {
     dispatch(items_get());
   }, []);
   const ItemData = useSelector((state) => state.ItemReducer.result?.data);
+
   useEffect(() => {
     setInventoryItems(ItemData);
   }, [ItemData]);
+
+  const BillingItem = useSelector(
+    (state) => state.BillingReducer.billItems?.data
+  );
+
+  // Inside the useEffect hook where findItemDetails is called
+  useEffect(() => {
+    if (BillingItem) {
+      const result = findItemDetails(BillingItem, ItemData);
+      console.log(result, "result");
+      // Update the state with the result
+      setInputs((prevInputs) => ({
+        ...prevInputs,
+        items: result,
+      }));
+    }
+  }, [BillingItem, ItemData]);
+
+  // Inside the findItemDetails function
+  function findItemDetails(billItems, items) {
+    const result = [];
+    if (
+      !billItems ||
+      !Array.isArray(billItems) ||
+      !items ||
+      !Array.isArray(items)
+    ) {
+      console.error("Invalid input arrays.");
+      return result;
+    }
+
+    billItems.forEach((billItem) => {
+      const item = items.find((item) => item.id === parseInt(billItem.itemId));
+      if (item) {
+        result.push({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          salePrice: item.salePrice,
+          qty: billItem.qty,
+          amount: billItem.amount,
+        });
+      }
+    });
+    return result;
+  }
+
   const toggleslider = () => {
     setIsopen(!isOpen);
   };
@@ -106,6 +172,11 @@ const Biling = ({ mode }) => {
   };
 
   const flag = useSelector((state) => state.BillingReducer.result.flag || {});
+  const insertId = useSelector((state) => state.BillingReducer.result.insertId);
+  useEffect(() => {
+    console.log(insertId);
+  }, [insertId]);
+
   if (flag === true) {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
@@ -230,8 +301,8 @@ const Biling = ({ mode }) => {
   };
 
   const navigate = useNavigate();
-  const deleteRow = (id) => {
-    const updatedItems = Inputs.items.filter((item) => item.id !== id);
+  const deleteRow = (index) => {
+    const updatedItems = Inputs.items.filter((item, idx) => idx !== index);
     setInputs({ ...Inputs, items: updatedItems });
   };
   const SumbmitHandle = () => {
@@ -248,8 +319,18 @@ const Biling = ({ mode }) => {
 
     // Dispatch the action to add the bill
     dispatch(addbill({ ...Inputs, items: filteredItems }));
-
-    navigate("/dashboard/bill", { state: { Inputs } });
+    console.log(insertId);
+    // navigate("/dashboard/bill", { state: { insertId } });
+  };
+  const updateHandle = () => {
+    const filteredItems = Inputs.items.filter(
+      (item) => item && item.name && item.name.trim() !== ""
+    );
+    // Update the Inputs with filtered items
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      items: filteredItems,
+    }));
   };
 
   return (
@@ -260,7 +341,7 @@ const Biling = ({ mode }) => {
         toggleSlideover={toggleslider}
         inventoryItems={inventoryItems}
       ></Slidover>
-      <div className=" flex-col min-h-screen justify-center flex items-center  bg-gray-100 ">
+      <div className=" flex-col min-h-screen justify-center flex items-center  bg-gray-100   dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
           <p>
@@ -277,7 +358,7 @@ const Biling = ({ mode }) => {
             <input type="checkbox" value={isChecked} onChange={HandleToggle} />
           </div>
         </h2>
-        <form className="grid grid-cols-1  gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
+        <form className="grid grid-cols-1   dark:bg-darklight dark:text-white dark:border-darkborder gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
           {/* party start */}
           {/* // party name */}
 
@@ -320,18 +401,21 @@ const Biling = ({ mode }) => {
             />
           </div>
           {/* // GstIn Party */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Party GSTIN:
-            </label>
-            <input
-              type="text"
-              className="form-input border border-primary w-full rounded-md h-10"
-              onChange={handelchange}
-              name="pgstNo"
-              value={Inputs.pgstNo}
-            />
-          </div>
+          {Inputs.isGstBill == true && (
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Party GSTIN:
+              </label>
+              <input
+                type="text"
+                className="form-input border border-primary w-full rounded-md h-10"
+                onChange={handelchange}
+                name="pgstNo"
+                value={Inputs.pgstNo}
+              />
+            </div>
+          )}
+
           {/* party end */}
 
           {/* purchase details start */}
@@ -377,18 +461,21 @@ const Biling = ({ mode }) => {
           </div>
 
           {/* gstno owner */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              GSTIN:
-            </label>
-            <input
-              type="number"
-              className="form-input border border-primary w-full rounded-md h-10"
-              onChange={handelchange}
-              name="oGSTIN"
-              value={Inputs.oGSTIN}
-            />
-          </div>
+          {Inputs.isGstBill == true && (
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                GSTIN:
+              </label>
+              <input
+                type="number"
+                className="form-input border border-primary w-full rounded-md h-10"
+                onChange={handelchange}
+                name="oGSTIN"
+                value={Inputs.oGSTIN}
+              />
+            </div>
+          )}
+
           {/* Transpose Date */}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -484,7 +571,7 @@ const Biling = ({ mode }) => {
 
         <div class="block w-full overflow-auto scrolling-touch">
           <table
-            class="w-full max-w-full mb-4 bg-transparent table-hover bg-white"
+            class="w-full max-w-full mb-4 bg-transparent table-hover  dark:bg-darklight dark:text-white dark:border-darkborder bg-white"
             id="addTable"
           >
             <thead>
@@ -500,78 +587,90 @@ const Biling = ({ mode }) => {
               </tr>
             </thead>
             <tbody className="tbodyone">
-              {Inputs.items.map((row, index) => (
-                <tr key={index}>
-                  <td>{row.id}</td>
-                  <td>
-                    <input
-                      type="text"
-                      name="name"
-                      value={row.name}
-                      onChange={(e) => handelchange(e, index)}
-                      disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="description"
-                      value={row.description}
-                      onChange={(e) => handelchange(e, index)}
-                      disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      inputMode="decimal"
-                      name="purchasePrice"
-                      value={row.purchasePrice}
-                      onChange={(e) => handelchange(e, index)}
-                      disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      name="qty"
-                      defaultValue={1}
-                      value={row.qty}
-                      onChange={(e) => handelchange(e, index)}
-                      disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
-                    />
-                  </td>
-                  {Inputs.isGstBill == true && (
+              {Inputs.items &&
+                Inputs.items.map((row, index) => (
+                  <tr key={index}>
+                    <td>{index}</td>
                     <td>
                       <input
-                        type="number"
-                        name="GST"
-                        value={row.GST}
+                        type="text"
+                        name="name"
+                        className=" dark:bg-darklight"
+                        value={row.name}
                         onChange={(e) => handelchange(e, index)}
                         disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
                       />
                     </td>
-                  )}
-                  <td>
-                    <input type="number" disabled value={row.amount} readOnly />
-                  </td>
-                  {index === 0 ? (
                     <td>
-                      {/* <button onClick={addRow}>Add</button> */}
-                      <button onClick={toggleslider}>Add</button>
+                      <input
+                        type="text"
+                        name="description"
+                        className=" dark:bg-darklight"
+                        value={row.description}
+                        onChange={(e) => handelchange(e, index)}
+                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                      />
                     </td>
-                  ) : (
                     <td>
-                      <button onClick={() => deleteRow(row.id)}>Delete</button>
+                      <input
+                        type="number"
+                        className=" dark:bg-darklight"
+                        inputMode="decimal"
+                        name="salePrice"
+                        value={row.salePrice}
+                        onChange={(e) => handelchange(e, index)}
+                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                      />
                     </td>
-                  )}
-                </tr>
-              ))}
+                    <td>
+                      <input
+                        className=" dark:bg-darklight"
+                        type="number"
+                        name="qty"
+                        defaultValue={1}
+                        value={row.qty}
+                        onChange={(e) => handelchange(e, index)}
+                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                      />
+                    </td>
+                    {Inputs.isGstBill == true && (
+                      <td>
+                        <input
+                          type="number"
+                          className=" dark:bg-darklight"
+                          name="GST"
+                          value={row.GST}
+                          onChange={(e) => handelchange(e, index)}
+                          disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                        />
+                      </td>
+                    )}
+                    <td>
+                      <input
+                        type="number"
+                        className=" dark:bg-darklight"
+                        disabled
+                        value={row.amount}
+                        readOnly
+                      />
+                    </td>
+                    {index === 0 ? (
+                      <td>
+                        {/* <button onClick={addRow}>Add</button> */}
+                        <button onClick={toggleslider}>Add</button>
+                      </td>
+                    ) : (
+                      <td>
+                        <button onClick={() => deleteRow(index)}>Delete</button>
+                      </td>
+                    )}
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>
-        <div class="block w-full overflow-auto scrolling-touch">
-          <table class="w-full max-w-full mb-4 bg-transparent table-hover bg-white">
+        <div class="block w-full overflow-auto  dark:bg-darklight dark:text-white dark:border-darkborder scrolling-touch">
+          <table class="w-full max-w-full   dark:bg-darklight dark:text-white dark:border-darkborder mb-4 bg-transparent table-hover bg-white">
             <tbody>
               <tr className="flex justify-end ">
                 <td className="col-span-9"></td>
@@ -733,13 +832,23 @@ const Biling = ({ mode }) => {
         </div>
 
         <div className="flex items-center justify-between col-3">
-          <button
-            className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
-            onClick={SumbmitHandle}
-            type="submit"
-          >
-            create Bill
-          </button>
+          {editdata ? (
+            <button
+              className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+              onClick={updateHandle}
+              type="submit"
+            >
+              Update Bill
+            </button>
+          ) : (
+            <button
+              className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+              onClick={SumbmitHandle}
+              type="submit"
+            >
+              Create Bill
+            </button>
+          )}
         </div>
       </div>
       <ToastContainer

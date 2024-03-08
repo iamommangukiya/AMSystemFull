@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   AccountGrop,
+  apiparty,
   apipartyGet,
   partyAction,
   partyDelete,
@@ -13,21 +14,22 @@ import {
 import Party from "../pages/Party";
 
 import React_Modal from "./ReactModal";
+import ExcelUploadModal from "./ExcelFileuplode";
 
 const PartyRecord = () => {
   const dispatch = useDispatch();
   const [modal, setModal] = useState(false);
   const [mode, setMode] = useState();
   const [filterData, setFilterData] = useState();
-
   const [editedValues, setEditedValues] = useState({});
+  const [excelModalOpen, setExcelModalOpen] = useState(false); // State for Excel upload modal
 
-  var result = useSelector((state) => state.PartyReducer.result.data);
-
+  const result = useSelector((state) => state.PartyReducer.result.data);
   const msg = useSelector((state) => state.PartyReducer.resultparty?.flag);
   const updateMsg = useSelector(
     (state) => state.PartyReducer.party_upadte?.flag
   );
+
   useEffect(() => {
     dispatch(AccountGrop());
     if (msg === true) {
@@ -66,50 +68,67 @@ const PartyRecord = () => {
   const closeModal = () => {
     setModal(false);
   };
+
   const handleUpdateClick = (index) => {
     setMode("update");
 
     setEditedValues(result[index]);
     setModal(true);
   };
+
   useEffect(() => {
     dispatch(apipartyGet());
   }, []);
+
   useEffect(() => {
     if (result?.length > 0) {
       setFilterData(result);
     }
   }, [result]);
-  console.log(filterData);
+
+  const openExcelModal = () => {
+    setExcelModalOpen(true);
+  };
+  const handleExcelUpload = (data) => {
+    // Here you can handle the data read from the Excel file and send it to the API
+    console.log("Excel data:", data);
+    dispatch(apiparty(data));
+    dispatch(apipartyGet());
+
+    // Close the modal after processing
+    setExcelModalOpen(false);
+  };
+
   if (!result || !Array.isArray(result)) {
     return (
-      <div className="flex justify-between items-center text-2xl">
-        No Data...
-        <div className="ml-auto">
-          <button
-            onClick={() => {
-              setEditedValues({});
-              setMode("add");
-              setModal(true);
-            }}
-            className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
-          >
-            ADD PARTY
-          </button>
+      <>
+        <ExcelUploadModal
+          isOpen={excelModalOpen}
+          closeModal={() => setExcelModalOpen(false)}
+          onUpload={handleExcelUpload}
+        />
+        <div className="flex justify-between items-center text-2xl">
+          No Data...
+          <div className="ml-auto">
+            <button
+              onClick={() => {
+                setEditedValues({});
+                setMode("add");
+                setModal(true);
+              }}
+              className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+            >
+              ADD PARTY
+            </button>
+          </div>
+          <React_Modal isOpen={modal} closeModal={closeModal}>
+            <Party data={editedValues} mode={mode} />
+          </React_Modal>
         </div>
-        <React_Modal isOpen={modal} closeModal={closeModal}>
-          <Party data={editedValues} mode={mode} />
-        </React_Modal>
-      </div>
+      </>
     );
   }
-  const displayFields = [
-    "partyName",
-    "phoneNumber",
-    "accountGroup",
-    "pan",
-    "gstNumber",
-  ];
+  const displayFields = ["partyName", "phoneNumber", "pan", "gstNumber"];
   const handleshow = (index) => {
     setEditedValues(result[index]);
     setModal(true);
@@ -130,6 +149,11 @@ const PartyRecord = () => {
 
   return (
     <>
+      <ExcelUploadModal
+        isOpen={excelModalOpen}
+        closeModal={() => setExcelModalOpen(false)}
+        onUpload={handleExcelUpload}
+      />
       <div>
         <React_Modal isOpen={modal} closeModal={closeModal}>
           <Party data={editedValues} mode={mode} />
@@ -145,16 +169,24 @@ const PartyRecord = () => {
                 class=" w-50 ml-4 rounded-xl mb-3"
                 placeholder="search "
               />
-              <button
-                onClick={() => {
-                  setEditedValues("");
-                  setMode("add");
-                  setModal(true);
-                }}
-                className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
-              >
-                ADD PARTY
-              </button>
+              <div className="space-x-5">
+                <button
+                  onClick={() => setExcelModalOpen(true)} // Open Excel upload modal
+                  className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                >
+                  Add By Excel
+                </button>
+                <button
+                  onClick={() => {
+                    setEditedValues("");
+                    setMode("add");
+                    setModal(true);
+                  }}
+                  className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                >
+                  ADD PARTY
+                </button>
+              </div>
             </div>
 
             <div className="overflow-auto">
@@ -164,7 +196,7 @@ const PartyRecord = () => {
                     <th class="w-24 text-center">Index</th>
                     <th class="w-32">PartyName</th>
                     <th class="w-32">PhoneNumber</th>
-                    <th class="w-32">AccountGroup</th>
+                    {/* <th class="w-32">AccountGroup</th> */}
                     <th class="w-32">Pan</th>
                     <th class="w-32">GstNumber</th>
                     <th class="w-32">Action</th>
@@ -172,13 +204,12 @@ const PartyRecord = () => {
                 </thead>
                 <tbody>
                   {filterData &&
-                    
                     filterData.map((item, index) => (
                       <tr key={index}>
                         <td className="text-center">{index + 1}</td>
                         {displayFields.map((field) => (
                           <td className="text-center " key={field}>
-                            {item[field]}
+                            {item[field] == null ? "-" : item[field]}
                           </td>
                         ))}
                         <td className=" space-x-5 justify-evenly  text-center ">
