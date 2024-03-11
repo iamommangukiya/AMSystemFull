@@ -39,16 +39,16 @@ const ExcelUploadModal = ({ isOpen, closeModal, onUpload }) => {
     >
       <div className="modal-background" onClick={closeModal}></div>
 
-      <div className="modal-card z-50 w-96 bg-white ">
+      <div className="modal-card z-50 w-auto bg-white py-5 rounded-md">
         <header className="modal-card-head">
-          <p className="modal-card-title">Upload Excel File</p>
+          <p className="modal-card-title text-center text-xl">Upload Excel File</p>
           <button
             className="delete"
             aria-label="close"
             onClick={closeModal}
           ></button>
         </header>
-        <section className="modal-card-body">
+        <section className="modal-card-body px-5 pb-5">
           <div className="file has-name is-fullwidth">
             <label className="file-label">
               <input
@@ -58,7 +58,7 @@ const ExcelUploadModal = ({ isOpen, closeModal, onUpload }) => {
                 accept=".xls, .xlsx"
                 onChange={handleFileChange}
               />
-              <span className="file-cta">
+              <span className="file-cta ps-2 bg-gray-200 p-3 rounded-md">
                 <span className="file-label">
                   {file ? file.name : "click to upload"}
                 </span>
@@ -68,13 +68,13 @@ const ExcelUploadModal = ({ isOpen, closeModal, onUpload }) => {
         </section>
         <footer className="modal-card-foot ">
           <button
-            className="btn hover:bg-black hover:text-white border mx-4 rounded-3xl transition-transform"
+            className="btn hover:bg-black hover:text-white border ms-5 me-2  rounded-md transition-transform"
             onClick={handleUpload}
           >
             Upload
           </button>
           <button
-            className="btn bg-black text-white border mx-4 rounded-3xl"
+            className="btn bg-black text-white border rounded-md"
             onClick={closeModal}
           >
             Cancel

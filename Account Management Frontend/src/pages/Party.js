@@ -171,12 +171,13 @@ const Party = ({ data, mode }) => {
 
   return (
     <>
-      <div className="  overflow-scroll flex items-center justify-center mt-0 ">
+    
+      <div className="  overflow-scroll flex items-center justify-center mt-0">
         <form
-          className="bg-white shadow-md   rounded px-2 pt-6  "
+          className="bg-white shadow-md rounded px-2 pt-6"
           onSubmit={handelSubmit}
         >
-          <h2 className="col-span-full  text-center mb-10 text-primary text-2xl font-bold">
+          <h2 className="col-span-full text-purple   text-center mb-10 text-primary text-2xl font-bold">
             PartyMaster
           </h2>
           <div className="grid grid-cols-4 gap-3  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1">
@@ -189,7 +190,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 aria-describedby="emailHelp"
                 onChange={handelchange}
                 name="partyName"
@@ -206,7 +207,7 @@ const Party = ({ data, mode }) => {
                 phone Number
               </label>
               <div className="flex ">
-                <select className="form-input border border-primary w-20 rounded-l-xl">
+                <select className="form-input border border-gray-400 w-20 h-10 rounded-l-md">
                   <option>+91</option>
 
                   {countryList.map((Countycode, index) => {
@@ -219,7 +220,7 @@ const Party = ({ data, mode }) => {
                 </select>
                 <input
                   type="text"
-                  className={`form-input border border-primary w-full rounded-r-xl ${
+                  className={`form-input border border-gray-400 w-full h-10 rounded-r-md ${
                     valid.phonevalid ? "border-red-500" : ""
                   }`}
                   id="exampleInputPhoneNo"
@@ -247,7 +248,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="email"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 onChange={handelchange}
@@ -261,7 +262,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 id="exampleInputCname"
                 aria-describedby="emailHelp"
                 onChange={handelchange}
@@ -278,7 +279,7 @@ const Party = ({ data, mode }) => {
               </label>
 
               <select
-                className="block w-full p-2 form-input  border-primary  rounded-l-xl border border-gray-300 rounded-md"
+                className="block w-full h-10 p-2 form-input rounded-l-md border border-gray-400 rounded-md"
                 onChange={handelchange}
                 name="country"
                 value={Inputs.country}
@@ -307,7 +308,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 id="exampleInputcity"
                 onChange={handelchange}
                 name="city"
@@ -323,7 +324,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 id="exampleInputstatecode"
                 onChange={handelchange}
                 name="statecode"
@@ -342,7 +343,7 @@ const Party = ({ data, mode }) => {
                 </label>
                 <input
                   type="text"
-                  className="form-input border border-primary w-full rounded-xl"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
                   id="exampleInputstate"
                   onChange={handelchange}
                   name="state"
@@ -359,7 +360,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className={`form-input border border-primary w-full rounded-xl ${
+                className={`form-input border border-gray-400 w-full h-10 rounded-md ${
                   valid.postCodevalid ? "border-red-500" : ""
                 }`}
                 id="exampleInputcode"
@@ -374,7 +375,7 @@ const Party = ({ data, mode }) => {
               </label>
 
               <select
-                className="  form-input border border-primary w-full rounded-xl"
+                className="  form-input border border-gray-400 w-full h-10 rounded-md"
                 onChange={handelchange}
                 re
                 name="accountGroup"
@@ -400,7 +401,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className={`form-input border border-primary w-full rounded-xl ${
+                className={`form-input border border-gray-400 w-full h-10 rounded-md ${
                   valid.panvalid ? "border-red-500" : ""
                 }`}
                 id="exampleInputEmail1"
@@ -419,7 +420,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className={`form-input border border-primary w-full rounded-xl ${
+                className={`form-input border border-gray-400 w-full h-10 rounded-md ${
                   valid.gstvalid ? "border-red-500" : ""
                 }`}
                 id="exampleInputGst"
@@ -434,7 +435,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 onChange={handelchange}
                 name="natureOfOrg"
                 value={Inputs.natureOfOrg}
@@ -446,7 +447,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 onChange={handelchange}
                 name="deliveryAddress"
                 value={Inputs.deliveryAddress}
@@ -458,7 +459,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 onChange={handelchange}
                 name="distance"
                 value={Inputs.distance}
@@ -470,7 +471,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 id="exampleInputaddress"
                 onChange={handelchange}
                 name="creditLimit"
@@ -483,7 +484,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 id="exampleInputCname"
                 aria-describedby="emailHelp"
                 onChange={handelchange}
@@ -502,7 +503,7 @@ const Party = ({ data, mode }) => {
               <div className="relative">
                 <input
                   type="number"
-                  className="form-input border border-primary w-full rounded-xl pr-10"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md pr-10"
                   inputMode="decimal"
                   onChange={handelchange}
                   name="tds"
@@ -522,7 +523,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 inputmode="decimal"
                 onChange={handelchange}
                 name="discount"
@@ -535,7 +536,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 onChange={handelchange}
                 name="transporterName"
                 value={Inputs.transporterName}
@@ -547,7 +548,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 onChange={handelchange}
                 name="brokerage"
                 value={Inputs.brokerage}
@@ -562,7 +563,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 inputmode="decimal"
                 onChange={handelchange}
                 name="rf"
@@ -578,7 +579,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 inputmode="decimal"
                 onChange={handelchange}
                 name="TCSRate"
@@ -591,7 +592,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 inputmode="decimal"
                 onChange={handelchange}
                 name="openingBalance"
@@ -607,7 +608,7 @@ const Party = ({ data, mode }) => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-xl"
+                className="form-input border border-gray-400 w-full h-10 rounded-md"
                 id="exampleInput"
                 onChange={handelchange}
                 name="paymentTerms"
@@ -634,7 +635,7 @@ const Party = ({ data, mode }) => {
             )}
             {mode === "update" && (
               <button
-                className="btn text-xl bg-purple border  border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
                 onClick={validation}
                 type="submit"
               >

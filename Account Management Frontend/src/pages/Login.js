@@ -49,7 +49,7 @@ const Login = () => {
         {/* <!-- Start Background Images --> */}
         <div
           className=" bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
-          style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}
+          style={{ backgroundImage: 'url("../assets/images/images-6.jpg")' }}
         ></div>
         {/* <!-- End Background Images --> */}
 
@@ -75,9 +75,9 @@ const Login = () => {
         </header>
         {/* <!-- End Header --> */}
 
-        <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto ">
-          <div className="max-w-[550px] flex-none w-full text-white  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300">
-            <h1 className="text-3xl font-semibold mb-2 text-center dark:text-white">
+        <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto">
+          <div className="max-w-[550px] flex-none w-full text-white  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300 shadow-2xl">
+            <h1 className="text-3xl text-[#03235780] font-semibold mb-2 text-center dark:text-white">
               Sign In
             </h1>
             <p className="text-center mb-7 dark:text-darkmuted">
@@ -136,7 +136,7 @@ const Login = () => {
                   name="email"
                   value={Inputs.email}
                   placeholder="Email"
-                  className="form-input"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
                   required
                 />
               </div>
@@ -147,7 +147,7 @@ const Login = () => {
                   name="password"
                   value={Inputs.password}
                   placeholder="Password"
-                  className="form-input"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
                   required
                 />
               </div>
@@ -159,7 +159,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="btn w-full py-3.5 text-bas bg-[#3b82f680] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+                className="btn w-full py-3.5 text-bas bg-[#03235780] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
               >
                 Sign In
               </button>

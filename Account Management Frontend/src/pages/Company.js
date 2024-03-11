@@ -126,22 +126,28 @@ const Company = () => {
   };
 
   return (
-    <div className=" flex-col min-h-screen justify-center flex items-center  bg-blue-300 ">
-      <div className=" flex-col flex items-center py-4 bg-blue-50 rounded   justify-center  ">
-        <h2 className="col-span-full text-blue-700  justify-center text-center mb-4 text-primary text-5xl font-bold">
+    <div className=" flex-col min-h-screen justify-center flex items-center   ">
+       {/* <!-- Start Background Images --> */}
+       <div
+          className=" bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
+          style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}
+        ></div>
+        {/* <!-- End Background Images --> */}
+      <div className=" flex-col flex items-center py-4  rounded-xl   justify-center backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300 shadow-2xl ">
+        <h2 className="col-span-full text-[#03235780]  justify-center text-center mb-4 text-primary text-4xl font-bold">
           Company Form
         </h2>
         <form className="grid grid-cols-1  gap-6 md:grid-cols-2 py-3 lg:grid-cols-3 xl:grid-cols-3 pt-6  mb-4 lg:w-3/4">
           <div className="mb-4">
             <label
               htmlFor="exampleInputEmail1"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               Company Name
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md"
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
               id="exampleInputCname"
               aria-describedby="emailHelp"
               onChange={handelchange}
@@ -152,13 +158,13 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputEmail1"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               Email address
             </label>
             <input
               type="email"
-              className="form-input border border-primary w-full rounded-md"
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               onChange={handelchange}
@@ -169,13 +175,13 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputpstock"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               purchaseStock
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md"
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
               id="exampleInputstock"
               onChange={handelchange}
               name="purchaseStock"
@@ -185,13 +191,13 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputaddress"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               Date
             </label>
             <DateRangePicker
-              className=" border border-primary w-full rounded-md"
-              value={Inputs.date}
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  value={Inputs.date}
               onChange={handleDateChange}
               placeholder="date"
             />
@@ -200,13 +206,14 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputEmail1"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               Pan
             </label>
             <input
               type="text"
-              className={`form-input border border-primary w-full rounded-md ${
+              className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg
+              ${
                 valid.panvalid ? "border-red-500" : ""
               }`}
               id="exampleInputEmail1"
@@ -222,12 +229,12 @@ const Company = () => {
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm mb-2">
+            <label className="block text-[#03235780] text-sm mb-2">
               Gst Number
             </label>
             <input
               type="text"
-              className={`form-input border border-primary w-full rounded-md ${
+              className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg ${
                 valid.gstvalid ? "border-red-500" : ""
               }`}
               id="exampleInputGst"
@@ -245,13 +252,13 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputPhoneNo"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               phone Number
             </label>
             <div>
               <div className="flex ">
-                <select className="form-input border border-primary w-20 rounded-l-md">
+                <select className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg">
                   <option>+91</option>
 
                   {countryList.map((Countycode, index) => {
@@ -265,7 +272,7 @@ const Company = () => {
 
                 <input
                   type="text"
-                  className={`form-input border border-primary w-full rounded-r-md ${
+                  className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg ${
                     valid.phonevalid ? "border-red-500" : ""
                   }`}
                   id="exampleInputPhoneNo"
@@ -295,13 +302,13 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputaddress"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               Adress
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md"
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
               id="exampleInputaddress"
               onChange={handelchange}
               name="address"
@@ -311,7 +318,7 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputcity"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               {" "}
               {/* Fix 'for' to 'htmlFor' */}
@@ -319,7 +326,7 @@ const Company = () => {
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md"
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
               id="exampleInputcity"
               onChange={handelchange}
               name="city"
@@ -329,7 +336,7 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputstate"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               {" "}
               {/* Fix 'for' to 'htmlFor' */}
@@ -337,7 +344,7 @@ const Company = () => {
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md"
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
               id="exampleInputstate"
               onChange={handelchange}
               name="state"
@@ -347,7 +354,7 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputcountry"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               Country
             </label>
@@ -363,7 +370,7 @@ const Company = () => {
           /> */}
 
             <select
-              className="block w-full p-2 border border-gray-300 rounded-md"
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
               onChange={handelchange}
               name="country"
               value={Inputs.country}
@@ -384,13 +391,13 @@ const Company = () => {
           <div className="mb-4">
             <label
               htmlFor="exampleInputcode"
-              className="block text-gray-700 text-sm mb-2"
+              className="block text-[#03235780] text-sm mb-2"
             >
               Postal Code
             </label>
             <input
               type="text"
-              className={`form-input border border-primary w-full rounded-md ${
+              className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg ${
                 valid.postCodevalid ? "border-red-500" : ""
               }`}
               id="exampleInputcode"
@@ -408,7 +415,7 @@ const Company = () => {
         </form>
         <div className="flex items-center justify-between col-3">
           <button
-            className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+            className="btn py-2.5 text-xl bg-[#03235780] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
             onClick={validation}
             type="submit"
           >
