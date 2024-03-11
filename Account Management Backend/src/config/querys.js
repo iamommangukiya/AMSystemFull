@@ -485,7 +485,7 @@ class Querys {
       transportDate,
       bookName,
       isGstBill,
-
+      transactionType,
       panding,
       dueAmount,
       deliveryAdress,
@@ -520,7 +520,8 @@ class Querys {
       deliveryAdress,
       createDate,
       updateDate,
-      isGstBill
+      isGstBill,
+      transactionType
  
   ) VALUES (
       '${CompanyId}',
@@ -549,11 +550,85 @@ class Querys {
       '${deliveryAdress}',
       '${formattedDate}',
       '${formattedDate}',
-      '${isGstBill}'
+      '${isGstBill}',
+      '${transactionType}'
 
   );
   `;
   };
+  selectBillLogbyID = (userDAta) => {
+    console.log(userDAta);
+    return `select * from Accounting.Billlog where id = ${userDAta.id} and ComapnyId=${userDAta.CompanyId}`;
+  };
+
+  updateBillLog = (userdata) => {
+    console.log(userdata);
+    const currentdate = moment();
+    const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
+    const {
+      id,
+      CompanyId,
+      invoiceNo,
+      invoiceDate,
+      dueDate,
+      bPartyName,
+      bPartyAdress,
+      bStateCode,
+      gstNo,
+      totalQuantity,
+      gtotalAmount,
+      discount,
+      totalTaxable,
+      paidAmount,
+      totalSgst,
+      totalCgst,
+      cmpId,
+      totalIGst,
+      tcs,
+      totalAmount,
+      flag,
+      transportDate,
+      bookName,
+      isGstBill,
+      panding,
+      dueAmount,
+      deliveryAdress,
+      transactionType,
+    } = userdata;
+    console.log(userdata, "jshdvgf");
+    return `UPDATE Accounting.Billlog 
+    SET
+      ComapnyId = '${cmpId}',
+      invoiceNo = '${invoiceNo}',
+      invoiceDate = '${invoiceDate}',
+      dueDate = '${dueDate}',
+      bPartyName = '${bPartyName}',
+      bPartyAdress = '${bPartyAdress}',
+      bStateCode = '${bStateCode}',
+      gstNo = '${gstNo}',
+      transactionType= '${transactionType}',
+      totalQuantity = '${totalQuantity}',
+      gtotalAmount = '${gtotalAmount}',
+      discount = '${discount}',
+      totalTaxable = '${totalTaxable}',
+      totalSgst = '${totalSgst}',
+      totalCgst = '${totalCgst}',
+      totalIGst = '${totalIGst}',
+      tcs = '${tcs}',
+      totalAmount = '${totalAmount}',
+      flag = '${flag}',
+      transportDate = '${transportDate}',
+      bookName = '${bookName}',
+      payAmount = '${paidAmount}',
+      panding = '${panding}',
+      dueAmount = '${dueAmount}',
+      deliveryAdress = '${deliveryAdress}',
+      updateDate = '${formattedDate}',
+      isGstBill = '${isGstBill}'
+    WHERE id = '${id}';
+    `;
+  };
+
   getbilling = (userdata) => {
     //return `select * from Billlog where ComapnyId =${userdata}  `;
     return `  SELECT * From Billlog WHERE ComapnyId = ${userdata}`;

@@ -57,7 +57,7 @@ export const transction_Records = createAsyncThunk(
           },
         }
       );
-      console.log(result);
+      // console.log(result);
       const response = result.data;
       return response;
     } catch (error) {
@@ -69,7 +69,7 @@ export const transction_Records = createAsyncThunk(
 export const transction_get = createAsyncThunk(
   "transction_get/tracstion_Slice",
   async (data) => {
-    console.log(data);
+    // console.log(data);
 
     try {
       const auth_token = localStorage.getItem("company");

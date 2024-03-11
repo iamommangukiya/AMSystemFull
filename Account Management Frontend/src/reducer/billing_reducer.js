@@ -18,18 +18,55 @@ export const addbill = createAsyncThunk(
     return responseData;
   }
 );
+export const UpdateBillog = createAsyncThunk(
+  "billing_slice/UpdateBillog",
+  async (data) => {
+    // console.log(data, "update");
+    const auth_token = localStorage.getItem("company");
+    const response = await axios.put(
+      process.env.REACT_APP_API + "/billlog",
+      data,
+      {
+        headers: {
+          com_token: auth_token,
+        },
+      }
+    );
+    const responseData = response.data;
+    return responseData;
+  }
+);
 
 export const getbilldata = createAsyncThunk(
   "billing_slice/getbilldata",
   async (data) => {
     const auth_token = localStorage.getItem("company");
-    console.log(auth_token);
+    // console.log(auth_token);
     const response = await axios.get(process.env.REACT_APP_API + "/billlog", {
       headers: {
         com_token: auth_token,
       },
     });
-    console.log(response.data);
+
+    const responseData = response.data;
+    return responseData;
+  }
+);
+export const getbilldatabyId = createAsyncThunk(
+  "billing_slice/getbilldatabyId",
+  async (data) => {
+    const auth_token = localStorage.getItem("company");
+
+    const response = await axios.post(
+      process.env.REACT_APP_API + "/billitemById",
+      { id: data },
+      {
+        headers: {
+          com_token: auth_token,
+        },
+      }
+    );
+
     const responseData = response.data;
     return responseData;
   }
@@ -81,6 +118,7 @@ const billingSlice = createSlice({
     billItems: "",
     result: "",
     resultData: "",
+    updateBilllog: "",
     delete: "",
   },
   reducers: {
@@ -125,6 +163,24 @@ const billingSlice = createSlice({
       })
       .addCase(getItemsOfBill.rejected, (state) => {
         state.billItems = "rejected";
+      })
+      .addCase(UpdateBillog.pending, (state) => {
+        state.updateBilllog = "pending";
+      })
+      .addCase(UpdateBillog.fulfilled, (state, action) => {
+        state.updateBilllog = action.payload;
+      })
+      .addCase(UpdateBillog.rejected, (state) => {
+        state.updateBilllog = "rejected";
+      })
+      .addCase(getbilldatabyId.pending, (state) => {
+        state.result = "pending";
+      })
+      .addCase(getbilldatabyId.fulfilled, (state, action) => {
+        state.result = action.payload;
+      })
+      .addCase(getbilldatabyId.rejected, (state) => {
+        state.result = "rejected";
       });
   },
 });

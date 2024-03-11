@@ -1,0 +1,40 @@
+2024-03-10T20:59:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T20:59:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T20:59:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T20:59:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T20:59:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T20:59:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T20:59:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T20:59:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:00:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:41:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: read ECONNRESET
+2024-03-10T21:41:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: read ECONNRESET
+2024-03-10T21:41:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: read ECONNRESET
+2024-03-10T21:41:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: read ECONNRESET
+2024-03-10T21:41:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:41:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:41:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state
+2024-03-10T21:49:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : ReferenceError: transactionType is not defined
+2024-03-10T21:49:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : ReferenceError: transactionType is not defined
+2024-03-10T21:49:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : ReferenceError: transactionType is not defined
+2024-03-10T21:53:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : ReferenceError: transactionType is not defined
+2024-03-10T22:50:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Table 'Accounting.billLog' doesn't exist
+2024-03-10T22:51:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2024-03-10T22:51:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'billId' in 'where clause'
+2024-03-10T22:52:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2024-03-10T22:53:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2024-03-10T22:53:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'
+2024-03-10T22:54:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'CompanyId' in 'where clause'
+2024-03-10T22:56:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'CompanyId' in 'where clause'
+2024-03-10T22:56:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'undefined' in 'where clause'

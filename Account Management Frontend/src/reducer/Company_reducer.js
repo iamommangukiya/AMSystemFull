@@ -20,7 +20,7 @@ export const company = createAsyncThunk(
         const response = companyResult.data;
         // const response = await JSON.parse(companyResult.data);
 
-        console.log(response);
+        // console.log(response);
         return response;
       } else {
       }

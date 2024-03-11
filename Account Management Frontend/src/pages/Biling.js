@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  UpdateBillog,
   addbill,
   billingaction,
   getItemsOfBill,
@@ -15,7 +16,24 @@ const Biling = () => {
   const location = useLocation(); // Hook to access the current location object
   const mode = location.state?.mode || ""; // Get the mode from the state
   const editdata = location.state.data;
-  console.log(editdata);
+  let bookName = "";
+  switch (mode) {
+    case "sales":
+      bookName = "SalesBook";
+      break;
+    case "purchase":
+      bookName = "PurchaseBook";
+      break;
+    case "asimat":
+      bookName = "AsimatBill";
+      break;
+    case "delivery":
+      bookName = "DeliveryBill";
+      break;
+    default:
+      bookName = "";
+      break;
+  }
 
   const [isOpen, setIsopen] = useState(false);
   const [Inputs, setInputs] = useState({
@@ -41,16 +59,15 @@ const Biling = () => {
     totalAmount: "",
     flag: "",
     transportDate: new Date().toISOString().split("T")[0],
-    bookName: "",
+    bookName: bookName,
     transactionStatus: "",
-    // panding: "",
     isGstBill: false,
     kasar: "",
     transactionType: "unpaid",
     deliveryAdress: "",
     items: [
       {
-        id: 1, // Assigning an initial ID for the first item
+        id: 1,
         item: "",
         description: "",
         purchasePrice: "",
@@ -68,7 +85,6 @@ const Biling = () => {
     if (editdata) {
       dispatch(getItemsOfBill(editdata.id));
       setInputs({ ...editdata });
-      console.log("object");
     }
   }, [editdata]);
 
@@ -94,7 +110,7 @@ const Biling = () => {
   useEffect(() => {
     if (BillingItem) {
       const result = findItemDetails(BillingItem, ItemData);
-      console.log(result, "result");
+      // console.log(result, "result");
       // Update the state with the result
       setInputs((prevInputs) => ({
         ...prevInputs,
@@ -123,8 +139,9 @@ const Biling = () => {
           id: item.id,
           name: item.name,
           description: item.description,
-          salePrice: item.salePrice,
+          salePrice: billItem.unitCost,
           qty: billItem.qty,
+          GST: billItem.gst,
           amount: billItem.amount,
         });
       }
@@ -153,6 +170,7 @@ const Biling = () => {
       (total, item) => total + parseFloat(item.amount * item.qty),
       0
     );
+    // console.log(totalAmount, "itemsSelect");
 
     setInputs((prevInputs) => ({
       ...prevInputs,
@@ -173,9 +191,6 @@ const Biling = () => {
 
   const flag = useSelector((state) => state.BillingReducer.result.flag || {});
   const insertId = useSelector((state) => state.BillingReducer.result.insertId);
-  useEffect(() => {
-    console.log(insertId);
-  }, [insertId]);
 
   if (flag === true) {
     toast.success("Sucessfull", "sucess");
@@ -200,7 +215,7 @@ const Biling = () => {
       const updatedItems = Inputs.items.map((item, i) => {
         if (i === index) {
           const qty = name === "qty" ? parseFloat(value) || 0 : item.qty;
-          const purchasePrice = parseFloat(item.purchasePrice) || 0;
+          const purchasePrice = parseFloat(item.salePrice) || 0;
           const GST = name === "GST" ? parseFloat(value) || 0 : item.GST;
           // Calculate the amount based on whether isGstBill is true or false
           const amount = Inputs.isGstBill
@@ -300,7 +315,6 @@ const Biling = () => {
     }
   };
 
-  const navigate = useNavigate();
   const deleteRow = (index) => {
     const updatedItems = Inputs.items.filter((item, idx) => idx !== index);
     setInputs({ ...Inputs, items: updatedItems });
@@ -319,7 +333,7 @@ const Biling = () => {
 
     // Dispatch the action to add the bill
     dispatch(addbill({ ...Inputs, items: filteredItems }));
-    console.log(insertId);
+    // console.log(insertId);
     // navigate("/dashboard/bill", { state: { insertId } });
   };
   const updateHandle = () => {
@@ -331,6 +345,7 @@ const Biling = () => {
       ...prevInputs,
       items: filteredItems,
     }));
+    dispatch(UpdateBillog({ ...Inputs, items: filteredItems }));
   };
 
   return (
@@ -345,8 +360,8 @@ const Biling = () => {
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
           <p>
-            {Inputs.isGstBill != true && mode == "sale" && "Sale Biling "}{" "}
-            {Inputs.isGstBill != false && mode == "sale" && "GST Sale Biling"}
+            {Inputs.isGstBill != true && mode == "salse" && "Sale Biling "}{" "}
+            {Inputs.isGstBill != false && mode == "salse" && "GST Sale Biling"}
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
               "GST purchase Biling"}
@@ -517,7 +532,7 @@ const Biling = () => {
           </div> */}
 
           {/* bookname */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Book Name:
             </label>
@@ -528,7 +543,7 @@ const Biling = () => {
               name="bookName"
               value={Inputs.bookName}
             />
-          </div>
+          </div> */}
           {/* pay Amount */}
           {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">

@@ -49,7 +49,7 @@ const ItemmasterRecords = () => {
             onClick={() => {
               setModal(true);
               setMode("add");
-              console.log(Mode);
+              // console.log(Mode);
             }}
             className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
           >
@@ -146,8 +146,8 @@ const ItemmasterRecords = () => {
                 <tbody>
                   {filterDate.map((item, index) => (
                     <tr key={index}>
-                      {console.log(item)}
-                      <td>{item.id}</td>
+                      {/* {console.log(item)} */}
+                      <td>{index + 1}</td>
                       <td>{item.name}</td>
                       <td>{item.unit}</td>
                       <td>
