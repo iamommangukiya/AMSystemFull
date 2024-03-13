@@ -246,4 +246,15 @@ module.exports = (app) => {
 
     AcountService.getBillById(sData, res);
   });
+  app.post("/api/getletestInvoiceId", feactCompany, (req, res) => {
+    var data = req.body;
+    var id = req.cmp;
+
+    var sData = {
+      ...data,
+      cmpId: id,
+    };
+
+    AcountService.getInvoiceNoLatest(sData, res);
+  });
 };

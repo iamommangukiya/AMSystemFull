@@ -111,6 +111,27 @@ export const getItemsOfBill = createAsyncThunk(
     }
   }
 );
+export const getletestInvoceId = createAsyncThunk(
+  "Billing_slice/getletestInvoceId",
+  async (id) => {
+    const authToken = localStorage.getItem("company");
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API}/getletestInvoiceId`,
+        {
+          headers: {
+            com_token: authToken,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      // Handle any errors, e.g., network errors, server errors, etc.
+      throw error;
+    }
+  }
+);
 
 const billingSlice = createSlice({
   name: "billing_slice",
@@ -119,6 +140,7 @@ const billingSlice = createSlice({
     result: "",
     resultData: "",
     updateBilllog: "",
+    InvoiceID: "",
     delete: "",
   },
   reducers: {
@@ -181,6 +203,15 @@ const billingSlice = createSlice({
       })
       .addCase(getbilldatabyId.rejected, (state) => {
         state.result = "rejected";
+      })
+      .addCase(getletestInvoceId.pending, (state) => {
+        state.InvoiceID = "pending";
+      })
+      .addCase(getletestInvoceId.fulfilled, (state, action) => {
+        state.InvoiceID = action.payload;
+      })
+      .addCase(getletestInvoceId.rejected, (state) => {
+        state.InvoiceID = "rejected";
       });
   },
 });

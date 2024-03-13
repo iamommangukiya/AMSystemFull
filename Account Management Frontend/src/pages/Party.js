@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { validGst, validPhone, Validpostcode, validpan } from "./Regex";
 import { useDispatch, useSelector } from "react-redux";
@@ -171,7 +170,6 @@ const Party = ({ data, mode }) => {
 
   return (
     <>
-    
       <div className="  overflow-scroll flex items-center justify-center mt-0">
         <form
           className="bg-white shadow-md rounded px-2 pt-6"
@@ -270,7 +268,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.address}
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label
                 htmlFor="exampleInputcountry"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -291,12 +289,8 @@ const Party = ({ data, mode }) => {
                   </option>
                 ))}
               </select>
-              {/* {selectedCountry && (
-                <p className="mt-4 text-green-600">
-                  You selected: {selectedCountry}
-                </p>
-              )} */}
-            </div>
+              
+            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInputcity"
@@ -315,7 +309,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.city}
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label
                 htmlFor="exampleInputstatecode"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -330,7 +324,7 @@ const Party = ({ data, mode }) => {
                 name="statecode"
                 value={Inputs.statecode}
               />
-            </div>
+            </div> */}
             {mode === "add" && (
               <div className="mb-4">
                 <label
@@ -369,7 +363,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.postalCode}
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Account Group
               </label>
@@ -391,7 +385,7 @@ const Party = ({ data, mode }) => {
                     );
                   })}
               </select>
-            </div>
+            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInputEmail1"
@@ -429,7 +423,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.gstNumber}
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 NatureOfOrg
               </label>
@@ -440,7 +434,7 @@ const Party = ({ data, mode }) => {
                 name="natureOfOrg"
                 value={Inputs.natureOfOrg}
               />
-            </div>
+            </div> */}
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 DeliveryAddress
@@ -453,7 +447,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.deliveryAddress}
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Distance
               </label>
@@ -464,8 +458,8 @@ const Party = ({ data, mode }) => {
                 name="distance"
                 value={Inputs.distance}
               />
-            </div>
-            <div className="mb-4">
+            </div> */}
+            {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 CreditLimit
               </label>
@@ -477,7 +471,7 @@ const Party = ({ data, mode }) => {
                 name="creditLimit"
                 value={Inputs.creditLimit}
               />
-            </div>
+            </div> */}
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 Remark
@@ -493,7 +487,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
 
-            <div className="mb-4 relative">
+            {/* <div className="mb-4 relative">
               <label
                 htmlFor="exampleInputstate"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -513,7 +507,7 @@ const Party = ({ data, mode }) => {
                   %
                 </span>
               </div>
-            </div>
+            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
@@ -554,7 +548,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.brokerage}
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
                 className="block text-gray-700 text-sm font-bold mb-2"
@@ -569,7 +563,7 @@ const Party = ({ data, mode }) => {
                 name="rf"
                 value={Inputs.rf}
               />
-            </div>
+            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
@@ -586,7 +580,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.TCSRate}
               />
             </div>
-            <div className="mb-4">
+            {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 OpeningBalance
               </label>
@@ -598,7 +592,7 @@ const Party = ({ data, mode }) => {
                 name="openingBalance"
                 value={Inputs.openingBalance}
               />
-            </div>
+            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInput"

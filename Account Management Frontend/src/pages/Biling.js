@@ -4,6 +4,7 @@ import {
   addbill,
   billingaction,
   getItemsOfBill,
+  getletestInvoceId,
 } from "../reducer/billing_reducer";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +16,8 @@ import { use } from "i18next";
 const Biling = () => {
   const location = useLocation(); // Hook to access the current location object
   const mode = location.state?.mode || ""; // Get the mode from the state
-  const editdata = location.state.data;
+  const editdata = location.state?.data;
+  // console.log(editdata);
   let bookName = "";
   switch (mode) {
     case "sales":
@@ -85,6 +87,20 @@ const Biling = () => {
     if (editdata) {
       dispatch(getItemsOfBill(editdata.id));
       setInputs({ ...editdata });
+    } else {
+      setInputs((prevInputs) => ({
+        ...prevInputs,
+        items: [
+          {
+            id: 1,
+            item: "",
+            description: "",
+            purchasePrice: "",
+            qty: "",
+            amount: "",
+          },
+        ],
+      }));
     }
   }, [editdata]);
 
@@ -95,7 +111,10 @@ const Biling = () => {
       setInputs((prevstate) => ({ ...prevstate, flag: "s" }));
     }
     dispatch(items_get());
+    dispatch(getletestInvoceId());
   }, []);
+  const InvoiceNo = useSelector((state) => state.BillingReducer.InvoiceID.data);
+
   const ItemData = useSelector((state) => state.ItemReducer.result?.data);
 
   useEffect(() => {
@@ -190,7 +209,6 @@ const Biling = () => {
   };
 
   const flag = useSelector((state) => state.BillingReducer.result.flag || {});
-  const insertId = useSelector((state) => state.BillingReducer.result.insertId);
 
   if (flag === true) {
     toast.success("Sucessfull", "sucess");
@@ -507,69 +525,69 @@ const Biling = () => {
 
           {/* gst %? */}
           {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Total CGST:
-            </label>
-            <input
-              type="number"
-              className="form-input border border-primary w-full rounded-md h-10"
-              onChange={handelchange}
-              name="totalCgst"
-              value={Inputs.totalCgst}
-            />
-          </div> */}
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Total CGST:
+              </label>
+              <input
+                type="number"
+                className="form-input border border-primary w-full rounded-md h-10"
+                onChange={handelchange}
+                name="totalCgst"
+                value={Inputs.totalCgst}
+              />
+            </div> */}
           {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Total IGst:
-            </label>
-            <input
-              type="number"
-              className="form-input border border-primary w-full rounded-md h-10"
-              onChange={handelchange}
-              name="totalIGst"
-              value={Inputs.totalIGst}
-            />
-          </div> */}
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Total IGst:
+              </label>
+              <input
+                type="number"
+                className="form-input border border-primary w-full rounded-md h-10"
+                onChange={handelchange}
+                name="totalIGst"
+                value={Inputs.totalIGst}
+              />
+            </div> */}
 
           {/* bookname */}
           {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Book Name:
-            </label>
-            <input
-              type="text"
-              className="form-input border border-primary w-full rounded-md h-10"
-              onChange={handelchange}
-              name="bookName"
-              value={Inputs.bookName}
-            />
-          </div> */}
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                Book Name:
+              </label>
+              <input
+                type="text"
+                className="form-input border border-primary w-full rounded-md h-10"
+                onChange={handelchange}
+                name="bookName"
+                value={Inputs.bookName}
+              />
+            </div> */}
           {/* pay Amount */}
           {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              PayAmount:
-            </label>
-            <input
-              type="number"
-              className="form-input border border-primary w-full rounded-md h-10"
-              onChange={handelchange}
-              name="payAmount"
-              value={Inputs.payAmount}
-            />
-          </div> */}
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                PayAmount:
+              </label>
+              <input
+                type="number"
+                className="form-input border border-primary w-full rounded-md h-10"
+                onChange={handelchange}
+                name="payAmount"
+                value={Inputs.payAmount}
+              />
+            </div> */}
 
           {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              panding:
-            </label>
-            <input
-              type="text"
-              className="form-input border border-primary w-full rounded-md h-10"
-              onChange={handelchange}
-              name="panding"
-              value={Inputs.panding}
-            />
-          </div> */}
+              <label className="block text-gray-700 text-sm font-bold mb-2">
+                panding:
+              </label>
+              <input
+                type="text"
+                className="form-input border border-primary w-full rounded-md h-10"
+                onChange={handelchange}
+                name="panding"
+                value={Inputs.panding}
+              />
+            </div> */}
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               deliveryAdress:
@@ -695,13 +713,13 @@ const Biling = () => {
                 </td>
                 <td class="text-end pr-4">
                   {/* <input
-                    disabled
-                    class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
-                    onClick={handelchange}
-                    readonly=""
-                    type="number"
-                    value={Inputs.to}
-                  /> */}
+                      disabled
+                      class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
+                      onClick={handelchange}
+                      readonly=""
+                      type="number"
+                      value={Inputs.to}
+                    /> */}
                 </td>
 
                 <tr>

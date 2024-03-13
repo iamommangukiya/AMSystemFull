@@ -161,8 +161,7 @@ const PrintBill = () => {
                 </i>
 
                 <p class="text-sm font-bold">
-                  GSTIN:{Company && Company["gstNumber"]} | State of supply
-                  Code:
+                  GSTIN:{Company && Company[" "]} | State of supply Code:
                 </p>
                 <p class="font-bold">{Inputs && Inputs["deliveryAdress"]}</p>
               </div>
@@ -206,8 +205,10 @@ const PrintBill = () => {
                 </p>
                 <p class="text-sm text-red-700 font-bold">
                   Invoice:{" "}
-                  {Inputs && Inputs["transactionType"] != "unpaid"
+                  {Inputs && Inputs["dueAmount"] === 0
                     ? "Paid"
+                    : Inputs["dueAmount"] < Inputs["gtotalAmount"]
+                    ? "Partial"
                     : "Unpaid"}
                 </p>
               </div>
@@ -225,7 +226,7 @@ const PrintBill = () => {
                   <tr className="border-b-2 border-black">
                     <th className="py-2">#</th>
                     <th className="py-2">Item Details</th>
-                    <th className="py-2">Price/Unit</th>
+                    <th className="py-2">Price</th>
                     <th className="py-2">Qty</th>
                     <th className="py-2">Total Rate</th>
                     {Inputs && Inputs["isGstBill"] == true && (
@@ -244,7 +245,7 @@ const PrintBill = () => {
                         <td className="py-2">{index + 1}</td>
                         <td className="py-2">{item.name || ""}</td>
                         <td className="py-2">
-                          {item.salePrice ? `${item.salePrice}/PCS` : ""}
+                          {item.salePrice ? `${item.salePrice}` : ""}
                         </td>
                         <td className="py-2">{item.qty || ""}</td>
                         <td className="py-2">
@@ -342,8 +343,10 @@ const PrintBill = () => {
                 </p>
                 <p class="text-sm text-red-700 font-bold">
                   Invoice:{" "}
-                  {Inputs && Inputs["transactionType"] != "unpaid"
+                  {Inputs && Inputs["dueAmount"] === 0
                     ? "Paid"
+                    : Inputs["dueAmount"] < Inputs["gtotalAmount"]
+                    ? "Partial"
                     : "Unpaid"}
                 </p>
                 <p class="text-sm">Is reverce charge applicable?No</p>

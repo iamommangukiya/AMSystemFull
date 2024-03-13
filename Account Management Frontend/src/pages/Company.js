@@ -127,15 +127,15 @@ const Company = () => {
 
   return (
     <div className=" flex-col min-h-screen justify-center flex items-center   ">
-       {/* <!-- Start Background Images --> */}
-       <div
-          className=" bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
-          style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}
-        ></div>
-        {/* <!-- End Background Images --> */}
+      {/* <!-- Start Background Images --> */}
+      <div
+        className=" bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
+        style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}
+      ></div>
+      {/* <!-- End Background Images --> */}
       <div className=" flex-col flex items-center py-4  rounded-xl   justify-center backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300 shadow-2xl ">
         <h2 className="col-span-full text-[#03235780]  justify-center text-center mb-4 text-primary text-4xl font-bold">
-          Company Form
+          Register Company
         </h2>
         <form className="grid grid-cols-1  gap-6 md:grid-cols-2 py-3 lg:grid-cols-3 xl:grid-cols-3 pt-6  mb-4 lg:w-3/4">
           <div className="mb-4">
@@ -196,8 +196,8 @@ const Company = () => {
               Date
             </label>
             <DateRangePicker
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
-                  value={Inputs.date}
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
+              value={Inputs.date}
               onChange={handleDateChange}
               placeholder="date"
             />
@@ -213,9 +213,7 @@ const Company = () => {
             <input
               type="text"
               className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg
-              ${
-                valid.panvalid ? "border-red-500" : ""
-              }`}
+              ${valid.panvalid ? "border-red-500" : ""}`}
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               onChange={handelchange}

@@ -675,6 +675,29 @@ class Accounting {
       }
     });
   }
+  async getInvoiceNoLatest(userrInputs, res) {
+    var q = query.getlastInvoiceNo(userrInputs);
+
+    db.query(q, (errr, data) => {
+      console.log(data);
+      if (errr) {
+        logError(errr);
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      } else {
+        if (data.length > 0) {
+          // console.log(data);
+
+          res.status(200).json({
+            flag: true,
+            data: data,
+            message: "Featch successfully",
+          });
+        } else {
+          res.status(200).json({ flag: false, message: "Not founded" });
+        }
+      }
+    });
+  }
 }
 
 module.exports = Accounting;

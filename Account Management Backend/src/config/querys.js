@@ -405,7 +405,7 @@ class Querys {
       name,
       unit,
       HSN,
-      gst,
+      GST,
       userId,
       openingStock,
       closingStock,
@@ -419,7 +419,7 @@ class Querys {
     const purchasePriceValue =
       purchasePrice !== undefined ? purchasePrice : null;
 
-    return `INSERT INTO Accounting.itemmaster (name, unit, HSN, GST, CompanyId, createDate, updateDate, LastModifidedBy, openingStock, closingStock, salePrice, purchasePrice) VALUES ('${name}', '${unit}', '${HSN}', '${gst}', ${userId}, '${formattedDate}', '${formattedDate}', ${userId}, ${openingStockValue}, ${closingStockValue}, ${salePriceValue}, ${purchasePriceValue});`;
+    return `INSERT INTO Accounting.itemmaster (name, unit, HSN, GST, CompanyId, createDate, updateDate, LastModifidedBy, openingStock, closingStock, salePrice, purchasePrice) VALUES ('${name}', '${unit}', '${HSN}', '${GST}', ${userId}, '${formattedDate}', '${formattedDate}', ${userId}, ${openingStockValue}, ${closingStockValue}, ${salePriceValue}, ${purchasePriceValue});`;
   };
   UpdateItemMaster = (userInputs) => {
     const currentdate = moment();
@@ -480,6 +480,7 @@ class Querys {
       totalCgst,
       totalIGst,
       tcs,
+      pgstNo,
       totalAmount,
       flag,
       transportDate,
@@ -531,7 +532,7 @@ class Querys {
       '${bPartyName}',
       '${bPartyAdress}',
       '${bStateCode}',
-      '${gstNo}',
+      '${pgstNo}',
       '${totalQuantity}',
       '${gtotalAmount}',
       '${discount}',
@@ -587,6 +588,7 @@ class Querys {
       tcs,
       totalAmount,
       flag,
+      pgstNo,
       transportDate,
       bookName,
       isGstBill,
@@ -605,7 +607,7 @@ class Querys {
       bPartyName = '${bPartyName}',
       bPartyAdress = '${bPartyAdress}',
       bStateCode = '${bStateCode}',
-      gstNo = '${gstNo}',
+      gstNo = '${pgstNo}',
       transactionType= '${transactionType}',
       totalQuantity = '${totalQuantity}',
       gtotalAmount = '${gtotalAmount}',
@@ -639,6 +641,9 @@ class Querys {
   };
   deleteBillLog = (data) => {
     return `DELETE FROM Billlog where id=${data.id} and ComapnyId = ${data.cmpId}`;
+  };
+  getlastInvoiceNo = (data) => {
+    return `SELECT invoiceNo FROM Accounting.Billlog where ComapnyId=${data.cmpId} ORDER BY id DESC LIMIT 1`;
   };
 }
 

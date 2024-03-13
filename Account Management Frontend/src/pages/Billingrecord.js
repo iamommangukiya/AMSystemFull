@@ -210,7 +210,7 @@ const Billingrecord = ({ mode }) => {
                             </button>
                             <button
                               className="text-black dark:text-white/80 px-3"
-                              onClick={() => handleUpdateClick(index + 1)}
+                              onClick={() => handleUpdateClick(index)}
                               type="submit"
                             >
                               <svg
