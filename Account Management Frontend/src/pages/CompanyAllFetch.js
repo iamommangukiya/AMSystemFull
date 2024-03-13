@@ -52,28 +52,28 @@ const CompanyFetchacompany = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen h-80 relative z-10">
-       <div className=" bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"  style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}></div>
-      <div className=" p-5 rounded-xl dark:bg-darklight dark:border-darkborder md:w-2/3 lg:w-1/2 backdrop-blur-xl overflow-hidden bg-[#ffffff14] border-2 backdrop-brightness-110 border-gray-300 shadow-2xl">
+       <div className=" dark:bg-purple bg-[#F9F5F6] h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
+      <div className=" p-5 rounded-xl dark:bg-darklight dark:border-darkborder md:w-2/3 lg:w-1/2 backdrop-blur-xl overflow-hidden bg-[#ffffff14] border backdrop-brightness-110 border-gray-300 shadow-2xl">
         <div className="justify-between flex items-center space-x-2 ">
-          <h2 className="text-3xl font-semibold text-[#03235780] dark:text-white/80 mb-4 px-4 capitalize flex justify-between">
+          <h2 className="text-3xl font-semibold text-[#6420AA] dark:text-white/80 mb-4 px-4 capitalize flex justify-between">
             Select Company
           </h2>
           <button
             type="button"
             onClick={() => handelClick(true)}
-            className="btn py-2 mb-4 px-3 text-xl bg-[#03235780]  border-0 rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+            className="btn py-2 mb-4 px-3 text-xl bg-[#6420AA]  border-0 rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
           >
             Add Company
           </button>
         </div>
 
         <form>
-          <select className="form-select text-white w-full bg-transparent backdrop-blur-3xl backdrop-brightness-200 border border-gray-50 rounded-md focus:border-gray-50 shadow-lg" onChange={handleSelectChange}>
+          <select className="form-select text-white w-full bg-transparent backdrop-blur-3xl backdrop-brightness-200 border border-[#6420AA] focus:border-[#492E87] rounded-md " onChange={handleSelectChange}>
             <option>Select option</option>
 
             {response &&
               response.map((item) => (
-                <option key={item.id} value={item.id}>
+                <option key={item.id} value={item.id} className=" text-black">
                   {item.companyName}
                 </option>
               ))}

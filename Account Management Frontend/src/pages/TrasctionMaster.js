@@ -69,7 +69,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
     <>
       <div className="flex items-center  justify-center mb-0">
         <form
-          className=" bg-white rounded mb-4 lg:w-2/3 "
+          className=" bg-white rounded mb-4 w-full h-full"
           onSubmit={handelSubmit}
         >
           <div className="grid grid-cols-2 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 ">

@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <>
       <nav className="sidebar absolute z-10  flex-none w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
-        <div className="bg-white dark:bg-darklight h-full">
+        <div className="bg-[#7469B6] dark:bg-darklight h-full">
           <div className="p-4">
             <a href="index.html" className="main-logo w-full">
               <img
@@ -18,7 +18,7 @@ const Sidebar = () => {
                 className="mx-auto dark-logo h-7 logo dark:hidden"
                 alt="logo"
               />
-              <img
+              {/* <img
                 src="assets/images/logo-light.svg"
                 className="mx-auto light-logo h-7 logo hidden dark:block"
                 alt="logo"
@@ -27,7 +27,7 @@ const Sidebar = () => {
                 src="assets/images/logo-icon.svg"
                 className="logo-icon h-7 mx-auto hidden"
                 alt=""
-              />
+              /> */}
             </a>
           </div>
           <div className="h-[calc(100vh-60px)]  overflow-y-auto overflow-x-hidden px-5 pb-4 space-y-16 detached-menu">
@@ -35,7 +35,7 @@ const Sidebar = () => {
               className="relative flex flex-col gap-1 "
               x-data="{ activeMenu: 'apps' }"
             >
-              <h2 className="my-2 text-black/50 text-sm dark:text-white/30">
+              <h2 className="my-2 text-white text-sm dark:text-white/30">
                 <span>Menu</span>
               </h2>
 

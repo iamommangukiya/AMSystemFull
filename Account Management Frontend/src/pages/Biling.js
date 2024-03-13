@@ -375,12 +375,12 @@ const Biling = () => {
         toggleSlideover={toggleslider}
         inventoryItems={inventoryItems}
       ></Slidover>
-      <div className=" flex-col min-h-screen justify-center flex items-center  bg-gray-100   dark:bg-darklight dark:border-darkborder">
+      <div className=" flex-col min-h-screen justify-center flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
-          <p>
-            {Inputs.isGstBill != true && mode == "salse" && "Sale Biling "}{" "}
-            {Inputs.isGstBill != false && mode == "salse" && "GST Sale Biling"}
+          <p>2
+            {Inputs.isGstBill != true && mode == "sale" && "Sale Biling "}{" "}
+            {Inputs.isGstBill != false && mode == "sale" && "GST Sale Biling"}
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
               "GST purchase Biling"}
@@ -388,11 +388,11 @@ const Biling = () => {
               mode == "purchase" &&
               "purchase Biling"}
           </p>
-          <div className="switch">
-            <input type="checkbox" value={isChecked} onChange={HandleToggle} />
+          <div className="switch ps-2">
+            <input type="checkbox" className="rounded-sm p-3" value={isChecked} onChange={HandleToggle} />
           </div>
         </h2>
-        <form className="grid grid-cols-1   dark:bg-darklight dark:text-white dark:border-darkborder gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
+        <form className="grid grid-cols-1   dark:bg-darklight dark:text-white dark:border-dark gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
           {/* party start */}
           {/* // party name */}
 
@@ -402,7 +402,7 @@ const Biling = () => {
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="bPartyName"
               value={Inputs.bPartyName}
@@ -415,7 +415,7 @@ const Biling = () => {
             </label>
             <textarea
               type="text"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="bPartyAdress"
               value={Inputs.bPartyAdress}
@@ -428,7 +428,7 @@ const Biling = () => {
             </label>
             <input
               type="number"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="bStateCode"
               value={Inputs.bStateCode}
@@ -442,7 +442,7 @@ const Biling = () => {
               </label>
               <input
                 type="text"
-                className="form-input border border-primary w-full rounded-md h-10"
+                className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
                 onChange={handelchange}
                 name="pgstNo"
                 value={Inputs.pgstNo}
@@ -461,7 +461,7 @@ const Biling = () => {
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="invoiceNo"
               value={Inputs.invoiceNo}
@@ -474,7 +474,7 @@ const Biling = () => {
             </label>
             <input
               type="date"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="invoiceDate"
               value={Inputs.invoiceDate}
@@ -487,7 +487,7 @@ const Biling = () => {
             </label>
             <input
               type="date"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="dueDate"
               value={Inputs.dueDate}
@@ -502,7 +502,7 @@ const Biling = () => {
               </label>
               <input
                 type="number"
-                className="form-input border border-primary w-full rounded-md h-10"
+                className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
                 onChange={handelchange}
                 name="oGSTIN"
                 value={Inputs.oGSTIN}
@@ -517,7 +517,7 @@ const Biling = () => {
             </label>
             <input
               type="date"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="transportDate"
               value={Inputs.transportDate}
@@ -551,18 +551,18 @@ const Biling = () => {
             </div> */}
 
           {/* bookname */}
-          {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Book Name:
-              </label>
-              <input
-                type="text"
-                className="form-input border border-primary w-full rounded-md h-10"
-                onChange={handelchange}
-                name="bookName"
-                value={Inputs.bookName}
-              />
-            </div> */}
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Book Name:
+            </label>
+            <input
+              type="text"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
+              onChange={handelchange}
+              name="bookName"
+              value={Inputs.bookName}
+            />
+          </div>
           {/* pay Amount */}
           {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -595,7 +595,7 @@ const Biling = () => {
             </label>
             <input
               type="text"
-              className="form-input border border-primary w-full rounded-md h-10"
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="deliveryAdress"
               value={Inputs.deliveryAdress}
@@ -629,7 +629,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="name"
-                        className=" dark:bg-darklight"
+                        className=" dark:bg-darklight focus:border-0"
                         value={row.name}
                         onChange={(e) => handelchange(e, index)}
                         disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
@@ -639,7 +639,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="description"
-                        className=" dark:bg-darklight"
+                        className=" dark:bg-darklight focus:border-0"
                         value={row.description}
                         onChange={(e) => handelchange(e, index)}
                         disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
@@ -648,7 +648,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className=" dark:bg-darklight"
+                        className=" dark:bg-darklight focus:border-0"
                         inputMode="decimal"
                         name="salePrice"
                         value={row.salePrice}
@@ -658,7 +658,7 @@ const Biling = () => {
                     </td>
                     <td>
                       <input
-                        className=" dark:bg-darklight"
+                        className=" dark:bg-darklight focus:border-0"
                         type="number"
                         name="qty"
                         defaultValue={1}
@@ -671,7 +671,7 @@ const Biling = () => {
                       <td>
                         <input
                           type="number"
-                          className=" dark:bg-darklight"
+                          className=" dark:bg-darklight focus:border-0"
                           name="GST"
                           value={row.GST}
                           onChange={(e) => handelchange(e, index)}
@@ -682,7 +682,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className=" dark:bg-darklight"
+                        className=" dark:bg-darklight focus:border-0"
                         disabled
                         value={row.amount}
                         readOnly

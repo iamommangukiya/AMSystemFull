@@ -48,15 +48,14 @@ const Login = () => {
       <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10">
         {/* <!-- Start Background Images --> */}
         <div
-          className=" bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
-          style={{ backgroundImage: 'url("../assets/images/images-6.jpg")' }}
+          className="bg-[#F9F5F6] dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
         ></div>
         {/* <!-- End Background Images --> */}
 
         {/* <!-- Start Header --> */}
         <header>
-          <nav className="px-4 lg:px-7 py-4 max-w-[1440px] mx-auto">
-            <div className="flex flex-wrap justify-between items-center">
+          <nav className="px-4 lg:px-7 py-3 max-w-[1440px] mx-auto">
+            <div className="items-center pt-5">
               <a href="index.html" className="flex items-center">
                 <img
                   src="assets/images/logo-light.svg"
@@ -76,8 +75,8 @@ const Login = () => {
         {/* <!-- End Header --> */}
 
         <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto">
-          <div className="max-w-[550px] flex-none w-full text-white  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300 shadow-2xl">
-            <h1 className="text-3xl text-[#03235780] font-semibold mb-2 text-center dark:text-white">
+          <div className="max-w-[550px] flex-none w-full text-black  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border backdrop-brightness-110 border-gray-300 shadow-2xl">
+            <h1 className="text-3xl text-[#6420AA] font-semibold mb-2 text-center dark:text-white">
               Sign In
             </h1>
             <p className="text-center mb-7 dark:text-darkmuted">
@@ -86,7 +85,7 @@ const Login = () => {
             <div className="flex flex-wrap items-center gap-4 mb-7">
               <a
                 href="javaScript:;"
-                className="flex flex-1 items-center gap-1 btn border border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300 hover:bg-light hover:text-black"
+                className="flex flex-1 items-center gap-1 btn border bg-[#F9F5F6] border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300"
               >
                 <div className="w-8 h-8 flex items-center justify-center flex-none">
                   <svg
@@ -100,11 +99,11 @@ const Login = () => {
                     ></path>
                   </svg>
                 </div>
-                <p className="whitespace-nowrap">Sign in with Google</p>
+                <p className="whitespace-nowrap ">Sign in with Google</p>
               </a>
               <a
                 href="javaScript:;"
-                className="flex flex-1 items-center gap-1 btn border border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300 hover:bg-light hover:text-black"
+                className="flex flex-1 items-center gap-1 btn border bg-[#F9F5F6] border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300"
               >
                 <div className="w-8 h-8 flex items-center justify-center flex-none">
                   <svg
@@ -136,7 +135,7 @@ const Login = () => {
                   name="email"
                   value={Inputs.email}
                   placeholder="Email"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent bg-[#F9F5F6] border-light backdrop-blur-3xl backdrop-brightness-200 border rounded-md placeholder:text-black focus:border-[#6420AA] shadow-lg"
                   required
                 />
               </div>
@@ -147,7 +146,7 @@ const Login = () => {
                   name="password"
                   value={Inputs.password}
                   placeholder="Password"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border-2 border-gray-50 rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent bg-[#F9F5F6] border-light backdrop-blur-3xl backdrop-brightness-200 border rounded-md placeholder:text-black focus:border-[#6420AA] shadow-lg"
                   required
                 />
               </div>
@@ -159,7 +158,7 @@ const Login = () => {
               </div>
               <button
                 type="submit"
-                className="btn w-full py-3.5 text-bas bg-[#03235780] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+                className="btn w-full text-lg bg-[#6420AA] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
               >
                 Sign In
               </button>
