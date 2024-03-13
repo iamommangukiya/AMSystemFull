@@ -172,10 +172,10 @@ const Party = ({ data, mode }) => {
     <>
       <div className="  overflow-scroll flex items-center justify-center mt-0">
         <form
-          className="bg-white shadow-md rounded px-2 pt-6"
+          className="bg-white shadow-md rounded px-2 "
           onSubmit={handelSubmit}
         >
-          <h2 className="col-span-full text-purple   text-center mb-10 text-primary text-2xl font-bold">
+          <h2 className="col-span-full text-[#6420AA]   text-center mb-10 text-primary text-2xl font-bold">
             PartyMaster
           </h2>
           <div className="grid grid-cols-4 gap-3  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1">
@@ -183,7 +183,7 @@ const Party = ({ data, mode }) => {
           <Link to="/fetchcompany">go</Link>
         </button> */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 PartyName
               </label>
               <input
@@ -200,7 +200,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInputPhoneNo"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 phone Number
               </label>
@@ -240,7 +240,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInputEmail1"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 Email address
               </label>
@@ -255,7 +255,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Adress
               </label>
               <input
@@ -271,7 +271,7 @@ const Party = ({ data, mode }) => {
             {/* <div className="mb-4">
               <label
                 htmlFor="exampleInputcountry"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 Country
               </label>
@@ -294,7 +294,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInputcity"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 {" "}
                 {/* Fix 'for' to 'htmlFor' */}
@@ -312,7 +312,7 @@ const Party = ({ data, mode }) => {
             {/* <div className="mb-4">
               <label
                 htmlFor="exampleInputstatecode"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 State Code
               </label>
@@ -329,7 +329,7 @@ const Party = ({ data, mode }) => {
               <div className="mb-4">
                 <label
                   htmlFor="exampleInputstate"
-                  className="block text-gray-700 text-sm font-bold mb-2"
+                  className="block text-black text-sm mb-2"
                 >
                   {" "}
                   {/* Fix 'for' to 'htmlFor' */}
@@ -348,7 +348,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInputcode"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 Postal Code
               </label>
@@ -364,7 +364,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Account Group
               </label>
 
@@ -389,7 +389,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInputEmail1"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 Pan
               </label>
@@ -409,7 +409,7 @@ const Party = ({ data, mode }) => {
               )}
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Gst Number
               </label>
               <input
@@ -424,7 +424,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 NatureOfOrg
               </label>
               <input
@@ -436,7 +436,7 @@ const Party = ({ data, mode }) => {
               />
             </div> */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 DeliveryAddress
               </label>
               <input
@@ -448,7 +448,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Distance
               </label>
               <input
@@ -460,7 +460,7 @@ const Party = ({ data, mode }) => {
               />
             </div> */}
             {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 CreditLimit
               </label>
               <input
@@ -473,7 +473,7 @@ const Party = ({ data, mode }) => {
               />
             </div> */}
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Remark
               </label>
               <input
@@ -490,7 +490,7 @@ const Party = ({ data, mode }) => {
             {/* <div className="mb-4 relative">
               <label
                 htmlFor="exampleInputstate"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 TDS
               </label>
@@ -511,7 +511,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 Discount
               </label>
@@ -525,7 +525,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 TransporterName
               </label>
               <input
@@ -537,7 +537,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Brokerage
               </label>
               <input
@@ -551,7 +551,7 @@ const Party = ({ data, mode }) => {
             {/* <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 RF
               </label>
@@ -567,7 +567,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 TCSRate
               </label>
@@ -581,7 +581,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 OpeningBalance
               </label>
               <input
@@ -596,7 +596,7 @@ const Party = ({ data, mode }) => {
             <div className="mb-4">
               <label
                 htmlFor="exampleInput"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-black text-sm mb-2"
               >
                 PaymentTerms
               </label>
@@ -610,7 +610,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
           </div>
-          <div className=" text-center mb-3 text-primary text-2xl font-bold items-center justify-between ">
+          <div className=" text-center mb-3 text-primary text-2xl items-center justify-between ">
             {/* <button
               className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
               onClick={validation}
@@ -620,7 +620,7 @@ const Party = ({ data, mode }) => {
             </button> */}
             {mode === "add" && (
               <button
-                className="btn  text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn  text-xl bg-[#6420AA] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
                 onClick={validation}
                 type="submit"
               >
@@ -629,7 +629,7 @@ const Party = ({ data, mode }) => {
             )}
             {mode === "update" && (
               <button
-                className="btn text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn text-xl bg-[#6420AA] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
                 onClick={validation}
                 type="submit"
               >

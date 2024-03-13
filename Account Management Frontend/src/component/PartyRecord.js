@@ -161,18 +161,18 @@ const PartyRecord = () => {
       </div>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
         <div className="grid grid-cols-1 gap-4">
-          <div className="bg-white border border-black/10 p-3 rounded dark:bg-darklight dark:border-darkborder">
+          <div className="bg-white border border-black/10 p-3 rounded shadow-md dark:bg-darklight dark:border-darkborder">
             <div className="flex  justify-between  text-center">
               <input
                 type="text"
                 onChange={handleSearchInputChange}
-                class=" w-50 ml-4 rounded-xl mb-3"
+                class=" w-50 ml-4 rounded-xl mb-3 bg-[#F9F5F6] focus:border-0 border-[#6420AA] placeholder:text-[#6420AA]"
                 placeholder="search "
               />
               <div className="space-x-5">
                 <button
                   onClick={() => setExcelModalOpen(true)} // Open Excel upload modal
-                  className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                  className="btn  py-2 mb-4 px-3 text-sm bg-[#6420AA] border border-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
                 >
                   Add By Excel
                 </button>
@@ -182,7 +182,7 @@ const PartyRecord = () => {
                     setMode("add");
                     setModal(true);
                   }}
-                  className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                  className="btn  py-2 mb-4 px-3 text-sm bg-[#6420AA] border border-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]  "
                 >
                   ADD PARTY
                 </button>
@@ -214,7 +214,7 @@ const PartyRecord = () => {
                         ))}
                         <td className=" space-x-5 justify-evenly  text-center ">
                           <button
-                            className="text-danger ms-2 px-3 "
+                            className="text-[#F69314] ms-2 px-3 "
                             onClick={() => handleButtonClick(item["ID"])}
                           >
                             <svg
