@@ -4,6 +4,7 @@ const Querys = require("../config/querys");
 const Query = new Querys();
 const JWT = require("jsonwebtoken");
 const logError = require("../../errorLog");
+const nodemailer = require("nodemailer");
 
 class userServices {
   async singUp(userInputs, res) {

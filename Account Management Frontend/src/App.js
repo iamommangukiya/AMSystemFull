@@ -17,7 +17,7 @@ import PartyRecord from "./component/PartyRecord";
 import ReciveAmount from "./component/ReciveAmountRecords";
 import Trasection_Records from "./component/Transection_Records";
 import PurchaseBill from "./pages/PurchaseBill";
-import SaleBilling from "./pages/SaleBilling";
+
 import ItemmasterRecords from "./pages/ItemmasterRecords";
 import Billingrecord from "./pages/Billingrecord";
 import Biling from "./pages/Biling";
@@ -101,7 +101,10 @@ const App = () => {
             element={<Billingrecord mode={"purchase"}></Billingrecord>}
           ></Route>
           <Route path="createBill" element={<Biling></Biling>}></Route>
-          <Route path="saleBill" element={<SaleBilling></SaleBilling>}></Route>
+          <Route
+            path="saleBill"
+            element={<Billingrecord mode={"salse"}></Billingrecord>}
+          ></Route>
           <Route
             path="transectionrecord"
             element={<Trasection_Records />}

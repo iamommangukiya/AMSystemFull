@@ -1,0 +1,1 @@
+2024-03-13T07:49:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Unknown column 'CompanyId' in 'where clause'

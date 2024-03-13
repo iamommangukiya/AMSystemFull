@@ -523,8 +523,15 @@ class Accounting {
   }
 
   async insertItemDetails(billId, item) {
-    const q = `INSERT INTO Accounting.BillFullLog (billId, itemId, gst, amount, qty) VALUES (?, ?, ?, ?, ?)`;
-    const values = [billId, item.id, item.GST, item.amount, item.qty];
+    const q = `INSERT INTO Accounting.BillFullLog (billId, itemId, gst, amount, qty,unitCost) VALUES (?, ?, ?, ?, ?,?)`;
+    const values = [
+      billId,
+      item.id,
+      item.GST,
+      item.amount,
+      item.qty,
+      item.salePrice,
+    ];
     await this.dbQuery(q, values);
   }
 
@@ -604,7 +611,93 @@ class Accounting {
     });
   }
 
-  // Usage
+  async updateBilling(userInputs, res) {
+    try {
+      const { billId, items } = userInputs;
+      const q = query.updateBillLog(userInputs);
+      const data = await this.dbQuery(q);
+
+      if (data.affectedRows > 0) {
+        await Promise.all(
+          items.map(async (item) => {
+            const existsQuery = `SELECT * FROM Accounting.BillFullLog WHERE billId = ? AND itemId = ?`;
+            const existsValues = [billId, item.id];
+            const existingItem = await this.dbQuery(existsQuery, existsValues);
+
+            if (existingItem.length > 0) {
+              const updateQuery = `UPDATE Accounting.BillFullLog SET gst = ?, amount = ?, qty = ?, unitCost = ? WHERE billId = ? AND itemId = ?`;
+              const updateValues = [
+                item.GST,
+                item.amount,
+                item.qty,
+                item.salePrice,
+                billId,
+                item.id,
+              ];
+              await this.dbQuery(updateQuery, updateValues);
+            } else {
+              await this.insertItemDetails(billId, item);
+            }
+          })
+        );
+        res.status(200).json({
+          flag: true,
+          message: "Inserted successfully",
+          insertId: data.insertId,
+        });
+      } else {
+        res.status(200).json({ flag: false, message: "Not found" });
+      }
+    } catch (error) {
+      logError(error);
+      res.status(200).json({ flag: false, message: "Internal Server error" });
+    }
+  }
+  async getBillById(userrInputs, res) {
+    var q = query.selectBillLogbyID(userrInputs);
+
+    db.query(q, (errr, data) => {
+      if (errr) {
+        logError(errr);
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      } else {
+        if (data.length > 0) {
+          // console.log(data);
+
+          res.status(200).json({
+            flag: true,
+            data: data[0],
+            message: "Featch successfully",
+          });
+        } else {
+          res.status(200).json({ flag: false, message: "Not founded" });
+        }
+      }
+    });
+  }
+  async getInvoiceNoLatest(userrInputs, res) {
+    var q = query.getlastInvoiceNo(userrInputs);
+
+    db.query(q, (errr, data) => {
+      console.log(data);
+      if (errr) {
+        logError(errr);
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      } else {
+        if (data.length > 0) {
+          // console.log(data);
+
+          res.status(200).json({
+            flag: true,
+            data: data,
+            message: "Featch successfully",
+          });
+        } else {
+          res.status(200).json({ flag: false, message: "Not founded" });
+        }
+      }
+    });
+  }
 }
 
 module.exports = Accounting;

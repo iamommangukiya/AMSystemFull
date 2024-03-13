@@ -219,7 +219,7 @@ module.exports = (app) => {
 
     AcountService.deleteBilllog(sData, res);
   });
-  app.put("/api/billlog",feactCompany,(req,res)=>{
+  app.put("/api/billlog", feactCompany, (req, res) => {
     var data = req.body;
     var id = req.cmp;
 
@@ -228,11 +228,33 @@ module.exports = (app) => {
       cmpId: id,
     };
 
-    AcountService.deleteBilllog(sData, res);
-  })
+    AcountService.updateBilling(sData, res);
+  });
   app.post("/api/billItem", feactCompany, (req, res) => {
     const id = req.body;
 
     AcountService.getBillItem(id, res);
+  });
+  app.post("/api/billitemById", feactCompany, (req, res) => {
+    var data = req.body;
+    var id = req.cmp;
+
+    var sData = {
+      ...data,
+      CompanyId: id,
+    };
+
+    AcountService.getBillById(sData, res);
+  });
+  app.post("/api/getletestInvoiceId", feactCompany, (req, res) => {
+    var data = req.body;
+    var id = req.cmp;
+
+    var sData = {
+      ...data,
+      cmpId: id,
+    };
+
+    AcountService.getInvoiceNoLatest(sData, res);
   });
 };

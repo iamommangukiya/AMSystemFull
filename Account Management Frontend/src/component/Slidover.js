@@ -22,7 +22,7 @@ const Slidover = ({ isOpen, toggleSlideover, inventoryItems, selectItem }) => {
         items.salePrice * items.qty +
         items.qty * items.salePrice * (items.GST / 100),
     }));
-    console.log(selectedItemsArray);
+    // console.log(selectedItemsArray);
     selectItem(selectedItemsArray);
     toggleSlideover();
   };

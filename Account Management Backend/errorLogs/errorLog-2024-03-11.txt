@@ -1,0 +1,1 @@
+2024-03-11T18:17:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Can't add new command when connection is in closed state

@@ -45,7 +45,7 @@ export const items_get = createAsyncThunk("items_get/items_api", async () => {
 export const items_delete = createAsyncThunk(
   "items_delete/items_api",
   async (info) => {
-    console.log(info);
+    // console.log(info);
     try {
       const auth_token = localStorage.getItem("company");
 
@@ -60,7 +60,7 @@ export const items_delete = createAsyncThunk(
         }
       );
       const response = result.data;
-      console.log(response);
+      // console.log(response);
       return response;
     } catch (error) {
       throw error.result.data;

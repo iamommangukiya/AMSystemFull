@@ -28,7 +28,7 @@ const CompanyFetchacompany = () => {
   const response = useSelector(
     (state) => state.CompanyReducer && state.CompanyReducer.result?.data
   );
-  console.log(response);
+  // console.log(response);
 
   const handelClick = (isButton) => {
     if (isButton) {

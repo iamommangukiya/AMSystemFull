@@ -23,11 +23,11 @@ const ItemMaster = ({ data, mode, closeBox }) => {
     const { name, value } = e.target;
     setInput({ ...inputs, [name]: value });
   };
-  console.log(mode);
+  // console.log(mode);
 
   const msg = useSelector((state) => state.ItemReducer.result["flag"]);
-  console.log(msg);
-
+  // console.log(msg);
+// 
   const handelSubmit = (e) => {
     e.preventDefault();
 

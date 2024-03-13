@@ -42,8 +42,8 @@ const Billingrecord = ({ mode }) => {
           text: "Your file has been deleted.",
           icon: "success",
         });
-        console.log("index");
-        console.log(index);
+        // console.log("index");
+        // console.log(index);
         dispatch(deletebill(index));
         dispatch(getbilldata());
       }
@@ -95,7 +95,12 @@ const Billingrecord = ({ mode }) => {
       state: { data: filteredData[index], mode: mode },
     });
   };
-  console.log(filteredData);
+  const handlePrintClick = (index) => {
+    navigate("/dashboard/bill", {
+      state: index,
+    });
+  };
+  // console.log(filteredData);
   const displayFields = [
     "invoiceNo",
     "bPartyName",
@@ -186,9 +191,7 @@ const Billingrecord = ({ mode }) => {
                           <td className=" space-x-5 justify-evenly  text-center ">
                             <button
                               className="text-black dark:text-white/80 px-3"
-                              onClick={() => {
-                                // handleshow(index);
-                              }}
+                              onClick={() => handlePrintClick(item["id"])}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

@@ -17,7 +17,7 @@ export const apiparty = createAsyncThunk(
         }
       );
 
-      console.log(result);
+      // console.log(result);
       const result = await response;
       return result;
     } catch (error) {

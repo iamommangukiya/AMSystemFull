@@ -102,7 +102,7 @@ const Sidebar = () => {
                 <a
                   href="javaScript:;"
                   class={`nav-link group text-black items-center justify-between ${
-                    activeMenu === "Master" ? "active" : ""
+                    activeMenu === "TrasctionMaster" ? "active" : ""
                   }`}
                   onClick={() => updateMenu("TrasctionMaster")}
                 >

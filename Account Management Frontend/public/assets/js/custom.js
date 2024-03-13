@@ -65,7 +65,7 @@ document.addEventListener("alpine:init", () => {
     const dropdownMenu = document.getElementById('dropdownMenu');
 
     toggleButton.addEventListener('click', function () {
-        console.log("toggle")
+        // console.log("toggle")
         dropdownMenu.classList.toggle('hidden');
         if (dropdownMenu) {
             if (dropdownMenu.style.display === 'none') {
