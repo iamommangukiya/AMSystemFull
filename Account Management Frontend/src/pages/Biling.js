@@ -377,15 +377,9 @@ const Biling = () => {
       <div className=" flex-col min-h-screen justify-center flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
-<<<<<<< HEAD
           <p>2
             {Inputs.isGstBill != true && mode == "sale" && "Sale Biling "}{" "}
             {Inputs.isGstBill != false && mode == "sale" && "GST Sale Biling"}
-=======
-          <p>
-            {Inputs.isGstBill != true && mode == "salse" && "Sale Biling "}{" "}
-            {Inputs.isGstBill != false && mode == "salse" && "GST Sale Biling"}
->>>>>>> 1b0c5322a84b883584dd750501ba876f648c407b
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
               "GST purchase Biling"}
@@ -556,7 +550,6 @@ const Biling = () => {
             </div> */}
 
           {/* bookname */}
-<<<<<<< HEAD
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Book Name:
@@ -569,20 +562,6 @@ const Biling = () => {
               value={Inputs.bookName}
             />
           </div>
-=======
-          {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Book Name:
-              </label>
-              <input
-                type="text"
-                className="form-input border border-primary w-full rounded-md h-10"
-                onChange={handelchange}
-                name="bookName"
-                value={Inputs.bookName}
-              />
-            </div> */}
->>>>>>> 1b0c5322a84b883584dd750501ba876f648c407b
           {/* pay Amount */}
           {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">

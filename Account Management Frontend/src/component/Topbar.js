@@ -58,11 +58,11 @@ const Topbar = () => {
   const currentnextYear = new Date().getFullYear() + 1;
   return (
     <>
-      <div class="bg-white dark:bg-darklight dark:border-darkborder flex gap-4   items-center justify-between px-4 h-[60px] border-b border-black/10 detached-topbar relative">
+      <div class="bg-[#6420AA] dark:bg-darklight dark:border-darkborder flex gap-4   items-center justify-between px-4 h-[60px] border-b border-black/10 detached-topbar relative">
         <div class="flex items-center gap-2 sm:gap-4 flex-1">
           <button
             type="button"
-            class="text-black dark:text-white/80"
+            class="text-white dark:text-white/80"
             onClick={toggleSidebar}
           >
             <svg
@@ -110,14 +110,14 @@ const Topbar = () => {
               </button>
             </div>
           </form> */}
-          <div className="justify-start">
+          <div className="justify-start text-white">
             <label>{comany_name}</label>
           </div>
         </div>
         <div class="flex items-center gap-4">
           <div class="h-5" x-data="{ fullScreen: false }">
             <button
-              className={`text-black dark:text-white/80 ${
+              className={`text-white dark:text-white/80 ${
                 fullScreen ? "hidden" : "block"
               }`}
               onClick={() => {
@@ -137,7 +137,7 @@ const Topbar = () => {
               </svg>
             </button>
             <button
-              className={`text-black dark:text-white/80 ${
+              className={`text-white dark:text-white/80 ${
                 fullScreen ? "block" : "hidden"
               }`}
               onClick={() => {
@@ -160,7 +160,7 @@ const Topbar = () => {
           <div>
             <a
               href="javascript:;"
-              class="text-black"
+              class="text-white"
               mode="light"
               onClick={() => toggleMode("dark")}
               style={{ display: mode === "dark" ? "none" : "block" }}
@@ -178,7 +178,7 @@ const Topbar = () => {
             </a>
             <a
               href="javascript:;"
-              class="text-black dark:text-white/80"
+              class="text-white dark:text-white/80"
               mode="dark"
               onClick={() => toggleMode("light")}
               style={{ display: mode === "light" ? "none" : "block" }}
