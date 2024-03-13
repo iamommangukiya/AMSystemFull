@@ -60,6 +60,23 @@ export const registation = createAsyncThunk(
     }
   }
 );
+export const varifyOtp = createAsyncThunk(
+  "userinfo/varifyOtp",
+  async (info) => {
+    try {
+      const request = await axios.get(
+        process.env.REACT_APP_API + "/user/varify",
+        info
+      );
+
+      const response = await request.data;
+
+      return response;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+);
 const UserSlice = createSlice({
   name: "userinfo",
   initialState: {
@@ -68,7 +85,7 @@ const UserSlice = createSlice({
     username: "",
     loading: "",
     error: "",
-
+    varify: "",
     isAuth: "",
     result: "",
   },
@@ -109,6 +126,21 @@ const UserSlice = createSlice({
         state.result = action.payload;
       })
       .addCase(registation.rejected, (state, action) => {
+        state.loading = false;
+
+        state.username = "";
+      })
+      .addCase(varifyOtp.pending, (state) => {
+        state.loading = true;
+        state.username = "";
+        state.error = "";
+      })
+      .addCase(varifyOtp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.varify = action.payload;
+      })
+      .addCase(varifyOtp.rejected, (state, action) => {
         state.loading = false;
 
         state.username = "";

@@ -5,7 +5,23 @@ const Query = new Querys();
 const JWT = require("jsonwebtoken");
 const logError = require("../../errorLog");
 const nodemailer = require("nodemailer");
-
+const redis = require("redis");
+// import { createClient } from "redis";
+const redisClient = redis.createClient({
+  password: "8LmnwdSJQ2SWO0GRxkja3SXODT3exXXq",
+  socket: {
+    host: "redis-15205.c264.ap-south-1-1.ec2.cloud.redislabs.com",
+    port: 15205,
+  },
+});
+const transporter = nodemailer.createTransport({
+  service: "gmail", // Use Gmail as the email service
+  auth: {
+    user: "gkusomg@gmail.com", // Your email address
+    pass: "cwhm pykw vghi nupo", // Your email password
+  },
+});
+redisClient.connect();
 class userServices {
   async singUp(userInputs, res) {
     let flag = false;
@@ -27,22 +43,13 @@ class userServices {
             .status(200)
             .json({ flag: false, message: "Account already exists" });
         } else {
-          // Create user if not already exists
-          var creQuery = Query.singUp(userInputs);
+          var email = userInputs.email;
+          var otp = this.generateOTP();
+          const expirationTime = 300;
+          redisClient.set(`otp:${email}`, otp);
+          redisClient.expire(`otp:${email}`, expirationTime);
 
-          db.query(creQuery, (error) => {
-            if (error) {
-              logError(error.message);
-              return res
-                .status(500)
-                .json({ message: "Internal Server Error", flag: false });
-            } else {
-              flag = true;
-              return res
-                .status(200)
-                .json({ flag: flag, message: "Account Created successfully" });
-            }
-          });
+          this.sendOTPEmail(email, otp, res);
         }
       });
     } catch (error) {
@@ -52,6 +59,87 @@ class userServices {
         .json({ message: "Internal Server Error", flag: false });
     }
   }
+
+  async varifyOtp(userInputs, res) {
+    redisClient.get(`otp:${userInputs.email}`, async (err, storedOTP) => {
+      if (err) {
+        logError(err);
+        return res
+          .status(500)
+          .json({ message: "Internal Server Error", flag: false });
+      }
+
+      if (storedOTP === otp) {
+        // Register user in MySQL database
+        this.createAccountFun(userInputs, res); // Assuming registerUser is an asynchronous function
+
+        // Delete OTP from Redis after successful verification
+        redisClient.del(`otp:${email}`);
+
+        return res
+          .status(200)
+          .json({ message: "User registered successfully", flag: true });
+      } else {
+        return res.status(400).json({ message: "Invalid OTP", flag: false });
+      }
+    });
+    redisClient.disconnect();
+  }
+  //generate otp fun
+  generateOTP() {
+    // Generate a random 6-digit number
+    return Math.floor(100000 + Math.random() * 900000);
+  }
+  //create Account fun
+  async createAccountFun(userInputs, res) {
+    var flag = false;
+    var creQuery = Query.singUp(userInputs);
+
+    db.query(creQuery, (error) => {
+      if (error) {
+        logError(error.message);
+        return res
+          .status(500)
+          .json({ message: "Internal Server Error", flag: false });
+      } else {
+        flag = true;
+        return res
+          .status(200)
+          .json({ flag: flag, message: "Account Created successfully" });
+      }
+    });
+  }
+  // otp send fun
+  async sendOTPEmail(email, otp, res) {
+    try {
+      // Email options
+      const mailOptions = {
+        from: "AmsSystem ",
+        to: email,
+        subject: "Verify Your Email Address for AmsSystem",
+        html: `
+          <h2>Verify Your Email Address for AmsSystem</h2>
+          <p>Thank you for registering with AmsSystem. To complete your registration, please use the following OTP (One-Time Password):</p>
+          <p style="font-size: 24px; font-weight: bold;">Your otp: <span style="color: #007bff;">${otp}</span></p>
+          <p>This OTP is valid for a single use and should not be shared with anyone else.</p>
+          <p>If you did not register with AmsSystem, please ignore this email.</p>
+          <p>If you have any questions, feel free to <a href="mailto:support@example.com">contact us</a>.</p>
+          <p>Best regards,<br>AmsSystem Team</p>
+        `,
+      };
+
+      // Send the email
+      await transporter.sendMail(mailOptions);
+      return res
+        .status(200)
+        .json({ message: "otp sended SucsessFully", flag: true });
+    } catch (error) {
+      return res
+        .status(200)
+        .json({ message: "Error sending OTP email:", flag: false });
+    }
+  }
+
   async singIn(userInputs, res) {
     let flag = false;
 

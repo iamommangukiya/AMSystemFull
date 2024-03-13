@@ -23,7 +23,7 @@ const Registration = () => {
 
   useEffect(() => {
     if (result.flag === true) {
-      naviagte("/");
+      naviagte("/varify");
     } else if (result.flag === false) {
       seterr(result.message);
     }

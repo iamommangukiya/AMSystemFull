@@ -21,6 +21,7 @@ import PurchaseBill from "./pages/PurchaseBill";
 import ItemmasterRecords from "./pages/ItemmasterRecords";
 import Billingrecord from "./pages/Billingrecord";
 import Biling from "./pages/Biling";
+import Varify from "./pages/Varify";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -81,6 +82,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/varify" element={<Varify />} />
         <Route path="/nav" element={<Topbar />} />
         <Route path="/fetchcompany" element={<CompanyFetchacompany />} />
         <Route path="/registration" element={<Registration />} />

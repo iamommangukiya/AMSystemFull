@@ -113,7 +113,8 @@ const Biling = () => {
     dispatch(items_get());
     dispatch(getletestInvoceId());
   }, []);
-  const InvoiceNo = useSelector((state) => state.BillingReducer.InvoiceID.data);
+  //use for asto increment invoice no
+  // const InvoiceNo = useSelector((state) => state.BillingReducer.InvoiceID.data);
 
   const ItemData = useSelector((state) => state.ItemReducer.result?.data);
 

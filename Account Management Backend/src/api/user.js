@@ -70,4 +70,7 @@ module.exports = (app) => {
     var id = req.cmp;
     user.selectFinancialYear(id, res);
   });
+  app.get("/api/varify", (req, res) => {
+    user.varifyOtp(req.body, res);
+  });
 };
