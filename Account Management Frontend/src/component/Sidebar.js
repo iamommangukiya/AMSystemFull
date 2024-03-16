@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="sidebar absolute z-10  flex-none w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
+      <nav className="sidebar absolute z-10  flex-none h-full w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
         <div className="bg-[#7469B6] dark:bg-darklight h-full">
           <div className="p-4">
             <a href="index.html" className="main-logo w-full">
@@ -58,7 +58,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5">Master</span>
+                    <span className="pl-1.5 text-white">Master</span>
                   </div>
 
                   <div
@@ -82,7 +82,7 @@ const Sidebar = () => {
                   x-cloak
                   x-show={`${activeMenu === "Master"}`}
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
                 >
                   <li>
                     <NavLink to="/dashboard/party">Party Master</NavLink>
@@ -117,7 +117,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5">TrasctionMaster</span>
+                    <span className="pl-1.5 text-white">TrasctionMaster</span>
                   </div>
 
                   <div
@@ -141,7 +141,7 @@ const Sidebar = () => {
                   x-cloak
                   x-show={`${activeMenu === "TrasctionMaster"}`}
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
                 >
                   <li>
                     <NavLink to="/dashboard/Recipt">Recipt</NavLink>
@@ -168,6 +168,16 @@ const Sidebar = () => {
                   </li>
                   <li>
                     <NavLink to="/dashboard/SaleBill">Sale Billing</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/deliveryChallan">
+                      delivery challan
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/quotation">
+                      quotation/Estimate
+                    </NavLink>
                   </li>
                 </ul>
               </li>
@@ -220,12 +230,6 @@ const Sidebar = () => {
                     <NavLink to="/dashboard/Purchase">Purchase Report</NavLink>
                   </li>
                   <li>
-                    {/* <a href="javascript:;">
-                      Projects{" "}
-                      <span className="bg-danger/10 ms-3 text-danger text-xs rounded px-2 inline-block py-1 leading-none">
-                        Soon
-                      </span>
-                    </a> */}
                     <NavLink to="/dashboard/Salse">Salse Report</NavLink>
                   </li>
                 </ul>

@@ -14,6 +14,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { use } from "i18next";
 
 const Biling = () => {
+  const navigate = useNavigate();
   const location = useLocation(); // Hook to access the current location object
   const mode = location.state?.mode || ""; // Get the mode from the state
   const editdata = location.state?.data;
@@ -29,8 +30,8 @@ const Biling = () => {
     case "asimat":
       bookName = "AsimatBill";
       break;
-    case "delivery":
-      bookName = "DeliveryBill";
+    case "deliveryChallan":
+      bookName = "deliveryChallan";
       break;
     default:
       bookName = "";
@@ -254,6 +255,9 @@ const Biling = () => {
   if (flag === true) {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
+    setTimeout(() => {
+      navigate("/dashboard/Purchase");
+    }, 2000);
   }
 
   const handelchange = (e, index) => {
@@ -431,6 +435,7 @@ const Biling = () => {
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
           <p>
             {Inputs.isGstBill != true && mode == "salse" && "salse Biling "}{" "}
+            {mode == "deliveryChallan" && "Delivery Challan "}{" "}
             {Inputs.isGstBill != false && mode == "salse" && "GST salse Biling"}
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
@@ -439,14 +444,16 @@ const Biling = () => {
               mode == "purchase" &&
               "purchase Biling"}
           </p>
-          <div className="switch ps-2">
-            <input
-              type="checkbox"
-              className="rounded-sm p-3"
-              value={isChecked}
-              onChange={HandleToggle}
-            />
-          </div>
+          {mode !== "deliveryChallan" && (
+            <div className="switch ps-2">
+              <input
+                type="checkbox"
+                className="rounded-sm p-3"
+                value={isChecked}
+                onChange={HandleToggle}
+              />
+            </div>
+          )}
         </h2>
         <form className="grid grid-cols-1   dark:bg-darklight dark:text-white dark:border-dark gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
           {/* party start */}

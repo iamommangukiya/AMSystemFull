@@ -108,6 +108,10 @@ const App = () => {
             element={<Billingrecord mode={"salse"}></Billingrecord>}
           ></Route>
           <Route
+            path="deliveryChallan"
+            element={<Billingrecord mode={"deliveryChallan"}></Billingrecord>}
+          ></Route>
+          <Route
             path="transectionrecord"
             element={<Trasection_Records />}
           ></Route>

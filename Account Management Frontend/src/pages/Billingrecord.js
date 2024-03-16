@@ -13,8 +13,10 @@ const Billingrecord = ({ mode }) => {
     if (mode === "purchase") {
       // Use === for comparison instead of =
       dispatch(getbilldata("PurchaseBook"));
-    } else {
+    } else if (mode === "salse") {
       dispatch(getbilldata("salesBook")); // Removed redundant dispatch
+    } else if (mode === "deliveryChallan") {
+      dispatch(getbilldata("deliveryChallan"));
     }
   }, [mode]); //
 
