@@ -10,7 +10,7 @@ const Sidebar = () => {
   return (
     <>
       <nav className="sidebar absolute z-10  flex-none h-full w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
-        <div className="bg-[#7469B6] dark:bg-darklight h-full">
+        <div className="bg-white dark:bg-darklight h-full">
           <div className="p-4">
             <a href="index.html" className="main-logo w-full">
               <img
@@ -35,7 +35,7 @@ const Sidebar = () => {
               className="relative flex flex-col gap-1 "
               x-data="{ activeMenu: 'apps' }"
             >
-              <h2 className="my-2 text-white text-sm dark:text-white/30">
+              <h2 className="my-2 text-black dark:text-white/30">
                 <span>Menu</span>
               </h2>
 
@@ -47,7 +47,7 @@ const Sidebar = () => {
                   }`}
                   onClick={() => updateMenu("Master")}
                 >
-                  <div className="flex items-center">
+                  <div className="flex items-center bg-[#ece0f8]">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
@@ -58,7 +58,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-white">Master</span>
+                    <span className="pl-1.5 text-black text-lg bg-[#ece0f8]">Master</span>
                   </div>
 
                   <div
@@ -66,23 +66,14 @@ const Sidebar = () => {
                       activeMenu === "Master" ? "!rotate-180" : ""
                     }`}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>
+                    
                   </div>
                 </a>
                 <ul
                   x-cloak
-                  x-show={`${activeMenu === "Master"}`}
+                  
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
                 >
                   <li>
                     <NavLink to="/dashboard/party">Party Master</NavLink>
@@ -117,7 +108,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-white">TrasctionMaster</span>
+                    <span className="pl-1.5 text-lg text-black">TrasctionMaster</span>
                   </div>
 
                   <div
@@ -125,23 +116,13 @@ const Sidebar = () => {
                       activeMenu === "TrasctionMaster" ? "!rotate-180" : ""
                     }`}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>
+                    
                   </div>
                 </a>
                 <ul
                   x-cloak
-                  x-show={`${activeMenu === "TrasctionMaster"}`}
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
                 >
                   <li>
                     <NavLink to="/dashboard/Recipt">Recipt</NavLink>

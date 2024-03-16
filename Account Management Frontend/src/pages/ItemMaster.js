@@ -60,7 +60,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
     <>
       <div>
         <form
-          className=" bg-white mt-10 rounded  pt-3 pb-2 mb-8   "
+          className=" bg-white rounded mb-8   "
           onSubmit={handelSubmit}
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-2 px-4">
@@ -68,7 +68,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               Items
             </h2>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Name
               </label>
               <input
@@ -81,7 +81,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Hsn Code
               </label>
               <input
@@ -94,7 +94,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Unit
               </label>
               <select
@@ -114,7 +114,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </select>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Opening Stock
               </label>
               <div className="relative">
@@ -129,7 +129,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Closing Stock
               </label>
               <div className="relative">
@@ -144,7 +144,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Sale Price
               </label>
               <div className="relative">
@@ -159,7 +159,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Purchase Price
               </label>
               <div className="relative">
@@ -174,7 +174,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Gst
               </label>
               <div className="relative">
