@@ -204,9 +204,15 @@ module.exports = (app) => {
     AcountService.inserbillLog(requestdata, res);
   });
 
-  app.get("/api/billlog", feactCompany, (req, res) => {
+  app.post("/api/billlog", feactCompany, (req, res) => {
+    var data = req.body;
     var id = req.cmp;
-    AcountService.getbilling(id, res);
+    console.log(data);
+    var Sdata = {
+      ...data,
+      cmpId: id,
+    };
+    AcountService.getbilling(Sdata, res);
   });
   app.delete("/api/billlog", feactCompany, (req, res) => {
     var data = req.body;

@@ -6,7 +6,6 @@ const JWT = require("jsonwebtoken");
 const logError = require("../../errorLog");
 const nodemailer = require("nodemailer");
 const redis = require("redis");
-// import { createClient } from "redis";
 const redisClient = redis.createClient({
   password: "8LmnwdSJQ2SWO0GRxkja3SXODT3exXXq",
   socket: {
@@ -15,19 +14,17 @@ const redisClient = redis.createClient({
   },
 });
 const transporter = nodemailer.createTransport({
-  service: "gmail", // Use Gmail as the email service
+  service: "gmail",
   auth: {
-    user: "gkusomg@gmail.com", // Your email address
-    pass: "cwhm pykw vghi nupo", // Your email password
+    user: "gkusomg@gmail.com",
+    pass: "cwhm pykw vghi nupo",
   },
 });
 redisClient.connect();
+
 class userServices {
   async singUp(userInputs, res) {
-    let flag = false;
-
     try {
-      // Check if user already exists
       var checkQuery = Query.checkUser(userInputs);
       db.query(checkQuery, (err, data) => {
         if (err) {
@@ -36,9 +33,7 @@ class userServices {
             .status(500)
             .json({ message: "Internal Server Error", flag: false });
         }
-
         if (data.length > 0) {
-          flag = false;
           return res
             .status(200)
             .json({ flag: false, message: "Account already exists" });
@@ -48,7 +43,6 @@ class userServices {
           const expirationTime = 300;
           redisClient.set(`otp:${email}`, otp);
           redisClient.expire(`otp:${email}`, expirationTime);
-
           this.sendOTPEmail(email, otp, res);
         }
       });
@@ -61,58 +55,58 @@ class userServices {
   }
 
   async varifyOtp(userInputs, res) {
-    redisClient.get(`otp:${userInputs.email}`, async (err, storedOTP) => {
-      if (err) {
-        logError(err);
-        return res
-          .status(500)
-          .json({ message: "Internal Server Error", flag: false });
-      }
+    const email = userInputs.email;
+    console.log(email);
 
-      if (storedOTP === otp) {
-        // Register user in MySQL database
-        this.createAccountFun(userInputs, res); // Assuming registerUser is an asynchronous function
+    // Retrieve stored OTP from Redis
+    const storedOTP = await redisClient.get(`otp:${email}`);
 
-        // Delete OTP from Redis after successful verification
-        redisClient.del(`otp:${email}`);
-
-        return res
-          .status(200)
-          .json({ message: "User registered successfully", flag: true });
+    if (storedOTP) {
+      const providedOTP = userInputs.otp;
+      if (storedOTP === providedOTP) {
+        // OTP is valid, proceed with account creation
+        try {
+          await this.createAccountFun(userInputs);
+          await redisClient.del(`otp:${email}`);
+          return res
+            .status(200)
+            .json({ message: "User registered successfully", flag: true });
+        } catch (error) {
+          logError(error.message);
+          return res
+            .status(500)
+            .json({ message: "Internal Server Error", flag: false });
+        }
       } else {
-        return res.status(400).json({ message: "Invalid OTP", flag: false });
+        // Invalid OTP, send error response
+        return res.status(200).json({ message: "Invalid OTP", flag: false });
       }
-    });
-    redisClient.disconnect();
+    } else {
+      // OTP not found, send error response
+      return res.status(200).json({ message: "OTP not found", flag: false });
+    }
   }
-  //generate otp fun
+
   generateOTP() {
-    // Generate a random 6-digit number
     return Math.floor(100000 + Math.random() * 900000);
   }
-  //create Account fun
-  async createAccountFun(userInputs, res) {
-    var flag = false;
-    var creQuery = Query.singUp(userInputs);
 
-    db.query(creQuery, (error) => {
-      if (error) {
-        logError(error.message);
-        return res
-          .status(500)
-          .json({ message: "Internal Server Error", flag: false });
-      } else {
-        flag = true;
-        return res
-          .status(200)
-          .json({ flag: flag, message: "Account Created successfully" });
-      }
+  async createAccountFun(userInputs) {
+    return new Promise((resolve, reject) => {
+      var creQuery = Query.singUp(userInputs);
+      db.query(creQuery, (error, data) => {
+        if (error) {
+          logError(error.message);
+          reject({ message: "Internal Server Error", flag: false });
+        } else {
+          resolve({ flag: true, message: "Account Created successfully" });
+        }
+      });
     });
   }
-  // otp send fun
+
   async sendOTPEmail(email, otp, res) {
     try {
-      // Email options
       const mailOptions = {
         from: "AmsSystem ",
         to: email,
@@ -127,54 +121,46 @@ class userServices {
           <p>Best regards,<br>AmsSystem Team</p>
         `,
       };
-
-      // Send the email
       await transporter.sendMail(mailOptions);
       return res
         .status(200)
         .json({ message: "otp sended SucsessFully", flag: true });
     } catch (error) {
       return res
-        .status(200)
+        .status(500)
         .json({ message: "Error sending OTP email:", flag: false });
     }
   }
 
   async singIn(userInputs, res) {
-    let flag = false;
-
     const key = process.env.JWT_KEY || "om@omangukiya";
-    console.log(key);
     var Loginquery = Query.singIN(userInputs);
     db.query(Loginquery, (err, data) => {
       if (err) {
         console.log(err);
-        res.send(200).json({ message: "Internal Server Error ", flag: false });
-
+        res
+          .status(500)
+          .json({ message: "Internal Server Error ", flag: false });
         logError(err.message);
       }
-
       if (data.length > 0) {
         const data1 = {
           user: {
             id: data[0]["id"],
           },
         };
-
         const token = JWT.sign(data1, key);
         const resdata = {
           data: data[0],
           auth_token: token,
         };
-        flag = true;
         res
           .status(200)
-          .json({ flag: flag, message: "Login successfully", data: resdata });
+          .json({ flag: true, message: "Login successfully", data: resdata });
       } else {
-        flag = false;
         res
           .status(200)
-          .json({ flag: flag, message: "Password Or Email Incorrect " });
+          .json({ flag: false, message: "Password Or Email Incorrect " });
       }
     });
   }

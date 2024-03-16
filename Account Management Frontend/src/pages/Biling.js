@@ -20,7 +20,7 @@ const Biling = () => {
   // console.log(editdata);
   let bookName = "";
   switch (mode) {
-    case "sales":
+    case "salse":
       bookName = "SalesBook";
       break;
     case "purchase":
@@ -43,6 +43,7 @@ const Biling = () => {
     dueAmount: "",
     paidAmount: "",
     payAmount: "",
+    bStateName: "", // Assuming bStateName will store the selected state name
     invoiceDate: new Date().toISOString().split("T")[0], // Set initial value to today's date
     dueDate: new Date().toISOString().split("T")[0], // Set initial value to today's date
     bPartyName: "",
@@ -107,7 +108,7 @@ const Biling = () => {
   useEffect(() => {
     if (mode === "purchase") {
       setInputs((prevstate) => ({ ...prevstate, flag: "P" }));
-    } else if (mode == "sale") {
+    } else if (mode == "salse") {
       setInputs((prevstate) => ({ ...prevstate, flag: "s" }));
     }
     dispatch(items_get());
@@ -200,6 +201,45 @@ const Biling = () => {
       gtotalAmount: totalAmount.toFixed(2),
       totalAmount: totalAmount.toFixed(2),
     }));
+  };
+  const stateData = {
+    AN: "Andaman and Nicobar Islands",
+    AP: "Andhra Pradesh",
+    AR: "Arunachal Pradesh",
+    AS: "Assam",
+    BR: "Bihar",
+    CG: "Chandigarh",
+    CH: "Chhattisgarh",
+    DN: "Dadra and Nagar Haveli",
+    DD: "Daman and Diu",
+    DL: "Delhi",
+    GA: "Goa",
+    GJ: "Gujarat",
+    HR: "Haryana",
+    HP: "Himachal Pradesh",
+    JK: "Jammu and Kashmir",
+    JH: "Jharkhand",
+    KA: "Karnataka",
+    KL: "Kerala",
+    LA: "Ladakh",
+    LD: "Lakshadweep",
+    MP: "Madhya Pradesh",
+    MH: "Maharashtra",
+    MN: "Manipur",
+    ML: "Meghalaya",
+    MZ: "Mizoram",
+    NL: "Nagaland",
+    OR: "Odisha",
+    PY: "Puducherry",
+    PB: "Punjab",
+    RJ: "Rajasthan",
+    SK: "Sikkim",
+    TN: "Tamil Nadu",
+    TS: "Telangana",
+    TR: "Tripura",
+    UP: "Uttar Pradesh",
+    UK: "Uttarakhand",
+    WB: "West Bengal",
   };
 
   const HandleToggle = () => {
@@ -366,6 +406,17 @@ const Biling = () => {
     }));
     dispatch(UpdateBillog({ ...Inputs, items: filteredItems }));
   };
+  const stateOptions = Object.keys(stateData).map((code) => ({
+    code,
+    name: stateData[code],
+  }));
+  const handleStateChange = (e) => {
+    const newStateName = e.target.value;
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      bStateName: newStateName,
+    }));
+  };
 
   return (
     <>
@@ -378,9 +429,9 @@ const Biling = () => {
       <div className=" flex-col min-h-screen justify-center flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
-          <p>2
-            {Inputs.isGstBill != true && mode == "sale" && "Sale Biling "}{" "}
-            {Inputs.isGstBill != false && mode == "sale" && "GST Sale Biling"}
+          <p>
+            {Inputs.isGstBill != true && mode == "salse" && "salse Biling "}{" "}
+            {Inputs.isGstBill != false && mode == "salse" && "GST salse Biling"}
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
               "GST purchase Biling"}
@@ -389,7 +440,12 @@ const Biling = () => {
               "purchase Biling"}
           </p>
           <div className="switch ps-2">
-            <input type="checkbox" className="rounded-sm p-3" value={isChecked} onChange={HandleToggle} />
+            <input
+              type="checkbox"
+              className="rounded-sm p-3"
+              value={isChecked}
+              onChange={HandleToggle}
+            />
           </div>
         </h2>
         <form className="grid grid-cols-1   dark:bg-darklight dark:text-white dark:border-dark gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
@@ -422,7 +478,7 @@ const Biling = () => {
             />
           </div>
           {/* // state code */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Bill StateCode:
             </label>
@@ -433,6 +489,24 @@ const Biling = () => {
               name="bStateCode"
               value={Inputs.bStateCode}
             />
+          </div> */}
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Bill State Name:
+            </label>
+            <select
+              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
+              onChange={handleStateChange}
+              name="bStateName"
+              value={Inputs.bStateName}
+            >
+              <option value="">Select State</option>
+              {stateOptions.map((state) => (
+                <option key={state.code} value={state.name}>
+                  {state.name}
+                </option>
+              ))}
+            </select>
           </div>
           {/* // GstIn Party */}
           {Inputs.isGstBill == true && (
@@ -460,7 +534,8 @@ const Biling = () => {
               Invoice Number
             </label>
             <input
-              type="text"
+              type="number"
+              required
               className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="invoiceNo"
@@ -502,6 +577,7 @@ const Biling = () => {
               </label>
               <input
                 type="number"
+                required
                 className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
                 onChange={handelchange}
                 name="oGSTIN"
@@ -517,6 +593,7 @@ const Biling = () => {
             </label>
             <input
               type="date"
+              required
               className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
               onChange={handelchange}
               name="transportDate"
@@ -551,7 +628,7 @@ const Biling = () => {
             </div> */}
 
           {/* bookname */}
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Book Name:
             </label>
@@ -562,7 +639,7 @@ const Biling = () => {
               name="bookName"
               value={Inputs.bookName}
             />
-          </div>
+          </div> */}
           {/* pay Amount */}
           {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">

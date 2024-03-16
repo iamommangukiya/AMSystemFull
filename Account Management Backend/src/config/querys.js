@@ -488,6 +488,7 @@ class Querys {
       isGstBill,
       transactionType,
       panding,
+      bStateName,
       dueAmount,
       deliveryAdress,
     } = userdata;
@@ -531,7 +532,7 @@ class Querys {
       '${dueDate}',
       '${bPartyName}',
       '${bPartyAdress}',
-      '${bStateCode}',
+      '${bStateName}',
       '${pgstNo}',
       '${totalQuantity}',
       '${gtotalAmount}',
@@ -596,6 +597,7 @@ class Querys {
       dueAmount,
       deliveryAdress,
       transactionType,
+      bStateName,
     } = userdata;
     console.log(userdata, "jshdvgf");
     return `UPDATE Accounting.Billlog 
@@ -606,7 +608,7 @@ class Querys {
       dueDate = '${dueDate}',
       bPartyName = '${bPartyName}',
       bPartyAdress = '${bPartyAdress}',
-      bStateCode = '${bStateCode}',
+      bStateCode = '${bStateName}',
       gstNo = '${pgstNo}',
       transactionType= '${transactionType}',
       totalQuantity = '${totalQuantity}',
@@ -632,8 +634,13 @@ class Querys {
   };
 
   getbilling = (userdata) => {
+    console.log(userdata.cmpId);
     //return `select * from Billlog where ComapnyId =${userdata}  `;
-    return `  SELECT * From Billlog WHERE ComapnyId = ${userdata}`;
+    if (userdata.bookName) {
+      return `  SELECT * From Billlog WHERE ComapnyId = ${userdata.cmpId} and bookName= '${userdata.bookName}'`;
+    } else {
+      return `  SELECT * From Billlog WHERE ComapnyId = ${userdata.cmpId}`;
+    }
   };
   getBillItem = (userinput) => {
     console.log(userinput.id, "ahsdg");

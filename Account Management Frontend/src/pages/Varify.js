@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { varifyOtp } from "../reducer/User_reducer";
+import { LoginAction, varifyOtp } from "../reducer/User_reducer";
+import { useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import Lottie from "lottie-react";
+import spinner from "../loading.json";
 
 const Varify = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const inputs = location.state;
   const [otp, setOtp] = useState(""); // State variable to store the OTP
-
+  const flag = useSelector((state) => state.Loginreducer.varify?.flag);
+  const loading = useSelector((state) => state.Loginreducer.loading);
   // Function to handle OTP input change
+  useEffect(() => {
+    if (flag === true) {
+      toast.success("otp verified successfully", "sucess");
+      setTimeout(() => {
+        navigate("/");
+      }, 3000); // Navigate to "/" after 3 seconds
+      dispatch(LoginAction.clearloading());
+    } else if (flag == false) {
+      toast.dark("Otp code is wrong", "DANGER");
+      dispatch(LoginAction.clearloading());
+    }
+  }, [flag]);
   const handleOtpChange = (index, value) => {
     // Create a copy of the OTP string
     let newOtp = otp;
@@ -16,9 +36,9 @@ const Varify = () => {
     // Update the state with the new OTP string
     setOtp(newOtp);
   };
-  const handleVarify = () => {
-    dispatch(varifyOtp(otp));
-    alert(otp);
+  const handleVarify = (e) => {
+    e.preventDefault();
+    dispatch(varifyOtp({ ...inputs, otp: otp }));
   };
 
   return (
@@ -31,7 +51,7 @@ const Varify = () => {
                 <p>Email Verification</p>
               </div>
               <div className="flex flex-row text-sm font-medium text-gray-400">
-                <p>We have sent a code to your email ba**@dipainhouse.com</p>
+                <p>We have sent a code to your email {inputs.email}</p>
               </div>
             </div>
 
@@ -82,6 +102,28 @@ const Varify = () => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex justify-center items-center z-50">
+          <Lottie
+            animationData={spinner}
+            style={{ width: "300px", height: "300px" }}
+            loop
+            autoplay
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -63,9 +63,10 @@ export const registation = createAsyncThunk(
 export const varifyOtp = createAsyncThunk(
   "userinfo/varifyOtp",
   async (info) => {
+    console.log(process.env.REACT_APP_API + "/varify");
     try {
-      const request = await axios.get(
-        process.env.REACT_APP_API + "/user/varify",
+      const request = await axios.post(
+        process.env.REACT_APP_API + "/varify",
         info
       );
 
@@ -90,6 +91,9 @@ const UserSlice = createSlice({
     result: "",
   },
   reducers: {
+    clearloading(state) {
+      state.loading = "";
+    },
     clLogindata(state) {
       state.result = "";
     },

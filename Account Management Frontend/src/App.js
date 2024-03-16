@@ -16,12 +16,12 @@ import PrintBill from "./pages/PrintBill";
 import PartyRecord from "./component/PartyRecord";
 import ReciveAmount from "./component/ReciveAmountRecords";
 import Trasection_Records from "./component/Transection_Records";
-import PurchaseBill from "./pages/PurchaseBill";
 
 import ItemmasterRecords from "./pages/ItemmasterRecords";
 import Billingrecord from "./pages/Billingrecord";
 import Biling from "./pages/Biling";
 import Varify from "./pages/Varify";
+import PurchaseReport from "./pages/Purchase-salse-Report";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -118,6 +118,14 @@ const App = () => {
           <Route
             path="Payment"
             element={<ReciveAmount transectionType={"debit"}></ReciveAmount>}
+          ></Route>
+          <Route
+            path="Purchase"
+            element={<PurchaseReport mode={"purchase"}></PurchaseReport>}
+          ></Route>
+          <Route
+            path="Salse"
+            element={<PurchaseReport mode={"salse"}></PurchaseReport>}
           ></Route>
         </Route>
         <Route path="/sidebar" element={<Sidebar />} />

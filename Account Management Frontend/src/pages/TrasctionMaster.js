@@ -21,7 +21,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
     chequeNo: "",
     amount: "",
     narration: "",
-
+    paymentMethod: "",
     invoiceNo: "",
   });
 
@@ -45,9 +45,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
     try {
       if (mode === "update") {
         dispatch(transction_Update(inputs));
-
       } else {
-       
         dispatch(transction_create(inputs));
       }
       dispatch(transction_get());
@@ -59,7 +57,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
         chequeNo: "",
         amount: "",
         narration: "",
-
+        paymentMethod: "",
         invoiceNo: "",
       });
     } catch {}
@@ -73,12 +71,10 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
           onSubmit={handelSubmit}
         >
           <div className="grid grid-cols-2 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 ">
-            
             <h2 className="col-span-full text-center mb-4 text-purple text-2xl font-bold">
               {transectionType == "credit" && "Recipt"}
               {transectionType == "debit" && "Payment"}
             </h2>
-            
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -87,7 +83,6 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
 
               <select
                 value={inputs.AccountTo}
-                
                 name="AccountTo"
                 onChange={handelchange}
                 className="form-input border  border-primary w-full h-10 rounded-md"

@@ -548,7 +548,7 @@ class Accounting {
   }
   async getbilling(userrInputs, res) {
     var q = query.getbilling(userrInputs);
-
+    console.log(q);
     db.query(q, (errr, data) => {
       if (errr) {
         logError(errr);
