@@ -49,8 +49,8 @@ class Querys {
     }
   };
   updateUser = (userInputs) => {
-    const { email, password, userName, id } = userInputs;
-    return `UPDATE tbl_user SET email='${email}', userName='${userName}', password='${password}' WHERE id=${id};`;
+    const { email, password, id, status } = userInputs;
+    return `UPDATE tbluser SET email='${email}', status='${status}', password='${password}' WHERE id=${id};`;
   };
   createCompany = (userInputs) => {
     const currentdate = moment(); // Get the current date and time
@@ -145,7 +145,13 @@ class Querys {
     return `select * from tblcompany Where userId= ${id}`;
   };
   selectAlluser = (id) => {
-    return `select * from tbluser `;
+    if (id) {
+      // If id is provided, select specific user data
+      return `SELECT * FROM tbluser WHERE id = ${id}`;
+    } else {
+      // If id is not provided, select all user data
+      return `SELECT * FROM tbluser`;
+    }
   };
   get featchCompany() {
     return this._featchCompany;

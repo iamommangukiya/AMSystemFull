@@ -17,8 +17,8 @@ module.exports = (app) => {
 
   //update user
   app.put("/api/user", featchUser, (req, res) => {
-    var data = req.user;
     data = req.body;
+    user.update(data, res);
   });
 
   //create company

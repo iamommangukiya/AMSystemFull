@@ -420,9 +420,9 @@ class userServices {
       }
     });
   }
-  async selectAlluser(res) {
+  async selectAlluser(userDAta, res) {
     let flag = false;
-    var query = Query.selectAlluser();
+    var query = Query.selectAlluser(userDAta.id);
     db.query(query, (err, data) => {
       if (err) {
         res
