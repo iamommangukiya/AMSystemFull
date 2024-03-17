@@ -376,18 +376,21 @@ const Biling = () => {
       ></Slidover>
       <div className=" flex-col min-h-screen justify-center flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
-        <h2 className="col-span-full flex  justify-between text-2xl font-bold">
+        <h2 className="grid grid-cols-1 text-2xl w-full">
+          <div className="text-center">
           <p>2
             {Inputs.isGstBill != true && mode == "sale" && "Sale Biling "}{" "}
             {Inputs.isGstBill != false && mode == "sale" && "GST Sale Biling"}
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
-              "GST purchase Biling"}
+              "GST purchase Billing"}
             {Inputs.isGstBill != true &&
               mode == "purchase" &&
-              "purchase Biling"}
+              "purchase Billing"}
           </p>
-          <div className="switch ps-2">
+          </div>
+          
+          <div className="switch ps-2 text-end">
             <input type="checkbox" className="rounded-sm p-3" value={isChecked} onChange={HandleToggle} />
           </div>
         </h2>
@@ -396,7 +399,7 @@ const Biling = () => {
           {/* // party name */}
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               PartyName:
             </label>
             <input
@@ -409,7 +412,7 @@ const Biling = () => {
           </div>
           {/* // Party adress */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               Bill PartyAdress:
             </label>
             <textarea
@@ -422,7 +425,7 @@ const Biling = () => {
           </div>
           {/* // state code */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               Bill StateCode:
             </label>
             <input
@@ -436,7 +439,7 @@ const Biling = () => {
           {/* // GstIn Party */}
           {Inputs.isGstBill == true && (
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Party GSTIN:
               </label>
               <input
@@ -455,7 +458,7 @@ const Biling = () => {
 
           {/* // bill no */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               Invoice Number
             </label>
             <input
@@ -468,7 +471,7 @@ const Biling = () => {
           </div>
           {/* // date */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               Invoice Date
             </label>
             <input
@@ -481,7 +484,7 @@ const Biling = () => {
           </div>
           {/* // due date */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               Due Date
             </label>
             <input
@@ -496,7 +499,7 @@ const Biling = () => {
           {/* gstno owner */}
           {Inputs.isGstBill == true && (
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 GSTIN:
               </label>
               <input
@@ -511,7 +514,7 @@ const Biling = () => {
 
           {/* Transpose Date */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               TransportDate:
             </label>
             <input
@@ -525,7 +528,7 @@ const Biling = () => {
 
           {/* gst %? */}
           {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Total CGST:
               </label>
               <input
@@ -537,7 +540,7 @@ const Biling = () => {
               />
             </div> */}
           {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Total IGst:
               </label>
               <input
@@ -551,7 +554,7 @@ const Biling = () => {
 
           {/* bookname */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               Book Name:
             </label>
             <input
@@ -564,7 +567,7 @@ const Biling = () => {
           </div>
           {/* pay Amount */}
           {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 PayAmount:
               </label>
               <input
@@ -577,7 +580,7 @@ const Biling = () => {
             </div> */}
 
           {/* <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 panding:
               </label>
               <input
@@ -589,7 +592,7 @@ const Biling = () => {
               />
             </div> */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-black text-sm mb-2">
               deliveryAdress:
             </label>
             <input
@@ -602,16 +605,16 @@ const Biling = () => {
           </div>
         </form>
 
-        <div class="block w-full overflow-auto scrolling-touch">
+        <div class="block w-full">
           <table
-            class="w-full max-w-full mb-4 bg-transparent table-hover  dark:bg-darklight dark:text-white dark:border-darkborder bg-white"
+            class="w-full  mb-4 bg-transparent table-hover  dark:bg-darklight dark:text-white dark:border-darkborder bg-white"
             id="addTable"
           >
             <thead>
               <tr>
                 <th>#</th>
-                <th className="sm:w-1/5 pr-4 pl-4">Item</th>
-                <th className="md:w-1/2 pr-4 pl-4">Description</th>
+                <th>Item</th>
+                <th>Description</th>
                 <th>Unit Cost</th>
                 <th>Qty</th>
                 {Inputs.isGstBill == true && <th>GST%</th>}
@@ -628,7 +631,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="name"
-                        className=" dark:bg-darklight focus:border-0"
+                        className=" dark:bg-darklight focus:border-0 w-48"
                         value={row.name}
                         onChange={(e) => handelchange(e, index)}
                         disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
@@ -638,7 +641,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="description"
-                        className=" dark:bg-darklight focus:border-0"
+                        className=" dark:bg-darklight focus:border-0 w-48"
                         value={row.description}
                         onChange={(e) => handelchange(e, index)}
                         disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
@@ -647,7 +650,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className=" dark:bg-darklight focus:border-0"
+                        className=" dark:bg-darklight focus:border-0 w-48"
                         inputMode="decimal"
                         name="salePrice"
                         value={row.salePrice}
@@ -657,7 +660,7 @@ const Biling = () => {
                     </td>
                     <td>
                       <input
-                        className=" dark:bg-darklight focus:border-0"
+                        className=" dark:bg-darklight focus:border-0 w-48"
                         type="number"
                         name="qty"
                         defaultValue={1}
@@ -670,7 +673,7 @@ const Biling = () => {
                       <td>
                         <input
                           type="number"
-                          className=" dark:bg-darklight focus:border-0"
+                          className=" dark:bg-darklight focus:border-0 w-48"
                           name="GST"
                           value={row.GST}
                           onChange={(e) => handelchange(e, index)}
@@ -681,7 +684,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className=" dark:bg-darklight focus:border-0"
+                        className=" dark:bg-darklight focus:border-0 w-48"
                         disabled
                         value={row.amount}
                         readOnly
@@ -864,10 +867,10 @@ const Biling = () => {
           </div>
         </div>
 
-        <div className="flex items-center justify-between col-3">
+        <div className="flex items-center justify-between col-3 pb-3">
           {editdata ? (
             <button
-              className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+              className="btn py-2.5 text-xl bg-[#6420AA] border border-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
               onClick={updateHandle}
               type="submit"
             >
@@ -875,7 +878,7 @@ const Biling = () => {
             </button>
           ) : (
             <button
-              className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+              className="btn py-2.5 text-xl bg-[#6420AA] border border-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
               onClick={SumbmitHandle}
               type="submit"
             >
