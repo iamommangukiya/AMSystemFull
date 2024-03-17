@@ -420,9 +420,33 @@ class userServices {
       }
     });
   }
-  async selectAlluser(userDAta, res) {
+  async selectAlluser(res) {
     let flag = false;
-    var query = Query.selectAlluser(userDAta.id);
+    var query = Query.selectAlluser();
+    db.query(query, (err, data) => {
+      if (err) {
+        res
+          .status(200)
+          .json({ message: "Internal Server Error ", flag: false });
+
+        logError(err.message);
+      } else {
+        if (data.length > 0) {
+          res.status(200).json({
+            flag: true,
+
+            message: "featch successfully",
+            data: data,
+          });
+        } else {
+          res.status(200).json({ flag: flag, message: "Not Founded users" });
+        }
+      }
+    });
+  }
+  async selectUserByid(userDAta, res) {
+    let flag = false;
+    var query = Query.selectuserByid(userDAta.id);
     db.query(query, (err, data) => {
       if (err) {
         res
