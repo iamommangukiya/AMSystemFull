@@ -87,6 +87,10 @@ module.exports = (app) => {
   app.get("/api/featchUsers", (req, res) => {
     user.selectAlluser(res);
   });
+  app.post("/api/featchUsersById", (req, res) => {
+    const data = req.body;
+    user.selectUserByid(data, res);
+  });
   app.post("/api/cmpByid", featchUser, (req, res) => {
     const id = req.body;
 

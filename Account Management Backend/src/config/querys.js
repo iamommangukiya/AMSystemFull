@@ -145,13 +145,10 @@ class Querys {
     return `select * from tblcompany Where userId= ${id}`;
   };
   selectAlluser = (id) => {
-    if (id) {
-      // If id is provided, select specific user data
-      return `SELECT * FROM tbluser WHERE id = ${id}`;
-    } else {
-      // If id is not provided, select all user data
-      return `SELECT * FROM tbluser`;
-    }
+    return `select * from tbluser `;
+  };
+  selectuserByid = (id) => {
+    return `select * from tbluser  where id = ${id}`;
   };
   get featchCompany() {
     return this._featchCompany;
