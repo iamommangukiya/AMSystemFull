@@ -2,13 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getbilldata } from "../reducer/billing_reducer";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+const formatDate = (dateString) => {
+  const options = { year: "numeric", month: "2-digit", day: "2-digit" };
+  return new Date(dateString).toLocaleDateString("en-US", options);
+};
+
 const PurchaseReport = ({ mode }) => {
   const dispatch = useDispatch();
   const records = useSelector(
     (state) => state.BillingReducer.resultData?.data || []
   );
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage, setRecordsPerPage] = useState(5);
+  const [recordsPerPage, setRecordsPerPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedMonth, setSelectedMonth] = useState(null);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
 
   useEffect(() => {
     if (mode === "salse") {
@@ -18,12 +29,30 @@ const PurchaseReport = ({ mode }) => {
     }
   }, [mode, dispatch]);
 
+  // Filter records based on search term
+  const filteredRecords = records.filter(
+    (record) =>
+      record.bPartyName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      record.invoiceNo.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  // Filter records based on selected month
+  const filteredRecordsByMonth = selectedMonth
+    ? filteredRecords.filter((record) => {
+        const recordMonth = new Date(record.createDate).getMonth() + 1;
+        return recordMonth === selectedMonth;
+      })
+    : filteredRecords;
+
   // Calculate the index of the last record to display on the current page
   const indexOfLastRecord = currentPage * recordsPerPage;
   // Calculate the index of the first record to display on the current page
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // Get the records to display on the current page
-  const currentRecords = records.slice(indexOfFirstRecord, indexOfLastRecord);
+  const currentRecords = filteredRecordsByMonth.slice(
+    indexOfFirstRecord,
+    indexOfLastRecord
+  );
 
   // Change the page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -34,6 +63,29 @@ const PurchaseReport = ({ mode }) => {
     setCurrentPage(1); // Reset the current page to 1 when changing records per page
   };
 
+  // Handle search input change
+  const handleSearchInputChange = (event) => {
+    setSearchTerm(event.target.value);
+    setCurrentPage(1); // Reset the current page to 1 when changing search term
+  };
+
+  // Handle month dropdown change
+  const handleMonthDropdownChange = (event) => {
+    setSelectedMonth(parseInt(event.target.value) || null);
+    setCurrentPage(1); // Reset the current page to 1 when changing selected month
+  };
+
+  // Handle start date change
+  const handleStartDateChange = (date) => {
+    setStartDate(date);
+    setCurrentPage(1); // Reset the current page to 1 when changing start date
+  };
+
+  // Handle end date change
+  const handleEndDateChange = (date) => {
+    setEndDate(date);
+    setCurrentPage(1); // Reset the current page to 1 when changing end date
+  };
   return (
     <>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
@@ -48,17 +100,59 @@ const PurchaseReport = ({ mode }) => {
                   value={recordsPerPage}
                   onChange={handleRecordsPerPageChange}
                 >
-                  <option value="5">5</option>
                   <option value="10">10</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
                 </select>
                 <p class="ml-2">entries</p>
               </div>
               <input
                 type="text"
-                // onChange={handleSearchInputChange}
+                onChange={handleSearchInputChange}
                 class=" w-50 ml-4 rounded-md mb-3"
-                placeholder="search "
+                placeholder="Search by name or invoice number"
               />
+            </div>
+            <div className="flex justify-between  text-center space-x-4 px-4 mt-3">
+              <div className="flex items-center">
+                <p className="mr-2">Filter by month:</p>
+                <select
+                  value={selectedMonth || ""}
+                  onChange={handleMonthDropdownChange}
+                  className="h-8 py-1 px-5 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                >
+                  <option value="">All</option>
+                  {[...Array(12).keys()].map((month) => (
+                    <option key={month + 1} value={month + 1}>
+                      {new Date(null, month).toLocaleDateString(undefined, {
+                        month: "long",
+                      })}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="flex items-center">
+                <p className="mr-2">Filter by date range:</p>
+                <DatePicker
+                  selected={startDate}
+                  onChange={handleStartDateChange}
+                  selectsStart
+                  startDate={startDate}
+                  endDate={endDate}
+                  placeholderText="Start Date"
+                  className="h-8 py-1 px-3 border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                />
+                <DatePicker
+                  selected={endDate}
+                  onChange={handleEndDateChange}
+                  selectsEnd
+                  startDate={startDate}
+                  endDate={endDate}
+                  minDate={startDate}
+                  placeholderText="End Date"
+                  className="h-8 py-1 px-3 border rounded-md ml-2 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                />
+              </div>
             </div>
 
             <div className="overflow-auto">
@@ -68,7 +162,6 @@ const PurchaseReport = ({ mode }) => {
                     <th class="w-24 text-center">Sr No.</th>
                     <th class="w-32">Invoice ID</th>
                     <th class="w-32">Party</th>
-                    {/* <th class="w-32">AccountGroup</th> */}
                     <th class="w-32">Date</th>
                     <th class="w-32">Total Amount</th>
                     <th class="w-32">Paid Amount</th>
@@ -83,8 +176,7 @@ const PurchaseReport = ({ mode }) => {
                       </td>
                       <td>{record.invoiceNo}</td>
                       <td>{record.bPartyName}</td>
-                      {/* Render other columns as per your data structure */}
-                      <td>{record.createDate}</td>
+                      <td>{formatDate(record.createDate)}</td>
                       <td>{record.gtotalAmount}</td>
                       <td>{record.payAmount}</td>
                       <td>{record.dueAmount}</td>
@@ -96,7 +188,6 @@ const PurchaseReport = ({ mode }) => {
             <div className="flex justify-end mr-4 mt-4">
               <nav aria-label="Pagination">
                 <ul className="flex list-style-none space-x-2">
-                  {/* Render previous page button */}
                   <li>
                     <button
                       onClick={() => paginate(currentPage - 1)}
@@ -107,7 +198,6 @@ const PurchaseReport = ({ mode }) => {
                     </button>
                   </li>
 
-                  {/* Render page numbers */}
                   {Array.from(
                     { length: Math.ceil(records.length / recordsPerPage) },
                     (_, index) => index + 1
@@ -126,7 +216,6 @@ const PurchaseReport = ({ mode }) => {
                     </li>
                   ))}
 
-                  {/* Render next page button */}
                   <li>
                     <button
                       onClick={() => paginate(currentPage + 1)}

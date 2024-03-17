@@ -11,10 +11,23 @@ class Querys {
     var encPass = crypto.HmacSHA1(password, key).toString(crypto.enc.Hex);
     return `insert into tbluser(email,firstName,lastName,password) values('${email}','${firstName}','${lastName}','${encPass}')`;
   };
+  signUpAdminUser = (userInputs) => {
+    const key = process.env.KEY;
+
+    const { email, password, firstName, lastName } = userInputs;
+    var encPass = crypto.HmacSHA1(password, key).toString(crypto.enc.Hex);
+    return `insert into admin(email,firstName,lastName,password) values('${email}','${firstName}','${lastName}','${encPass}')`;
+  };
+
   checkUser = (userInputs) => {
     const { email } = userInputs;
     return `select * from tbluser where  email='${email}'`;
   };
+  checkAdminUser = (userInputs) => {
+    const { email } = userInputs;
+    return `select * from admin where  email='${email}'`;
+  };
+
   singIN = (userInputs) => {
     const key = process.env.KEY;
     const { email, password, userName } = userInputs;
@@ -23,6 +36,16 @@ class Querys {
       return `select * from tbluser where  email='${email}' and password = '${encPass}'`;
     } else {
       return `select * from tbluser where  userName='${userName}' and password = '${encPass}'`;
+    }
+  };
+  singInAdmin = (userInputs) => {
+    const key = process.env.KEY;
+    const { email, password, userName } = userInputs;
+    var encPass = crypto.HmacSHA1(password, key).toString(crypto.enc.Hex);
+    if (email != null || email != "") {
+      return `select * from admin where  email='${email}' and password = '${encPass}'`;
+    } else {
+      return `select * from admin where  userName='${userName}' and password = '${encPass}'`;
     }
   };
   updateUser = (userInputs) => {
@@ -117,6 +140,12 @@ class Querys {
   };
   featchCompanyid = (id) => {
     return `select * from tblcompany Where id= ${id}`;
+  };
+  featchCompanyUserId = (id) => {
+    return `select * from tblcompany Where userId= ${id}`;
+  };
+  selectAlluser = (id) => {
+    return `select * from tbluser `;
   };
   get featchCompany() {
     return this._featchCompany;
@@ -422,9 +451,22 @@ class Querys {
     return `INSERT INTO Accounting.itemmaster (name, unit, HSN, GST, CompanyId, createDate, updateDate, LastModifidedBy, openingStock, closingStock, salePrice, purchasePrice) VALUES ('${name}', '${unit}', '${HSN}', '${GST}', ${userId}, '${formattedDate}', '${formattedDate}', ${userId}, ${openingStockValue}, ${closingStockValue}, ${salePriceValue}, ${purchasePriceValue});`;
   };
   UpdateItemMaster = (userInputs) => {
+    console.log(userInputs);
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
-    const { id, name, unit, HSN, GST, userId } = userInputs;
+    const {
+      id,
+      name,
+      unit,
+      HSN,
+      GST,
+      userId,
+      CompanyId,
+      openingStock,
+      purchasePrice,
+      closingStock,
+      salePrice,
+    } = userInputs;
 
     return `UPDATE Accounting.itemmaster
    SET
@@ -432,11 +474,14 @@ class Querys {
        unit = '${unit}',
        HSN =' ${HSN}',
        GST = '${GST}',
-      
+       salePrice='${salePrice}',
+       purchasePrice='${purchasePrice}',
+       openingStock='${openingStock}',
+       closingStock='${closingStock}',
        updateDate =' ${formattedDate}',
        LastModifidedBy = '${userId}'
    WHERE
-       id= ${id}`;
+       id= ${id} and CompanyId=${CompanyId} `;
   };
   deleteitemMaster = (userdata) => {
     return `DELETE FROM Accounting.itemmaster where id =${userdata.id}`;

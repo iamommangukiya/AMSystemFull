@@ -239,7 +239,8 @@ class userServices {
   // featch CompanyFit
   async featchCompanybyid(userInputs, res) {
     let flag = false;
-    var query = Query.featchCompanyid(userInputs);
+    var query = Query.featchCompanyUserId(userInputs.id);
+    console.log(query);
     db.query(query, (err, data) => {
       if (err) {
         res
@@ -344,6 +345,101 @@ class userServices {
           });
         } else {
           res.status(200).json({ flag: flag, message: "no year founded" });
+        }
+      }
+    });
+  }
+
+  //admin
+  async singUpAdmin(userInputs, res) {
+    try {
+      var checkQuery = Query.checkAdminUser(userInputs);
+      db.query(checkQuery, (err, data) => {
+        if (err) {
+          logError(err.message);
+          return res
+            .status(500)
+            .json({ message: "Internal Server Error", flag: false });
+        }
+        if (data.length > 0) {
+          return res
+            .status(200)
+            .json({ flag: false, message: "Account already exists" });
+        } else {
+          var signUpQuery = Query.signUpAdminUser(userInputs);
+          db.query(signUpQuery, (err, result) => {
+            if (err) {
+              logError(err.message);
+              return res
+                .status(500)
+                .json({ message: "Internal Server Error", flag: false });
+            }
+            return res.status(200).json({
+              flag: true,
+              message: "Admin account created successfully",
+            });
+          });
+        }
+      });
+    } catch (error) {
+      logError(error.message);
+      return res
+        .status(500)
+        .json({ message: "Internal Server Error", flag: false });
+    }
+  }
+  async SingInAdmin(userInputs, res) {
+    const key = process.env.JWT_KEY || "om@omangukiya";
+    var Loginquery = Query.singInAdmin(userInputs);
+    db.query(Loginquery, (err, data) => {
+      if (err) {
+        console.log(err);
+        res
+          .status(500)
+          .json({ message: "Internal Server Error ", flag: false });
+        logError(err.message);
+      }
+      if (data.length > 0) {
+        const data1 = {
+          user: {
+            id: data[0]["id"],
+          },
+        };
+        const token = JWT.sign(data1, key);
+        const resdata = {
+          data: data[0],
+          auth_token: token,
+        };
+        res
+          .status(200)
+          .json({ flag: true, message: "Login successfully", data: resdata });
+      } else {
+        res
+          .status(200)
+          .json({ flag: false, message: "Password Or Email Incorrect " });
+      }
+    });
+  }
+  async selectAlluser(res) {
+    let flag = false;
+    var query = Query.selectAlluser();
+    db.query(query, (err, data) => {
+      if (err) {
+        res
+          .status(200)
+          .json({ message: "Internal Server Error ", flag: false });
+
+        logError(err.message);
+      } else {
+        if (data.length > 0) {
+          res.status(200).json({
+            flag: true,
+
+            message: "featch successfully",
+            data: data,
+          });
+        } else {
+          res.status(200).json({ flag: flag, message: "Not Founded users" });
         }
       }
     });

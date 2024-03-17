@@ -17,6 +17,8 @@ const Billingrecord = ({ mode }) => {
       dispatch(getbilldata("salesBook")); // Removed redundant dispatch
     } else if (mode === "deliveryChallan") {
       dispatch(getbilldata("deliveryChallan"));
+    } else if (mode === "quotation") {
+      dispatch(getbilldata("quotation"));
     }
   }, [mode]); //
 

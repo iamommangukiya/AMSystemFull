@@ -504,9 +504,18 @@ class Accounting {
 
       if (data.affectedRows > 0) {
         await Promise.all(
-          userInputs.items.map((item) =>
-            this.insertItemDetails(data.insertId, item)
-          )
+          userInputs.items.map(async (item) => {
+            const transactionType = userInputs.bookName;
+            if (transactionType === "PurchaseBook") {
+              // Increment inventory for purchase
+              await this.updateInventory(item.id, item.qty, "purchase");
+            } else if (transactionType === "SalesBook") {
+              // Decrement inventory for sale
+              await this.updateInventory(item.id, item.qty, "sale");
+            }
+            // Insert item details in fullbilllog table
+            await this.insertItemDetails(data.insertId, item);
+          })
         );
         res.status(200).json({
           flag: true,
@@ -519,6 +528,43 @@ class Accounting {
     } catch (error) {
       logError(error);
       res.status(200).json({ flag: false, message: "Internal Server error" });
+    }
+  }
+  async updateInventory(itemId, quantity, transactionType) {
+    try {
+      // Fetch current inventory quantity
+      const currentInventoryQuery = `SELECT openingStock FROM itemmaster WHERE id = ?`;
+      const [currentInventoryRows] = await this.dbQuery(currentInventoryQuery, [
+        itemId,
+      ]);
+
+      if (currentInventoryRows.length === 0) {
+        throw new Error("Item not found in inventory");
+      }
+      console.log(currentInventoryRows);
+      const currentQuantity = currentInventoryRows.openingStock;
+      console.log(currentQuantity);
+
+      // Update inventory based on transaction type
+      let updatedQuantity;
+      if (transactionType === "purchase") {
+        updatedQuantity = parseInt(currentQuantity) + parseInt(quantity);
+      } else if (transactionType === "sale") {
+        updatedQuantity = parseInt(currentQuantity) - parseInt(quantity);
+        if (updatedQuantity < 0) {
+          throw new Error("Insufficient inventory for sale");
+        }
+      } else {
+        throw new Error("Invalid transaction type");
+      }
+
+      // Update inventory in the database
+      const updateInventoryQuery = `UPDATE itemmaster SET openingStock = ? WHERE id = ?`;
+      await this.dbQuery(updateInventoryQuery, [updatedQuantity, itemId]);
+
+      return true; // Return true if inventory update is successful
+    } catch (error) {
+      throw error; // Propagate error if inventory update fails
     }
   }
 

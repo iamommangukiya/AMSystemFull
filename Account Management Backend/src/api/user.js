@@ -74,4 +74,22 @@ module.exports = (app) => {
     console.log(req.body);
     user.varifyOtp(req.body, res);
   });
+  // admin apis
+
+  app.post("/api/singupAdmin", (req, res) => {
+    let data = req.body;
+    user.singUpAdmin(data, res);
+  });
+  app.post("/api/singInAdmin", (req, res) => {
+    let data = req.body;
+    user.SingInAdmin(data, res);
+  });
+  app.get("/api/featchUsers", (req, res) => {
+    user.selectAlluser(res);
+  });
+  app.post("/api/cmpByid", featchUser, (req, res) => {
+    const id = req.body;
+
+    user.featchCompanybyid(id, res);
+  });
 };

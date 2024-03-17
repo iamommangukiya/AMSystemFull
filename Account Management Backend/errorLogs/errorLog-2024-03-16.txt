@@ -1,0 +1,11 @@
+2024-03-16T18:14:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Incorrect decimal value: 'null' for column 'salePrice' at row 1
+2024-03-16T18:14:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Incorrect decimal value: 'null' for column 'salePrice' at row 1
+2024-03-16T18:15:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Incorrect integer value: 'null' for column 'openingStock' at row 1
+2024-03-16T18:15:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Incorrect integer value: 'null' for column 'closingStock' at row 1
+2024-03-16T18:16:0  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Incorrect integer value: 'null' for column 'closingStock' at row 1
+2024-03-16T18:16:4  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Error: Incorrect integer value: 'null' for column 'closingStock' at row 1
+2024-03-16T18:33:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'quantity')
+2024-03-16T18:35:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-16T18:36:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-16T18:36:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-16T18:36:5  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')

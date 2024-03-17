@@ -33,6 +33,9 @@ const Biling = () => {
     case "deliveryChallan":
       bookName = "deliveryChallan";
       break;
+    case "quotation":
+      bookName = "quotation";
+      break;
     default:
       bookName = "";
       break;
@@ -434,9 +437,15 @@ const Biling = () => {
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
           <p>
-            {Inputs.isGstBill != true && mode == "salse" && "salse Biling "}{" "}
             {mode == "deliveryChallan" && "Delivery Challan "}{" "}
+            {Inputs.isGstBill != true && mode == "salse" && "salse Biling "}{" "}
             {Inputs.isGstBill != false && mode == "salse" && "GST salse Biling"}
+            {Inputs.isGstBill != true &&
+              mode == "quotation" &&
+              "quotation Biling "}{" "}
+            {Inputs.isGstBill != false &&
+              mode == "quotation" &&
+              "GST quotation Biling"}
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
               "GST purchase Biling"}

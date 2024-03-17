@@ -7,27 +7,35 @@ import { items_create, items_get, items_update } from "../reducer/Item_reducer";
 import { ToastContainer, toast } from "react-toastify";
 
 const ItemMaster = ({ data, mode, closeBox }) => {
+  console.log(data, "data");
   const [inputs, setInput] = useState({
     name: "",
     unit: "",
-    openingStock: "0",
-    closingStock: "0",
+    openingStock: "",
+    closingStock: "",
     HSN: "",
-    gst: "0",
+    GST: "",
+    salePrice: "",
+    purchasePrice: "",
   });
+
   useEffect(() => {
-    setInput(data);
+    if (mode === "update") {
+      setInput(data);
+    }
   }, [data]);
+
   const dispatch = useDispatch();
+
   const handelchange = (e) => {
     const { name, value } = e.target;
-    setInput({ ...inputs, [name]: value });
+    // If the value is empty, set it to 0
+    const sanitizedValue = value === "" ? "0" : value;
+    setInput({ ...inputs, [name]: sanitizedValue });
   };
-  // console.log(mode);
 
   const msg = useSelector((state) => state.ItemReducer.result["flag"]);
-  // console.log(msg);
-// 
+
   const handelSubmit = (e) => {
     e.preventDefault();
 
@@ -59,18 +67,13 @@ const ItemMaster = ({ data, mode, closeBox }) => {
   return (
     <>
       <div>
-        <form
-          className=" bg-white mt-10 rounded  pt-3 pb-2 mb-8   "
-          onSubmit={handelSubmit}
-        >
+        <form className=" bg-white rounded mb-8   " onSubmit={handelSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-2 px-4">
             <h2 className="col-span-full text-center mb-4 text-purple text-2xl font-bold">
               Items
             </h2>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Name
-              </label>
+              <label className="block text-black text-sm  mb-2">Name</label>
               <input
                 required
                 type="text"
@@ -81,12 +84,9 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Hsn Code
-              </label>
+              <label className="block text-black text-sm  mb-2">Hsn Code</label>
               <input
                 type="text"
-                required
                 name="HSN"
                 onChange={handelchange}
                 value={inputs.HSN}
@@ -94,12 +94,10 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Unit
-              </label>
+              <label className="block text-black text-sm  mb-2">Unit</label>
               <select
-                defaultValue={0}
                 name="unit"
+                value={inputs.unit}
                 onChange={handelchange}
                 className="form-input border border-gray-400 w-30 h-10 rounded-md"
               >
@@ -114,7 +112,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </select>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Opening Stock
               </label>
               <div className="relative">
@@ -129,8 +127,8 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Closing Stock
+              <label className="block text-black text-sm  mb-2">
+                Minimum Stock
               </label>
               <div className="relative">
                 <input
@@ -144,7 +142,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm  mb-2">
                 Sale Price
               </label>
               <div className="relative">
@@ -159,7 +157,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+              <label className="block text-black text-sm mb-2">
                 Purchase Price
               </label>
               <div className="relative">
@@ -174,16 +172,13 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
             <div className="mb-4 relative">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Gst
-              </label>
+              <label className="block text-black text-sm mb-2">Gst</label>
               <div className="relative">
                 <input
                   type="number"
-                  defaultValue={0}
-                  name="gst"
+                  name="GST"
                   onChange={handelchange}
-                  value={inputs.gst}
+                  value={inputs.GST}
                   className="form-input border border-gray-400 w-full h-10 rounded-md"
                 />
                 <span className="absolute inset-y-0 right-2 flex items-center pr-6 text-gray-400 disabled:">
