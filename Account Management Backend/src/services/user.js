@@ -167,15 +167,17 @@ class userServices {
   async update(userInputs, res) {
     let flag = false;
     var updateQuery = Query.updateUser(userInputs);
+    console.log(updateQuery);
     db.query(updateQuery, (err, data) => {
       if (err) {
         res.send(200).json({ message: "Internal Server Error ", flag: false });
 
         logError(err.message);
+      } else {
+        res
+          .status(200)
+          .json({ flag: true, message: "Update Successfully", data: data });
       }
-      res
-        .status(200)
-        .json({ flag: true, message: "Update Successfully", data: data });
     });
   }
 
@@ -464,6 +466,30 @@ class userServices {
           });
         } else {
           res.status(200).json({ flag: flag, message: "Not Founded users" });
+        }
+      }
+    });
+  }
+  async deletuser(userdata, res) {
+    let flag = false;
+    var query = Query.deleteUser(userdata);
+    db.query(query, (err, data) => {
+      if (err) {
+        res
+          .status(200)
+          .json({ message: "Internal Server Error ", flag: false });
+
+        logError(err.message);
+      } else {
+        if (data.affectedRows) {
+          flag = true;
+          res
+            .status(200)
+            .json({ flag: flag, message: "user Deleted Successfully" });
+        } else {
+          res
+            .status(200)
+            .json({ flag: flag, message: "No user Founded To delete" });
         }
       }
     });

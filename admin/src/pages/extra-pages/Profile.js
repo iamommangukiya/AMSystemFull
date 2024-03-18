@@ -1,12 +1,14 @@
 import React, { useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Tab, Tabs } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 import { useTheme } from '@mui/material/styles';
 import { Button, Popconfirm, Tooltip, Skeleton, Space, Modal, Tag, Empty, Alert } from 'antd';
 import { CheckCircleFilled, EyeOutlined, StopOutlined, DeleteOutlined, StopFilled } from '@ant-design/icons';
 import NorthOutlinedIcon from '@mui/icons-material/NorthOutlined';
 import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { DomainContext } from 'App';
 import { UncontrolledCarousel } from 'reactstrap';
 import DiamondIcon from '@mui/icons-material/Diamond';
@@ -49,46 +51,36 @@ const Profile = () => {
     const [eventmodal, seteventmodal] = useState(false);
     const [oneeventData, setoneeventData] = useState({});
     const [items, setitems] = useState([]);
-    const [popup, setpopup] = useState({ show: false, message: '', success: true });
+    const [userdetails, setuserdetails] = useState({});
+    const [transaction, settransaction] = useState([]);
+    const [companydata, setcompanydata] = useState([]);
+    const [popup, setpopup] = useState({
+        show: false,
+        message: '',
+        success: true
+    });
+
     const location = useLocation();
-    const { users } = location.state;
+    const userdata = location.state.users;
     useEffect(() => {
-        console.log(users);
-    }, [users]);
-    // useEffect(() => {
-    //     if (popup.show) {
-    //         setTimeout(() => {
-    //             setpopup(false);
-    //         }, 3000);
-    //     }
-    // }, [popup]);
+        setuserdetails(userdata);
+    }, [userdata]);
 
-    // const { profile_id } = useParams();
-
-    // useEffect(() => {
-    //     console.log('in effect');
-    //     axios
-    //         .post(`${BASE_URL1}/featchUsersById`, profileId, {
-    //             headers: {
-    //                 Authorization: `Bearer ${token.token}`
-    //             }
-    //         })
-    //         .then((response) => response.data)
-
-    //         // Add other API requests here using axios
-
-    //         .then((values) => {
-    //             if (values[0].success) {
-    //                 setuserdetails(values[0].data);
-    //             }
-    //             // Handle other API responses here
-    //             setload(false);
-    //         })
-    //         .catch((error) => {
-    //             console.error('Error fetching profile details:', error);
-    //         });
-    // }, [profile_id, value, provalue]);
-
+    useEffect(() => {
+        axios
+            .post(`${BASE_URL1}/cmpByid`, {
+                id: userdata.id
+            })
+            .then((response) => {
+                return response.data;
+            })
+            .then((data) => {
+                if (data.data) {
+                    console.log(data.data);
+                    setcompanydata(data.data);
+                }
+            });
+    }, [userdetails]);
     const [load, setload] = useState(true);
     const [walletModal, setwalletModal] = useState(false);
 
@@ -99,32 +91,6 @@ const Profile = () => {
     const productChange = (event, newValue) => {
         setproValue(newValue);
     };
-
-    const breadcrumbManager = (a, b) => {
-        let bread = [];
-        let prepath = false;
-        for (var i = 0; i < breadcrumb?.length; i++) {
-            bread.push(breadcrumb[i]);
-            if (breadcrumb[i].url == b) {
-                prepath = true;
-                break;
-            }
-        }
-        if (prepath == false) {
-            bread.push({ name: a, url: b });
-        }
-
-        sessionStorage.setItem('breadcrumb', JSON.stringify(bread));
-    };
-
-    const [userdetails, setuserdetails] = useState({});
-    const [follower, setfollower] = useState([]);
-    const [following, setfollowing] = useState([]);
-    const [report, setreport] = useState([]);
-    const [sell_products, setsell_products] = useState([]);
-    const [buy_products, setbuy_products] = useState([]);
-    const [events, setevents] = useState([]);
-    const [transaction, settransaction] = useState([]);
 
     useEffect(() => {
         let bread = [];
@@ -142,22 +108,29 @@ const Profile = () => {
             setbreadcrumb(bread);
             sessionStorage.setItem('breadcrumb', JSON.stringify(bread));
         }
-        console.log(userdetails); // ================== Delete User ==================
+
+        // ================== Delete User ==================
     }, [userdetails]);
 
     const deleteUser = (a) => {
-        const deleteuser = new FormData();
-        deleteuser.append('user_id', a);
         try {
             axios
-                .post(`${BASE_URL1}/featchUsersById`, deleteuser, {
+                .delete(`${BASE_URL1}/deleteUser`, {
+                    data: { id: a }, // Pass data object with the id
                     headers: {
                         Authorization: `Bearer ${token.token}`
                     }
                 })
-                .then((response) => response.data)
+                .then((response) => {
+                    console.log(response);
+                    return response.data;
+                })
                 .then((data) => {
-                    setpopup({ show: true, message: data.message, success: data.success });
+                    setpopup({
+                        show: true,
+                        message: data.message,
+                        success: data.success
+                    });
                     if (data.success) {
                         navigate('/users');
                     }
@@ -181,9 +154,16 @@ const Profile = () => {
                 })
                 .then((response) => response.data)
                 .then((data) => {
-                    setpopup({ show: true, message: data.message, success: data.success });
+                    setpopup({
+                        show: true,
+                        message: data.message,
+                        success: data.success
+                    });
                     if (data.success) {
-                        setuserdetails({ ...userdetails, is_active: !userdetails.is_active });
+                        setuserdetails({
+                            ...userdetails,
+                            is_active: !userdetails.is_active
+                        });
                     }
                 });
         } catch (err) {
@@ -194,42 +174,24 @@ const Profile = () => {
     // ======================= Verify User and Unverify User ============================
 
     const verifyUser = (a) => {
-        const verifyuserdata = new FormData();
-        verifyuserdata.append('user_id', a);
         try {
-            axios
-                .post(`${BASE_URL}/user_details/verified_unverified_user`, verifyuserdata, {
-                    headers: {
-                        Authorization: `Bearer ${token.token}`
-                    }
-                })
-                .then((response) => response.data)
-                .then((data) => {
-                    setpopup({ show: true, message: data.message, success: data.success });
-                    if (data.success) {
-                        setuserdetails({ ...userdetails, is_verified: !userdetails.is_verified });
-                    }
-                });
-        } catch (err) {
-            console.log(err);
-        }
-    };
+            let newStatus = userdetails.status ? 'INACTIVE' : 'active'; // Toggle status
 
-    const ambassadorUser = (a) => {
-        const verifyuserdata = new FormData();
-        verifyuserdata.append('user_id', a);
-        try {
             axios
-                .post(`${BASE_URL}/user_details/made_ambassador_user`, verifyuserdata, {
-                    headers: {
-                        Authorization: `Bearer ${token.token}`
-                    }
-                })
+                .put(`${BASE_URL1}/user`, { ...a, status: newStatus })
                 .then((response) => response.data)
                 .then((data) => {
-                    setpopup({ show: true, message: data.message, success: data.success });
+                    setpopup({
+                        show: true,
+                        message: data.message,
+                        success: data.success
+                    });
                     if (data.success) {
-                        setuserdetails({ ...userdetails, is_ambassador: userdetails.is_ambassador ? !userdetails.is_ambassador : true });
+                        setuserdetails({
+                            ...userdetails,
+                            is_verified: !userdetails.is_verified,
+                            is_active: !userdetails.is_active // Toggle status
+                        });
                     }
                 });
         } catch (err) {
@@ -239,7 +201,7 @@ const Profile = () => {
 
     return (
         <>
-            <div className="breadcrumb d-flex align-items-center">
+            {/* <div className="breadcrumb d-flex align-items-center">
                 {breadcrumb?.map((e, i) => {
                     return (
                         <>
@@ -265,8 +227,8 @@ const Profile = () => {
                         </>
                     );
                 })}
-            </div>
-            {load ? (
+            </div> */}
+            {false ? (
                 <></>
             ) : (
                 <>
@@ -286,7 +248,7 @@ const Profile = () => {
                                                 className="object-fit"
                                             />
                                         </div> */}
-                                        {userdetails?.is_verified && (
+                                        {userdetails?.status === 'active' && (
                                             <>
                                                 <div className="verified-user" style={{ right: '0', fontSize: '24px' }}>
                                                     <CheckCircleFilled />
@@ -295,29 +257,21 @@ const Profile = () => {
                                         )}
                                     </div>
                                     <h5>
-                                        {userdetails?.name}{' '}
-                                        {userdetails.is_ambassador && (
-                                            <span style={{ color: '#faad25' }}>
-                                                <DiamondIcon className="me-1" />
-                                                Ambassador
-                                            </span>
-                                        )}
+                                        {userdetails?.firstName} {userdetails?.lastName}{' '}
                                     </h5>
-                                    <p className="mb-0">{`Email : ${userdetails?.email}`}</p>
+                                    <p className="mb-0">{`Email : ${userdetails.email}`}</p>
                                     {/* {userdetails?.dob && (
                                         <p className="mb-0">{`Birth Date : ${new Date(userdetails?.dob).toDateString()}`}</p>
                                     )} */}
-                                    {userdetails?.mobile_number && (
-                                        <p className="mb-0">{`Mobile No. : +${userdetails?.country_code}  ${userdetails?.phoneNo}`}</p>
-                                    )}
+                                    {userdetails?.phoneNo && <p className="mb-0">{`Mobile No. : +${+91}  ${userdetails?.phoneNo}`}</p>}
 
                                     <div className="d-flex flex-wrap mx-auto justify-content-center mt-4">
-                                        {userdetails.is_verified ? (
+                                        {userdetails?.status === 'active' ? (
                                             <Popconfirm
                                                 title="Are you sure to unverify this user?"
                                                 description="Are you sure to unverify this user?"
                                                 onConfirm={() => {
-                                                    verifyUser(userdetails._id);
+                                                    verifyUser(userdetails);
                                                 }}
                                                 onCancel={() => {}}
                                                 okText="Yes"
@@ -332,7 +286,7 @@ const Profile = () => {
                                                 title="Are you sure to verify this user?"
                                                 description="Are you sure to verify this user?"
                                                 onConfirm={() => {
-                                                    verifyUser(userdetails._id);
+                                                    verifyUser(userdetails);
                                                 }}
                                                 onCancel={() => {}}
                                                 okText="Yes"
@@ -343,51 +297,11 @@ const Profile = () => {
                                                 </button>
                                             </Popconfirm>
                                         )}
-                                        {!userdetails.is_active ? (
-                                            <Popconfirm
-                                                title="Are you sure to unblock this user?"
-                                                description="Are you sure to unblock this user?"
-                                                onConfirm={() => {
-                                                    blockUser(userdetails._id);
-                                                }}
-                                                onCancel={() => {}}
-                                                okText="Yes"
-                                                cancelText="No"
-                                            >
-                                                <Tooltip placement="top" title={'Unblock User'}>
-                                                    <div
-                                                        className="me-2 action-button bg-white"
-                                                        style={{ border: '1px solid #4caf50', color: '#4caf50' }}
-                                                    >
-                                                        <StopFilled />
-                                                    </div>
-                                                </Tooltip>
-                                            </Popconfirm>
-                                        ) : (
-                                            <Popconfirm
-                                                title="Are you sure to block this user?"
-                                                description="Are you sure to block this user?"
-                                                onConfirm={() => {
-                                                    blockUser(userdetails._id);
-                                                }}
-                                                onCancel={() => {}}
-                                                okText="Yes"
-                                                cancelText="No"
-                                            >
-                                                <Tooltip placement="top" title={'Block User'}>
-                                                    <div
-                                                        className="me-2 action-button bg-white d-flex justify-content-center align-items-center"
-                                                        style={{ border: '1px solid rgb(255 134 0)', color: 'rgb(255 134 0)' }}
-                                                    >
-                                                        <StopOutlined />
-                                                    </div>
-                                                </Tooltip>
-                                            </Popconfirm>
-                                        )}
+
                                         <Popconfirm
                                             title="Are you sure to delete this user?"
                                             description="Are you sure to delete this user?"
-                                            onConfirm={() => deleteUser(userdetails._id)}
+                                            onConfirm={() => deleteUser(userdetails.id)}
                                             onCancel={() => {}}
                                             okText="Yes"
                                             cancelText="No"
@@ -395,49 +309,15 @@ const Profile = () => {
                                             <Tooltip placement="top" title={'Delete User'}>
                                                 <div
                                                     className="action-button bg-white d-flex justify-content-center align-items-center me-2"
-                                                    style={{ border: '1px solid #ff4d4f', color: '#ff4d4f' }}
+                                                    style={{
+                                                        border: '1px solid #ff4d4f',
+                                                        color: '#ff4d4f'
+                                                    }}
                                                 >
                                                     <DeleteOutlined />
                                                 </div>
                                             </Tooltip>
                                         </Popconfirm>
-                                        {userdetails.is_ambassador ? (
-                                            <Popconfirm
-                                                title="Are you sure to Remove Ambassador?"
-                                                description="Are you sure to Remove Ambassador?"
-                                                onConfirm={() => {
-                                                    ambassadorUser(userdetails._id);
-                                                }}
-                                                onCancel={() => {}}
-                                                okText="Yes"
-                                                cancelText="No"
-                                            >
-                                                <button
-                                                    className="btn btn-outline-secondary mb-5 btn-sm d-flex justify-content-center align-items-center"
-                                                    style={{ fontSize: '14px' }}
-                                                >
-                                                    <DiamondIcon className="me-1" style={{ height: '21px' }} /> Remove Ambassador
-                                                </button>
-                                            </Popconfirm>
-                                        ) : (
-                                            <Popconfirm
-                                                title="Are you sure to Make Ambassador?"
-                                                description="Are you sure to Make Ambassador?"
-                                                onConfirm={() => {
-                                                    ambassadorUser(userdetails._id);
-                                                }}
-                                                onCancel={() => {}}
-                                                okText="Yes"
-                                                cancelText="No"
-                                            >
-                                                {/* <button
-                                                    className="btn btn-outline-success ambassador mb-5 btn-sm d-flex justify-content-center align-items-center"
-                                                    style={{ fontSize: '14px' }}
-                                                >
-                                                    <DiamondIcon className="me-1" style={{ height: '21px' }} /> Make Ambassador
-                                                </button> */}
-                                            </Popconfirm>
-                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -491,7 +371,13 @@ const Profile = () => {
                                                                     ? `Credited from ${data.from_user_id?.user_name}`
                                                                     : 'Add to Wallet'}
                                                             </h6>
-                                                            <p className="m-0" style={{ fontSize: '12px', color: 'rgb(168 168 168)' }}>
+                                                            <p
+                                                                className="m-0"
+                                                                style={{
+                                                                    fontSize: '12px',
+                                                                    color: 'rgb(168 168 168)'
+                                                                }}
+                                                            >
                                                                 {`${date} at ${finaltime}`}
                                                             </p>
                                                         </div>
@@ -518,7 +404,13 @@ const Profile = () => {
                                                                     ? `Debited to ${data.to_user_id?.user_name}`
                                                                     : 'Withdraw to Wallet'}
                                                             </h6>
-                                                            <p className="m-0" style={{ fontSize: '12px', color: 'rgb(168 168 168)' }}>
+                                                            <p
+                                                                className="m-0"
+                                                                style={{
+                                                                    fontSize: '12px',
+                                                                    color: 'rgb(168 168 168)'
+                                                                }}
+                                                            >
                                                                 {`${date} at ${finaltime}`}
                                                             </p>
                                                         </div>
@@ -535,7 +427,11 @@ const Profile = () => {
                     </div>
                     <div
                         className="p-2 px-0 position-absolute w-100"
-                        style={{ borderBottom: '1px solid #0dbcec', color: '#0dbcec', top: '0px' }}
+                        style={{
+                            borderBottom: '1px solid #0dbcec',
+                            color: '#0dbcec',
+                            top: '0px'
+                        }}
                     >
                         <h5 className="m-0 d-flex justify-content-between">
                             Currunt Balance{' '}

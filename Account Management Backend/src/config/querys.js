@@ -147,6 +147,9 @@ class Querys {
   selectAlluser = (id) => {
     return `select * from tbluser `;
   };
+  deleteUser = (data) => {
+    return `delete from tbluser where id =${data}`;
+  };
   selectuserByid = (id) => {
     return `select * from tbluser  where id = ${id}`;
   };

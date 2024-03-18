@@ -16,7 +16,7 @@ module.exports = (app) => {
   });
 
   //update user
-  app.put("/api/user", featchUser, (req, res) => {
+  app.put("/api/user", (req, res) => {
     data = req.body;
     user.update(data, res);
   });
@@ -91,9 +91,14 @@ module.exports = (app) => {
     const data = req.body;
     user.selectUserByid(data, res);
   });
-  app.post("/api/cmpByid", featchUser, (req, res) => {
+  app.post("/api/cmpByid", (req, res) => {
     const id = req.body;
 
     user.featchCompanybyid(id, res);
+  });
+  app.delete("/api/deleteUser", (req, res) => {
+    const id = req.body.id;
+    console.log(id);
+    user.deletuser(id, res);
   });
 };

@@ -97,23 +97,27 @@ const Users = () => {
     };
 
     // Function to delete user
-    const deleteUser = (userId) => {
-        const deleteuser = new FormData();
-        deleteuser.append('user_id', userId);
+    const deleteUser = (a) => {
         try {
             axios
-                .post(`${BASE_URL}/user_details/delete_user`, deleteuser, {
+                .delete(`${BASE_URL1}/deleteUser`, {
+                    data: { id: a }, // Pass data object with the id
                     headers: {
                         Authorization: `Bearer ${token.token}`
                     }
                 })
-                .then((response) => response.data)
+                .then((response) => {
+                    console.log(response);
+                    return response.data;
+                })
                 .then((data) => {
-                    setPopup({ show: true, message: data.message, success: data.success });
+                    setpopup({
+                        show: true,
+                        message: data.message,
+                        success: data.success
+                    });
                     if (data.success) {
-                        const updatedData = userdata.filter((user) => user._id !== userId);
-                        setUserData(updatedData);
-                        localStorage.setItem('ad_users', JSON.stringify(updatedData));
+                        navigate('/users');
                     }
                 });
         } catch (err) {
@@ -150,6 +154,10 @@ const Users = () => {
         } catch (err) {
             console.log(err);
         }
+    };
+
+    const handleshowClick = (data) => {
+        navigate(`/profile`, { state: { users: data } });
     };
 
     const [page, setPage] = useState(paginationcontext.pagination.users);
@@ -261,21 +269,14 @@ const Users = () => {
                                         <TableCell className="br-line">{data.email}</TableCell>
                                         <TableCell className="br-line">{data.phoneNo ? `+${+91} ${data.phoneNo}` : '-'}</TableCell>
                                         <TableCell align="center">
-                                            <Tooltip placement="top" title={'View User'}>
-                                                <Link
-                                                    to={`/profile/${data.id}`}
-                                                    onClick={() => {
-                                                        // Navigate to the profile page with all user data
-                                                        navigate(`/profile`, { state: { users: userdata } });
-                                                    }}
+                                            <Tooltip placement="top" title="View User">
+                                                <button
+                                                    className="me-2 action-button bg-white"
+                                                    style={{ border: '1px solid #1677ff', color: '#1677ff' }}
+                                                    onClick={() => handleshowClick(data)}
                                                 >
-                                                    <div
-                                                        className="me-2 action-button bg-white"
-                                                        style={{ border: '1px solid #1677ff', color: '#1677ff' }}
-                                                    >
-                                                        <EyeOutlined />
-                                                    </div>
-                                                </Link>
+                                                    <EyeOutlined />
+                                                </button>
                                             </Tooltip>
                                             {!data.is_active ? (
                                                 <>
@@ -325,7 +326,7 @@ const Users = () => {
                                             <Popconfirm
                                                 title="Are you sure to delete this user?"
                                                 description="Are you sure to delete this user?"
-                                                onConfirm={() => deleteUser(data._id)}
+                                                onConfirm={() => deleteUser(data.id)}
                                                 onCancel={() => {}}
                                                 okText="Yes"
                                                 cancelText="No"

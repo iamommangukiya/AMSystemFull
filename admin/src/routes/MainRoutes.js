@@ -58,7 +58,7 @@ const MainRoutes = {
             element: <ShippingProduct />
         },
         {
-            path: 'profile/:profile_id',
+            path: 'profile',
             element: <Profile />
         },
         {
