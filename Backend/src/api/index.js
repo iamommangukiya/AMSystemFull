@@ -1,4 +1,4 @@
 module.exports = {
   userApi: require("./user"),
-  AcountingApi: require("./Accounting"),
+  AcountingApi: require("./accounting"),
 };
