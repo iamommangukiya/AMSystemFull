@@ -505,7 +505,7 @@ const Biling = () => {
               name="bStateCode"
               value={Inputs.bStateCode}
             />
-          </div> */}
+          </div> 
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Bill State Name:
@@ -655,7 +655,7 @@ const Biling = () => {
               name="bookName"
               value={Inputs.bookName}
             />
-          </div> */}
+          </div> 
           {/* pay Amount */}
           {/* <div className="mb-4">
               <label className="block text-black text-sm mb-2">
