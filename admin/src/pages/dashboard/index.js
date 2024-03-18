@@ -13,7 +13,8 @@ import { useContext } from 'react';
 import { DomainContext } from 'App';
 import { useDispatch } from '../../../node_modules/react-redux/es/exports';
 import { activeItem } from 'store/reducers/menu';
-import { BASE_URL } from 'Configration';
+import { BASE_URL, BASE_URL1 } from 'Configration';
+import { Axios } from '../../../node_modules/axios/index';
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
@@ -25,138 +26,53 @@ const DashboardDefault = () => {
     const navigate = useNavigate();
 
     // const [counter, setcounter] = useState({ users: 0, categories: 0, products: 0, events: 0, wallet: 0, shipping_post: 0 });
-    const [counter, setcounter] = useState({ users: 0, provider: 0, event: 0, payment: 0 });
+    const [counter, setcounter] = useState({ users: 0, company: 0, event: 0, payment: 0, ActiveUser: 0, pending: 0 });
 
     if (!token?.is_login && !token?.is_login == true) {
         navigate('/login');
     }
-
+    const countuser = async (data) => {
+        const activeUsersCount = await data.filter((user) => user.status === 'active').length;
+        setcounter((prevState) => ({
+            ...prevState,
+            ActiveUser: activeUsersCount
+        }));
+    };
+    const pendinguser = async (data) => {
+        const activeUsersCount = await data.filter((user) => user.status === 'pending').length;
+        setcounter((prevState) => ({
+            ...prevState,
+            pending: activeUsersCount
+        }));
+    };
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(activeItem({ openItem: ['dashboard'] }));
         if (token?.is_login && token?.is_login == true) {
             try {
-                fetch(`${BASE_URL}/admin/admin_dashboard`, {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${token.token}`
-                    },
-                    body: ''
+                try {
+                    fetch(`${BASE_URL1}/allcmp`, {
+                        method: 'POST'
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            setcounter((prevState) => ({
+                                ...prevState,
+                                company: data.data.length
+                            }));
+                            console.log(data.data.length);
+                        });
+                } catch (err) {
+                    console.log(err);
+                }
+                fetch(`${BASE_URL1}/featchUsers`, {
+                    method: 'get'
                 })
                     .then((response) => response.json())
                     .then((data) => {
-                        if (data.success) {
-                            setcounter(data.data);
-
-                            // try {
-                            //     fetch(`${BASE_URL}/categories/category_list`, {
-                            //         method: 'POST',
-                            //         headers: {
-                            //             Authorization: `Bearer ${token.token}`
-                            //         },
-                            //         body: ''
-                            //     })
-                            //         .then((response) => response.json())
-                            //         .then((data) => {
-                            //             localStorage.setItem('synp_categories', JSON.stringify(data.data));
-                            //         });
-                            // } catch (err) {
-                            //     console.log(err);
-                            // }
-                            const userList = new FormData();
-                            userList.append('user_type', 'user');
-
-                            try {
-                                fetch(`${BASE_URL}/user_details/user_List`, {
-                                    method: 'POST',
-                                    headers: {
-                                        Authorization: `Bearer ${token.token}`
-                                    },
-                                    body: userList
-                                })
-                                    .then((response) => response.json())
-                                    .then((data) => {
-                                        localStorage.setItem('ad_users', JSON.stringify(data.data));
-                                    });
-                            } catch (err) {
-                                console.log(err);
-                            }
-
-                            const providerList = new FormData();
-                            providerList.append('user_type', 'provider');
-
-                            try {
-                                fetch(`${BASE_URL}/user_details/user_List`, {
-                                    method: 'POST',
-                                    headers: {
-                                        Authorization: `Bearer ${token.token}`
-                                    },
-                                    body: providerList
-                                })
-                                    .then((response) => response.json())
-                                    .then((data) => {
-                                        localStorage.setItem('ad_providers', JSON.stringify(data.data));
-                                    });
-                            } catch (err) {
-                                console.log(err);
-                            }
-
-                            // try {
-                            //     fetch(`${baseUrl.apiBase}/post_detail/all_post_list`, {
-                            //         method: 'POST',
-                            //         headers: {
-                            //             Authorization: `Bearer ${token.token}`
-                            //         },
-                            //         body: ''
-                            //     })
-                            //         .then((response) => response.json())
-                            //         .then((data) => {
-                            //             if (data.success) {
-                            //                 localStorage.setItem('synp_products', JSON.stringify(data.data));
-                            //             }
-                            //         });
-                            // } catch (err) {
-                            //     console.log(err);
-                            // }
-
-                            // try {
-                            //     fetch(`${baseUrl.apiBase}/event_detail/all_event_list`, {
-                            //         method: 'POST',
-                            //         headers: {
-                            //             Authorization: `Bearer ${token.token}`
-                            //         },
-                            //         body: ''
-                            //     })
-                            //         .then((response) => response.json())
-                            //         .then((data) => {
-                            //             if (data.success) {
-                            //                 localStorage.setItem('synp_events', JSON.stringify(data.data));
-                            //             }
-                            //         });
-                            // } catch (err) {
-                            //     console.log(err);
-                            // }
-
-                            // try {
-                            //     fetch(`${baseUrl.apiBase}/payment_history/transaction_history`, {
-                            //         method: 'POST',
-                            //         headers: {
-                            //             Authorization: `Bearer ${token?.token}`
-                            //         },
-                            //         body: ''
-                            //     })
-                            //         .then((response) => response.json())
-                            //         .then((data) => {
-                            //             if (data.success) {
-                            //                 localStorage.setItem('synp_transaction', JSON.stringify(data.data));
-                            //             }
-                            //         });
-                            // } catch (err) {
-                            //     console.log(err);
-                            // }
-                        } else if (data.message == 'Authentication failed.') {
-                            navigate('/login');
-                        }
+                        pendinguser(data.data);
+                        countuser(data.data);
+                        setcounter((prevState) => ({ ...prevState, users: data.data.length }));
                     });
             } catch (err) {}
         } else {
@@ -174,13 +90,13 @@ const DashboardDefault = () => {
                 <AnalyticEcommerce title="Total Users" count={counter.users} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Providers" count={counter.provider} />
+                <AnalyticEcommerce title="Total Company" count={counter.company} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Events" count={counter.event} />
+                <AnalyticEcommerce title="Active users" count={counter.ActiveUser} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Payment" count={counter.payment} />
+                <AnalyticEcommerce title="Total requests" count={counter.pending} />
             </Grid>
             {/* <Grid item xs={12} sm={6} md={4} lg={3}>
                 <AnalyticEcommerce title="Total Wallet balance" count={counter.wallet} />

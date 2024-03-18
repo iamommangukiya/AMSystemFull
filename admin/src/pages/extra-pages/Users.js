@@ -39,9 +39,7 @@ const Users = () => {
             userList.append('user_type', 'user');
             try {
                 axios
-                    .get(`${BASE_URL1}/featchUsers`, {
-                        data: userList
-                    })
+                    .get(`${BASE_URL1}/featchUsers`, {})
                     .then((response) => {
                         return response.data;
                     })
