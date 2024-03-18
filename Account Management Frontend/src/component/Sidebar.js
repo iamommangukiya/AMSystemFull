@@ -13,12 +13,13 @@ const Sidebar = () => {
         <div className="bg-white dark:bg-darklight h-full">
           <div className="p-4">
             <a href="index.html" className="main-logo w-full">
-              <img
+              <h1 className="text-3xl text-center">AMS</h1>
+              {/* <img
                 src="assets/images/logo-dark.svg"
                 className="mx-auto dark-logo h-7 logo dark:hidden"
                 alt="logo"
               />
-              {/* <img
+              <img
                 src="assets/images/logo-light.svg"
                 className="mx-auto light-logo h-7 logo hidden dark:block"
                 alt="logo"
@@ -42,43 +43,36 @@ const Sidebar = () => {
               <li className="menu nav-item">
                 <a
                   href="javaScript:;"
-                  class={`nav-link group text-black items-center justify-between ${
-                    activeMenu === "Master" ? "active" : ""
-                  }`}
+                  class={`nav-link group justify-between flex items-center text-gray-600 py-2 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 px-2 duration-200 ${activeMenu === "Master" ? "active" : ""
+                    }`}
                   onClick={() => updateMenu("Master")}
                 >
-                  <div className="flex items-center bg-[#ece0f8]">
+                  <div className="flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
-                      className="w-5 h-5"
+                      className="w-5 h-5 "
                     >
                       <path
                         d="M7.5 11.5C5.01472 11.5 3 9.48528 3 7C3 4.51472 5.01472 2.5 7.5 2.5C9.98528 2.5 12 4.51472 12 7C12 9.48528 9.98528 11.5 7.5 11.5ZM7.5 21.5C5.01472 21.5 3 19.4853 3 17C3 14.5147 5.01472 12.5 7.5 12.5C9.98528 12.5 12 14.5147 12 17C12 19.4853 9.98528 21.5 7.5 21.5ZM17.5 11.5C15.0147 11.5 13 9.48528 13 7C13 4.51472 15.0147 2.5 17.5 2.5C19.9853 2.5 22 4.51472 22 7C22 9.48528 19.9853 11.5 17.5 11.5ZM17.5 21.5C15.0147 21.5 13 19.4853 13 17C13 14.5147 15.0147 12.5 17.5 12.5C19.9853 12.5 22 14.5147 22 17C22 19.4853 19.9853 21.5 17.5 21.5ZM7.5 9.5C8.88071 9.5 10 8.38071 10 7C10 5.61929 8.88071 4.5 7.5 4.5C6.11929 4.5 5 5.61929 5 7C5 8.38071 6.11929 9.5 7.5 9.5ZM7.5 19.5C8.88071 19.5 10 18.3807 10 17C10 15.6193 8.88071 14.5 7.5 14.5C6.11929 14.5 5 15.6193 5 17C5 18.3807 6.11929 19.5 7.5 19.5ZM17.5 9.5C18.8807 9.5 20 8.38071 20 7C20 5.61929 18.8807 4.5 17.5 4.5C16.1193 4.5 15 5.61929 15 7C15 8.38071 16.1193 9.5 17.5 9.5ZM17.5 19.5C18.8807 19.5 20 18.3807 20 17C20 15.6193 18.8807 14.5 17.5 14.5C16.1193 14.5 15 15.6193 15 17C15 18.3807 16.1193 19.5 17.5 19.5Z"
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-black text-lg bg-[#ece0f8]">Master</span>
+                    <span className="pl-1.5 text-black text-lg">Master</span>
                   </div>
 
-                  <div
-                    class={`w-4 h-4 flex items-center justify-center dropdown-icon ${
-                      activeMenu === "Master" ? "!rotate-180" : ""
-                    }`}
-                  >
-                    
-                  </div>
+                  
                 </a>
                 <ul
                   x-cloak
-                  
+
                   x-collapse
                   className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
                 >
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/party">Party Master</NavLink>
                   </li>
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     {/* <a href="javascript:;">
                       Projects{" "}
                       <span className="bg-danger/10 ms-3 text-danger text-xs rounded px-2 inline-block py-1 leading-none">
@@ -92,9 +86,8 @@ const Sidebar = () => {
               <li className="menu nav-item">
                 <a
                   href="javaScript:;"
-                  class={`nav-link group text-black items-center justify-between ${
-                    activeMenu === "TrasctionMaster" ? "active" : ""
-                  }`}
+                  class={`nav-link group justify-between flex items-center text-gray-600 py-2 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 px-2 duration-200 ${activeMenu === "TrasctionMaster" ? "active" : ""
+                    }`}
                   onClick={() => updateMenu("TrasctionMaster")}
                 >
                   <div className="flex items-center">
@@ -111,24 +104,18 @@ const Sidebar = () => {
                     <span className="pl-1.5 text-lg text-black">TrasctionMaster</span>
                   </div>
 
-                  <div
-                    class={`w-4 h-4 flex items-center justify-center dropdown-icon ${
-                      activeMenu === "TrasctionMaster" ? "!rotate-180" : ""
-                    }`}
-                  >
-                    
-                  </div>
+                  
                 </a>
                 <ul
                   x-cloak
                   x-collapse
                   className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
                 >
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/Recipt">Recipt</NavLink>
                   </li>
 
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     {/* <a href="javascript:;">
                       Projects{" "}
                       <span className="bg-danger/10 ms-3 text-danger text-xs rounded px-2 inline-block py-1 leading-none">
@@ -137,25 +124,25 @@ const Sidebar = () => {
                     </a> */}
                     <NavLink to="/dashboard/Payment">Payment</NavLink>
                   </li>
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/transectionrecord">
                       transectionrecord
                     </NavLink>
                   </li>
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/PurchaseBill">
                       Purchase Billing
                     </NavLink>
                   </li>
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/SaleBill">Sale Billing</NavLink>
                   </li>
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/deliveryChallan">
                       delivery challan
                     </NavLink>
                   </li>
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/quotation">
                       quotation/Estimate
                     </NavLink>
@@ -165,9 +152,8 @@ const Sidebar = () => {
               <li className="menu nav-item">
                 <a
                   href="javaScript:;"
-                  class={`nav-link group text-black items-center justify-between ${
-                    activeMenu === "Report" ? "active" : ""
-                  }`}
+                  class={`nav-link group justify-between flex items-center text-gray-600 py-2 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 px-2 duration-200  ${activeMenu === "Report" ? "active" : ""
+                    }`}
                   onClick={() => updateMenu("Report")}
                 >
                   <div className="flex items-center">
@@ -184,33 +170,17 @@ const Sidebar = () => {
                     <span className="pl-1.5">Report</span>
                   </div>
 
-                  <div
-                    class={`w-4 h-4 flex items-center justify-center dropdown-icon ${
-                      activeMenu === "Report" ? "!rotate-180" : ""
-                    }`}
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      className="w-6 h-6"
-                    >
-                      <path
-                        d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z"
-                        fill="currentColor"
-                      ></path>
-                    </svg>
-                  </div>
+
                 </a>
                 <ul
                   x-cloak
-                  x-show={`${activeMenu === "Report"}`}
                   x-collapse
                   className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
                 >
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/Purchase">Purchase Report</NavLink>
                   </li>
-                  <li>
+                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
                     <NavLink to="/dashboard/Salse">Salse Report</NavLink>
                   </li>
                 </ul>

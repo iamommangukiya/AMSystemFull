@@ -435,25 +435,11 @@ const Biling = () => {
       ></Slidover>
       <div className=" flex-col min-h-screen justify-center flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
-<<<<<<< HEAD
         <h2 className="grid grid-cols-1 text-2xl w-full">
           <div className="text-center">
           <p>2
             {Inputs.isGstBill != true && mode == "sale" && "Sale Biling "}{" "}
             {Inputs.isGstBill != false && mode == "sale" && "GST Sale Biling"}
-=======
-        <h2 className="col-span-full flex  justify-between text-2xl font-bold">
-          <p>
-            {mode == "deliveryChallan" && "Delivery Challan "}{" "}
-            {Inputs.isGstBill != true && mode == "salse" && "salse Biling "}{" "}
-            {Inputs.isGstBill != false && mode == "salse" && "GST salse Biling"}
-            {Inputs.isGstBill != true &&
-              mode == "quotation" &&
-              "quotation Biling "}{" "}
-            {Inputs.isGstBill != false &&
-              mode == "quotation" &&
-              "GST quotation Biling"}
->>>>>>> fbef780eae36e929cc1694a0eba69ac53cc84402
             {Inputs.isGstBill != false &&
               mode == "purchase" &&
               "GST purchase Billing"}
@@ -461,24 +447,11 @@ const Biling = () => {
               mode == "purchase" &&
               "purchase Billing"}
           </p>
-<<<<<<< HEAD
           </div>
           
           <div className="switch ps-2 text-end">
             <input type="checkbox" className="rounded-sm p-3" value={isChecked} onChange={HandleToggle} />
           </div>
-=======
-          {mode !== "deliveryChallan" && (
-            <div className="switch ps-2">
-              <input
-                type="checkbox"
-                className="rounded-sm p-3"
-                value={isChecked}
-                onChange={HandleToggle}
-              />
-            </div>
-          )}
->>>>>>> fbef780eae36e929cc1694a0eba69ac53cc84402
         </h2>
         <form className="grid grid-cols-1   dark:bg-darklight dark:text-white dark:border-dark gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
           {/* party start */}
@@ -510,13 +483,8 @@ const Biling = () => {
             />
           </div>
           {/* // state code */}
-<<<<<<< HEAD
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-=======
-          {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
->>>>>>> fbef780eae36e929cc1694a0eba69ac53cc84402
               Bill StateCode:
             </label>
             <input
@@ -526,7 +494,7 @@ const Biling = () => {
               name="bStateCode"
               value={Inputs.bStateCode}
             />
-          </div> */}
+          </div> 
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Bill State Name:
@@ -665,13 +633,8 @@ const Biling = () => {
             </div> */}
 
           {/* bookname */}
-<<<<<<< HEAD
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-=======
-          {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
->>>>>>> fbef780eae36e929cc1694a0eba69ac53cc84402
               Book Name:
             </label>
             <input
@@ -681,7 +644,7 @@ const Biling = () => {
               name="bookName"
               value={Inputs.bookName}
             />
-          </div> */}
+          </div> 
           {/* pay Amount */}
           {/* <div className="mb-4">
               <label className="block text-black text-sm mb-2">
