@@ -213,6 +213,9 @@ const Sidebar = () => {
                   <li>
                     <NavLink to="/dashboard/Salse">Salse Report</NavLink>
                   </li>
+                  <li>
+                    <NavLink to="/dashboard/GSTR1">GSTR1</NavLink>
+                  </li>
                 </ul>
               </li>
             </ul>

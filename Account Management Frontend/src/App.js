@@ -22,6 +22,7 @@ import Billingrecord from "./pages/Billingrecord";
 import Biling from "./pages/Biling";
 import Varify from "./pages/Varify";
 import PurchaseReport from "./pages/Purchase-salse-Report";
+import GSTR from "./pages/P_S_REPORT";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -135,6 +136,7 @@ const App = () => {
             path="Salse"
             element={<PurchaseReport mode={"salse"}></PurchaseReport>}
           ></Route>
+          <Route path="GSTR1" element={<GSTR mode={"salse"}></GSTR>}></Route>
         </Route>
         <Route path="/sidebar" element={<Sidebar />} />
       </Routes>

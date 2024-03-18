@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getbilldata } from "../reducer/billing_reducer";
 import DatePicker from "react-datepicker";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
+
 import "react-datepicker/dist/react-datepicker.css";
 import { saveAs } from "file-saver";
 import emailjs from "emailjs-com";
@@ -23,7 +25,7 @@ const PurchaseReport = ({ mode }) => {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-
+  const navigate = useNavigate(); // Initialize useNavigate hook
   useEffect(() => {
     if (mode === "salse") {
       dispatch(getbilldata("SalesBook"));
@@ -168,6 +170,34 @@ const PurchaseReport = ({ mode }) => {
   //   window.location.href = mailtoLink;
   // };
 
+  const GenerateReport = () => {
+    // Determine if filter is applied by month or date range
+    let filterInfo;
+    if (selectedMonth) {
+      // If filtered by month, include the month in the filterInfo
+      filterInfo = new Date(null, selectedMonth - 1).toLocaleDateString(
+        undefined,
+        { month: "long" }
+      );
+    } else if (startDate && endDate) {
+      // If filtered by date range, include the date range in the filterInfo
+      const startDateFormatted = formatDate(startDate);
+      const endDateFormatted = formatDate(endDate);
+      filterInfo = `${startDateFormatted} to ${endDateFormatted}`;
+    } else {
+      // If no filter applied, set filterInfo to null
+      filterInfo = null;
+    }
+  
+    // Navigate to the dashboard with filtered data and filterInfo
+    navigate("/dashboard/GSTR1", {
+      state: {
+        filteredData: filteredRecordsByMonthAndDateRange,
+        filterInfo: filterInfo,
+      },
+    });
+  };
+
   return (
     <>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
@@ -274,12 +304,12 @@ const PurchaseReport = ({ mode }) => {
               >
                 Export to Excel
               </button>
-              {/* <button
-                onClick={shareViaEmail}
+              <button
+                onClick={GenerateReport}
                 className="bg-blue-500 text-white px-4 py-2 rounded-md"
               >
-                Share via Email
-              </button> */}
+                Generate Report
+              </button>
             </div>
           </div>
         </div>
