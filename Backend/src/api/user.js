@@ -97,6 +97,9 @@ module.exports = (app) => {
 
     user.cmpbyid(id, res);
   });
+  app.post("/api/allcmp", (req, res) => {
+    user.allcmp(res);
+  });
   app.delete("/api/deleteUser", (req, res) => {
     const id = req.body.id;
     // console.log(id);

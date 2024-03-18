@@ -144,6 +144,9 @@ class Querys {
   featchCompanyUserId = (id) => {
     return `select * from tblcompany Where userId= ${id}`;
   };
+  allcmp = () => {
+    return `select * from tblcompany `;
+  };
   selectAlluser = (id) => {
     return `select * from tbluser `;
   };

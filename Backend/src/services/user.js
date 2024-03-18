@@ -495,7 +495,7 @@ class userServices {
   }
   async cmpbyid(userdata, res) {
     let flag = false;
-    var query = Query.featchCompanyUserId(userInputs.id);
+    var query = Query.featchCompanyUserId(userdata.id);
     // console.log(query);
     db.query(query, (err, data) => {
       if (err) {
@@ -507,7 +507,6 @@ class userServices {
       } else {
         if (data.length > 0) {
           var data1 = {
-            uid: userInputs.uid,
             id: data[0].id,
           };
 
@@ -523,6 +522,28 @@ class userServices {
           res
             .status(200)
             .json({ flag: flag, message: "Not Founded Registered Company" });
+        }
+      }
+    });
+  }
+  async allcmp(res) {
+    let flag = false;
+    var query = Query.allcmp();
+    db.query(query, (err, data) => {
+      if (err) {
+        res
+          .status(200)
+          .json({ message: "Internal Server Error ", flag: false });
+
+        logError(err.message);
+      } else {
+        if (data.length > 0) {
+          flag = true;
+          res
+            .status(200)
+            .json({ flag: flag, message: "featch Successfully", data: data });
+        } else {
+          res.status(200).json({ flag: flag, message: "No Founded " });
         }
       }
     });
