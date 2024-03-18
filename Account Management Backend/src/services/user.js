@@ -241,8 +241,7 @@ class userServices {
   // featch CompanyFit
   async featchCompanybyid(userInputs, res) {
     let flag = false;
-    var query = Query.featchCompanyUserId(userInputs.id);
-    console.log(query);
+    var query = Query.featchCompanyid(userInputs);
     db.query(query, (err, data) => {
       if (err) {
         res
@@ -490,6 +489,40 @@ class userServices {
           res
             .status(200)
             .json({ flag: flag, message: "No user Founded To delete" });
+        }
+      }
+    });
+  }
+  async cmpbyid(userdata, res) {
+    let flag = false;
+    var query = Query.featchCompanyUserId(userInputs.id);
+    console.log(query);
+    db.query(query, (err, data) => {
+      if (err) {
+        res
+          .status(200)
+          .json({ message: "Internal Server Error ", flag: false });
+
+        logError(err.message);
+      } else {
+        if (data.length > 0) {
+          var data1 = {
+            uid: userInputs.uid,
+            id: data[0].id,
+          };
+
+          const key = process.env.JWT_KEY;
+          let token = JWT.sign(data1, key);
+          res.status(200).json({
+            flag: true,
+            companyId: token,
+            message: "featch successfully",
+            data: data,
+          });
+        } else {
+          res
+            .status(200)
+            .json({ flag: flag, message: "Not Founded Registered Company" });
         }
       }
     });

@@ -29,6 +29,15 @@ const Company = () => {
     ownerPhoneNumber: "",
     businessType: "",
   });
+  const [step, setStep] = useState(0);
+  const handleNext = () => {
+    setStep(step + 1);
+  };
+
+  const handlePrevious = () => {
+    setStep(step - 1);
+  };
+
   const handleDateChange = (value) => {
     setInputs((prevInputs) => ({ ...prevInputs, date: value }));
   };
@@ -124,20 +133,26 @@ const Company = () => {
       });
     }
   };
+  const nextStep = () => {
+    setStep((prevStep) => prevStep + 1);
+  };
+
+  const prevStep = () => {
+    setStep((prevStep) => prevStep - 1);
+  };
 
   return (
     <div className=" flex-col min-h-screen justify-center flex items-center   ">
-       {/* <!-- Start Background Images --> */}
-       <div
-          className="bg-[#F9F5F6] dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
-
-        ></div>
-        {/* <!-- End Background Images --> */}
+      {/* <!-- Start Background Images --> */}
+      <div className="bg-[#F9F5F6] dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
+      {/* <!-- End Background Images --> */}
       <div className=" flex-col flex items-center py-4  rounded-xl   justify-center backdrop-blur-xl border backdrop-brightness-110 border-gray-300 shadow-2xl ">
         <h2 className="col-span-full text-[#6420AA]  justify-center text-center mb-4 text-primary text-4xl font-bold">
-          Company Form
+          Company registation
         </h2>
         <form className="grid grid-cols-1  gap-6 md:grid-cols-2 py-3 lg:grid-cols-3 xl:grid-cols-3 pt-6  mb-4 lg:w-3/4">
+        
+        
           <div className="mb-4">
             <label
               htmlFor="exampleInputEmail1"
@@ -193,11 +208,12 @@ const Company = () => {
               htmlFor="exampleInputaddress"
               className="block text-black text-sm mb-2"
             >
-              Date
+              End Of Month Date
             </label>
-            <DateRangePicker
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
-                  value={Inputs.date}
+            <input
+              className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+              value={Inputs.date}
+              type="date"
               onChange={handleDateChange}
               placeholder="date"
             />
@@ -212,10 +228,8 @@ const Company = () => {
             </label>
             <input
               type="text"
-              className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg
-              ${
-                valid.panvalid ? "border-red-500" : ""
-              }`}
+              className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light  placeholder:text-white focus:border-0 shadow-lg
+              ${valid.panvalid ? "border-red-500" : ""}`}
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               onChange={handelchange}
@@ -229,9 +243,7 @@ const Company = () => {
             </div>
           </div>
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">
-              Gst Number
-            </label>
+            <label className="block text-black text-sm mb-2">Gst Number</label>
             <input
               type="text"
               className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg ${
@@ -258,18 +270,13 @@ const Company = () => {
             </label>
             <div>
               <div className="flex ">
-                <select className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg">
-                  <option>+91</option>
-
-                  {countryList.map((Countycode, index) => {
-                    return (
-                      <option key={index} value={Countycode.dialCode}>
-                        {Countycode.dialCode}
-                      </option>
-                    );
-                  })}
-                </select>
-
+                <input
+                  type="text"
+                  value={+91}
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg w-12"
+                  readOnly
+                  disabled
+                />
                 <input
                   type="text"
                   className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg ${

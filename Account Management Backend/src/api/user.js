@@ -58,6 +58,7 @@ module.exports = (app) => {
     }
   });
   app.get("/api/companyByid", featchUser, (req, res) => {
+    console.log(req.query.id);
     user.featchCompanybyid(req.query.id, res);
   });
 
@@ -94,7 +95,7 @@ module.exports = (app) => {
   app.post("/api/cmpByid", (req, res) => {
     const id = req.body;
 
-    user.featchCompanybyid(id, res);
+    user.cmpbyid(id, res);
   });
   app.delete("/api/deleteUser", (req, res) => {
     const id = req.body.id;
