@@ -56,7 +56,7 @@ class userServices {
 
   async varifyOtp(userInputs, res) {
     const email = userInputs.email;
-    console.log(email);
+    // console.log(email);
 
     // Retrieve stored OTP from Redis
     const storedOTP = await redisClient.get(`otp:${email}`);
@@ -167,7 +167,7 @@ class userServices {
   async update(userInputs, res) {
     let flag = false;
     var updateQuery = Query.updateUser(userInputs);
-    console.log(updateQuery);
+    // console.log(updateQuery);
     db.query(updateQuery, (err, data) => {
       if (err) {
         res.send(200).json({ message: "Internal Server Error ", flag: false });
@@ -496,7 +496,7 @@ class userServices {
   async cmpbyid(userdata, res) {
     let flag = false;
     var query = Query.featchCompanyUserId(userInputs.id);
-    console.log(query);
+    // console.log(query);
     db.query(query, (err, data) => {
       if (err) {
         res

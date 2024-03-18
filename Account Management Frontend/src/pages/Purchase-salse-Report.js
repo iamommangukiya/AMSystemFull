@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getbilldata } from "../reducer/billing_reducer";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { saveAs } from "file-saver";
+import emailjs from "emailjs-com";
+import * as XLSX from "xlsx";
+
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "2-digit", day: "2-digit" };
   return new Date(dateString).toLocaleDateString("en-US", options);
@@ -36,20 +39,27 @@ const PurchaseReport = ({ mode }) => {
       record.invoiceNo.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Filter records based on selected month
-  const filteredRecordsByMonth = selectedMonth
-    ? filteredRecords.filter((record) => {
-        const recordMonth = new Date(record.createDate).getMonth() + 1;
-        return recordMonth === selectedMonth;
-      })
-    : filteredRecords;
+  // Filter records based on selected month and date range
+  const filteredRecordsByMonthAndDateRange = filteredRecords.filter(
+    (record) => {
+      const recordDate = new Date(record.createDate);
+      const recordMonth = recordDate.getMonth() + 1;
+      const startDateValid = !startDate || recordDate >= startDate;
+      const endDateValid = !endDate || recordDate <= endDate;
+      return (
+        (!selectedMonth || recordMonth === selectedMonth) &&
+        startDateValid &&
+        endDateValid
+      );
+    }
+  );
 
   // Calculate the index of the last record to display on the current page
   const indexOfLastRecord = currentPage * recordsPerPage;
   // Calculate the index of the first record to display on the current page
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
   // Get the records to display on the current page
-  const currentRecords = filteredRecordsByMonth.slice(
+  const currentRecords = filteredRecordsByMonthAndDateRange.slice(
     indexOfFirstRecord,
     indexOfLastRecord
   );
@@ -86,6 +96,78 @@ const PurchaseReport = ({ mode }) => {
     setEndDate(date);
     setCurrentPage(1); // Reset the current page to 1 when changing end date
   };
+
+  // Function to export data to Excel
+  const exportToExcel = () => {
+    // Selecting only required fields
+    const dataToExport = filteredRecordsByMonthAndDateRange.map((record) => ({
+      "Invoice ID": record.invoiceNo,
+      Party: record.bPartyName,
+      Date: formatDate(record.createDate),
+      "Due Date": formatDate(record.dueDate), // Assuming you have a dueDate field in your data
+      "Total Amount": record.gtotalAmount,
+      "Paid Amount": record.payAmount,
+      "Due Amount": record.dueAmount,
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+    const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(data, "purchase_report.xlsx");
+  };
+
+  // Function to share Excel file via email
+  // const shareViaEmail = () => {
+  //   // Generate the Excel file (assuming you have the exportToExcel function)
+  //   const dataToExport = filteredRecordsByMonthAndDateRange.map((record) => ({
+  //     "Invoice ID": record.invoiceNo,
+  //     Party: record.bPartyName,
+  //     Date: formatDate(record.createDate),
+  //     "Due Date": formatDate(record.dueDate),
+  //     "Total Amount": record.gtotalAmount,
+  //     "Paid Amount": record.payAmount,
+  //     "Due Amount": record.dueAmount,
+  //   }));
+
+  //   const worksheet = XLSX.utils.json_to_sheet(dataToExport);
+  //   const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+  //   const excelBuffer = XLSX.write(workbook, {
+  //     bookType: "xlsx",
+  //     type: "array",
+  //   });
+  //   const excelBlob = new Blob([excelBuffer], {
+  //     type: "application/octet-stream",
+  //   });
+
+  //   // Create a secure temporary URL (if possible)
+  //   const excelUrl = window.URL.createObjectURL(excelBlob); // May not work in all browsers
+
+  //   // Compose the email body (without sensitive data)
+  //   const emailSubject = encodeURIComponent("Purchase Report");
+  //   const emailBody = encodeURIComponent(
+  //     "Please find the attached purchase report.\n\n"
+  //   );
+
+  //   // Compose the mailto link with subject and body
+  //   const emailAddress = ""; // Prompt user for recipient email address (more secure)
+  //   let mailtoLink;
+
+  //   if (excelUrl) {
+  //     // If a temporary URL can be created, attach the file
+  //     mailtoLink = `mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}&attachment=${excelUrl}`;
+  //   } else {
+  //     // If temporary URL creation fails, provide instructions
+  //     mailtoLink = `mailto:${emailAddress}?subject=${emailSubject}&body=${emailBody}\n\n**Note:** Due to browser limitations, the purchase report cannot be directly attached. Please download and attach the report manually.`;
+  //   }
+
+  //   // Open default email client with the mailto link
+  //   window.location.href = mailtoLink;
+  // };
+
   return (
     <>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
@@ -186,50 +268,18 @@ const PurchaseReport = ({ mode }) => {
               </table>
             </div>
             <div className="flex justify-end mr-4 mt-4">
-              <nav aria-label="Pagination">
-                <ul className="flex list-style-none space-x-2">
-                  <li>
-                    <button
-                      onClick={() => paginate(currentPage - 1)}
-                      disabled={currentPage === 1}
-                      className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Prev
-                    </button>
-                  </li>
-
-                  {Array.from(
-                    { length: Math.ceil(records.length / recordsPerPage) },
-                    (_, index) => index + 1
-                  ).map((pageNumber) => (
-                    <li key={pageNumber}>
-                      <button
-                        onClick={() => paginate(pageNumber)}
-                        className={`px-3 py-1 rounded-md ${
-                          currentPage === pageNumber
-                            ? "bg-blue-500 text-white"
-                            : "bg-gray-200 hover:bg-gray-300"
-                        }`}
-                      >
-                        {pageNumber}
-                      </button>
-                    </li>
-                  ))}
-
-                  <li>
-                    <button
-                      onClick={() => paginate(currentPage + 1)}
-                      disabled={
-                        currentPage ===
-                        Math.ceil(records.length / recordsPerPage)
-                      }
-                      className="px-3 py-1 rounded-md bg-gray-200 hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      Next
-                    </button>
-                  </li>
-                </ul>
-              </nav>
+              <button
+                onClick={exportToExcel}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
+              >
+                Export to Excel
+              </button>
+              {/* <button
+                onClick={shareViaEmail}
+                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+              >
+                Share via Email
+              </button> */}
             </div>
           </div>
         </div>

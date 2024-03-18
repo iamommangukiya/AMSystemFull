@@ -58,7 +58,7 @@ module.exports = (app) => {
     }
   });
   app.get("/api/companyByid", featchUser, (req, res) => {
-    console.log(req.query.id);
+    // console.log(req.query.id);
     user.featchCompanybyid(req.query.id, res);
   });
 
@@ -72,7 +72,7 @@ module.exports = (app) => {
     user.selectFinancialYear(id, res);
   });
   app.post("/api/varify", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     user.varifyOtp(req.body, res);
   });
   // admin apis
@@ -99,7 +99,7 @@ module.exports = (app) => {
   });
   app.delete("/api/deleteUser", (req, res) => {
     const id = req.body.id;
-    console.log(id);
+    // console.log(id);
     user.deletuser(id, res);
   });
 };

@@ -282,7 +282,7 @@ class Querys {
   };
 
   insertFinancialYaer = (userInputs) => {
-    console.log(userInputs);
+    // console.log(userInputs);
     var {
       insertId,
 
@@ -457,7 +457,7 @@ class Querys {
     return `INSERT INTO Accounting.itemmaster (name, unit, HSN, GST, CompanyId, createDate, updateDate, LastModifidedBy, openingStock, closingStock, salePrice, purchasePrice) VALUES ('${name}', '${unit}', '${HSN}', '${GST}', ${userId}, '${formattedDate}', '${formattedDate}', ${userId}, ${openingStockValue}, ${closingStockValue}, ${salePriceValue}, ${purchasePriceValue});`;
   };
   UpdateItemMaster = (userInputs) => {
-    console.log(userInputs);
+    // console.log(userInputs);
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
     const {
@@ -510,7 +510,7 @@ class Querys {
     return `SELECT * FROM Accounting.accountgroupmaster;`;
   };
   inserbillLog = (userdata) => {
-    console.log(userdata);
+    // console.log(userdata);
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
     const {
@@ -610,12 +610,12 @@ class Querys {
   `;
   };
   selectBillLogbyID = (userDAta) => {
-    console.log(userDAta);
+    // console.log(userDAta);
     return `select * from Accounting.Billlog where id = ${userDAta.id} and ComapnyId=${userDAta.CompanyId}`;
   };
 
   updateBillLog = (userdata) => {
-    console.log(userdata);
+    // console.log(userdata);
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
     const {
@@ -650,7 +650,7 @@ class Querys {
       transactionType,
       bStateName,
     } = userdata;
-    console.log(userdata, "jshdvgf");
+    // console.log(userdata, "jshdvgf");
     return `UPDATE Accounting.Billlog 
     SET
       ComapnyId = '${cmpId}',
@@ -685,7 +685,7 @@ class Querys {
   };
 
   getbilling = (userdata) => {
-    console.log(userdata.cmpId);
+    // console.log(userdata.cmpId);
     //return `select * from Billlog where ComapnyId =${userdata}  `;
     if (userdata.bookName) {
       return `  SELECT * From Billlog WHERE ComapnyId = ${userdata.cmpId} and bookName= '${userdata.bookName}'`;
@@ -694,7 +694,7 @@ class Querys {
     }
   };
   getBillItem = (userinput) => {
-    console.log(userinput.id, "ahsdg");
+    // console.log(userinput.id, "ahsdg");
     return `SELECT * FROM BillFullLog WHERE billId ='${userinput.id}'`;
   };
   deleteBillLog = (data) => {

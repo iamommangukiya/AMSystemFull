@@ -338,7 +338,7 @@ class Accounting {
     var existitmquery = query.itmexistquery(userInputs);
 
     db.query(existitmquery, (err, data) => {
-      console.log(data);
+      // console.log(data);
       if (err) {
         res
           .status(200)
@@ -541,10 +541,10 @@ class Accounting {
       if (currentInventoryRows.length === 0) {
         throw new Error("Item not found in inventory");
       }
-      console.log(currentInventoryRows);
+      // console.log(currentInventoryRows);
       const currentQuantity = currentInventoryRows.openingStock;
-      console.log(currentQuantity);
-
+      // console.log(currentQuantity);
+// 
       // Update inventory based on transaction type
       let updatedQuantity;
       if (transactionType === "purchase") {
@@ -594,7 +594,7 @@ class Accounting {
   }
   async getbilling(userrInputs, res) {
     var q = query.getbilling(userrInputs);
-    console.log(q);
+    // console.log(q);
     db.query(q, (errr, data) => {
       if (errr) {
         logError(errr);
@@ -638,7 +638,7 @@ class Accounting {
   }
 
   async deleteBilllog(userInputs, res) {
-    console.log(userInputs);
+    // console.log(userInputs);
     var q = query.deleteBillLog(userInputs);
     db.query(q, (errr, data) => {
       if (errr) {
@@ -725,7 +725,7 @@ class Accounting {
     var q = query.getlastInvoiceNo(userrInputs);
 
     db.query(q, (errr, data) => {
-      console.log(data);
+      // console.log(data);
       if (errr) {
         logError(errr);
         res.status(200).json({ flag: false, message: "Internal Server error" });

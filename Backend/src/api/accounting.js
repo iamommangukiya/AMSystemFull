@@ -207,7 +207,7 @@ module.exports = (app) => {
   app.post("/api/billlog", feactCompany, (req, res) => {
     var data = req.body;
     var id = req.cmp;
-    console.log(data);
+    // console.log(data);
     var Sdata = {
       ...data,
       cmpId: id,

@@ -52,16 +52,16 @@ const Login = () => {
 
         {/* <!-- Start Header --> */}
         <header>
-          <nav className="px-4 lg:px-7 py-3 max-w-[1440px] mx-auto">
+          <nav className="px-4 lg:px-7 max-w-[1440px] mx-auto">
             <div className="items-center pt-5">
               <a href="index.html" className="flex items-center">
-                {/* <img
-                  src="assets/images/logo-light.png "
-                  height={500}
-                  width={500}
+                <img
+                  src="assets/images/logo.png "
+                  height={100}
+                  width={100}
                   className="mx-auto dark-logo  dark:hidden"
                   alt="logo"
-                /> */}
+                />
               </a>
               {/* <div className="flex items-center lg:order-2"></div> */}
             </div>
