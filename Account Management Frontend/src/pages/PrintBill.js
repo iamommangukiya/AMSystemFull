@@ -13,6 +13,7 @@ import { fetchDetailsComapny } from "../reducer/Company_reducer";
 const PrintBill = () => {
   const location = useLocation();
   const { state } = location;
+
   const dispatch = useDispatch();
   const [Inputs, setInputs] = useState({});
 
@@ -34,9 +35,8 @@ const PrintBill = () => {
   const BillingItem = useSelector(
     (state) => state.BillingReducer.billItems?.data
   );
-  console.log(BillingItem, "billingitm");
+
   const ItemData = useSelector((state) => state.ItemReducer.result?.data);
-  console.log(ItemData, "itemdata");
   const cmpdata = useSelector((state) => state.CompanyReducer.result?.data);
   var Company;
   if (cmpdata) {
@@ -53,7 +53,13 @@ const PrintBill = () => {
       }));
     }
   }, [BillingItem, ItemData]);
-  console.log(Inputs);
+  console.log(Inputs, "in");
+  const invoiceStatus =
+    Inputs && Inputs["dueAmount"] === 0
+      ? "Paid"
+      : Inputs["dueAmount"] < Inputs["gtotalAmount"]
+      ? "Partial"
+      : "Unpaid";
 
   // Inside the findItemDetails function
   function findItemDetails(billItems, items) {
@@ -152,6 +158,12 @@ const PrintBill = () => {
       <div className="h-3/4 w-3/4 ">
         <section class="bill ">
           <div class="border-t-4 border border-red-700"></div>
+          {Inputs.bookName == "deliveryChallan" && (
+            <div className="pt-4 text-xl text-red-700 ">
+              Orignal Delivery Challan
+            </div>
+          )}
+
           <div class="container">
             <div class="grid grid-cols-2 py-6">
               <div class="space-y-2">
@@ -161,9 +173,9 @@ const PrintBill = () => {
                 </i>
 
                 <p class="text-sm font-bold">
-                  GSTIN:{Company && Company[" "]} | State of supply Code:
+                  GSTIN:{Company && Company[" "]} | State of supply:
                 </p>
-                <p class="font-bold">{Inputs && Inputs["deliveryAdress"]}</p>
+                <p class="font-bold">{Inputs && Inputs["bStateCode"]}</p>
               </div>
               <div class="text-end space-y-2">
                 <h1 class="font-bold">
@@ -192,24 +204,35 @@ const PrintBill = () => {
                     Inputs["isGstBill"] === true &&
                     "GSTIN: " + Inputs["gstNo"] + " |"}
                   State of supply:
-                  {Inputs && Inputs["deliveryAdress"]}
+                  {Inputs && Inputs["bStateCode"]}
                 </p>
               </div>
               <div class="text-end pt-10 space-y-2">
                 <p class="text-sm">Total amount</p>
                 <h1 class="text-3xl font-bold">
-                  {Inputs && Inputs["gtotalAmount"]}
+                  ₹{Inputs && Inputs["gtotalAmount"]}
                 </h1>
                 <p class="text-sm">
                   {convertToWords(Inputs && Inputs["gtotalAmount"])}
                 </p>
+                {Inputs && Inputs["dueAmount"] > 0 && (
+                  <>
+                    <p class="text-sm font-bold">
+                      Amount Paid: ₹{Inputs && Inputs["payAmount"]}
+                    </p>
+                    <p class="text-lg text-yellow-700 font-bold">
+                      Balance Due: ₹{Inputs && Inputs["dueAmount"]}
+                    </p>
+                  </>
+                )}
+
                 <p class="text-sm text-red-700 font-bold">
                   Invoice:{" "}
-                  {Inputs && Inputs["dueAmount"] === 0
+                  {Inputs && Inputs["dueAmount"] == 0
                     ? "Paid"
                     : Inputs["dueAmount"] < Inputs["gtotalAmount"]
-                    ? "Partial"
-                    : "Unpaid"}
+                    ? "Unpaid"
+                    : "Partial"}
                 </p>
               </div>
             </div>
@@ -341,15 +364,25 @@ const PrintBill = () => {
                 <p class="text-sm">
                   {convertToWords(Inputs && Inputs["gtotalAmount"])}
                 </p>
+                {Inputs && Inputs["dueAmount"] > 0 && (
+                  <>
+                    <p class="text-sm font-bold">
+                      Amount Paid: ₹{Inputs && Inputs["payAmount"]}
+                    </p>
+                    <p class="text-lg text-yellow-700 font-bold">
+                      Balance Due: ₹{Inputs && Inputs["dueAmount"]}
+                    </p>
+                  </>
+                )}
                 <p class="text-sm text-red-700 font-bold">
                   Invoice:{" "}
-                  {Inputs && Inputs["dueAmount"] === 0
+                  {Inputs && Inputs["dueAmount"] == 0
                     ? "Paid"
                     : Inputs["dueAmount"] < Inputs["gtotalAmount"]
-                    ? "Partial"
-                    : "Unpaid"}
+                    ? "Unpaid"
+                    : "Partial"}
                 </p>
-                <p class="text-sm">Is reverce charge applicable?No</p>
+                {/* <p class="text-sm">Is reverce charge applicable?No</p> */}
               </div>
             </div>
           </div>

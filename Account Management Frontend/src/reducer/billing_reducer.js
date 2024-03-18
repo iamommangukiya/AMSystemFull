@@ -40,18 +40,24 @@ export const UpdateBillog = createAsyncThunk(
 export const getbilldata = createAsyncThunk(
   "billing_slice/getbilldata",
   async (data) => {
+    console.log(data);
     const auth_token = localStorage.getItem("company");
     // console.log(auth_token);
-    const response = await axios.get(process.env.REACT_APP_API + "/billlog", {
-      headers: {
-        com_token: auth_token,
-      },
-    });
+    const response = await axios.post(
+      process.env.REACT_APP_API + "/billlog",
+      { bookName: data },
+      {
+        headers: {
+          com_token: auth_token,
+        },
+      }
+    );
 
     const responseData = response.data;
     return responseData;
   }
 );
+
 export const getbilldatabyId = createAsyncThunk(
   "billing_slice/getbilldatabyId",
   async (data) => {

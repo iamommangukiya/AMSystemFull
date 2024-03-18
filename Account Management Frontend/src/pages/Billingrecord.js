@@ -10,10 +10,21 @@ import Biling from "./Biling";
 const Billingrecord = ({ mode }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getbilldata());
-  }, []);
+    if (mode === "purchase") {
+      // Use === for comparison instead of =
+      dispatch(getbilldata("PurchaseBook"));
+    } else if (mode === "salse") {
+      dispatch(getbilldata("salesBook")); // Removed redundant dispatch
+    } else if (mode === "deliveryChallan") {
+      dispatch(getbilldata("deliveryChallan"));
+    } else if (mode === "quotation") {
+      dispatch(getbilldata("quotation"));
+    }
+  }, [mode]); //
 
-  let records = useSelector((state) => state.BillingReducer.resultData?.data);
+  let records = useSelector(
+    (state) => state.BillingReducer.resultData?.data || []
+  );
 
   const [filterName, setFilterName] = useState("");
   const navigate = useNavigate();
@@ -166,7 +177,7 @@ const Billingrecord = ({ mode }) => {
               <table className="min-w-[640px] w-full  table-hover">
                 <thead>
                   <tr className="border-separate">
-                    <th class="w-24 text-center">Index</th>
+                    <th class="w-24 text-center">Sr No.</th>
                     <th class="w-32">Invoice No</th>
                     <th class="w-32">PartyName</th>
                     <th class="w-32">Paid Amount</th>

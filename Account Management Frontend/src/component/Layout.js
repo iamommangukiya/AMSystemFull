@@ -61,7 +61,10 @@ const Layout = () => {
                       {pathname === "/dashboard/Recipt" && "TransectionMaster"}
                       {pathname === "/dashboard/transectionrecord" &&
                         "TransectionMaster"}
+
                       {pathname === "/dashboard/Payment" && "TransectionMaster"}
+                      {pathname === "/dashboard/PurchaseBill" &&
+                        "TransectionMaster"}
                       {pathname === "/dashboard/biling" && "TransectionMaster"}
                     </li>
                     <li className="text-black font-semibold text-2xl dark:text-white">
@@ -70,9 +73,11 @@ const Layout = () => {
                       {pathname === "/dashboard/itemmaster" && "Itemmaster"}
                       {pathname === "/dashboard/Recipt" && "Recipt"}
                       {pathname === "/dashboard/Payment" && "Payment"}
+                      {pathname === "/dashboard/PurchaseBill" &&
+                        "Purchase Billing"}
                       {pathname === "/dashboard/transectionrecord" &&
                         "Transectionrecord"}
-                          {pathname === "/dashboard/biling" && "Biling"}
+                      {pathname === "/dashboard/biling" && "Biling"}
                     </li>
                   </ul>
                 </nav>
@@ -80,8 +85,10 @@ const Layout = () => {
               {/* End Breadcrumb  */}
 
               {/* Start All Card  */}
-              <div className="h-screen"><Outlet /></div>
-              
+              <div className="h-screen">
+                <Outlet />
+              </div>
+
               {/* End All Card  */}
 
               {/* Start Footer  */}

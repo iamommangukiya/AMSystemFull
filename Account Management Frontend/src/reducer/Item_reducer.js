@@ -5,6 +5,7 @@ export const items_create = createAsyncThunk(
   async (info) => {
     try {
       const auth_token = localStorage.getItem("company");
+      console.log(auth_token);
       const result = await axios.post(
         process.env.REACT_APP_API + "/itemMaster",
         info,
@@ -51,12 +52,12 @@ export const items_delete = createAsyncThunk(
 
       const result = await axios.delete(
         process.env.REACT_APP_API + "/itemMaster",
-       
 
         {
           headers: {
             com_token: auth_token,
-          },   data: { id: info },
+          },
+          data: { id: info },
         }
       );
       const response = result.data;

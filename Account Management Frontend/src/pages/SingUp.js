@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { LoginAction, registation } from "../reducer/User_reducer";
 import { useDispatch, useSelector } from "react-redux";
+import Lottie from "lottie-react";
+import spinner from "../loading.json";
 
 const Registration = () => {
   const [inputs, setInputs] = useState({
@@ -11,8 +13,11 @@ const Registration = () => {
     password: "",
     firstName: "",
     lastName: "",
+    mobile: "",
   });
   const [err, seterr] = useState("");
+  const [errmp, seterrmp] = useState("");
+
   const dispatch = useDispatch();
 
   const handelchange = (e) => {
@@ -20,10 +25,10 @@ const Registration = () => {
     setInputs({ ...inputs, [name]: value });
   };
   const result = useSelector((state) => state.Loginreducer.result);
-
+  const loading = useSelector((state) => state.Loginreducer.loading);
   useEffect(() => {
     if (result.flag === true) {
-      naviagte("/");
+      naviagte("/varify", { state: inputs });
     } else if (result.flag === false) {
       seterr(result.message);
     }
@@ -31,8 +36,11 @@ const Registration = () => {
   }, [result]);
   const handelsubmit = async (e) => {
     e.preventDefault();
-    if (inputs.password.length < 6) {
+    if (inputs.password?.length < 6) {
       seterr("Password must be at least 6 characters long.");
+    }
+    if (!/^\d{10}$/.test(inputs.mobile)) {
+      seterrmp("Please enter a 10-digit mobile number.");
     } else {
       try {
         dispatch(registation(inputs));
@@ -40,7 +48,9 @@ const Registration = () => {
         console.log(error);
       }
     }
+    console.log(errmp);
   };
+
   const naviagte = useNavigate();
 
   return (
@@ -59,11 +69,11 @@ const Registration = () => {
           <nav className="px-4 lg:px-7 py-4 max-w-[1440px] mx-auto">
             <div className="flex flex-wrap justify-between items-center">
               <a href="index.html" className="flex items-center">
-                <img
+                {/* <img
                   src="assets/images/logo-light.svg"
                   className="mx-auto dark-logo h-7 dark:hidden"
                   alt="logo"
-                />
+                /> */}
                 <img
                   src="assets/images/light.svg"
                   className="mx-auto light-logo h-7 hidden dark:block"
@@ -171,6 +181,19 @@ const Registration = () => {
               </div>
               <div className="sm:col-span-2">
                 <input
+                  tabIndex={5}
+                  type="text"
+                  value={inputs.mobile}
+                  placeholder="Mobile Number"
+                  className="form-input"
+                  name="mobile"
+                  onChange={handelchange}
+                  required
+                />
+              </div>
+              <p className="text-red-600 col-span-2">{errmp}</p>
+              <div className="sm:col-span-2">
+                <input
                   tabIndex={4}
                   type="password"
                   value={inputs.password}
@@ -231,8 +254,16 @@ const Registration = () => {
       {/* <!-- All javascirpt --> */}
       {/* <!-- Alpine js --> */}
 
-      {/* <!-- Custom js --> */}
-      <script src="assets/js/custom.js"></script>
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-300 bg-opacity-50 flex justify-center items-center z-50">
+          <Lottie
+            animationData={spinner}
+            style={{ width: "300px", height: "300px" }}
+            loop
+            autoplay
+          />
+        </div>
+      )}
     </>
   );
 };

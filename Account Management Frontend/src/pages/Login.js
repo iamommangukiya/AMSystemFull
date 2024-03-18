@@ -47,24 +47,19 @@ const Login = () => {
     <>
       <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10">
         {/* <!-- Start Background Images --> */}
-        <div
-          className="bg-[#F9F5F6] dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
-        ></div>
+        <div className="bg-[#F9F5F6] dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
         {/* <!-- End Background Images --> */}
 
         {/* <!-- Start Header --> */}
         <header>
-          <nav className="px-4 lg:px-7 py-3 max-w-[1440px] mx-auto">
+          <nav className="px-4 lg:px-7 max-w-[1440px] mx-auto">
             <div className="items-center pt-5">
               <a href="index.html" className="flex items-center">
                 <img
-                  src="assets/images/logo-light.svg"
-                  className="mx-auto dark-logo h-7 dark:hidden"
-                  alt="logo"
-                />
-                <img
-                  src="assets/images/light.svg"
-                  className="mx-auto light-logo h-7 hidden dark:block"
+                  src="assets/images/logo.png "
+                  height={100}
+                  width={100}
+                  className="mx-auto dark-logo  dark:hidden"
                   alt="logo"
                 />
               </a>

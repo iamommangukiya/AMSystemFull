@@ -16,11 +16,12 @@ import PrintBill from "./pages/PrintBill";
 import PartyRecord from "./component/PartyRecord";
 import ReciveAmount from "./component/ReciveAmountRecords";
 import Trasection_Records from "./component/Transection_Records";
-import PurchaseBill from "./pages/PurchaseBill";
 
 import ItemmasterRecords from "./pages/ItemmasterRecords";
 import Billingrecord from "./pages/Billingrecord";
 import Biling from "./pages/Biling";
+import Varify from "./pages/Varify";
+import PurchaseReport from "./pages/Purchase-salse-Report";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -81,6 +82,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/varify" element={<Varify />} />
         <Route path="/nav" element={<Topbar />} />
         <Route path="/fetchcompany" element={<CompanyFetchacompany />} />
         <Route path="/registration" element={<Registration />} />
@@ -106,6 +108,14 @@ const App = () => {
             element={<Billingrecord mode={"salse"}></Billingrecord>}
           ></Route>
           <Route
+            path="deliveryChallan"
+            element={<Billingrecord mode={"deliveryChallan"}></Billingrecord>}
+          ></Route>
+          <Route
+            path="quotation"
+            element={<Billingrecord mode={"quotation"}></Billingrecord>}
+          ></Route>
+          <Route
             path="transectionrecord"
             element={<Trasection_Records />}
           ></Route>
@@ -116,6 +126,14 @@ const App = () => {
           <Route
             path="Payment"
             element={<ReciveAmount transectionType={"debit"}></ReciveAmount>}
+          ></Route>
+          <Route
+            path="Purchase"
+            element={<PurchaseReport mode={"purchase"}></PurchaseReport>}
+          ></Route>
+          <Route
+            path="Salse"
+            element={<PurchaseReport mode={"salse"}></PurchaseReport>}
           ></Route>
         </Route>
         <Route path="/sidebar" element={<Sidebar />} />
