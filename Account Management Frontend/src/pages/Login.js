@@ -25,7 +25,13 @@ const Login = () => {
 
   useEffect(() => {
     if (result && result.flag === true) {
-      naviagte("/fetchcompany");
+      if (result.data.data.status == "active") {
+        naviagte("/fetchcompany");
+      } else {
+        toast.warning(
+          "Your Acoount is InActive Contact Administator For Activation"
+        );
+      }
     }
     if (result && result.flag == false) {
       seterr(result.message);
@@ -170,6 +176,19 @@ const Login = () => {
 
         {/* <!-- End Footer --> */}
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        className={"text-black"}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </>
     // <!-- Start Main Content -->
 

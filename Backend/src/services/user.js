@@ -70,7 +70,11 @@ class userServices {
           await redisClient.del(`otp:${email}`);
           return res
             .status(200)
-            .json({ message: "User registered successfully", flag: true });
+            .json({
+              message: "User registered successfully",
+              flag: true,
+           
+            });
         } catch (error) {
           logError(error.message);
           return res
