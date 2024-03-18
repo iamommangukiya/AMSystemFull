@@ -58,20 +58,19 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-black text-lg bg-[#ece0f8]">Master</span>
+                    <span className="pl-1.5 text-black text-lg bg-[#ece0f8]">
+                      Master
+                    </span>
                   </div>
 
                   <div
                     class={`w-4 h-4 flex items-center justify-center dropdown-icon ${
                       activeMenu === "Master" ? "!rotate-180" : ""
                     }`}
-                  >
-                    
-                  </div>
+                  ></div>
                 </a>
                 <ul
                   x-cloak
-                  
                   x-collapse
                   className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
                 >
@@ -108,16 +107,16 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-lg text-black">TrasctionMaster</span>
+                    <span className="pl-1.5 text-lg text-black">
+                      TrasctionMaster
+                    </span>
                   </div>
 
                   <div
                     class={`w-4 h-4 flex items-center justify-center dropdown-icon ${
                       activeMenu === "TrasctionMaster" ? "!rotate-180" : ""
                     }`}
-                  >
-                    
-                  </div>
+                  ></div>
                 </a>
                 <ul
                   x-cloak
@@ -214,7 +213,7 @@ const Sidebar = () => {
                     <NavLink to="/dashboard/Salse">Salse Report</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/GSTR1">GSTR1</NavLink>
+                    <NavLink to="/dashboard/gst">GSTR1</NavLink>
                   </li>
                 </ul>
               </li>

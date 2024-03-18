@@ -19,6 +19,7 @@ const PurchaseReport = ({ mode }) => {
   const records = useSelector(
     (state) => state.BillingReducer.resultData?.data || []
   );
+
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage, setRecordsPerPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState("");
@@ -188,7 +189,7 @@ const PurchaseReport = ({ mode }) => {
       // If no filter applied, set filterInfo to null
       filterInfo = null;
     }
-  
+
     // Navigate to the dashboard with filtered data and filterInfo
     navigate("/dashboard/GSTR1", {
       state: {
