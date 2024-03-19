@@ -30,12 +30,6 @@ const Company = () => {
     businessType: "",
   });
   const [step, setStep] = useState(1);
-  const handleNext = () => {
-    if (step === 2) {
-    }
-
-    setStep(step + 1);
-  };
 
   const handlePrevious = () => {
     setStep(step - 1);
@@ -141,6 +135,9 @@ const Company = () => {
   };
 
   const nextStep = () => {
+    if (step == 1) {
+      setStep(step + 1);
+    }
     if (step == 2) {
       const ispan = validpan.test(Inputs.pan);
       const isGst = validGst.test(Inputs.gstNumber);

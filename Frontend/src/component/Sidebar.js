@@ -184,6 +184,21 @@ const Sidebar = () => {
                   <li>
                     <NavLink to="/dashboard/gst">GSTR1</NavLink>
                   </li>
+                  <li>
+                    <NavLink to="/dashboard/balancesheet">
+                      Balance Sheet
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/AccountPay">
+                      Accounts payable (AP)
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/dashboard/Accountrec">
+                      Accounts receivable (AR)
+                    </NavLink>
+                  </li>
                 </ul>
               </li>
             </ul>

@@ -191,7 +191,7 @@ const PurchaseReport = ({ mode }) => {
     }
 
     // Navigate to the dashboard with filtered data and filterInfo
-    navigate("/dashboard/GSTR1", {
+    navigate("/dashboard/Report", {
       state: {
         filteredData: filteredRecordsByMonthAndDateRange,
         filterInfo: filterInfo,

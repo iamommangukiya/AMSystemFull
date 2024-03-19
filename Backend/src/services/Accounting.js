@@ -514,7 +514,11 @@ class Accounting {
               await this.updateInventory(item.id, item.qty, "sale");
             }
             // Insert item details in fullbilllog table
-            await this.insertItemDetails(data.insertId, item);
+            await this.insertItemDetails(
+              userInputs.CompanyId,
+              data.insertId,
+              item
+            );
           })
         );
         res.status(200).json({
@@ -544,7 +548,7 @@ class Accounting {
       // console.log(currentInventoryRows);
       const currentQuantity = currentInventoryRows.openingStock;
       // console.log(currentQuantity);
-// 
+      //
       // Update inventory based on transaction type
       let updatedQuantity;
       if (transactionType === "purchase") {
@@ -568,8 +572,8 @@ class Accounting {
     }
   }
 
-  async insertItemDetails(billId, item) {
-    const q = `INSERT INTO Accounting.BillFullLog (billId, itemId, gst, amount, qty,unitCost) VALUES (?, ?, ?, ?, ?,?)`;
+  async insertItemDetails(cmpid, billId, item) {
+    const q = `INSERT INTO Accounting.BillFullLog (billId, itemId, gst, amount, qty,unitCost,CompanyId) VALUES (?, ?, ?, ?, ?, ?, ?)`;
     const values = [
       billId,
       item.id,
@@ -577,6 +581,7 @@ class Accounting {
       item.amount,
       item.qty,
       item.salePrice,
+      cmpid,
     ];
     await this.dbQuery(q, values);
   }
@@ -743,6 +748,208 @@ class Accounting {
         }
       }
     });
+  }
+  async showBills(id, res) {
+    try {
+      let billLogs, fullBillLogs;
+
+      const getBillLogsPromise = new Promise((resolve, reject) => {
+        db.query(
+          `SELECT * from Billlog where ComapnyId =  ${id}`,
+          (err, data) => {
+            if (err) {
+              logError(err);
+              reject(err);
+            } else {
+              billLogs = data;
+              resolve();
+            }
+          }
+        );
+      });
+
+      const getFullBillLogPromise = new Promise((resolve, reject) => {
+        db.query(
+          `SELECT * from BillFullLog where CompanyId=${id} `,
+          (err, data) => {
+            if (err) {
+              logError(err);
+              reject(err);
+            } else {
+              fullBillLogs = data;
+              resolve();
+            }
+          }
+        );
+      });
+
+      Promise.all([getBillLogsPromise, getFullBillLogPromise])
+        .then(() => {
+          const bills = {};
+          for (const billLog of billLogs) {
+            const billId = billLog.id;
+
+            bills[billId] = { ...billLog, items: [] }; // Copy bill details and create empty items array
+          }
+
+          for (const fullBillLog of fullBillLogs) {
+            const billId = fullBillLog.billId;
+
+            if (bills[billId]) {
+              bills[billId].items.push({
+                itemId: fullBillLog.itemId,
+                // Include other relevant columns from fullBillLog
+                GST: fullBillLog.gst,
+                amount: fullBillLog.amount, // Assuming a `name` column in `itemMaster` (modify as needed)
+                // Add other relevant columns from `fullBillLog`
+              });
+            }
+          }
+          const gstbills = Object.values(bills).filter(
+            (item) => item.isGstBill == "true"
+          );
+          res
+            .status(200)
+            .json({
+              message: "featch sucessfully",
+              flag: true,
+              data: gstbills,
+            });
+        })
+        .catch((error) => {
+          console.error(error);
+          res
+            .status(500)
+            .json({ flag: false, message: "Internal Server Error" });
+        });
+    } catch (error) {
+      console.error(error);
+      throw error; // Re-throw the error for proper handling in the Express route
+    }
+  }
+  async GenerateBalanceSheet(id, res) {
+    try {
+      let billLogs, transaction, itemmaster;
+
+      const getBillLogsPromise = new Promise((resolve, reject) => {
+        db.query(
+          `SELECT * from Billlog where ComapnyId =  ${id}`,
+          (err, data) => {
+            if (err) {
+              logError(err);
+              reject(err);
+            } else {
+              billLogs = data;
+              resolve();
+            }
+          }
+        );
+      });
+
+      const getfulltransaction = new Promise((resolve, reject) => {
+        db.query(
+          `SELECT * from transactionMaster where CompanyId=${id} `,
+          (err, data) => {
+            if (err) {
+              logError(err);
+              reject(err);
+            } else {
+              transaction = data;
+              resolve();
+            }
+          }
+        );
+      });
+      const itempro = new Promise((resolve, reject) => {
+        db.query(
+          `SELECT * from itemmaster where CompanyId=${id} `,
+          (err, data) => {
+            if (err) {
+              logError(err);
+              reject(err);
+            } else {
+              itemmaster = data;
+              resolve();
+            }
+          }
+        );
+      });
+      function calculateInventoryCost(items) {
+        return items.reduce((totalCost, item) => {
+          if (
+            item.openingStock !== undefined &&
+            item.purchasePrice !== undefined
+          ) {
+            totalCost += item.openingStock * item.purchasePrice;
+          }
+          return totalCost;
+        }, 0);
+      }
+      const accountpayeble = (transaction) => {
+        return transaction
+          .filter((transaction) => transaction.transectionType == "credit")
+          .reduce((total, item) => {
+            return total + parseFloat(item.amount);
+          }, 0);
+      };
+      const accountRecivable = (transaction) => {
+        return transaction
+          .filter((transaction) => transaction.transectionType == "debit")
+          .reduce((total, item) => {
+            return total + parseFloat(item.amount);
+          }, 0);
+      };
+      const sales = (billog) => {
+        return billog
+          .filter((tra) => tra.bookName == "SalesBook")
+          .reduce((profit, bill) => {
+            profit += parseInt(bill.gtotalAmount);
+            return profit;
+          }, 0);
+      };
+      const Purchase = (billog) => {
+        return billog
+          .filter((tra) => tra.bookName == "PurchaseBook")
+          .reduce((profit, bill) => {
+            profit += parseInt(bill.gtotalAmount);
+            return profit;
+          }, 0);
+      };
+
+      Promise.all([getBillLogsPromise, getfulltransaction, itempro])
+        .then(() => {
+          const balanceSheet = {
+            assets: {
+              inventory: calculateInventoryCost(itemmaster),
+              accountsReceivable: accountRecivable(transaction), // Optional
+            },
+            liabilities: {
+              accountsPayable: accountpayeble(transaction), // Optional
+            },
+            // ... other sections (equity calculation might need separate logic)
+            totalAssets: 0,
+            totalLiabilities: 0,
+            totalEquityAndLiabilities: 0,
+            sales: sales(billLogs),
+            Purchase: Purchase(billLogs),
+          };
+
+          res.status(200).json({
+            message: "featch sucessfully ",
+            flag: "true",
+            data: balanceSheet,
+          });
+        })
+        .catch((error) => {
+          console.error(error);
+          res
+            .status(500)
+            .json({ flag: false, message: "Internal Server Error" });
+        });
+    } catch (error) {
+      console.error(error);
+      throw error; // Re-throw the error for proper handling in the Express route
+    }
   }
 }
 

@@ -1,0 +1,29 @@
+2024-03-19T05:34:0  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Table 'user.Billlog' doesn't exist
+2024-03-19T05:38:0  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Expression #30 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'Accounting.im.id' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+2024-03-19T05:39:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Expression #31 of SELECT list is not in GROUP BY clause and contains nonaggregated column 'Accounting.im.name' which is not functionally dependent on columns in GROUP BY clause; this is incompatible with sql_mode=only_full_group_by
+2024-03-19T06:44:3  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: Unknown column 'CompanyId' in 'where clause'
+2024-03-19T06:44:3  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: Unknown column 'CompanyId' in 'where clause'
+2024-03-19T06:45:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: Unknown column 'CompanyId' in 'where clause'
+2024-03-19T07:48:4  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?)' at line 1
+2024-03-19T07:48:4  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?)' at line 1
+2024-03-19T07:48:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?)' at line 1
+2024-03-19T10:41:4  : E:\projects\clg project\Amsystem\Backend\errorLog.js : read ECONNRESET
+2024-03-19T10:41:4  : E:\projects\clg project\Amsystem\Backend\errorLog.js : read ECONNRESET
+2024-03-19T10:42:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:42:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:43:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:43:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:43:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:43:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:43:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:43:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T10:43:3  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-19T11:29:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-19T11:29:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-19T11:29:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-19T11:29:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-19T11:29:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-19T11:29:4  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-19T11:30:3  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-19T17:48:4  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: Out of range value for column 'amount' at row 1
+2024-03-19T19:39:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Unknown column 'party' in 'field list'

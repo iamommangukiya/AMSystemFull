@@ -68,13 +68,10 @@ class userServices {
         try {
           await this.createAccountFun(userInputs);
           await redisClient.del(`otp:${email}`);
-          return res
-            .status(200)
-            .json({
-              message: "User registered successfully",
-              flag: true,
-           
-            });
+          return res.status(200).json({
+            message: "User registered successfully",
+            flag: true,
+          });
         } catch (error) {
           logError(error.message);
           return res
@@ -473,6 +470,7 @@ class userServices {
       }
     });
   }
+
   async deletuser(userdata, res) {
     let flag = false;
     var query = Query.deleteUser(userdata);
@@ -552,6 +550,57 @@ class userServices {
       }
     });
   }
+
+  create = async (userdata, res) => {
+    try {
+      let { cmpid, issueComponent, issueTopic } = userdata;
+      let query = `INSERT INTO user.tblhelp(CompanyId,module,status,problem)VALUES('${cmpid}','${issueComponent}','${"pending"}','${issueTopic}');`;
+      db.query(query, (err, result) => {
+        if (err) {
+          logError(err.message);
+          console.log(err);
+          res.status(200).send("Failed to load");
+        } else {
+          res.status(200).send({ flag: "true", message: "added successfully" });
+        }
+      });
+    } catch (error) {}
+  };
+  getissue = (res) => {
+    try {
+      let query = `select * from tblhelp`;
+      db.query(query, (err, result) => {
+        if (err) {
+          logError(err.message);
+          console.log(err);
+          res.status(200).send("Failed to load");
+        } else {
+          res.status(200).send({
+            flag: "true",
+            message: "featch successfully",
+            data: result,
+          });
+        }
+      });
+    } catch (error) {}
+  };
+  updateIssue = (usedata, res) => {
+    try {
+      let { id, issueComponent, issueTopic, status } = usedata; // Assuming 'userdata' contains the necessary data including the 'id' of the issue to be updated
+      let query = `UPDATE user.tblhelp SET module='${issueComponent}',status=${status}, problem='${issueTopic}' WHERE id='${id}';`;
+      db.query(query, (err, result) => {
+        if (err) {
+          logError(err.message);
+          console.log(err);
+          res.status(200).send("Failed to update");
+        } else {
+          res.status(200).send({ flag: true, message: "Updated successfully" });
+        }
+      });
+    } catch (error) {
+      // Handle any potential errors here
+    }
+  };
 }
 
 module.exports = userServices;
