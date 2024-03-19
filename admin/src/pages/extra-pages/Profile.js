@@ -18,6 +18,8 @@ import { Navigation, A11y, Autoplay } from 'swiper';
 import { BASE_URL, BASE_URL1 } from 'Configration';
 import noimage from 'assets/images/image.jpg';
 import axios from 'axios'; // Import axios library
+import { Paper, Table, TableContainer, TableHead, TableRow } from '../../../node_modules/@mui/material/index';
+import TableCell from 'themes/overrides/TableCell';
 
 function TabPanel({ children, value, index, ...other }) {
     return (
@@ -232,11 +234,22 @@ const Profile = () => {
                 <></>
             ) : (
                 <>
-                    <div className="w-100 d-flex flex-wrap" style={{ height: '25    0px' }}>
-                        <div className="col-lg-6 profilemodal p-2" style={{ height: '100%' }}>
-                            <div className="w-100 rounded-2 bg-white p-3 position-relative" style={{ height: '100%' }}>
+                    <div className=" w-100 d-flex flex-wrap " style={{ height: '25    0px' }}>
+                        <div
+                            className="col-lg-6 profilemodal p-2 "
+                            style={{ height: '100%', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                        >
+                            <div
+                                className="w-100 rounded-2 bg-white p-3 position-relative mb-3 shadow p-3 mb-5 bg-white rounded"
+                                style={{
+                                    height: '100%',
+                                    boxShadow: 'black',
+                                    justifyContent: 'center',
+                                    alignItems: 'center'
+                                }}
+                            >
                                 <div className="text-center">
-                                    <div className="position-relative my-3 d-inline-block">
+                                    <div className="position-relative my-3 d-inline-block ">
                                         {/* <div className="profile-img-table m-auto" style={{ width: '100px', height: '100px' }}>
                                             <img
                                                 src={`${userdetails?.profile_picture}`}
@@ -323,6 +336,157 @@ const Profile = () => {
                             </div>
                         </div>
                     </div>
+                    {/* <TableContainer component={Paper} className="mb-4">
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow className="bg-light-gray">
+                                    <TableCell className="bh-line">Frist Name</TableCell>
+                                    <TableCell className="bh-line">Last Name</TableCell>
+                                    <TableCell className="bh-line">E-mail</TableCell>
+                                    <TableCell className="bh-line">Mobile No.</TableCell>
+                                    <TableCell align="center" style={{ minWidth: '150px' }}>
+                                        Action
+                                    </TableCell>
+                                </TableRow>
+                            </TableHead> */}
+
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table" className="border border-dark">
+                        <thead className="border border-dark p-3">
+                            <tr>
+                                <td className="bh-line p-2 text-center">Company Name</td>
+                                <td className="bh-line p-2 text-center">E-mail</td>
+                                <td className="bh-line p-2 text-center">Phone No.</td>
+                                <td className="bh-line p-2 text-center">GST Number</td>
+                                <td className="bh-line p-2 text-center">Country</td>
+                            </tr>
+                        </thead>
+                        <tbody className="border border-dark p-3">
+                            {companydata &&
+                                companydata.map((item) => (
+                                    <tr>
+                                        <td className="bh-line p-2 text-center  border-dark">{item.companyName}</td>
+                                        <td className="bh-line p-2 text-center  border-dark">{item.email}</td>
+                                        <td className="bh-line p-2 text-center  border-dark">{item.phoneNumber}</td>
+                                        {/* <td className="bh-line p-2 text-center  border-dark">{item.phoneNumber}</td> */}
+                                        <td className="bh-line p-2 text-center ">{item.gstNumber}</td>
+
+                                        <td className="bh-line p-2 text-center">{item.country}</td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </Table>
+                    {/* <TableBody>
+                                {pageUserData.map((data, i) => (
+                                    <TableRow key={data._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                                        <TableCell className="br-line" component="th" scope="row">
+                                            <div className="d-flex align-items-center">
+                                                <div className="position-relative">
+                                                    <div className="profile-img-table me-3">
+                                                        <img
+                                                            src={data.profile_picture != undefined ? `${data.profile_picture}` : noimage}
+                                                            onError={({ currentTarget }) => {
+                                                                currentTarget.onerror = null; // prevents looping
+                                                                currentTarget.src = noimage;
+                                                            }}
+                                                            alt="profile"
+                                                            width="100%"
+                                                            className="object-fit"
+                                                        />
+                                                    </div>
+                                                    {data.is_verified && (
+                                                        <>
+                                                            <div className="verified-user">
+                                                                <CheckCircleFilled />
+                                                            </div>
+                                                        </>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="m-0">{data.firstName}</p>
+                                                </div>
+                                            </div>
+                                        </TableCell>
+                                        <TableCell className="br-line">{data.lastName}</TableCell>
+                                        <TableCell className="br-line">{data.email}</TableCell>
+                                        <TableCell className="br-line">{data.phoneNo ? `+${+91} ${data.phoneNo}` : '-'}</TableCell>
+                                        <TableCell align="center">
+                                            <Tooltip placement="top" title="View User">
+                                                <button
+                                                    className="me-2 action-button bg-white"
+                                                    style={{ border: '1px solid #1677ff', color: '#1677ff' }}
+                                                    onClick={() => handleshowClick(data)}
+                                                >
+                                                    <EyeOutlined />
+                                                </button>
+                                            </Tooltip>
+                                            {!data.is_active ? (
+                                                <>
+                                                    <Popconfirm
+                                                        title="Are you sure to unblock this user?"
+                                                        description="Are you sure to unblock this user?"
+                                                        onConfirm={() => {
+                                                            blockUser(data._id);
+                                                        }}
+                                                        onCancel={() => {}}
+                                                        okText="Yes"
+                                                        cancelText="No"
+                                                    >
+                                                        <Tooltip placement="top" title={'Unblock User'}>
+                                                            <div
+                                                                className="me-2 action-button bg-white"
+                                                                style={{ border: '1px solid #4caf50', color: '#4caf50' }}
+                                                            >
+                                                                <StopFilled />
+                                                            </div>
+                                                        </Tooltip>
+                                                    </Popconfirm>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Popconfirm
+                                                        title="Are you sure to block this user?"
+                                                        description="Are you sure to block this user?"
+                                                        onConfirm={() => {
+                                                            blockUser(data._id);
+                                                        }}
+                                                        onCancel={() => {}}
+                                                        okText="Yes"
+                                                        cancelText="No"
+                                                    >
+                                                        <Tooltip placement="top" title={'Block User'}>
+                                                            <div
+                                                                className="me-2 action-button bg-white"
+                                                                style={{ border: '1px solid rgb(255 134 0)', color: 'rgb(255 134 0)' }}
+                                                            >
+                                                                <StopOutlined />
+                                                            </div>
+                                                        </Tooltip>
+                                                    </Popconfirm>
+                                                </>
+                                            )}
+                                            <Popconfirm
+                                                title="Are you sure to delete this user?"
+                                                description="Are you sure to delete this user?"
+                                                onConfirm={() => deleteUser(data.id)}
+                                                onCancel={() => {}}
+                                                okText="Yes"
+                                                cancelText="No"
+                                            >
+                                                <Tooltip placement="top" title={'Delete User'}>
+                                                    <div
+                                                        className="action-button bg-white"
+                                                        style={{ border: '1px solid #ff4d4f', color: '#ff4d4f' }}
+                                                    >
+                                                        <DeleteOutlined />
+                                                    </div>
+                                                </Tooltip>
+                                            </Popconfirm>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody> */}
+                    {/* </Table>
+                    </TableContainer> */}
                 </>
             )}
             <Modal

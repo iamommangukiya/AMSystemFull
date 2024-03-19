@@ -1,0 +1,632 @@
+:root {
+    --dark-brown: #EE5E86;
+    --light-brown: #ffecf1;
+}
+
+.bg-brown {
+    background-color: var(--dark-brown);
+}
+
+.bg-light-brown {
+    background-color: var(--light-brown);
+}
+
+.css-1yl4b1w-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+    background-color: var(--light-brown);
+    border-right: 2px solid var(--dark-brown);
+    color: var(--dark-brown);
+}
+
+.css-1y762s6-MuiListItemIcon-root {
+    color: var(--dark-brown);
+}
+
+.css-o2d1ik-MuiTypography-root {
+    color: var(--dark-brown);
+}
+
+.css-1yl4b1w-MuiButtonBase-root-MuiListItemButton-root:hover {
+    background-color: var(--light-brown);
+}
+
+.css-1yl4b1w-MuiButtonBase-root-MuiListItemButton-root.Mui-selected:hover {
+    color: var(--dark-brown);
+    background-color: var(--light-brown);
+}
+
+.css-4ava29-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: var(--dark-brown);
+}
+
+.css-4ava29-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+    background-color: var(--dark-brown);
+}
+
+.category-box {
+    border: 1px solid #ededed;
+    transition: all 0.5s;
+}
+
+.category-box:hover {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    outline: none;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #ededed;
+    padding: 15px;
+    padding-right: 45px;
+}
+
+.MuiGrid-root.MuiGrid-item.css-r4jj1p-MuiGrid-root {
+    display: none;
+}
+
+:where(.css-dev-only-do-not-override-26rdvq).ant-modal .ant-modal-close:hover {
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.search-icon {
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    right: 22px;
+    font-size: 18px;
+    color: #c7c7c7;
+    display: flex;
+}
+
+.anticon {
+    vertical-align: middle;
+}
+
+:where(.css-dev-only-do-not-override-26rdvq).ant-popconfirm .ant-popconfirm-message > .ant-popconfirm-message-icon .anticon {
+    display: flex;
+}
+
+.css-ujljcm-MuiGrid-root > .MuiGrid-item {
+    margin-left: 0;
+}
+
+.css-1xok1uc-MuiGrid-root {
+    min-height: calc(100vh);
+}
+
+.css-1p661si {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.loginbotton .css-1rke8zj-MuiButtonBase-root-MuiButton-root {
+    background-color: var(--dark-brown);
+}
+
+.css-agvve6-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: var(--dark-brown);
+}
+
+.css-7mcwe1-MuiTabs-indicator {
+    background-color: var(--dark-brown);
+}
+
+.css-188vsrs-MuiButtonBase-root-MuiListItemButton-root.Mui-selected {
+    background-color: #fff;
+}
+
+.css-188vsrs-MuiButtonBase-root-MuiListItemButton-root.Mui-selected:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.css-7gmzek-MuiButtonBase-root-MuiTab-root.Mui-selected {
+    color: var(--dark-brown);
+}
+
+.followlist ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+/* Track */
+.followlist ::-webkit-scrollbar-track {
+    background: none;
+}
+
+/* Handle */
+.followlist ::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+.followlist ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.card-price {
+    font-weight: 700;
+    color: var(--dark-brown);
+}
+
+.paid-card-price {
+    font-weight: 700;
+    color: #057721;
+}
+
+.slick-list {
+    height: 100%;
+}
+
+:where(.css-dev-only-do-not-override-26rdvq).ant-carousel {
+    height: 100%;
+}
+
+.MuiLinearProgress-colorPrimary {
+    background-color: var(--light-brown);
+}
+
+.MuiLinearProgress-barColorPrimary {
+    background-color: var(--dark-brown);
+}
+
+:where(.css-dev-only-do-not-override-26rdvq).ant-steps .ant-steps-item-icon .ant-steps-icon {
+    top: -1.5px;
+}
+a {
+    text-decoration: none;
+}
+/* --------------------------------------------------------------------------------- */
+
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 50px auto;
+}
+.avatar-upload .avatar-edit {
+    position: absolute;
+    right: 12px;
+    z-index: 1;
+    top: 10px;
+}
+.avatar-upload .avatar-edit input {
+    display: none;
+}
+.avatar-upload .avatar-edit label {
+    display: inline-block;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 0;
+    border-radius: 100%;
+    background: #ffffff;
+    border: 1px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+}
+.avatar-upload .avatar-edit label:hover {
+    background: #f1f1f1;
+    border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit label:after {
+    content: '\f040';
+    font-family: 'FontAwesome';
+    color: #757575;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin: auto;
+}
+.avatar-preview {
+    width: 192px;
+    height: 192px;
+    position: relative;
+    border-radius: 100%;
+    border: 6px solid #f8f8f8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-preview > div {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.css-10tnq6j {
+    z-index: 999;
+}
+
+.css-1w6xj8r-MuiPaper-root-MuiAppBar-root {
+    z-index: 999;
+}
+
+.category-profile-add {
+    position: absolute;
+    bottom: -3px;
+    right: -3px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.2) inset;
+}
+
+.css-1c2m6kz {
+    padding: 24px;
+}
+
+.css-1q36rmd-MuiStack-root > :not(style) + :not(style) {
+    display: none;
+}
+
+.bg-light-green {
+    background-color: #dcfee5;
+}
+
+.l_form label {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 25px;
+    color: #67698e;
+    margin-bottom: 10px;
+}
+.l_form .form-group {
+    display: flex;
+}
+.l_form .form-select {
+    width: 30%;
+    height: 60px;
+    color: #232656;
+    font-weight: 600;
+    font-size: 20px;
+    background-color: #f4f8ff;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 20px;
+}
+.l_form .form-select:focus {
+    box-shadow: none;
+}
+
+.rx-input {
+    font-size: 20px;
+    border: none;
+    padding: 10px 20px;
+    color: #232656;
+    background-color: #fff7f2;
+    border-radius: 10px;
+    width: 80%;
+}
+.rx-input::placeholder {
+    color: #b8b9cf;
+}
+
+.otp-input {
+    width: 100%;
+    height: 90px;
+    margin: 0 13px;
+    text-align: center;
+    font-size: 30px;
+    border: 1px solid #eee;
+}
+.otp-input:first-child {
+    margin-left: 0;
+}
+.otp-input:last-child {
+    margin-right: 0;
+}
+
+.l_form :focus-visible {
+    outline: 2px solid var(--dark-brown);
+}
+
+.css-2hztrc-MuiTypography-root {
+    color: var(--dark-brown);
+}
+
+.css-1nqofv-MuiPaper-root-MuiCard-root {
+    display: none;
+}
+.breadcrumb p {
+    margin-bottom: 0;
+}
+
+.verified-user {
+    position: absolute;
+    display: flex;
+    border-radius: 50%;
+    bottom: 0;
+    right: 10px;
+    color: #057721;
+    font-size: 16px;
+    background-color: #fff;
+    border: 2px solid #fff;
+}
+/* --------------------------------------------------------------------------------- */
+
+.bg-light-blue {
+    background-color: rgb(210, 234, 255);
+}
+
+.bg-light-gray {
+    background-color: #f5f5f5;
+}
+
+.bg-light-red {
+    background-color: #ffe9e9;
+}
+
+.br-line {
+    border-right: 1px solid rgba(5, 5, 5, 0.06) !important;
+}
+
+.bh-line {
+    border-right: 1px solid rgba(5, 5, 5, 0.06) !important;
+}
+
+.action-button {
+    width: 30px !important;
+    height: 30px;
+    display: inline-block;
+    line-height: 25px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: 1px solid #d8d8d8;
+    transition: all 0.5s;
+}
+
+.action-button:hover {
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.15);
+}
+
+.action-button svg {
+    width: 15px;
+    height: 15px;
+}
+
+.profile-img-table {
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.css-1ikuz5r-MuiList-root {
+    margin-bottom: 0;
+}
+
+ul,
+ol {
+    margin: 0 !important;
+}
+
+.object-fit {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.comment-line-css {
+    height: 50px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.add-cattegory-button {
+    color: #ffffff !important;
+    font-weight: 600;
+    background-color: var(--dark-brown) !important;
+    border-color: var(--dark-brown) !important;
+}
+
+.add-cattegory-button:hover {
+    color: #ffffff !important;
+    font-weight: 600;
+    background-color: var(--dark-brown) !important;
+    border-color: var(--dark-brown) !important;
+}
+
+.category-button {
+    color: #020000 !important;
+    font-weight: 600;
+    background-color: #c4c4c4 !important;
+    border-color: #c4c4c4 !important;
+}
+
+.category-button:hover {
+    color: #020000 !important;
+    font-weight: 600;
+    background-color: #c4c4c4 !important;
+    border-color: #c4c4c4 !important;
+}
+
+.category-small-button span {
+    margin-inline-start: 5px !important;
+    font-size: 12px;
+}
+
+.category-small-button span[role='img'] {
+    margin-inline-start: 0px !important;
+    font-size: 14px;
+}
+
+.slider-skeleton .ant-skeleton {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 30px !important;
+    color: #cacaca;
+}
+
+.custom-order .ant-steps-item-finish .ant-steps-item-tail::after {
+    background-color: var(--dark-brown) !important;
+}
+
+.custom-order .ant-steps-item-finish .ant-steps-item-icon {
+    background-color: var(--light-brown) !important;
+    border-color: var(--light-brown) !important;
+}
+
+.custom-order .ant-steps-item-finish .ant-steps-item-icon .ant-steps-icon {
+    color: var(--dark-brown);
+}
+
+.custom-order .ant-steps-item-active .ant-steps-item-icon {
+    background-color: var(--dark-brown);
+    border-color: var(--dark-brown);
+}
+
+.transaction {
+    overflow: hidden;
+}
+
+.transaction-top {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ededed;
+}
+
+.transaction-price {
+    border-bottom: 2px solid #ff8600;
+}
+
+.transaction span.h6 {
+    font-size: 14px;
+    color: red;
+}
+
+.transaction-price .aerrow {
+    position: absolute;
+    bottom: -14px;
+    right: -5px;
+    color: #ff8600;
+    font-size: 18px;
+}
+
+.border-right {
+    border-right: 1px solid #ededed;
+}
+
+.transaction-add {
+    border-right: 2px solid #198754;
+}
+
+.transaction-add .aerrow {
+    position: absolute;
+    bottom: -9px;
+    right: -11px;
+    color: #198754;
+    font-size: 18px;
+    transform: rotate(90deg);
+}
+
+.transaction-withdraw {
+    border-left: 2px solid #dc3545;
+}
+
+.transaction-withdraw .aerrow {
+    position: absolute;
+    top: -9px;
+    left: -11px;
+    color: #dc3545;
+    font-size: 18px;
+    transform: rotate(-90deg);
+}
+
+.ms-22 {
+    margin-left: 22px !important;
+}
+
+.terms-condition {
+    color: #222222;
+    font-family: 'Mulish', sans-serif;
+    max-width: 1400px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 26px;
+    font-weight: 500 !important;
+    padding: 0 20px !important;
+}
+
+.terms-condition h1,
+.terms-condition h2,
+.terms-condition h3,
+.terms-condition h4,
+.terms-condition h5,
+.terms-condition h6 {
+    color: var(--dark-brown);
+}
+
+button[type='submit'] {
+    background: linear-gradient(90deg, #5ccbea 0%, #efce96 100%);
+    border-radius: 0px;
+    color: #000;
+    font-weight: 700;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.polygon-imgae .p_image_shape {
+    /* background-image: url(../images/shape-4.png); */
+    background-size: cover;
+}
+
+.p_image_shape {
+    width: 99.554px;
+    height: 87px;
+    overflow: hidden;
+    background-image: url(../images/shape-3.png);
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+    z-index: 5;
+    padding: 2px;
+    min-width: 99.554px;
+}
+
+.p_image_shape img {
+    width: 96px;
+    height: 83px;
+    object-fit: cover;
+    object-position: center;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+}
+
+.polygon-imgae .p_image_shape img {
+    margin: 0;
+}
+
+.modal-content {
+    background-color: transparent !important;
+    border: none !important;
+}
+
+.btn-outline-success.ambassador {
+    color: #faad25 !important;
+    border: 1px solid #faad25 !important;
+}
+
+.btn-outline-success.ambassador:hover {
+    color: #ffffff !important;
+    background-color: #faad25 !important;
+    border: 1px solid #faad25 !important;
+}
