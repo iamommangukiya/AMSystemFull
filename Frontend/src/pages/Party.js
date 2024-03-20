@@ -173,7 +173,7 @@ const Party = ({ data, mode }) => {
           className="bg-white shadow-md rounded px-2 "
           onSubmit={handelSubmit}
         >
-          <h2 className="col-span-full text-[#6420AA]   text-center mb-10 text-primary text-2xl font-bold">
+          <h2 className="col-span-full text-[#225777]   text-center mb-10 text-primary text-2xl font-bold">
             PartyMaster
           </h2>
           <div className="grid grid-cols-4 gap-3  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1">
@@ -610,7 +610,7 @@ const Party = ({ data, mode }) => {
             </button> */}
             {mode === "add" && (
               <button
-                className="btn  text-xl bg-[#6420AA] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
+                className="btn  text-xl bg-[#225777] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 onClick={validation}
                 type="submit"
               >
@@ -619,7 +619,7 @@ const Party = ({ data, mode }) => {
             )}
             {mode === "update" && (
               <button
-                className="btn text-xl bg-[#6420AA] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
+                className="btn text-xl bg-[#225777] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 onClick={validation}
                 type="submit"
               >

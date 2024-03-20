@@ -73,7 +73,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
           onSubmit={handelSubmit}
         >
           <div className="grid grid-cols-2 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 ">
-            <h2 className="col-span-full text-center mb-4 text-purple text-2xl font-bold">
+            <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
               {transectionType == "debit" && "Recipt"}
               {transectionType == "credit" && "Payment"}
             </h2>
@@ -208,7 +208,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
           <div className="  text-center mb-4 text-primary text-2xl font-bold items-center justify-between mt-4">
             {mode === "add" && (
               <button
-                className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn py-2.5 text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 onClick={handelSubmit}
                 type="submit"
               >
@@ -217,7 +217,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
             )}
             {mode === "update" && (
               <button
-                className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn py-2.5 text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 onClick={handelSubmit}
                 type="submit"
               >

@@ -82,7 +82,7 @@ const ReciveAmount = ({ transectionType }) => {
               setMode("add");
               setModal(true);
             }}
-            className="btn py-2 px-3 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+            className="btn py-2 px-3 text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
           >
             ADD
           </button>
@@ -128,7 +128,7 @@ const ReciveAmount = ({ transectionType }) => {
                   setMode("add");
                   setModal(true);
                 }}
-                className="btn  py-2  px-3 text-LG bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn  py-2  px-3 text-LG bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               >
                 MAKE PAYMENT
               </button>
@@ -159,7 +159,7 @@ const ReciveAmount = ({ transectionType }) => {
                       ))}
                       <td className=" space-x-5 justify-evenly  text-center ">
                         <button
-                          className="text-danger ms-2 px-3 "
+                          className="text-[#173054] ms-2 px-3 "
                           onClick={() => handleButtonClick(item["id"])}
                         >
                           <svg

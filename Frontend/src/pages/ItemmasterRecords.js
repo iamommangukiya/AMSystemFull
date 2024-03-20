@@ -51,7 +51,7 @@ const ItemmasterRecords = () => {
               setMode("add");
               // console.log(Mode);
             }}
-            className="btn py-2 px-3 text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+            className="btn py-2 px-3 text-lg bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
           >
             Add Product
           </button>
@@ -118,7 +118,7 @@ const ItemmasterRecords = () => {
               <input
                 type="text"
                 placeholder="serch"
-                className=" rounded-xl border-[#6420AA] placeholder:text-[#6420AA] focus:border-0"
+                className="w-50 rounded-md border-[#225777] placeholder:text-[#225777] focus:border-0"
                 onChange={handelSerchChange}
               />
               <button
@@ -126,9 +126,9 @@ const ItemmasterRecords = () => {
                   setModal(true);
                   setMode("add");
                 }}
-                className="btn py-2 px-3 text-lg bg-[#6420AA] border border-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
+                className="btn py-2 px-3 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               >
-                Add Product
+                ADD PRODUCT
               </button>
             </div>
             <div className="overflow-auto">
@@ -156,7 +156,7 @@ const ItemmasterRecords = () => {
                       <td>{item.GST == "undefined" ? "-" : item.GST + "%"}</td>
                       <td>
                         <button
-                          className="text-[#F69314] ms-2"
+                          className="text-[#173054] ms-2"
                           onClick={() => handelDeletebtn(item.id)}
                         >
                           <svg

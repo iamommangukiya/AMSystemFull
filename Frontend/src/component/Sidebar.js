@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 import AppContext from "../context/AppContext";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const Sidebar = () => {
   const context = useContext(AppContext);
@@ -64,10 +65,11 @@ const Sidebar = () => {
                 <ul
                   x-cloak
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 list-none"
+                  style={{ listStyle: 'none' }}
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer">
-                    <NavLink to="/dashboard/party">Party Master</NavLink>
+                    <NavLink to="/dashboard/party" >Party Master</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     {/* <a href="javascript:;">
@@ -107,7 +109,7 @@ const Sidebar = () => {
                 <ul
                   x-cloak
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 "
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/Recipt">Recipt</NavLink>
