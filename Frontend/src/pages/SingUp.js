@@ -56,39 +56,38 @@ const Registration = () => {
   return (
     <>
       {/* <!-- Start Layout --> */}
-      <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10">
+      <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10 ">
         {/* <!-- Start Background Images -->/ */}
         <div
-          className="  bg-black dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
-          style={{ backgroundImage: 'url("../assets/images/images-5.jpg")' }}
+          className="  bg-white dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
         ></div>
         {/* <!-- End Background Images --> */}
 
+       
         {/* <!-- Start Header --> */}
         <header>
-          <nav className="px-4 lg:px-7 py-4 max-w-[1440px] mx-auto">
-            <div className="flex flex-wrap justify-between items-center">
+          <nav className="px-4 lg:px-7 max-w-[1440px] mx-auto">
+            <div className="items-center">
               <a href="index.html" className="flex items-center">
-                {/* <img
-                  src="assets/images/logo-light.svg"
-                  className="mx-auto dark-logo h-7 dark:hidden"
-                  alt="logo"
-                /> */}
                 <img
-                  src="assets/images/light.svg"
-                  className="mx-auto light-logo h-7 hidden dark:block"
+                  src="assets/images/logo4.png "
+                  height={200}
+                  width={200}
+                  className="mx-auto dark-logo  dark:hidden pt-5"
                   alt="logo"
                 />
               </a>
+              {/* <div className="flex items-center lg:order-2"></div> */}
             </div>
           </nav>
         </header>
         {/* <!-- End Header --> */}
 
+
         {/* <!-- Start Main Content --> */}
         <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto">
-          <div className="max-w-[550px] flex-none w-full p-6 text-white sm:p-10 lg:px-10 lg:py-14 rounded-2xl dark:bg-darklight dark:border-darkborder backdrop-blur-xl border-2 backdrop-brightness-110 border-gray-300">
-            <h1 className="text-3xl font-semibold mb-2 text-center dark:text-white">
+          <div className="max-w-[550px] flex-none w-full text-black  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border backdrop-brightness-110 border-gray-300 shadow-2xl">
+            <h1 className="text-3xl text-[#225777] font-semibold mb-2 text-center dark:text-white">
               Sign Up
             </h1>
             <p className="text-center mb-7 dark:text-darkmuted">
@@ -97,7 +96,7 @@ const Registration = () => {
             <div className="flex flex-wrap items-center gap-4 mb-7">
               <a
                 href="javaScript:;"
-                className="flex flex-1 items-center gap-1 btn border border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300 hover:bg-light hover:text-black"
+                className="flex flex-1 items-center gap-1 btn border bg-[#F9F5F6] border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300"
               >
                 <div className="w-8 h-8 flex items-center justify-center flex-none">
                   <svg
@@ -115,7 +114,7 @@ const Registration = () => {
               </a>
               <a
                 href="javaScript:;"
-                className="flex flex-1 items-center gap-1 btn border border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300 hover:bg-light hover:text-black"
+                className="flex flex-1 items-center gap-1 btn border bg-[#F9F5F6] border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300"
               >
                 <div className="w-8 h-8 flex items-center justify-center flex-none">
                   <svg
@@ -141,7 +140,7 @@ const Registration = () => {
             </div>
             <form
               onSubmit={handelsubmit}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              className="grid grid-cols-1 gap-4"
             >
               <div>
                 <input
@@ -149,7 +148,7 @@ const Registration = () => {
                   type="text"
                   value={inputs.firstName}
                   placeholder="First Name"
-                  className="form-input"
+                  className="form-input bg-transparent bg-[#F9F5F6] border-light backdrop-blur-3xl backdrop-brightness-200 border rounded-md placeholder:text-black focus:border-[#6420AA] shadow-lg"
                   name="firstName"
                   onChange={handelchange}
                   required
@@ -161,7 +160,7 @@ const Registration = () => {
                   type="text"
                   value={inputs.lastName}
                   placeholder="Last Name"
-                  className="form-input"
+                  className="form-input bg-transparent bg-[#F9F5F6] border-light backdrop-blur-3xl backdrop-brightness-200 border rounded-md placeholder:text-black focus:border-[#6420AA] shadow-lg"
                   name="lastName"
                   onChange={handelchange}
                   required
@@ -173,7 +172,7 @@ const Registration = () => {
                   type="email"
                   value={inputs.email}
                   placeholder="Email"
-                  className="form-input"
+                  className="form-input bg-transparent bg-[#F9F5F6] border-light backdrop-blur-3xl backdrop-brightness-200 border rounded-md placeholder:text-black focus:border-[#6420AA] shadow-lg"
                   name="email"
                   onChange={handelchange}
                   required
@@ -185,7 +184,7 @@ const Registration = () => {
                   type="text"
                   value={inputs.mobile}
                   placeholder="Mobile Number"
-                  className="form-input"
+                  className="form-input bg-transparent bg-[#F9F5F6] border-light backdrop-blur-3xl backdrop-brightness-200 border rounded-md placeholder:text-black focus:border-[#6420AA] shadow-lg"
                   name="mobile"
                   onChange={handelchange}
                   required
@@ -199,19 +198,21 @@ const Registration = () => {
                   value={inputs.password}
                   placeholder="Password"
                   name="password"
-                  className="form-input"
+                  className="form-input bg-transparent bg-[#F9F5F6] border-light backdrop-blur-3xl backdrop-brightness-200 border rounded-md placeholder:text-black focus:border-[#6420AA] shadow-lg"
                   onChange={handelchange}
                   required
                 />
               </div>
               <p className="text-red-600 col-span-2">{err}</p>
 
+              
               <button
                 type="submit"
-                className="btn sm:col-span-2 w-full py-3.5 text-base bg-[#3b82f680] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+                className="btn w-full text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               >
                 Create an account
               </button>
+              
             </form>
             <p className="text-center mt-5 dark:text-darkmuted">
               Already a member?{" "}

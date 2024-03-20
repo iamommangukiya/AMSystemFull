@@ -301,13 +301,13 @@ const PurchaseReport = ({ mode }) => {
             <div className="flex justify-end mr-4 mt-4">
               <button
                 onClick={exportToExcel}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md mr-2"
+                className="bg-[#225777] text-white px-4 py-2 rounded-md mr-2"
               >
                 Export to Excel
               </button>
               <button
                 onClick={GenerateReport}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md"
+                className="bg-[#225777] text-white px-4 py-2 rounded-md"
               >
                 Generate Report
               </button>

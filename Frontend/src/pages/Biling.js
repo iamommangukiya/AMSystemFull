@@ -932,7 +932,7 @@ const Biling = () => {
         <div className="flex items-center justify-between col-3 pb-3">
           {editdata ? (
             <button
-              className="btn py-2.5 text-xl bg-[#6420AA] border border-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
+              className="btn py-2.5 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               onClick={updateHandle}
               type="submit"
             >
@@ -940,7 +940,7 @@ const Biling = () => {
             </button>
           ) : (
             <button
-              className="btn py-2.5 text-xl bg-[#6420AA] border border-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
+              className="btn py-2.5 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               onClick={SumbmitHandle}
               type="submit"
             >

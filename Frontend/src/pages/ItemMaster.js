@@ -69,7 +69,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
       <div>
         <form className=" bg-white rounded mb-8   " onSubmit={handelSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-2 px-4">
-            <h2 className="col-span-full text-center mb-4 text-purple text-2xl font-bold">
+            <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
               Items
             </h2>
             <div className="mb-4">
@@ -190,7 +190,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
           <div className=" flex items-center m-auto justify-center">
             {mode == "add" && (
               <button
-                className="btn   flex items-center justify-center text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn   flex items-center justify-center text-lg bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 type="submit"
               >
                 Add Product
@@ -198,7 +198,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
             )}
             {mode == "update" && (
               <button
-                className="btn   flex items-center justify-center text-lg bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn   flex items-center justify-center text-lg bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 type="button"
                 onClick={handleUpdate}
               >

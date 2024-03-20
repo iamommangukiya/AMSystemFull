@@ -63,7 +63,7 @@ const P_S_REPORT = () => {
     <>
       <section className="flex justify-end mb-4 mr-4">
         <button
-          className="bg-black text-white rounded-lg py-2 px-5 border border-black "
+          className="bg-[#225777] text-white rounded-lg py-2 px-5 border border-[#225777] transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
           onClick={() => toPDF()}
         >
           GET PDF

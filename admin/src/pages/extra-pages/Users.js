@@ -30,8 +30,9 @@ const Users = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [userdata, setUserData] = useState([]);
     const [pageUserData, setPageUserData] = useState([]);
+    const [changestate, setchangestate] = useState(true);
     const [popup, setPopup] = useState({ show: false, message: '', success: true });
-
+    useEffect(() => {}, []);
     useEffect(() => {
         if (token?.is_login && token?.is_login === true) {
             dispatch(activeItem({ openItem: ['util-user'] }));
@@ -54,7 +55,7 @@ const Users = () => {
         } else {
             navigate('/login');
         }
-    }, []);
+    }, [changestate]);
 
     useEffect(() => {
         if (popup.show) {
@@ -106,6 +107,7 @@ const Users = () => {
                 })
                 .then((response) => {
                     console.log(response);
+                    setchangestate(!changestate);
                     return response.data;
                 })
                 .then((data) => {
@@ -223,10 +225,10 @@ const Users = () => {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow className="bg-light-gray">
-                                    <TableCell className="bh-line">Frist Name</TableCell>
-                                    <TableCell className="bh-line">Last Name</TableCell>
-                                    <TableCell className="bh-line">E-mail</TableCell>
-                                    <TableCell className="bh-line">Mobile No.</TableCell>
+                                    <TableCell className="bh-line text-center">Frist Name</TableCell>
+                                    <TableCell className="bh-line text-center">Last Name</TableCell>
+                                    <TableCell className="bh-line text-center">E-mail</TableCell>
+                                    <TableCell className="bh-line text-center">Mobile No.</TableCell>
                                     <TableCell align="center" style={{ minWidth: '150px' }}>
                                         Action
                                     </TableCell>
@@ -237,35 +239,21 @@ const Users = () => {
                                     <TableRow key={data._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                         <TableCell className="br-line" component="th" scope="row">
                                             <div className="d-flex align-items-center">
-                                                <div className="position-relative">
-                                                    <div className="profile-img-table me-3">
-                                                        <img
-                                                            src={data.profile_picture != undefined ? `${data.profile_picture}` : noimage}
-                                                            onError={({ currentTarget }) => {
-                                                                currentTarget.onerror = null; // prevents looping
-                                                                currentTarget.src = noimage;
-                                                            }}
-                                                            alt="profile"
-                                                            width="100%"
-                                                            className="object-fit"
-                                                        />
-                                                    </div>
+                                                <div className="position-absolute d-flex align-items-center">
+                                                    <span className="m-3 text-center">{data.firstName}</span>
                                                     {data.is_verified && (
-                                                        <>
-                                                            <div className="verified-user">
-                                                                <CheckCircleFilled />
-                                                            </div>
-                                                        </>
+                                                        <div className="verified-user">
+                                                            <CheckCircleFilled />
+                                                        </div>
                                                     )}
-                                                </div>
-                                                <div>
-                                                    <p className="m-0">{data.firstName}</p>
                                                 </div>
                                             </div>
                                         </TableCell>
-                                        <TableCell className="br-line">{data.lastName}</TableCell>
-                                        <TableCell className="br-line">{data.email}</TableCell>
-                                        <TableCell className="br-line">{data.phoneNo ? `+${+91} ${data.phoneNo}` : '-'}</TableCell>
+                                        <TableCell className="br-line text-center">{data.lastName}</TableCell>
+                                        <TableCell className="br-line text-center">{data.email}</TableCell>
+                                        <TableCell className="br-line text-center">
+                                            {data.phoneNo ? `+${+91} ${data.phoneNo}` : '-'}
+                                        </TableCell>
                                         <TableCell align="center">
                                             <Tooltip placement="top" title="View User">
                                                 <button

@@ -82,7 +82,7 @@ const Account_REC_PAY = ({ mode }) => {
             <div className="flex justify-end mt-4">
               <input
                 type="text"
-                placeholder="Search by name..."
+                placeholder="
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="p-2 border rounded"

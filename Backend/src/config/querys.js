@@ -136,7 +136,7 @@ class Querys {
   };
 
   featchCompany = (id) => {
-    return `select * from tblcompany Where userId= ${id.uid}`;
+    return `select * from tblcompany }`;
   };
   featchCompanyid = (id) => {
     return `select * from tblcompany Where id= ${id}`;

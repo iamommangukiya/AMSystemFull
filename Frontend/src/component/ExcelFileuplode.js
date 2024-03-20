@@ -68,13 +68,13 @@ const ExcelUploadModal = ({ isOpen, closeModal, onUpload }) => {
         </section>
         <footer className="modal-card-foot ">
           <button
-            className="btn hover:bg-[#492E87] hover:text-white border ms-5 me-2  rounded-md transition-transform"
+            className="btn bg-[#225777] hover:bg-[#173054] text-white border ms-5 me-2  rounded-md  transition-all duration-300"
             onClick={handleUpload}
           >
             Upload
           </button>
           <button
-            className="btn bg-[#492E87] text-white border rounded-md"
+            className="btn bg-[#225777] hover:bg-[#173054] text-white border rounded-md transition-all duration-300"
             onClick={closeModal}
           >
             Cancel

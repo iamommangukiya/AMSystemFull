@@ -179,22 +179,24 @@ const Company = () => {
     setOrganizationType(e.target.value);
   };
   return (
+    
+    
     <div className=" flex-col min-h-screen justify-center flex items-center   ">
       {/* <!-- Start Background Images --> */}
-      <div className="bg-[#F9F5F6] dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
+      <div className="bg-white dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
       {/* <!-- End Background Images --> */}
       <div className=" flex-col flex items-center py-4  rounded-xl   justify-center backdrop-blur-xl border backdrop-brightness-110 border-gray-300 shadow-2xl ">
-        <h2 className="col-span-full text-[#6420AA]  justify-center text-center mb-4 text-primary text-4xl font-bold">
-          Company registation
+        <h2 className="col-span-full text-[#225777]  justify-center text-center mb-4 text-primary text-4xl font-bold">
+          Company Registration
         </h2>
-        <form className="grid grid-cols-1  gap-6 md:grid-cols-2 py-3 lg:grid-cols-3 xl:grid-cols-3 pt-6  mb-4 lg:w-3/4">
+        <form className="grid grid-cols-1 gap-5  md:grid-cols-2 py-3 lg:grid-cols-3 xl:grid-cols-3 pt-6  mb-4 lg:w-3/4">
           {step == 1 && (
             <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Organization Type
+              <label className="block text-black mb-2">
+              🡢 Organization Type
               </label>
               <div>
-                <label className="inline-flex items-center">
+                <label className="inline-flex items-center ps-4">
                   <input
                     type="radio"
                     value="Retailer"
@@ -204,7 +206,7 @@ const Company = () => {
                   />
                   <span className="ml-2">Retailer</span>
                 </label>
-                <label className="inline-flex items-center ml-6">
+                <label className="inline-flex items-center ps-4">
                   <input
                     type="radio"
                     value="Wholesaler"
@@ -229,7 +231,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   id="exampleInputCname"
                   aria-describedby="emailHelp"
                   required
@@ -247,7 +249,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light  placeholder:text-white focus:border-0 shadow-lg
+                  className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border rounded-md border-light  placeholder:text-white focus:border-0 shadow-md
               ${valid.panvalid ? "border-red-500" : ""}`}
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
@@ -267,7 +269,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg ${
+                  className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md ${
                     valid.gstvalid ? "border-red-500" : ""
                   }`}
                   id="exampleInputGst"
@@ -290,7 +292,7 @@ const Company = () => {
                   End Of Month Date
                 </label>
                 <input
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   value={Inputs.date}
                   type="date"
                   onChange={handleDateChange}
@@ -306,7 +308,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   id="exampleInputstock"
                   onChange={handelchange}
                   name="purchaseStock"
@@ -329,7 +331,7 @@ const Company = () => {
                 </label>
                 <input
                   type="email"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   onChange={handelchange}
@@ -349,13 +351,13 @@ const Company = () => {
                     <input
                       type="text"
                       value={+91}
-                      className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg w-12"
+                      className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md w-12"
                       readOnly
                       disabled
                     />
                     <input
                       type="text"
-                      className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg ${
+                      className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md ${
                         valid.phonevalid ? "border-red-500" : ""
                       }`}
                       id="exampleInputPhoneNo"
@@ -394,7 +396,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   id="exampleInputaddress"
                   onChange={handelchange}
                   name="address"
@@ -412,7 +414,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   id="exampleInputcity"
                   onChange={handelchange}
                   name="city"
@@ -430,7 +432,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   id="exampleInputstate"
                   onChange={handelchange}
                   name="state"
@@ -456,7 +458,7 @@ const Company = () => {
           /> */}
 
                 <select
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg"
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   onChange={handelchange}
                   name="country"
                   value={Inputs.country}
@@ -483,7 +485,7 @@ const Company = () => {
                 </label>
                 <input
                   type="text"
-                  className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 focus:border-[#6420AA] border border-light rounded-md placeholder:text-white focus:border-0 shadow-lg ${
+                  className={`form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md ${
                     valid.postCodevalid ? "border-red-500" : ""
                   }`}
                   id="exampleInputcode"
@@ -501,15 +503,16 @@ const Company = () => {
             </>
           )}
         </form>
+        <div className="flex">
         <div>
-          <div className="d-flex justify-content-between">
+          <div className="d-flex flex justify-content-between">
             {step > 1 && (
-              <button variant="secondary" onClick={handlePrevious}>
+              <button className=" variant btn me-5 w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]secondary" onClick={handlePrevious}>
                 Previous
               </button>
             )}
             {step < 4 && (
-              <button variant="primary" onClick={nextStep}>
+              <button className="btn w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]" variant="primary" onClick={nextStep}>
                 Next
               </button>
             )}
@@ -518,7 +521,7 @@ const Company = () => {
         <div className="flex items-center justify-between col-3">
           {step == 4 && (
             <button
-              className="btn py-2.5 text-xl bg-[#6420AA] rounded-md text-white transition-all duration-300 hover:bg-[#5881c280] hover:border-purple/[0.85]"
+              className="btn w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               onClick={validation}
               type="submit"
             >
@@ -526,6 +529,8 @@ const Company = () => {
             </button>
           )}
         </div>
+        </div>
+        
 
         <ToastContainer
           position={successToastPosition}

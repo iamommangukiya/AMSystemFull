@@ -130,18 +130,18 @@ const Billingrecord = ({ mode }) => {
                 <input
                   type="text"
                   onChange={handleSearchInputChange}
-                  className=" w-50 ml-4 rounded-xl mb-3  dark:bg-darklight dark:text-white dark:border-darkborder"
+                  className=" w-50 ml-4 rounded-md mb-3  dark:bg-darklight dark:text-white dark:border-darkborder border-[#225777] placeholder:text-[#225777] focus:border-[#225777]"
                   placeholder="search "
                 />
                 <select
                   onChange={handleDateFilterChange}
-                  className="btn py-2 px-7 mb-4  dark:bg-darklight dark:text-white dark:border-darkborder  justify-start border border-purple rounded-md text-black transition-all  duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                  className=" w-50 ml-4 rounded-md mb-3  dark:bg-darklight dark:text-white dark:border-darkborder border-[#225777] placeholder:text-[#225777] focus:border-[#225777]"
                 >
                   <option value="latest">Latest</option>
                   <option value="oldest">Oldest</option>
                 </select>
                 <button
-                  className="text-lg"
+                  className=" btn w-20 py-2 px-3 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                   onClick={() => {
                     handlePaymentStatus("All");
                   }}
@@ -149,7 +149,7 @@ const Billingrecord = ({ mode }) => {
                   all
                 </button>
                 <button
-                  className="text-lg "
+                  className=" btn w-20 py-2 px-3 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                   onClick={() => {
                     handlePaymentStatus("paid");
                   }}
@@ -157,7 +157,7 @@ const Billingrecord = ({ mode }) => {
                   paid
                 </button>
                 <button
-                  className="text-lg"
+                  className=" btn w-20 py-2 px-3 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                   onClick={() => {
                     handlePaymentStatus("unpaid");
                   }}
@@ -167,7 +167,7 @@ const Billingrecord = ({ mode }) => {
               </div>
 
               <button
-                className="btn  py-2 mb-4 px-3 text-sm bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+                className="btn  py-2 mb-4 px-3 text-sm bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 onClick={handleCreateBill}
               >
                 Create Bill

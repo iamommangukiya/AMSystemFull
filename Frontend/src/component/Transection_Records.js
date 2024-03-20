@@ -54,7 +54,7 @@ const Trasection_Records = () => {
         href="#"
         onClick={() => paginate(i)}
         className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-          i === currentPage ? "bg-indigo-600 text-white" : "text-gray-900"
+          i === currentPage ? "bg-[#225777] text-white" : "text-gray-900"
         } ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0`}
       >
         {i}
@@ -70,7 +70,7 @@ const Trasection_Records = () => {
             <div className="flex justify-end mt-4">
               <input
                 type="text"
-                placeholder="Search by name..."
+                placeholder="name..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="p-2 border rounded"

@@ -18,7 +18,7 @@ const Layout = () => {
       {/* <body x-data="main" className={`font-cerebri antialiased relative text-black dark:text-white text-sm font-normal overflow-x-hidden vertical ${sidebar ? "" : "toggle-sidebar" } ${fullscreen ? "full" : "" }`}> */}
 
       {/* Start Layout */}
-      <div className="bg-[#F9F5F6] dark:bg-dark dark:text-darkmuted text-black">
+      <div className="bg-[#F2F4F6] dark:bg-dark dark:text-darkmuted text-black">
         {/* Start detached bg */}
         <div
           className=" bg-black min-h-[220px] sm:min-h-[250px] bg-bottom fixed hidden w-full -z-50 detached-img"

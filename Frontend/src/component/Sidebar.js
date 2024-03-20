@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 
 import { NavLink } from "react-router-dom";
 import AppContext from "../context/AppContext";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const Sidebar = () => {
   const context = useContext(AppContext);
@@ -9,26 +10,25 @@ const Sidebar = () => {
 
   return (
     <>
-      <nav className="sidebar absolute z-10  flex-none h-full w-[240px] border-r dark:bg-darkborder border-black/10 transition-all duration-300 overflow-hidden">
-        <div className="bg-white dark:bg-darklight h-full">
+      <nav className="sidebar absolute z-10  flex-none h-full w-[240px] border-r dark:bg-darkborder border-white/10 transition-all duration-300 overflow-hidden">
+        <div className="bg-[#225777] dark:bg-darklight h-full">
           <div className="p-4">
             <a href="index.html" className="main-logo w-full">
-              <h1 className="text-3xl text-center">AMS</h1>
-              {/* <img
-                src="assets/images/logo-dark.svg"
-                className="mx-auto dark-logo h-7 logo dark:hidden"
+              <img
+                src="assets/images/logo5.png"
+                height={200}
+                  width={130}
+                className="mx-auto dark-logo h-7  dark:hidden"
                 alt="logo"
               />
               <img
-                src="assets/images/logo-light.svg"
+                src="assets/images/logo6.png"
+                height={200}
+                  width={130}
                 className="mx-auto light-logo h-7 logo hidden dark:block"
-                alt="logo"
-              />
-              <img
-                src="assets/images/logo-icon.svg"
-                className="logo-icon h-7 mx-auto hidden"
                 alt=""
-              /> */}
+              />
+              
             </a>
           </div>
           <div className="h-[calc(100vh-60px)]  overflow-y-auto overflow-x-hidden px-5 pb-4 space-y-16 detached-menu">
@@ -36,14 +36,14 @@ const Sidebar = () => {
               className="relative flex flex-col gap-1 "
               x-data="{ activeMenu: 'apps' }"
             >
-              <h2 className="my-2 text-black dark:text-white/30">
+              <h2 className="my-2 text-white dark:text-white/30">
                 <span>Menu</span>
               </h2>
 
               <li className="menu nav-item">
                 <a
                   href="javaScript:;"
-                  class={`nav-link group justify-between flex items-center text-gray-600 py-2 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 px-2 duration-200 ${
+                  class={`nav-link group justify-between flex items-center text-white py-2 cursor-pointer  ${
                     activeMenu === "Master" ? "active" : ""
                   }`}
                   onClick={() => updateMenu("Master")}
@@ -52,25 +52,26 @@ const Sidebar = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
-                      className="w-5 h-5 "
+                      className="w-5 h-5 text-white"
                     >
                       <path
                         d="M7.5 11.5C5.01472 11.5 3 9.48528 3 7C3 4.51472 5.01472 2.5 7.5 2.5C9.98528 2.5 12 4.51472 12 7C12 9.48528 9.98528 11.5 7.5 11.5ZM7.5 21.5C5.01472 21.5 3 19.4853 3 17C3 14.5147 5.01472 12.5 7.5 12.5C9.98528 12.5 12 14.5147 12 17C12 19.4853 9.98528 21.5 7.5 21.5ZM17.5 11.5C15.0147 11.5 13 9.48528 13 7C13 4.51472 15.0147 2.5 17.5 2.5C19.9853 2.5 22 4.51472 22 7C22 9.48528 19.9853 11.5 17.5 11.5ZM17.5 21.5C15.0147 21.5 13 19.4853 13 17C13 14.5147 15.0147 12.5 17.5 12.5C19.9853 12.5 22 14.5147 22 17C22 19.4853 19.9853 21.5 17.5 21.5ZM7.5 9.5C8.88071 9.5 10 8.38071 10 7C10 5.61929 8.88071 4.5 7.5 4.5C6.11929 4.5 5 5.61929 5 7C5 8.38071 6.11929 9.5 7.5 9.5ZM7.5 19.5C8.88071 19.5 10 18.3807 10 17C10 15.6193 8.88071 14.5 7.5 14.5C6.11929 14.5 5 15.6193 5 17C5 18.3807 6.11929 19.5 7.5 19.5ZM17.5 9.5C18.8807 9.5 20 8.38071 20 7C20 5.61929 18.8807 4.5 17.5 4.5C16.1193 4.5 15 5.61929 15 7C15 8.38071 16.1193 9.5 17.5 9.5ZM17.5 19.5C18.8807 19.5 20 18.3807 20 17C20 15.6193 18.8807 14.5 17.5 14.5C16.1193 14.5 15 15.6193 15 17C15 18.3807 16.1193 19.5 17.5 19.5Z"
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-black text-lg">Master</span>
+                    <span className="pl-1.5 text-white text-lg">Master</span>
                   </div>
                 </a>
                 <ul
                   x-cloak
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 list-none"
+                  style={{ listStyle: 'none' }}
                 >
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
-                    <NavLink to="/dashboard/party">Party Master</NavLink>
+                  <li className=" flex items-center text-white py-1 cursor-pointer">
+                    <NavLink to="/dashboard/party" >Party Master</NavLink>
                   </li>
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     {/* <a href="javascript:;">
                       Projects{" "}
                       <span className="bg-danger/10 ms-3 text-danger text-xs rounded px-2 inline-block py-1 leading-none">
@@ -84,7 +85,7 @@ const Sidebar = () => {
               <li className="menu nav-item">
                 <a
                   href="javaScript:;"
-                  class={`nav-link group justify-between flex items-center text-gray-600 py-2 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 px-2 duration-200 ${
+                  class={`nav-link group justify-between flex items-center text-white py-2 cursor-pointer  ${
                     activeMenu === "TrasctionMaster" ? "active" : ""
                   }`}
                   onClick={() => updateMenu("TrasctionMaster")}
@@ -93,14 +94,14 @@ const Sidebar = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
-                      className="w-5 h-5"
+                      className="w-5 h-5 text-white"
                     >
                       <path
                         d="M7.5 11.5C5.01472 11.5 3 9.48528 3 7C3 4.51472 5.01472 2.5 7.5 2.5C9.98528 2.5 12 4.51472 12 7C12 9.48528 9.98528 11.5 7.5 11.5ZM7.5 21.5C5.01472 21.5 3 19.4853 3 17C3 14.5147 5.01472 12.5 7.5 12.5C9.98528 12.5 12 14.5147 12 17C12 19.4853 9.98528 21.5 7.5 21.5ZM17.5 11.5C15.0147 11.5 13 9.48528 13 7C13 4.51472 15.0147 2.5 17.5 2.5C19.9853 2.5 22 4.51472 22 7C22 9.48528 19.9853 11.5 17.5 11.5ZM17.5 21.5C15.0147 21.5 13 19.4853 13 17C13 14.5147 15.0147 12.5 17.5 12.5C19.9853 12.5 22 14.5147 22 17C22 19.4853 19.9853 21.5 17.5 21.5ZM7.5 9.5C8.88071 9.5 10 8.38071 10 7C10 5.61929 8.88071 4.5 7.5 4.5C6.11929 4.5 5 5.61929 5 7C5 8.38071 6.11929 9.5 7.5 9.5ZM7.5 19.5C8.88071 19.5 10 18.3807 10 17C10 15.6193 8.88071 14.5 7.5 14.5C6.11929 14.5 5 15.6193 5 17C5 18.3807 6.11929 19.5 7.5 19.5ZM17.5 9.5C18.8807 9.5 20 8.38071 20 7C20 5.61929 18.8807 4.5 17.5 4.5C16.1193 4.5 15 5.61929 15 7C15 8.38071 16.1193 9.5 17.5 9.5ZM17.5 19.5C18.8807 19.5 20 18.3807 20 17C20 15.6193 18.8807 14.5 17.5 14.5C16.1193 14.5 15 15.6193 15 17C15 18.3807 16.1193 19.5 17.5 19.5Z"
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-lg text-black">
+                    <span className="pl-1.5 text-lg text-white">
                       TrasctionMaster
                     </span>
                   </div>
@@ -108,13 +109,13 @@ const Sidebar = () => {
                 <ul
                   x-cloak
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 "
                 >
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/Recipt">Recipt</NavLink>
                   </li>
 
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     {/* <a href="javascript:;">
                       Projects{" "}
                       <span className="bg-danger/10 ms-3 text-danger text-xs rounded px-2 inline-block py-1 leading-none">
@@ -123,25 +124,25 @@ const Sidebar = () => {
                     </a> */}
                     <NavLink to="/dashboard/Payment">Payment</NavLink>
                   </li>
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/transectionrecord">
                       transectionrecord
                     </NavLink>
                   </li>
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/PurchaseBill">
                       Purchase Billing
                     </NavLink>
                   </li>
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/SaleBill">Sale Billing</NavLink>
                   </li>
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/deliveryChallan">
                       delivery challan
                     </NavLink>
                   </li>
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/quotation">
                       quotation/Estimate
                     </NavLink>
@@ -151,7 +152,7 @@ const Sidebar = () => {
               <li className="menu nav-item">
                 <a
                   href="javaScript:;"
-                  class={`nav-link group justify-between flex items-center text-gray-600 py-2 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 px-2 duration-200  ${
+                  class={`nav-link group justify-between flex items-center text-white py-2 cursor-pointer   ${
                     activeMenu === "Report" ? "active" : ""
                   }`}
                   onClick={() => updateMenu("Report")}
@@ -160,25 +161,27 @@ const Sidebar = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
-                      className="w-5 h-5"
+                      className="w-5 h-5 text-white"
                     >
                       <path
                         d="M7.5 11.5C5.01472 11.5 3 9.48528 3 7C3 4.51472 5.01472 2.5 7.5 2.5C9.98528 2.5 12 4.51472 12 7C12 9.48528 9.98528 11.5 7.5 11.5ZM7.5 21.5C5.01472 21.5 3 19.4853 3 17C3 14.5147 5.01472 12.5 7.5 12.5C9.98528 12.5 12 14.5147 12 17C12 19.4853 9.98528 21.5 7.5 21.5ZM17.5 11.5C15.0147 11.5 13 9.48528 13 7C13 4.51472 15.0147 2.5 17.5 2.5C19.9853 2.5 22 4.51472 22 7C22 9.48528 19.9853 11.5 17.5 11.5ZM17.5 21.5C15.0147 21.5 13 19.4853 13 17C13 14.5147 15.0147 12.5 17.5 12.5C19.9853 12.5 22 14.5147 22 17C22 19.4853 19.9853 21.5 17.5 21.5ZM7.5 9.5C8.88071 9.5 10 8.38071 10 7C10 5.61929 8.88071 4.5 7.5 4.5C6.11929 4.5 5 5.61929 5 7C5 8.38071 6.11929 9.5 7.5 9.5ZM7.5 19.5C8.88071 19.5 10 18.3807 10 17C10 15.6193 8.88071 14.5 7.5 14.5C6.11929 14.5 5 15.6193 5 17C5 18.3807 6.11929 19.5 7.5 19.5ZM17.5 9.5C18.8807 9.5 20 8.38071 20 7C20 5.61929 18.8807 4.5 17.5 4.5C16.1193 4.5 15 5.61929 15 7C15 8.38071 16.1193 9.5 17.5 9.5ZM17.5 19.5C18.8807 19.5 20 18.3807 20 17C20 15.6193 18.8807 14.5 17.5 14.5C16.1193 14.5 15 15.6193 15 17C15 18.3807 16.1193 19.5 17.5 19.5Z"
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5">Report</span>
+                    <span className="pl-1.5 text-lg text-white">
+                      Report
+                    </span>
                   </div>
                 </a>
                 <ul
                   x-cloak
                   x-collapse
-                  className="sub-menu flex flex-col gap-1 text-black dark:text-white/60"
+                  className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
                 >
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/Purchase">Purchase Report</NavLink>
                   </li>
-                  <li className=" flex items-center text-gray-600 py-1 cursor-pointer hover:bg-indigo-200 bg-indigo-100 focus:text-indigo-500 rounded-md">
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/Salse">Salse Report</NavLink>
                   </li>
                   <li>
@@ -204,7 +207,7 @@ const Sidebar = () => {
             </ul>
             {/* <div className="bg-purple p-4 pt-0 text-center rounded-md relative help-box">
               <div className="-top-6 relative">
-                <span className="text-black mx-auto border border-black/10 shadow-[0_0.75rem_1.5rem_rgba(18,38,63,.03)]  bg-white flex items-center justify-center h-12 w-12 rounded-full">
+                <span className="text-white mx-auto border border-white/10 shadow-[0_0.75rem_1.5rem_rgba(18,38,63,.03)]  bg-white flex items-center justify-center h-12 w-12 rounded-full">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
