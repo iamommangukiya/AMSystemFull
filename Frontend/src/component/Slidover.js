@@ -18,9 +18,7 @@ const Slidover = ({ isOpen, toggleSlideover, inventoryItems, selectItem }) => {
   const btnhandel = () => {
     const selectedItemsArray = Object.values(selectedItems).map((items) => ({
       ...items,
-      amount:
-        items.salePrice * items.qty +
-        items.qty * items.salePrice * (items.GST / 100),
+      amount: items.salePrice * items.qty,
     }));
     // console.log(selectedItemsArray);
     selectItem(selectedItemsArray);

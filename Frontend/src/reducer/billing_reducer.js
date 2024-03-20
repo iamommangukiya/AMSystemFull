@@ -18,6 +18,24 @@ export const addbill = createAsyncThunk(
     return responseData;
   }
 );
+
+export const gstbill = createAsyncThunk(
+  "billing_slice/gsttbill",
+  async (data) => {
+    const auth_token = localStorage.getItem("company");
+    const response = await axios.get(
+      process.env.REACT_APP_API + "/billget",
+
+      {
+        headers: {
+          com_token: auth_token,
+        },
+      }
+    );
+    const responseData = response.data;
+    return responseData;
+  }
+);
 export const UpdateBillog = createAsyncThunk(
   "billing_slice/UpdateBillog",
   async (data) => {
@@ -138,6 +156,27 @@ export const getletestInvoceId = createAsyncThunk(
     }
   }
 );
+export const getbalancesheet = createAsyncThunk(
+  "Billing_slice/getbalancesheet",
+  async (id) => {
+    const authToken = localStorage.getItem("company");
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API}/balancesheet`,
+        {
+          headers: {
+            com_token: authToken,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      // Handle any errors, e.g., network errors, server errors, etc.
+      throw error;
+    }
+  }
+);
 
 const billingSlice = createSlice({
   name: "billing_slice",
@@ -147,6 +186,8 @@ const billingSlice = createSlice({
     resultData: "",
     updateBilllog: "",
     InvoiceID: "",
+    gstBilldata: "",
+    balancesheet: "",
     delete: "",
   },
   reducers: {
@@ -218,6 +259,24 @@ const billingSlice = createSlice({
       })
       .addCase(getletestInvoceId.rejected, (state) => {
         state.InvoiceID = "rejected";
+      })
+      .addCase(gstbill.pending, (state) => {
+        state.InvoiceID = "pending";
+      })
+      .addCase(gstbill.fulfilled, (state, action) => {
+        state.gstBilldata = action.payload;
+      })
+      .addCase(gstbill.rejected, (state) => {
+        state.InvoiceID = "rejected";
+      })
+      .addCase(getbalancesheet.pending, (state) => {
+        state.balancesheet = "pending";
+      })
+      .addCase(getbalancesheet.fulfilled, (state, action) => {
+        state.balancesheet = action.payload;
+      })
+      .addCase(getbalancesheet.rejected, (state) => {
+        state.balancesheet = "rejected";
       });
   },
 });

@@ -594,7 +594,7 @@ class Querys {
       '${totalTaxable}',
       '${totalSgst}',
       '${totalCgst}',
-      '${totalIGst}',
+      '${totalIGst}', 
       '${tcs}',
       '${totalAmount}',
       '${flag}',
@@ -618,7 +618,7 @@ class Querys {
   };
 
   updateBillLog = (userdata) => {
-    // console.log(userdata);
+    console.log(userdata);
     const currentdate = moment();
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");
     const {
