@@ -105,4 +105,22 @@ module.exports = (app) => {
     // console.log(id);
     user.deletuser(id, res);
   });
+  app.post("/api/problem", feactCompany, (req, res) => {
+    const cmpid = req.cmp;
+    const data = req.body;
+    let sdata = {
+      ...data,
+      cmpid: cmpid,
+    };
+    user.create(sdata, res);
+  });
+  app.get("/api/getissue", (req, res) => {
+    user.getissue(res);
+  });
+  app.post("/api/updateIssue",(req,res)=>{
+    
+    const data = req.body;
+    
+    user.updateIssue(data,res)
+  });
 };

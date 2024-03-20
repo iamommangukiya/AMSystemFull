@@ -4,11 +4,13 @@ import party_Slice from "./Party_reducer";
 import Item_Slice from "./Item_reducer";
 import transction_Slice from "./Trasction_reducer";
 import billing_reducer from "./billing_reducer";
+import Helpreducer from "./Helpreducer";
 const reducers = {
   BillingReducer: billing_reducer,
   Loginreducer: UserSlice,
   CompanyReducer: company_Slice,
   PartyReducer: party_Slice,
+  Helpereducer: Helpreducer,
   ItemReducer: Item_Slice,
   TransctionReducer: transction_Slice,
 };

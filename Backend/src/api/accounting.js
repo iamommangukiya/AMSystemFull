@@ -3,6 +3,7 @@ const logError = require("../../errorLog");
 const { AcountServices } = require("../services");
 const feactCompany = require("./middleware/featchCompany");
 const Accounting = require("../services/Accounting");
+const featchUser = require("./middleware/featchUser");
 var AcountService = new AcountServices();
 
 module.exports = (app) => {
@@ -263,4 +264,13 @@ module.exports = (app) => {
 
     AcountService.getInvoiceNoLatest(sData, res);
   });
+  app.get("/api/billget", feactCompany, (req, res) => {
+    var id = req.cmp;
+    AcountService.showBills(id, res);
+  });
+  app.get("/api/balancesheet", feactCompany, (req, res) => {
+    id = req.cmp;
+    AcountService.GenerateBalanceSheet(id, res);
+  });
+  
 };

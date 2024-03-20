@@ -1,2 +1,12 @@
-INSERT INTO `Accounting`.`Billlog`(Comapny⁯iD,invoiceNo,invoiceDate,dueDate,bPartyName,bPartyAdress,bStateCode,gstNo,totalQuantity,gtotalAmount,discount,totalTaxable,totalSgst,totalCgst,totalIGst,tsc,totalAmount,flag,transportDate,bookName,payAmount,panding,kassar,deliveryAdress,createDate,updateDate)VALUES('${Comapny⁯iD}','${invoiceNo}','${invoiceDate}','${dueDate}','${bPartyName}','${bPartyAdress}','${bStateCode}','${gstNo}','${totalQuantity}','${gtotalAmount}','${discount}','${totalTaxable}','${totalSgst}','${totalCgst}','${totalIGst}','${tsc}','${totalAmount}','${flag}','${transportDate}','${bookName}','${payAmount}','${panding}','${kassar}','${deliveryAdress}','${createDate}','${updateDate}')
+INSERT INTO user.tblhelp
+(
+CompanyId,
+module,
+status,
+problem)
+VALUES(
 
+{CompanyId },
+{module },
+{status },
+{problem });

@@ -59,7 +59,7 @@ const Login = () => {
         {/* <!-- Start Header --> */}
         <header>
           <nav className="px-4 lg:px-7 max-w-[1440px] mx-auto">
-            <div className="items-center pt-5">
+            <div className="items-center">
               <a href="index.html" className="flex items-center">
                 <img
                   src="assets/images/logo.png "

@@ -24,6 +24,9 @@ import Varify from "./pages/Varify";
 import PurchaseReport from "./pages/Purchase-salse-Report";
 import Reports1 from "./pages/P_S_REPORT";
 import GSTR from "./pages/GSTR";
+import Balancesheet from "./pages/Balancesheet";
+import Account_REC_PAY from "./pages/Account_rec_pay";
+import Help from "./pages/Help";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -142,6 +145,19 @@ const App = () => {
             element={<Reports1 mode={"salse"}></Reports1>}
           ></Route>
           <Route path="gst" element={<GSTR mode={"salse"}></GSTR>}></Route>
+          <Route
+            path="BalanceSheet"
+            element={<Balancesheet></Balancesheet>}
+          ></Route>
+          <Route
+            path="Accountrec"
+            element={<Account_REC_PAY mode={"recive"}></Account_REC_PAY>}
+          ></Route>
+          <Route
+            path="Accountpay"
+            element={<Account_REC_PAY mode={"payable"}></Account_REC_PAY>}
+          ></Route>
+          <Route path="help" element={<Help></Help>}></Route>
         </Route>
         <Route path="/sidebar" element={<Sidebar />} />
       </Routes>

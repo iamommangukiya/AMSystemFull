@@ -259,7 +259,8 @@ const Biling = () => {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
     setTimeout(() => {
-      navigate("/dashboard/Purchase");
+      // navigate("/dashboard/PurchaseBill");
+      window.history.back();
     }, 2000);
   }
 
@@ -413,18 +414,20 @@ const Biling = () => {
     }));
     dispatch(UpdateBillog({ ...Inputs, items: filteredItems }));
   };
-  const stateOptions = Object.keys(stateData).map((code) => ({
+  useEffect(() => {
+    console.log(Inputs);
+  }, [Inputs]);
+  const stateOptions = Object.entries(stateData).map(([code, name]) => ({
     code,
-    name: stateData[code],
+    name,
   }));
   const handleStateChange = (e) => {
-    const newStateName = e.target.value;
+    const selectedStateName = e.target.value;
     setInputs((prevInputs) => ({
       ...prevInputs,
-      bStateName: newStateName,
+      bStateName: selectedStateName,
     }));
   };
-
   return (
     <>
       <Slidover
@@ -469,9 +472,7 @@ const Biling = () => {
           {/* // party name */}
 
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">
-              PartyName:
-            </label>
+            <label className="block text-black text-sm mb-2">PartyName:</label>
             <input
               type="text"
               className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
@@ -493,19 +494,8 @@ const Biling = () => {
               value={Inputs.bPartyAdress}
             />
           </div>
-          {/* // state code */}
-          {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Bill StateCode:
-            </label>
-            <input
-              type="number"
-              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
-              onChange={handelchange}
-              name="bStateCode"
-              value={Inputs.bStateCode}
-            />
-          </div> 
+          {/* // state name */}
+
           <div className="mb-4">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Bill State Name:
@@ -524,7 +514,7 @@ const Biling = () => {
               ))}
             </select>
           </div>
-          {/* // GstIn Party */}
+          {/* // GstIn Party*/}
           {Inputs.isGstBill == true && (
             <div className="mb-4">
               <label className="block text-black text-sm mb-2">
@@ -573,9 +563,7 @@ const Biling = () => {
           </div>
           {/* // due date */}
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">
-              Due Date
-            </label>
+            <label className="block text-black text-sm mb-2">Due Date</label>
             <input
               type="date"
               className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
@@ -584,23 +572,6 @@ const Biling = () => {
               value={Inputs.dueDate}
             />
           </div>
-
-          {/* gstno owner */}
-          {Inputs.isGstBill == true && (
-            <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                GSTIN:
-              </label>
-              <input
-                type="number"
-                required
-                className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
-                onChange={handelchange}
-                name="oGSTIN"
-                value={Inputs.oGSTIN}
-              />
-            </div>
-          )}
 
           {/* Transpose Date */}
           <div className="mb-4">
