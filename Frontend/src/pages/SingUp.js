@@ -59,7 +59,7 @@ const Registration = () => {
       <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10 ">
         {/* <!-- Start Background Images -->/ */}
         <div
-          className="  bg-[#F9F5F6] dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
+          className="  bg-white dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
         ></div>
         {/* <!-- End Background Images --> */}
 
@@ -70,10 +70,10 @@ const Registration = () => {
             <div className="items-center">
               <a href="index.html" className="flex items-center">
                 <img
-                  src="assets/images/logo.png "
-                  height={100}
-                  width={100}
-                  className="mx-auto dark-logo  dark:hidden"
+                  src="assets/images/logo4.png "
+                  height={200}
+                  width={200}
+                  className="mx-auto dark-logo  dark:hidden pt-5"
                   alt="logo"
                 />
               </a>
@@ -87,7 +87,7 @@ const Registration = () => {
         {/* <!-- Start Main Content --> */}
         <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto">
           <div className="max-w-[550px] flex-none w-full text-black  p-6 sm:p-10 lg:px-10 lg:py-14 rounded-2xl loginform dark:bg-darklight dark:border-darkborder backdrop-blur-xl border backdrop-brightness-110 border-gray-300 shadow-2xl">
-            <h1 className="text-3xl text-[#6420AA] font-semibold mb-2 text-center dark:text-white">
+            <h1 className="text-3xl text-[#225777] font-semibold mb-2 text-center dark:text-white">
               Sign Up
             </h1>
             <p className="text-center mb-7 dark:text-darkmuted">
@@ -208,7 +208,7 @@ const Registration = () => {
               
               <button
                 type="submit"
-                className="btn w-full text-lg bg-[#6420AA] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#492E87] hover:border-[#492E87]"
+                className="btn w-full text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               >
                 Create an account
               </button>
