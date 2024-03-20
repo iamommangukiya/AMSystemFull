@@ -584,10 +584,12 @@ class userServices {
       });
     } catch (error) {}
   };
+
   updateIssue = (usedata, res) => {
     try {
-      let { id, issueComponent, issueTopic, status } = usedata; // Assuming 'userdata' contains the necessary data including the 'id' of the issue to be updated
-      let query = `UPDATE user.tblhelp SET module='${issueComponent}',status=${status}, problem='${issueTopic}' WHERE id='${id}';`;
+      console.log(usedata); // Assuming 'userdata' contains the necessary data including the 'id' of the issue to be updated
+      let { id, issueComponent, issueTopic, status } = usedata;
+      let query = `UPDATE user.tblhelp SET status='${status}' WHERE id='${id}';`;
       db.query(query, (err, result) => {
         if (err) {
           logError(err.message);
@@ -595,6 +597,24 @@ class userServices {
           res.status(200).send("Failed to update");
         } else {
           res.status(200).send({ flag: true, message: "Updated successfully" });
+        }
+      });
+    } catch (error) {
+      // Handle any potential errors here
+    }
+  };
+  deleteIssue = (id, res) => {
+    try {
+      // Assuming 'userdata' contains the necessary data including the 'id' of the issue to be updated
+
+      let query = `delete from user.tblhelp WHERE id='${id}';`;
+      db.query(query, (err, result) => {
+        if (err) {
+          logError(err.message);
+          console.log(err);
+          res.status(200).send("Failed to delete");
+        } else {
+          res.status(200).send({ flag: true, message: "delete successfully" });
         }
       });
     } catch (error) {

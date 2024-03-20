@@ -230,41 +230,46 @@ class Querys {
       rf
     )}, ${replaceUndefinedWithNull(TCSRate)});`;
   };
-
   updateParty(userInputs) {
-    const {
-      ID,
-      partyName,
-      gstNumber,
-      email,
-      phoneNumber,
-      address,
-      city,
+    const replaceUndefinedWithNull = (value) =>
+      value !== undefined ? `'${value}'` : "";
 
-      statecode,
-      pan,
-      remarks,
-      openingBalance,
+    const fieldsToUpdate = [
+      "partyName",
+      "gstNumber",
+      "email",
+      "phoneNumber",
+      "address",
+      "city",
+      "statecode",
+      "pan",
+      "remarks",
+      "openingBalance",
+      "deliveryAddress",
+      "tds",
+      "creditLimit",
+      "distance",
+      "transporterName",
+      "natureOfOrg",
+      "partyGroup",
+      "discount",
+      "brokerage",
+      "rf",
+      "TCSRate",
+      "postalCode",
+      "accountGroup",
+      "paymentTerms",
+    ];
 
-      deliveryAddress,
-      tds,
-      creditLimit,
-      distance,
-      transporterName,
-      natureOfOrg,
-      partyGroup,
-      discount,
-      brokerage,
-      rf,
+    const setValues = fieldsToUpdate
+      .map(
+        (field) => `${field} = ${replaceUndefinedWithNull(userInputs[field])}`
+      )
+      .join(", ");
 
-      TCSRate,
-      postalCode,
-      accountGroup,
-      paymentTerms,
-    } = userInputs;
-    // console.log(userInputs);
-    return `UPDATE Accounting.party SET partyName = '${partyName}', address = '${address}', phoneNumber = '${phoneNumber}', statecode = '${statecode}', pan = '${pan}', gstNumber = '${gstNumber}',  deliveryAddress = '${deliveryAddress}', creditLimit = '${creditLimit}', openingBalance = '${openingBalance}', accountGroup = '${accountGroup}', city = '${city}', postalCode = '${postalCode}', distance = '${distance}', transporterName = '${transporterName}', brokerage = '${brokerage}', natureOfOrg = '${natureOfOrg}', email = '${email}', remarks = '${remarks}', tds = '${tds}', paymentTerms = '${paymentTerms}', partyGroup = '${partyGroup}', discount = '${discount}', brokerage = '${brokerage}', rf = '${rf}', TCSRate = '${TCSRate}' WHERE ID = ${ID};`;
-    // return `UPDATE Accounting.party SET PartyName = '${PartyName}', Address = '${Address}', MobileNo = '${MobileNo}', StateCode = '${StateCode}', PAN = '${PAN}', CompanyId='${CompanyId}', GSTIN = '${GSTIN}',  DeliveryAddress = '${DeliveryAddress}', CreditLimit = '${CreditLimit}', OpeningBalance = '${OpeningBalance}', accountGroup = '${accountGroup}', City = '${City}', Pincode = '${Pincode}', Distance = '${Distance}', transporterName = '${transporterName}', BrokerName = '${BrokerName}', natureOfOrg = '${natureOfOrg}', EmailId = '${EmailId}', Remarks = '${Remarks}', TDS = '${TDS}', paymentterms = '${paymentterms}', partyGroup = '${partyGroup}', discount = '${discount}', brokerage = '${brokerage}', rf = '${rf}', TCSRate = '${TCSRate}' WHERE ID = ${ID};`;
+    const query = `UPDATE Accounting.party SET ${setValues} WHERE ID = ${userInputs.ID};`;
+
+    return query;
   }
 
   deleteParty = (id) => {
@@ -451,11 +456,10 @@ class Querys {
       purchasePrice,
     } = userdata;
 
-    const openingStockValue = openingStock !== undefined ? openingStock : null;
-    const closingStockValue = closingStock !== undefined ? closingStock : null;
-    const salePriceValue = salePrice !== undefined ? salePrice : null;
-    const purchasePriceValue =
-      purchasePrice !== undefined ? purchasePrice : null;
+    const openingStockValue = openingStock !== "" ? openingStock : null;
+    const closingStockValue = closingStock !== "" ? closingStock : null;
+    const salePriceValue = salePrice !== "" ? salePrice : null;
+    const purchasePriceValue = purchasePrice !== "" ? purchasePrice : null;
 
     return `INSERT INTO Accounting.itemmaster (name, unit, HSN, GST, CompanyId, createDate, updateDate, LastModifidedBy, openingStock, closingStock, salePrice, purchasePrice) VALUES ('${name}', '${unit}', '${HSN}', '${GST}', ${userId}, '${formattedDate}', '${formattedDate}', ${userId}, ${openingStockValue}, ${closingStockValue}, ${salePriceValue}, ${purchasePriceValue});`;
   };

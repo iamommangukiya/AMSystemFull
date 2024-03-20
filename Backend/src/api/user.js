@@ -117,10 +117,15 @@ module.exports = (app) => {
   app.get("/api/getissue", (req, res) => {
     user.getissue(res);
   });
-  app.post("/api/updateIssue",(req,res)=>{
-    
+  app.post("/api/updateIssue", (req, res) => {
     const data = req.body;
-    
-    user.updateIssue(data,res)
+
+    user.updateIssue(data, res);
+  });
+  app.post("/api/deleteissue", (req, res) => {
+    const id = req.query.id; // Accessing the id from the request body
+    console.log(id);
+
+    user.deleteIssue(id, res);
   });
 };

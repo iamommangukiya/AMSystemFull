@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
+
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -18,7 +19,7 @@ import { DomainContext, PadinationContext } from 'App';
 import { useDispatch } from '../../../node_modules/react-redux/es/exports';
 import { activeItem } from 'store/reducers/menu';
 import noimage from 'assets/images/image.jpg';
-import { BASE_URL } from 'Configration';
+import { BASE_URL, BASE_URL1 } from 'Configration';
 
 let keyword = '';
 
@@ -32,22 +33,15 @@ const Providers = () => {
 
     useEffect(() => {
         if (token?.is_login && token?.is_login == true) {
-            dispatch(activeItem({ openItem: ['util-providers'] }));
-            const userList = new FormData();
-            userList.append('user_type', 'provider');
             try {
-                fetch(`${BASE_URL}/user_details/user_List`, {
-                    method: 'POST',
-                    headers: {
-                        Authorization: `Bearer ${token.token}`
-                    },
-                    body: userList
+                fetch(`${BASE_URL1}/getissue`, {
+                    method: 'get'
                 })
                     .then((response) => response.json())
                     .then((data) => {
-                        if (data.success) {
-                            localStorage.setItem('ad_providers', JSON.stringify(data.data));
-                            setuserdata(data.data);
+                        console.log(data.data);
+                        if (data.flag) {
+                            setissue(data.data);
                         }
                     });
             } catch (err) {
@@ -60,8 +54,9 @@ const Providers = () => {
 
     const localusers = JSON.parse(localStorage.getItem('ad_providers'));
 
-    const [userdata, setuserdata] = useState(localusers ? localusers : []);
-    const [pageuserdata, setpageuserdata] = useState([]);
+    const [issue, setissue] = useState([]);
+
+    const [pageissue, setpageissue] = useState([]);
     const [searchchange, setsearchchange] = useState('');
     const [popup, setpopup] = useState({ show: false, message: '', success: true });
 
@@ -79,49 +74,65 @@ const Providers = () => {
             let re = new RegExp(e, 'gi');
             return pre.name.match(re) || pre.email_address.match(re);
         });
-        setuserdata(newdata);
+        setissue(newdata);
         setpage(1);
     };
 
-    const breadcrumbManager = (a, b) => {
-        let bread = [];
-        let prepath = false;
-        for (var i = 0; i < breadcrumb?.length; i++) {
-            bread.push(breadcrumb[i]);
-            if (breadcrumb[i].url == b) {
-                prepath = true;
-                break;
-            }
-        }
-        if (prepath == false) {
-            bread.push({ name: a, url: b });
-        }
-
-        sessionStorage.setItem('breadcrumb', JSON.stringify(bread));
-    };
-
-    // ================== Delete User ==================
-
-    const deleteUser = (a) => {
-        const deleteuser = new FormData();
-        deleteuser.append('user_id', a);
+    const updateIssueStatus = (issueId, status) => {
+        // Perform API call to update the status of the issue in your database
+        console.log(issueId);
         try {
-            fetch(`${BASE_URL}/user_details/delete_user`, {
+            fetch(`${BASE_URL1}/updateIssue`, {
                 method: 'POST',
                 headers: {
-                    Authorization: `Bearer ${token.token}`
+                    'Content-Type': 'application/json'
                 },
-                body: deleteuser
+                body: JSON.stringify({ id: issueId, status })
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    setpopup({ show: true, message: data.message, success: data.success });
+                    console.log(data);
+                    // Handle response data accordingly
                     if (data.success) {
-                        const val = userdata.filter((e) => {
-                            return e._id != a;
+                        // Update the issue status in your local state or data source
+                        const updatedIssues = issue.map((item) => {
+                            if (item.id === issueId) {
+                                return { ...item, status: status };
+                            }
+                            return item;
                         });
-                        setuserdata(val);
-                        localStorage.setItem('ad_providers', JSON.stringify(val));
+                        setIssue(updatedIssues);
+                    } else {
+                        // Handle error or show notification
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    // Handle error
+                });
+        } catch (error) {
+            console.error('Error:', error);
+            // Handle error
+        }
+    };
+    // ================== Delete User ==================
+
+    const handledelete = (id) => {
+        try {
+            fetch(`${BASE_URL1}/deleteissue?id=${id}`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token.token}`
+                }
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setpopup({ show: true, message: data.message, success: data.flag });
+                    if (data.flag) {
+                        const val = issue.filter((e) => {
+                            return e.id != id;
+                        });
+                        setissue(val);
                     }
                 });
         } catch (err) {
@@ -132,28 +143,28 @@ const Providers = () => {
     // ======================= Block User and Unblock User ============================
 
     const blockUser = (a) => {
-        const blockuserdata = new FormData();
-        blockuserdata.append('user_id', a);
+        const blockissue = new FormData();
+        blockissue.append('user_id', a);
         try {
             fetch(`${BASE_URL}/user_details/block_unblock_user`, {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${token.token}`
                 },
-                body: blockuserdata
+                body: blockissue
             })
                 .then((response) => response.json())
                 .then((data) => {
                     setpopup({ show: true, message: data.message, success: data.success });
                     if (data.success) {
-                        const val = userdata?.map((e) => {
+                        const val = issue?.map((e) => {
                             if (e._id == a) {
                                 return { ...e, is_active: !e.is_active };
                             } else {
                                 return e;
                             }
                         });
-                        setuserdata(val);
+                        setissue(val);
                         localStorage.setItem('ad_providers', JSON.stringify(val));
                     }
                 });
@@ -173,14 +184,22 @@ const Providers = () => {
     useEffect(() => {
         let value = [];
         for (var i = (page - 1) * 10; i < page * 10; i++) {
-            userdata[i] != undefined && value.push(userdata[i]);
+            issue[i] != undefined && value.push(issue[i]);
         }
         if (value?.length < 1 && page > 1) {
             setpage(page - 1);
         }
-        settotalPage(Math.ceil(userdata?.length / 10));
-        setpageuserdata(value);
-    }, [userdata, page]);
+        settotalPage(Math.ceil(issue?.length / 10));
+        setpageissue(value);
+    }, [issue, page]);
+    useEffect(() => {
+        // Initialize selectedStatus based on initial issue data
+        const initialSelectedStatus = {};
+        issue.forEach((data) => {
+            initialSelectedStatus[data.id] = data.status;
+        });
+        setSelectedStatus(initialSelectedStatus);
+    }, [issue]);
 
     useEffect(() => {
         let bread = [];
@@ -199,7 +218,12 @@ const Providers = () => {
             sessionStorage.setItem('breadcrumb', JSON.stringify(bread));
         }
     }, []);
-
+    const [selectedStatus, setSelectedStatus] = useState({});
+    const [showFullText, setShowFullText] = useState(false);
+    const handleStatusChange = (status, issueId) => {
+        setSelectedStatus({ ...selectedStatus, [issueId]: status });
+        updateIssueStatus(issueId, status);
+    };
     return (
         <>
             <div className="breadcrumb d-flex align-items-center">
@@ -225,135 +249,89 @@ const Providers = () => {
                 Providers
             </Divider>
             <div className="p-2">
-                {userdata?.length > 0 ? (
+                {issue?.length > 0 ? (
                     <TableContainer component={Paper} className="mb-4">
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead>
                                 <TableRow className="bg-light-gray">
-                                    <TableCell className="bh-line">Name</TableCell>
-                                    <TableCell className="bh-line">E-mail</TableCell>
-                                    <TableCell className="bh-line">Birth Date</TableCell>
-                                    <TableCell className="bh-line">Mobile No.</TableCell>
-                                    <TableCell className="bh-line">Services</TableCell>
+                                    <TableCell className="bh-line">Sr No.</TableCell>
+                                    <TableCell className="bh-line">Company id</TableCell>
+                                    <TableCell className="bh-line">Module name</TableCell>
+                                    <TableCell className="bh-line">issue</TableCell>
+
                                     <TableCell align="center" style={{ minWidth: '150px' }}>
                                         Action
                                     </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {pageuserdata?.map((data, i) => (
+                                {pageissue?.map((data, i) => (
                                     <TableRow key={data._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                                         <TableCell className="br-line" component="th" scope="row">
                                             <div className="d-flex align-items-center">
                                                 <div className="position-relative">
-                                                    <div className="profile-img-table me-3">
-                                                        <img
-                                                            src={data.profile_picture != undefined ? `${data.profile_picture}` : noimage}
-                                                            onError={({ currentTarget }) => {
-                                                                currentTarget.onerror = null; // prevents looping
-                                                                currentTarget.src = noimage;
-                                                            }}
-                                                            alt="profile"
-                                                            width="100%"
-                                                            className="object-fit"
-                                                        />
-                                                    </div>
-                                                    {data.is_verified && (
-                                                        <>
-                                                            <div className="verified-user">
-                                                                <CheckCircleFilled />
-                                                            </div>
-                                                        </>
-                                                    )}
-                                                </div>
-                                                <div>
-                                                    <p className="m-0">{data.name}</p>
+                                                    <div className="profile-img-table me-3"></div>
+                                                    <p>{i + 1}</p>
                                                 </div>
                                             </div>
                                         </TableCell>
-                                        <TableCell className="br-line">{data.email_address}</TableCell>
-                                        <TableCell className="br-line">{data.dob ? new Date(data.dob).toDateString() : '-'}</TableCell>
-                                        <TableCell className="br-line">
-                                            {data.mobile_number ? `+${data.country_code} ${data.mobile_number}` : '-'}
-                                        </TableCell>
-                                        <TableCell className="br-line">{data.service_count}</TableCell>
-                                        <TableCell align="center">
-                                            <Tooltip placement="top" title={'View User'}>
-                                                <Link
-                                                    to={`/providerdetails/${data._id}`}
-                                                    onClick={() => breadcrumbManager(data.name, `/providerdetails/${data._id}`)}
-                                                >
-                                                    <div
-                                                        className="me-2 action-button bg-white"
-                                                        style={{ border: '1px solid #1677ff', color: '#1677ff' }}
-                                                    >
-                                                        <EyeOutlined />
-                                                    </div>
-                                                </Link>
+                                        <TableCell className="br-line">{data.CompanyId}</TableCell>
+                                        <TableCell className="br-line">{data.module}</TableCell>
+                                        <TableCell className="br-line ">
+                                            <Tooltip title={data.problem} mouseEnterDelay={0.5} arrowPointAtCenter>
+                                                <span>{data.problem}</span>
                                             </Tooltip>
-                                            {!data.is_active ? (
-                                                <>
-                                                    <Popconfirm
-                                                        title="Are you sure to unblock this user?"
-                                                        description="Are you sure to unblock this user?"
-                                                        onConfirm={() => {
-                                                            blockUser(data._id);
-                                                        }}
-                                                        onCancel={() => {}}
-                                                        okText="Yes"
-                                                        cancelText="No"
-                                                    >
-                                                        <Tooltip placement="top" title={'Unblock User'}>
-                                                            <div
-                                                                className="me-2 action-button bg-white"
-                                                                style={{ border: '1px solid #4caf50', color: '#4caf50' }}
-                                                            >
-                                                                <StopFilled />
-                                                            </div>
-                                                        </Tooltip>
-                                                    </Popconfirm>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <Popconfirm
-                                                        title="Are you sure to block this user?"
-                                                        description="Are you sure to block this user?"
-                                                        onConfirm={() => {
-                                                            blockUser(data._id);
-                                                        }}
-                                                        onCancel={() => {}}
-                                                        okText="Yes"
-                                                        cancelText="No"
-                                                    >
-                                                        <Tooltip placement="top" title={'Block User'}>
-                                                            <div
-                                                                className="me-2 action-button bg-white"
-                                                                style={{ border: '1px solid rgb(255 134 0)', color: 'rgb(255 134 0)' }}
-                                                            >
-                                                                <StopOutlined />
-                                                            </div>
-                                                        </Tooltip>
-                                                    </Popconfirm>
-                                                </>
-                                            )}
+                                        </TableCell>
 
-                                            <Popconfirm
-                                                title="Are you sure to delete this user?"
-                                                description="Are you sure to delete this user?"
-                                                onConfirm={() => deleteUser(data._id)}
-                                                onCancel={() => {}}
-                                                okText="Yes"
-                                                cancelText="No"
-                                            >
+                                        <TableCell align="center d-flex justify-content-around">
+                                            <div>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name={`status_${data.id}`}
+                                                        value="solved"
+                                                        checked={selectedStatus[data.id] === 'solved'}
+                                                        onChange={() => handleStatusChange('solved', data.id)}
+                                                    />
+                                                    Solved
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name={`status_${data.id}`}
+                                                        value="pending"
+                                                        checked={selectedStatus[data.id] === 'pending'}
+                                                        onChange={() => handleStatusChange('pending', data.id)}
+                                                    />
+                                                    Pending
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name={`status_${data.id}`}
+                                                        value="rejected"
+                                                        checked={selectedStatus[data.id] === 'rejected'}
+                                                        onChange={() => handleStatusChange('rejected', data.id)}
+                                                    />
+                                                    Rejected
+                                                </label>
+                                            </div>
+                                            <div>
                                                 <Tooltip placement="top" title={'Delete User'}>
                                                     <div
                                                         className="action-button bg-white"
                                                         style={{ border: '1px solid #ff4d4f', color: '#ff4d4f' }}
                                                     >
-                                                        <DeleteOutlined />
+                                                        <button onClick={() => handledelete(data.id)}>
+                                                            <DeleteOutlined />
+                                                        </button>
                                                     </div>
                                                 </Tooltip>
-                                            </Popconfirm>
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))}

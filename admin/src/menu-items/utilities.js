@@ -46,10 +46,10 @@ const utilities = {
         },
         {
             id: 'util-providers',
-            title: 'Providers',
+            title: 'Issues',
             type: 'item',
             forPagination: 'providers',
-            url: '/provider',
+            url: '/Issues',
             icon: icons.ProfileOutlined
         }
         // {

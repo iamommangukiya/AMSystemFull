@@ -38,11 +38,11 @@ const MainRoutes = {
             element: <Users />
         },
         {
-            path: 'categories',
+            path: 'catag',
             element: <Categories />
         },
         {
-            path: 'provider',
+            path: 'Issues',
             element: <Providers />
         },
         {
