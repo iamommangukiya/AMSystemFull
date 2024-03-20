@@ -63,8 +63,8 @@ const Login = () => {
               <a href="index.html" className="flex items-center">
                 <img
                   src="assets/images/logo.png "
-                  height={150}
-                  width={250}
+                  height={100}
+                  width={100}
                   className="mx-auto dark-logo  dark:hidden"
                   alt="logo"
                 />
