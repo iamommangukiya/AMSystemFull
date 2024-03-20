@@ -1,0 +1,7 @@
+2024-03-18T02:36:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
+2024-03-18T02:47:2  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
+2024-03-18T02:50:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
+2024-03-18T02:52:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
+2024-03-18T02:53:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
+2024-03-18T03:06:1  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'
+2024-03-18T03:06:3  : E:\projects\clg project\Amsystem\Account Management Backend\errorLog.js : Unknown column 'undefined' in 'where clause'

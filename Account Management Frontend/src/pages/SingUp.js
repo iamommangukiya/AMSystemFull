@@ -13,8 +13,11 @@ const Registration = () => {
     password: "",
     firstName: "",
     lastName: "",
+    mobile: "",
   });
   const [err, seterr] = useState("");
+  const [errmp, seterrmp] = useState("");
+
   const dispatch = useDispatch();
 
   const handelchange = (e) => {
@@ -35,6 +38,9 @@ const Registration = () => {
     e.preventDefault();
     if (inputs.password?.length < 6) {
       seterr("Password must be at least 6 characters long.");
+    }
+    if (!/^\d{10}$/.test(inputs.mobile)) {
+      seterrmp("Please enter a 10-digit mobile number.");
     } else {
       try {
         dispatch(registation(inputs));
@@ -42,7 +48,9 @@ const Registration = () => {
         console.log(error);
       }
     }
+    console.log(errmp);
   };
+
   const naviagte = useNavigate();
 
   return (
@@ -171,6 +179,19 @@ const Registration = () => {
                   required
                 />
               </div>
+              <div className="sm:col-span-2">
+                <input
+                  tabIndex={5}
+                  type="text"
+                  value={inputs.mobile}
+                  placeholder="Mobile Number"
+                  className="form-input"
+                  name="mobile"
+                  onChange={handelchange}
+                  required
+                />
+              </div>
+              <p className="text-red-600 col-span-2">{errmp}</p>
               <div className="sm:col-span-2">
                 <input
                   tabIndex={4}

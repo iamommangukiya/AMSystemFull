@@ -30,8 +30,9 @@ const Users = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [userdata, setUserData] = useState([]);
     const [pageUserData, setPageUserData] = useState([]);
+    const [changestate, setchangestate] = useState(true);
     const [popup, setPopup] = useState({ show: false, message: '', success: true });
-
+    useEffect(() => {}, []);
     useEffect(() => {
         if (token?.is_login && token?.is_login === true) {
             dispatch(activeItem({ openItem: ['util-user'] }));
@@ -39,9 +40,7 @@ const Users = () => {
             userList.append('user_type', 'user');
             try {
                 axios
-                    .get(`${BASE_URL1}/featchUsers`, {
-                        data: userList
-                    })
+                    .get(`${BASE_URL1}/featchUsers`, {})
                     .then((response) => {
                         return response.data;
                     })
@@ -56,7 +55,7 @@ const Users = () => {
         } else {
             navigate('/login');
         }
-    }, []);
+    }, [changestate]);
 
     useEffect(() => {
         if (popup.show) {
@@ -108,6 +107,7 @@ const Users = () => {
                 })
                 .then((response) => {
                     console.log(response);
+                    setchangestate(!changestate);
                     return response.data;
                 })
                 .then((data) => {

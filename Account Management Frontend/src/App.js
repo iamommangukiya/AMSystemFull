@@ -22,6 +22,8 @@ import Billingrecord from "./pages/Billingrecord";
 import Biling from "./pages/Biling";
 import Varify from "./pages/Varify";
 import PurchaseReport from "./pages/Purchase-salse-Report";
+import Reports1 from "./pages/P_S_REPORT";
+import GSTR from "./pages/GSTR";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -121,11 +123,11 @@ const App = () => {
           ></Route>
           <Route
             path="Recipt"
-            element={<ReciveAmount transectionType={"credit"}></ReciveAmount>}
+            element={<ReciveAmount transectionType={"debit"}></ReciveAmount>}
           ></Route>
           <Route
             path="Payment"
-            element={<ReciveAmount transectionType={"debit"}></ReciveAmount>}
+            element={<ReciveAmount transectionType={"credit"}></ReciveAmount>}
           ></Route>
           <Route
             path="Purchase"
@@ -135,6 +137,11 @@ const App = () => {
             path="Salse"
             element={<PurchaseReport mode={"salse"}></PurchaseReport>}
           ></Route>
+          <Route
+            path="Report"
+            element={<Reports1 mode={"salse"}></Reports1>}
+          ></Route>
+          <Route path="gst" element={<GSTR mode={"salse"}></GSTR>}></Route>
         </Route>
         <Route path="/sidebar" element={<Sidebar />} />
       </Routes>

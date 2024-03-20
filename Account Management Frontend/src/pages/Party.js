@@ -49,6 +49,7 @@ const Party = ({ data, mode }) => {
   useEffect(() => {
     setInputs(data);
   }, [data]);
+
   const errorToastPosition = "top-right";
   const countryList = Object.values(coutry);
 
@@ -117,10 +118,7 @@ const Party = ({ data, mode }) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(AccountGrop());
-  }, [dispatch]);
-  const result = useSelector((state) => state.PartyReducer.accountGrop?.data);
+ 
 
   const handelSubmit = (e) => {
     e.preventDefault();
@@ -183,9 +181,7 @@ const Party = ({ data, mode }) => {
           <Link to="/fetchcompany">go</Link>
         </button> */}
             <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                PartyName
-              </label>
+              <label className="block text-black text-sm mb-2">PartyName</label>
               <input
                 type="text"
                 className="form-input border border-gray-400 w-full h-10 rounded-md"
@@ -255,9 +251,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Adress
-              </label>
+              <label className="block text-black text-sm mb-2">Adress</label>
               <input
                 type="text"
                 className="form-input border border-gray-400 w-full h-10 rounded-md"
@@ -473,9 +467,7 @@ const Party = ({ data, mode }) => {
               />
             </div> */}
             <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Remark
-              </label>
+              <label className="block text-black text-sm mb-2">Remark</label>
               <input
                 type="text"
                 className="form-input border border-gray-400 w-full h-10 rounded-md"
@@ -537,9 +529,7 @@ const Party = ({ data, mode }) => {
               />
             </div>
             <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Brokerage
-              </label>
+              <label className="block text-black text-sm mb-2">Brokerage</label>
               <input
                 type="number"
                 className="form-input border border-gray-400 w-full h-10 rounded-md"

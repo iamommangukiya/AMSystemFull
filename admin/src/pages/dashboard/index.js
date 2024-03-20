@@ -1,110 +1,80 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState } from 'react';
+
+// material-ui
 import { Grid, Typography } from '@mui/material';
+
+// project import
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { activeItem } from 'store/reducers/menu';
-import axios from 'axios';
+
+// assets
+import { useNavigate } from '../../../node_modules/react-router-dom/dist/index';
+import { useEffect } from 'react';
+import { useContext } from 'react';
 import { DomainContext } from 'App';
+import { useDispatch } from '../../../node_modules/react-redux/es/exports';
+import { activeItem } from 'store/reducers/menu';
 import { BASE_URL, BASE_URL1 } from 'Configration';
+import { Axios } from '../../../node_modules/axios/index';
+
+// ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const DashboardDefault = () => {
     const token = JSON.parse(localStorage.getItem('adAnimaLogin'));
-    const baseUrl = useContext(DomainContext);
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [counter, setCounter] = useState({ users: 0, provider: 0, event: 0, payment: 0 });
-    let len = 0;
 
-    if (!token?.is_login && !token?.is_login === true) {
+    const baseUrl = useContext(DomainContext);
+
+    const navigate = useNavigate();
+
+    // const [counter, setcounter] = useState({ users: 0, categories: 0, products: 0, events: 0, wallet: 0, shipping_post: 0 });
+    const [counter, setcounter] = useState({ users: 0, company: 0, event: 0, payment: 0, ActiveUser: 0, pending: 0 });
+
+    if (!token?.is_login && !token?.is_login == true) {
         navigate('/login');
     }
-
+    const countuser = async (data) => {
+        const activeUsersCount = await data.filter((user) => user.status === 'active').length;
+        setcounter((prevState) => ({
+            ...prevState,
+            ActiveUser: activeUsersCount
+        }));
+    };
+    const pendinguser = async (data) => {
+        const activeUsersCount = await data.filter((user) => user.status === 'pending').length;
+        setcounter((prevState) => ({
+            ...prevState,
+            pending: activeUsersCount
+        }));
+    };
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(activeItem({ openItem: ['dashboard'] }));
-        if (token?.is_login && token?.is_login === true) {
-            const fetchData = async () => {
+        if (token?.is_login && token?.is_login == true) {
+            try {
                 try {
-                    const response = await axios.get(
-                        `${BASE_URL1}/featchUsers`,
-                        {},
-                        {
-                            headers: {
-                                Authorization: `Bearer ${token.token}`
-                            }
-                        }
-                    );
-                    const data = response.data;
-
-                    setCounter((prevCounter) => ({ ...prevCounter, users: data.data.length }));
-
-                    const userList = new FormData();
-                    userList.append('user_type', 'user');
-
-                    const providerList = new FormData();
-                    providerList.append('user_type', 'provider');
-
-                    const [userData, providerData] = await Promise.all([
-                        axios.post(`${BASE_URL1}/featchUsers`, userList, {
-                            headers: {
-                                Authorization: `Bearer ${token.token}`
-                            }
-                        }),
-                        axios.post(`${BASE_URL1}/featchUsers`, providerList, {
-                            headers: {
-                                Authorization: `Bearer ${token.token}`
-                            }
-                        })
-                    ]);
-
-                    localStorage.setItem('ad_users', JSON.stringify(userData.data.data));
-                    localStorage.setItem('ad_providers', JSON.stringify(providerData.data.data));
+                    fetch(`${BASE_URL1}/allcmp`, {
+                        method: 'POST'
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            setcounter((prevState) => ({
+                                ...prevState,
+                                company: data.data.length
+                            }));
+                            console.log(data.data.length);
+                        });
                 } catch (err) {
                     console.log(err);
                 }
-            };
-            const fetchCmp = async () => {
-                try {
-                    const response = await axios.get(
-                        `${BASE_URL1}/company`,
-                        {},
-                        {
-                            headers: {
-                                auth_token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfSwiaWF0IjoxNzEwNzM1NTU0fQ.zWWJVpQ9OmwrOf7VOYnmeAlhV-TCTiW4oMR0DYTdajs`
-                            }
-                        }
-                    );
-                    const data = response.data;
-
-                    setCounter((prevCounter) => ({ ...prevCounter, provider: data.data.length }));
-
-                    const userList = new FormData();
-                    userList.append('user_type', 'user');
-
-                    const providerList = new FormData();
-                    providerList.append('user_type', 'provider');
-
-                    const [userData, providerData] = await Promise.all([
-                        axios.post(`${BASE_URL1}/featchUsers`, userList, {
-                            headers: {
-                                Authorization: `Bearer ${token.token}`
-                            }
-                        }),
-                        axios.post(`${BASE_URL1}/featchUsers`, providerList, {
-                            headers: {
-                                Authorization: `Bearer ${token.token}`
-                            }
-                        })
-                    ]);
-
-                    localStorage.setItem('ad_users', JSON.stringify(userData.data.data));
-                    localStorage.setItem('ad_providers', JSON.stringify(providerData.data.data));
-                } catch (err) {
-                    console.log(err);
-                }
-            };
-
-            fetchData();
+                fetch(`${BASE_URL1}/featchUsers`, {
+                    method: 'get'
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        pendinguser(data.data);
+                        countuser(data.data);
+                        setcounter((prevState) => ({ ...prevState, users: data.data.length }));
+                    });
+            } catch (err) {}
         } else {
             navigate('/login');
         }
@@ -120,14 +90,21 @@ const DashboardDefault = () => {
                 <AnalyticEcommerce title="Total Users" count={counter.users} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Providers" count={counter.provider} />
+                <AnalyticEcommerce title="Total Company" count={counter.company} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Events" count={counter.event} />
+                <AnalyticEcommerce title="Active users" count={counter.ActiveUser} />
             </Grid>
             <Grid item xs={12} sm={6} md={4} lg={3}>
-                <AnalyticEcommerce title="Total Payment" count={counter.payment} />
+                <AnalyticEcommerce title="Total requests" count={counter.pending} />
             </Grid>
+            {/* <Grid item xs={12} sm={6} md={4} lg={3}>
+                <AnalyticEcommerce title="Total Wallet balance" count={counter.wallet} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+                <AnalyticEcommerce title="Total Shipping Products" count={counter.shipping_post} />
+            </Grid> */}
+
             <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
         </Grid>
     );

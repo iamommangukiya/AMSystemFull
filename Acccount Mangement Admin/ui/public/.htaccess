@@ -1,6 +1,0 @@
-<IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_URI} !^/images [NC]
-RewriteCond %{REQUEST_URI} !^/css [NC]
-RewriteCond %{REQUEST_URI} !^/js [NC]
-RewriteRule ^([^/]+)/?$ index.html [L]
-</IfModule>

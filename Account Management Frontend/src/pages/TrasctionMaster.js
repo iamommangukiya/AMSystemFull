@@ -12,7 +12,9 @@ import "react-notifications/lib/notifications.css";
 
 import { ToastContainer, toast } from "react-toastify";
 import { apipartyGet } from "../reducer/Party_reducer";
+import { Translation } from "react-i18next";
 const TrasactionMaster = ({ data, mode, transectionType }) => {
+  console.log(mode);
   const [inputs, setInput] = useState({
     paymentNo: "",
     transectionType: transectionType,
@@ -72,48 +74,87 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
         >
           <div className="grid grid-cols-2 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 ">
             <h2 className="col-span-full text-center mb-4 text-purple text-2xl font-bold">
-              {transectionType == "credit" && "Recipt"}
-              {transectionType == "debit" && "Payment"}
+              {transectionType == "debit" && "Recipt"}
+              {transectionType == "credit" && "Payment"}
             </h2>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                AccountTo
-              </label>
+            {transectionType == "debit" && (
+              <>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    AccountFrom
+                  </label>
+                  <select
+                    name="AccountFrom"
+                    value={inputs.AccountFrom}
+                    onChange={handelchange}
+                    className="form-input border border-primary w-full h-10 rounded-md"
+                  >
+                    <option value="">Select </option>
+                    <option value="Bank">Bank</option>
+                    <option value="cash">cash</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    AccountTo
+                  </label>
 
-              <select
-                value={inputs.AccountTo}
-                name="AccountTo"
-                onChange={handelchange}
-                className="form-input border  border-primary w-full h-10 rounded-md"
-              >
-                <option value="">Select </option>
-                {party.map((items, index) => (
-                  <option key={index} value={items.partyName}>
-                    {items.partyName}
-                  </option>
-                ))}
-              </select>
-            </div>
+                  <select
+                    value={inputs.AccountTo}
+                    name="AccountTo"
+                    onChange={handelchange}
+                    className="form-input border  border-primary w-full h-10 rounded-md"
+                  >
+                    <option value="">Select </option>
+                    {party.map((items, index) => (
+                      <option key={index} value={items.partyName}>
+                        {items.partyName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            )}
+            {transectionType == "credit" && (
+              <>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    AccountTo
+                  </label>
 
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                AccountFrom
-              </label>
-              <select
-                name="AccountFrom"
-                value={inputs.AccountFrom}
-                onChange={handelchange}
-                className="form-input border border-primary w-full h-10 rounded-md"
-              >
-                <option value="">Select </option>
-                {party.map((items, index) => (
-                  <option key={index} value={items.partyName}>
-                    {items.partyName}
-                  </option>
-                ))}
-              </select>
-            </div>
+                  <select
+                    value={inputs.AccountTo}
+                    name="AccountTo"
+                    onChange={handelchange}
+                    className="form-input border  border-primary w-full h-10 rounded-md"
+                  >
+                    <option value="">Select </option>
+                    <option value="Bank">Bank</option>
+                    <option value="cash">cash</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    AccountFrom
+                  </label>
+                  <select
+                    name="AccountFrom"
+                    value={inputs.AccountFrom}
+                    onChange={handelchange}
+                    className="form-input border border-primary w-full h-10 rounded-md"
+                  >
+                    <option value="">Select </option>
+                    {party.map((items, index) => (
+                      <option key={index} value={items.partyName}>
+                        {items.partyName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            )}
+
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 amount

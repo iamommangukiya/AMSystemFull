@@ -177,7 +177,7 @@ const Profile = () => {
 
     const verifyUser = (a) => {
         try {
-            let newStatus = userdetails.status ? 'INACTIVE' : 'active'; // Toggle status
+            let newStatus = userdetails.status === 'INACTIVE' ? 'active' : 'INACTIVE'; // Toggle status
 
             axios
                 .put(`${BASE_URL1}/user`, { ...a, status: newStatus })
@@ -712,7 +712,7 @@ const Profile = () => {
             {popup.show && (
                 <Alert
                     message={popup?.message}
-                    type={popup?.success ? 'success' : 'error'}
+                    type={popup?.success ? 'success' : 'success'}
                     showIcon
                     style={{ position: 'fixed', right: '15px', bottom: '30px' }}
                 />
