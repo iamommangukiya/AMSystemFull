@@ -188,12 +188,12 @@ const Company = () => {
       {/* <!-- End Background Images --> */}
       <div className=" flex-col flex items-center py-4  rounded-xl   justify-center backdrop-blur-xl border backdrop-brightness-110 border-gray-300 shadow-2xl ">
         <h2 className="col-span-full text-[#6420AA]  justify-center text-center mb-4 text-primary text-4xl font-bold">
-          Company registation
+          Company Registration
         </h2>
         <form className="grid grid-cols-1  gap-6 md:grid-cols-2 py-3 lg:grid-cols-3 xl:grid-cols-3 pt-6  mb-4 lg:w-3/4">
           {step == 1 && (
             <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
+              <label className="block text-black mb-2">
                 Organization Type
               </label>
               <div>
@@ -207,7 +207,7 @@ const Company = () => {
                   />
                   <span className="ml-2">Retailer</span>
                 </label>
-                <label className="inline-flex items-center ml-6">
+                <label className="inline-flex items-center">
                   <input
                     type="radio"
                     value="Wholesaler"
