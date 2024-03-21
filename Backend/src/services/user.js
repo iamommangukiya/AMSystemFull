@@ -53,6 +53,38 @@ class userServices {
         .json({ message: "Internal Server Error", flag: false });
     }
   }
+  async resetOTP(userInputs, res) {
+    try {
+      var checkQuery = Query.checkUser(userInputs);
+      db.query(checkQuery, async (err, data) => {
+        if (err) {
+          logError(err.message);
+          return res
+            .status(500)
+            .json({ message: "Internal Server Error", flag: false });
+        }
+        if (data.length == 0) {
+          return res
+            .status(200)
+            .json({ flag: false, message: "Account not exists create One" });
+        } else {
+          var email = userInputs.email;
+          var otp = await this.generateOTP();
+
+          const expirationTime = 300;
+          console.log(email, otp);
+          redisClient.set(`otp:${email}`, otp);
+          redisClient.expire(`otp:${email}`, expirationTime);
+          this.forgotOTPEmail(email, otp, res);
+        }
+      });
+    } catch (error) {
+      logError(error.message);
+      return res
+        .status(500)
+        .json({ message: "Internal Server Error", flag: false });
+    }
+  }
 
   async varifyOtp(userInputs, res) {
     const email = userInputs.email;
@@ -70,6 +102,38 @@ class userServices {
           await redisClient.del(`otp:${email}`);
           return res.status(200).json({
             message: "User registered successfully",
+            flag: true,
+          });
+        } catch (error) {
+          logError(error.message);
+          return res
+            .status(500)
+            .json({ message: "Internal Server Error", flag: false });
+        }
+      } else {
+        // Invalid OTP, send error response
+        return res.status(200).json({ message: "Invalid OTP", flag: false });
+      }
+    } else {
+      // OTP not found, send error response
+      return res.status(200).json({ message: "OTP not found", flag: false });
+    }
+  }
+  async REvarifyOtp(userInputs, res) {
+    const email = userInputs.email;
+    // console.log(email);
+
+    // Retrieve stored OTP from Redis
+    const storedOTP = await redisClient.get(`otp:${email}`);
+
+    if (storedOTP) {
+      const providedOTP = userInputs.otp;
+      if (storedOTP === providedOTP) {
+        // OTP is valid, proceed with account creation
+        try {
+          await redisClient.del(`otp:${email}`);
+          return res.status(200).json({
+            message: "User varifided SucsessFully successfully",
             flag: true,
           });
         } catch (error) {
@@ -132,6 +196,34 @@ class userServices {
         .json({ message: "Error sending OTP email:", flag: false });
     }
   }
+  async forgotOTPEmail(email, otp, res) {
+    console.log(email, "inotp");
+    try {
+      const mailOptions = {
+        from: "AmsSystem ",
+        to: email,
+        subject: "Reset Your Password for AmsSystem",
+        html: `
+        <h2>Reset Your Password for AmsSystem</h2>
+        <p>We received a request to reset your password for your AmsSystem account. Please use the following OTP (One-Time Password) to reset your password:</p>
+        <p style="font-size: 24px; font-weight: bold;">Your OTP: <span style="color: #007bff;">${otp}</span></p>
+        <p>This OTP is valid for a single use and should not be shared with anyone else.</p>
+        <p>If you did not request a password reset for your AmsSystem account, please ignore this email.</p>
+        <p>If you have any questions or need assistance, feel free to <a href="mailto:support@example.com">contact us</a>.</p>
+        <p>Best regards,<br>AmsSystem Team</p>
+        `,
+      };
+      await transporter.sendMail(mailOptions);
+      return res
+        .status(200)
+        .json({ message: "otp sended SucsessFully", flag: true });
+    } catch (error) {
+      console.log(error);
+      // return res
+      //   .status(200)
+      //   .json({ message: "Error sending OTP email:", flag: false });
+    }
+  }
 
   async singIn(userInputs, res) {
     const key = process.env.JWT_KEY || "om@omangukiya";
@@ -168,6 +260,22 @@ class userServices {
   async update(userInputs, res) {
     let flag = false;
     var updateQuery = Query.updateUser(userInputs);
+    // console.log(updateQuery);
+    db.query(updateQuery, (err, data) => {
+      if (err) {
+        res.send(200).json({ message: "Internal Server Error ", flag: false });
+
+        logError(err.message);
+      } else {
+        res
+          .status(200)
+          .json({ flag: true, message: "Update Successfully", data: data });
+      }
+    });
+  }
+  async updatepassWord(userInputs, res) {
+    let flag = false;
+    var updateQuery = Query.resetPassword(userInputs);
     // console.log(updateQuery);
     db.query(updateQuery, (err, data) => {
       if (err) {

@@ -153,9 +153,12 @@ const Login = () => {
               </div>
               <p className="text-red-600">{err}</p>
               <div className="text-right">
-                <a href="reset-pw.html" className="text-black dark:text-white">
+                <Link
+                  to="/resetPassword"
+                  className="text-black dark:text-white"
+                >
                   Forgot Password?
-                </a>
+                </Link>
               </div>
               <button
                 type="submit"

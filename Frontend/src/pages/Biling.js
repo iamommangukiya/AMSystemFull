@@ -12,6 +12,7 @@ import Slidover from "../component/Slidover";
 import { items_get } from "../reducer/Item_reducer";
 import { useNavigate, useLocation } from "react-router-dom";
 import { use } from "i18next";
+import { validGst } from "./Regex";
 
 const Biling = () => {
   const navigate = useNavigate();
@@ -254,7 +255,22 @@ const Biling = () => {
   };
 
   const flag = useSelector((state) => state.BillingReducer.result.flag || {});
+  const validation = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    if (Inputs.isGstBill) {
+      const isGst = validGst.test(Inputs.pgstNo);
 
+      if (!isGst) {
+      } else {
+        SumbmitHandle();
+      }
+    }
+    SumbmitHandle();
+
+    // setValid(() => ({
+    //   gstvalid: !isGst,
+    // }));
+  };
   if (flag === true) {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
@@ -941,7 +957,7 @@ const Biling = () => {
           ) : (
             <button
               className="btn py-2.5 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
-              onClick={SumbmitHandle}
+              onClick={validation}
               type="submit"
             >
               Create Bill

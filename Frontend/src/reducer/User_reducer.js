@@ -60,6 +60,39 @@ export const registation = createAsyncThunk(
     }
   }
 );
+export const updatePassWord = createAsyncThunk(
+  "userinfo/updatePassWord",
+  async (info) => {
+    try {
+      const request = await axios.post(
+        process.env.REACT_APP_API + "/updatePassWord",
+        info
+      );
+
+      const response = await request.data;
+
+      return response;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+);
+export const forgotpass = createAsyncThunk(
+  "userinfo/forgotpass",
+  async (info) => {
+    try {
+      const request = await axios.post(
+        process.env.REACT_APP_API + "/user/resetPass",
+        info
+      );
+      const response = await request.data;
+
+      return response;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+);
 export const varifyOtp = createAsyncThunk(
   "userinfo/varifyOtp",
   async (info) => {
@@ -67,6 +100,23 @@ export const varifyOtp = createAsyncThunk(
     try {
       const request = await axios.post(
         process.env.REACT_APP_API + "/varify",
+        info
+      );
+
+      const response = await request.data;
+
+      return response;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+);
+export const REverifyOtp = createAsyncThunk(
+  "userinfo/REverifyOtp",
+  async (info) => {
+    try {
+      const request = await axios.post(
+        process.env.REACT_APP_API + "/resetvarify",
         info
       );
 
@@ -86,7 +136,10 @@ const UserSlice = createSlice({
     username: "",
     loading: "",
     error: "",
+    forresult: "",
     varify: "",
+    updatePassWord: "",
+    REverifyOtp: "",
     isAuth: "",
     result: "",
   },
@@ -94,6 +147,18 @@ const UserSlice = createSlice({
     clearloading(state) {
       state.loading = "";
     },
+    clearALLlogin(state) {
+      state.username = "";
+      state.loading = "";
+      state.error = "";
+      state.forresult = "";
+      state.varify = "";
+      state.updatePassWord = "";
+      state.REverifyOtp = "";
+      state.isAuth = "";
+      state.result = "";
+    },
+
     clLogindata(state) {
       state.result = "";
     },
@@ -119,6 +184,21 @@ const UserSlice = createSlice({
 
         state.username = "";
       })
+      .addCase(updatePassWord.pending, (state) => {
+        state.loading = true;
+        state.username = "";
+        state.error = "";
+      })
+      .addCase(updatePassWord.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.updatePassWord = action.payload;
+      })
+      .addCase(updatePassWord.rejected, (state, action) => {
+        state.loading = false;
+
+        state.username = "";
+      })
       .addCase(registation.pending, (state) => {
         state.loading = true;
         state.username = "";
@@ -130,6 +210,36 @@ const UserSlice = createSlice({
         state.result = action.payload;
       })
       .addCase(registation.rejected, (state, action) => {
+        state.loading = false;
+
+        state.username = "";
+      })
+      .addCase(forgotpass.pending, (state) => {
+        state.loading = true;
+        state.username = "";
+        state.error = "";
+      })
+      .addCase(forgotpass.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.forresult = action.payload;
+      })
+      .addCase(forgotpass.rejected, (state, action) => {
+        state.loading = false;
+
+        state.username = "";
+      })
+      .addCase(REverifyOtp.pending, (state) => {
+        state.loading = true;
+        state.username = "";
+        state.error = "";
+      })
+      .addCase(REverifyOtp.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = "";
+        state.REverifyOtp = action.payload;
+      })
+      .addCase(REverifyOtp.rejected, (state, action) => {
         state.loading = false;
 
         state.username = "";

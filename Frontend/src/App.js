@@ -27,6 +27,9 @@ import GSTR from "./pages/GSTR";
 import Balancesheet from "./pages/Balancesheet";
 import Account_REC_PAY from "./pages/Account_rec_pay";
 import Help from "./pages/Help";
+import ResetPassword from "./pages/ResetPassword";
+import ResetPass from "./pages/ResetPass";
+import ResetEmailVarify from "./pages/ResetEmailVarify";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -88,9 +91,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/varify" element={<Varify />} />
+        <Route path="/revarify" element={<ResetEmailVarify />} />
         <Route path="/nav" element={<Topbar />} />
+        <Route path="/REpass" element={<ResetPass />} />
         <Route path="/fetchcompany" element={<CompanyFetchacompany />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/company" element={<Company />} />
 
         <Route path="/companydetails" element={<CompanyDetail />} />

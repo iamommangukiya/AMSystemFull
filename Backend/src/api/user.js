@@ -75,6 +75,19 @@ module.exports = (app) => {
     // console.log(req.body);
     user.varifyOtp(req.body, res);
   });
+  app.post("/api/user/resetPass", (req, res) => {
+    let data = req.body;
+    user.resetOTP(data, res);
+  });
+  app.post("/api/resetvarify", (req, res) => {
+    // console.log(req.body);
+    user.REvarifyOtp(req.body, res);
+  });
+  app.post("/api/updatePassWord", (req, res) => {
+    // console.log(req.body);
+    user.updatepassWord(req.body, res);
+  });
+
   // admin apis
 
   app.post("/api/singupAdmin", (req, res) => {

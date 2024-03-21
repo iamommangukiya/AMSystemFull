@@ -13,22 +13,21 @@ const Sidebar = () => {
       <nav className="sidebar absolute z-10  flex-none h-full w-[240px] border-r dark:bg-darkborder border-white/10 transition-all duration-300 overflow-hidden">
         <div className="bg-[#225777] dark:bg-darklight h-full">
           <div className="p-4">
-            <a href="index.html" className="main-logo w-full">
+            <a href="#" className="main-logo w-full">
               <img
-                src="assets/images/logo5.png"
+                src="./assets/images/logo5.png"
                 height={200}
-                  width={130}
+                width={130}
                 className="mx-auto dark-logo h-7  dark:hidden"
                 alt="logo"
               />
               <img
-                src="assets/images/logo6.png"
+                src="./assets/images/logo6.png"
                 height={200}
-                  width={130}
+                width={130}
                 className="mx-auto light-logo h-7 logo hidden dark:block"
                 alt=""
               />
-              
             </a>
           </div>
           <div className="h-[calc(100vh-60px)]  overflow-y-auto overflow-x-hidden px-5 pb-4 space-y-16 detached-menu">
@@ -66,10 +65,10 @@ const Sidebar = () => {
                   x-cloak
                   x-collapse
                   className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 list-none"
-                  style={{ listStyle: 'none' }}
+                  style={{ listStyle: "none" }}
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer">
-                    <NavLink to="/dashboard/party" >Party Master</NavLink>
+                    <NavLink to="/dashboard/party">Party Master</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     {/* <a href="javascript:;">
@@ -168,9 +167,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-lg text-white">
-                      Report
-                    </span>
+                    <span className="pl-1.5 text-lg text-white">Report</span>
                   </div>
                 </a>
                 <ul

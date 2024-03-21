@@ -101,6 +101,9 @@ const Company = () => {
       toast.success("Successfully", { position: successToastPosition });
 
       dispatch(companyAction.companyData());
+      setTimeout(() => {
+        navigate("/fetchcompany");
+      }, 100);
     }
   }, [dispatch, msg]);
   const handelSubmit = async () => {
@@ -179,8 +182,6 @@ const Company = () => {
     setOrganizationType(e.target.value);
   };
   return (
-    
-    
     <div className=" flex-col min-h-screen justify-center flex items-center   ">
       {/* <!-- Start Background Images --> */}
       <div className="bg-white dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
@@ -193,7 +194,7 @@ const Company = () => {
           {step == 1 && (
             <div className="mb-4">
               <label className="block text-black mb-2">
-              🡢 Organization Type
+                🡢 Organization Type
               </label>
               <div>
                 <label className="inline-flex items-center ps-4">
@@ -504,33 +505,39 @@ const Company = () => {
           )}
         </form>
         <div className="flex">
-        <div>
-          <div className="d-flex flex justify-content-between">
-            {step > 1 && (
-              <button className=" variant btn me-5 w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]secondary" onClick={handlePrevious}>
-                Previous
-              </button>
-            )}
-            {step < 4 && (
-              <button className="btn w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]" variant="primary" onClick={nextStep}>
-                Next
+          <div>
+            <div className="d-flex flex justify-content-between">
+              {step > 1 && (
+                <button
+                  className=" variant btn me-5 w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]secondary"
+                  onClick={handlePrevious}
+                >
+                  Previous
+                </button>
+              )}
+              {step < 4 && (
+                <button
+                  className="btn w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+                  variant="primary"
+                  onClick={nextStep}
+                >
+                  Next
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center justify-between col-3">
+            {step == 4 && (
+              <button
+                className="btn w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+                onClick={validation}
+                type="submit"
+              >
+                Submit
               </button>
             )}
           </div>
         </div>
-        <div className="flex items-center justify-between col-3">
-          {step == 4 && (
-            <button
-              className="btn w-40 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
-              onClick={validation}
-              type="submit"
-            >
-              Submit
-            </button>
-          )}
-        </div>
-        </div>
-        
 
         <ToastContainer
           position={successToastPosition}

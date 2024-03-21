@@ -52,6 +52,13 @@ class Querys {
     const { email, password, id, status } = userInputs;
     return `UPDATE tbluser SET email='${email}', status='${status}', password='${password}' WHERE id=${id};`;
   };
+  resetPassword = (userInputs) => {
+    const key = process.env.KEY;
+
+    const { email, password } = userInputs;
+    var encPass = crypto.HmacSHA1(password, key).toString(crypto.enc.Hex);
+    return `UPDATE tbluser SET  password='${encPass}' WHERE email='${email}'`;
+  };
   createCompany = (userInputs) => {
     const currentdate = moment(); // Get the current date and time
     const formattedDate = currentdate.format("YYYY-MM-DD HH:mm:ss");

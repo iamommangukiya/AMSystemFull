@@ -536,7 +536,6 @@ class Accounting {
   }
   async updateInventory(itemId, quantity, transactionType) {
     try {
-      // Fetch current inventory quantity
       const currentInventoryQuery = `SELECT openingStock FROM itemmaster WHERE id = ?`;
       const [currentInventoryRows] = await this.dbQuery(currentInventoryQuery, [
         itemId,
@@ -547,14 +546,18 @@ class Accounting {
       }
       // console.log(currentInventoryRows);
       const currentQuantity = currentInventoryRows.openingStock;
-      // console.log(currentQuantity);
-      //
+
       // Update inventory based on transaction type
       let updatedQuantity;
       if (transactionType === "purchase") {
-        updatedQuantity = parseInt(currentQuantity) + parseInt(quantity);
+        updatedQuantity =
+          parseInt(currentQuantity == "null" ? 0 : currentQuantity) +
+          parseInt(quantity);
+        console.log(updatedQuantity);
       } else if (transactionType === "sale") {
-        updatedQuantity = parseInt(currentQuantity) - parseInt(quantity);
+        updatedQuantity =
+          parseInt(currentQuantity == "null" ? 0 : currentQuantity) -
+          parseInt(quantity);
         if (updatedQuantity < 0) {
           throw new Error("Insufficient inventory for sale");
         }
@@ -808,13 +811,11 @@ class Accounting {
           const gstbills = Object.values(bills).filter(
             (item) => item.isGstBill == "true"
           );
-          res
-            .status(200)
-            .json({
-              message: "featch sucessfully",
-              flag: true,
-              data: gstbills,
-            });
+          res.status(200).json({
+            message: "featch sucessfully",
+            flag: true,
+            data: gstbills,
+          });
         })
         .catch((error) => {
           console.error(error);
