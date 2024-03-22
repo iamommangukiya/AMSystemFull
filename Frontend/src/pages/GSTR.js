@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { company, fetchDetailsComapny } from "../reducer/Company_reducer";
 import { gstbill } from "../reducer/billing_reducer";
-const GSTR = () => {
+import { usePDF, Margin } from "react-to-pdf";
+
+const GSTR = ({ mode }) => {
   let dispatch = useDispatch();
   let [cmpdata, setcompany] = useState();
   let [data, setdate] = useState([]);
@@ -27,7 +29,8 @@ const GSTR = () => {
       totalTax += parseFloat(gstAmount.toFixed(2)); // Add GST amount to total tax
       totalAmount += itemAmount; // Add item amount to total amount
     });
-    let gstRate = ((totalTax / totalAmount) * 100).toFixed(2); // Calculate GST rate
+    let gstRate = ((totalTax / totalAmount) * 100).toFixed(2);
+
     return { totalTax: totalTax.toFixed(2), gstRate: gstRate }; // Rounding to 2 decimal places
   }
   let [colspan, setcolspan] = useState();
@@ -37,15 +40,41 @@ const GSTR = () => {
     }
   }, [cdata]);
   useEffect(() => {
-    console.log(gstdata);
     if (gstdata) {
-      setdate(gstdata);
+      let fildata = [];
+      if (mode == "purchase") {
+        fildata = gstdata.filter((item) => item.bookName == "PurchaseBook");
+      } else {
+        fildata = gstdata.filter((item) => item.bookName == "SalesBook");
+      }
+      console.log(fildata);
+      setdate(fildata);
     }
-  }, [data]);
+  }, [gstdata, mode]);
+
+  const { toPDF, targetRef } = usePDF({
+    filename: "gstR1.pdf",
+    page: {
+      size: "auto",
+      margin: Margin.MEDIUM,
+    },
+  });
+
   return (
-    <section className=" flex justify-center items-center ">
-      <></>
-      <section className="w-4/5  h-full bg-white p-5 border rounded-md">
+    <section className=" flex  flex-col justify-center items-center ">
+      <section className="flex w-full justify-end mr-64 mb-4 ">
+        <button
+          className="bg-[#225777] text-white rounded-lg py-2 px-5 border border-[#225777] transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+          onClick={() => toPDF()}
+        >
+          GET PDF
+        </button>
+      </section>
+
+      <section
+        ref={targetRef}
+        className="w-4/5  h-full bg-white p-5 border rounded-md"
+      >
         <section>
           <div class="container">
             <div class="grid grid-cols-2">
@@ -126,22 +155,22 @@ const GSTR = () => {
               <td class="border border-black px-2">CESS</td>
               <td class="border border-black px-2">Additional CESS</td>
             </tr>
-            {gstdata &&
-              gstdata.map((party, i) => (
+            {data &&
+              data.map((party, i) => (
                 <>
                   <tr>
-                    <td rowspan="2" class="border border-black"></td>
+                    <td rowspan="" class="border border-black"></td>
 
-                    <td rowspan="2" class="border border-black">
+                    <td rowspan="" class="border border-black">
                       {party.bPartyName}
                     </td>
-                    <td rowspan="2" class="border border-black">
+                    <td rowspan="" class="border border-black">
                       {party.invoiceNo}
                     </td>
-                    <td rowspan="2" class="border border-black">
+                    <td rowspan="" class="border border-black">
                       {party.invoiceDate}
                     </td>
-                    <td rowspan="2" class="border border-black">
+                    <td rowspan="" class="border border-black">
                       {" "}
                       ₹ {party.gtotalAmount}
                     </td>
@@ -154,7 +183,7 @@ const GSTR = () => {
                         {calculateTotalTaxAmount(party.items).gstRate + "%"}
                       </td>
                       <td class="border border-black">
-                        ₹ {calculateTotalTaxAmount(party.items).totalTax}
+                        {calculateTotalTaxAmount(party.items).totalTax}
                       </td>
                       <td class="border border-black">₹ 0</td>
                       <td class="border border-black">
@@ -167,7 +196,7 @@ const GSTR = () => {
                       </td>
                       <td class="border border-black">₹ 0</td>
                       <td class="border border-black">₹ 0</td>
-                      <td rowspan="2" class="border border-black">
+                      <td rowspan="" class="border border-black">
                         {party.bStateCode}
                       </td>
                     </>
@@ -177,7 +206,7 @@ const GSTR = () => {
           </table>
         </section>
 
-        <section class="container">
+        {/* <section class="container">
           <h1 class="text-xl font-bold py-5">Sale Return</h1>
           <table class="text-center">
             <tr>
@@ -217,7 +246,7 @@ const GSTR = () => {
               <td class="border border-black px-2">Additional CESS</td>
             </tr>
           </table>
-        </section>
+        </section> */}
       </section>
     </section>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  company,
   fetchAllComapny,
   fetchDetailsComapny,
 } from "../reducer/Company_reducer";
@@ -30,6 +31,11 @@ const CompanyFetchacompany = () => {
   );
   // console.log(response);
 
+  // useEffect(() => {
+  //   if (!response) {
+  //     navigate("/company");
+  //   }
+  // }, [company]);
   const handelClick = (isButton) => {
     if (isButton) {
       navigate("/company");

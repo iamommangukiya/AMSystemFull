@@ -151,6 +151,7 @@ const App = () => {
             element={<Reports1 mode={"salse"}></Reports1>}
           ></Route>
           <Route path="gst" element={<GSTR mode={"salse"}></GSTR>}></Route>
+          <Route path="gst2" element={<GSTR mode={"purchase"}></GSTR>}></Route>
           <Route
             path="BalanceSheet"
             element={<Balancesheet></Balancesheet>}

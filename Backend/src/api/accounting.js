@@ -272,5 +272,4 @@ module.exports = (app) => {
     id = req.cmp;
     AcountService.GenerateBalanceSheet(id, res);
   });
-  
 };

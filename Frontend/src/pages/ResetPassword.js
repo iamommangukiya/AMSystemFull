@@ -56,7 +56,7 @@ const ResetPassword = () => {
         <header>
           <nav className="px-4 lg:px-7 max-w-[1440px] mx-auto">
             <div className="items-center">
-              <a href="index.html" className="flex items-center">
+              <a href="#" className="flex items-center">
                 <img
                   src="assets/images/logo4.png "
                   height={200}

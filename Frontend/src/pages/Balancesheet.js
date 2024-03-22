@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getbalancesheet } from "../reducer/billing_reducer";
+import { usePDF, Margin } from "react-to-pdf";
 
-const Balancesheet = () => {
+const Balancesheet = ({ mode }) => {
   const dispatch = useDispatch();
   // get the data from redux store
   const balancesheetData = useSelector(
@@ -14,10 +15,29 @@ const Balancesheet = () => {
   useEffect(() => {
     console.log(balancesheetData);
   }, [balancesheetData]);
+  const { toPDF, targetRef } = usePDF({
+    filename: "BalanceSheet.pdf",
+    page: {
+      size: "auto",
+      margin: Margin.MEDIUM,
+    },
+  });
   return (
     <>
-      <section className="w-full flex justify-center items-center">
-        <section class="container py-10 w-4/5 bg-white p-5 rounded-md justify-center items-center">
+      <section className="w-full flex flex-col justify-center items-center">
+        <section className="flex w-full justify-end mr-64 mb-4 ">
+          <button
+            className="bg-[#225777] text-white rounded-lg py-2 px-5 border border-[#225777] transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+            onClick={() => toPDF()}
+          >
+            GET PDF
+          </button>
+        </section>
+        <section
+          ref={targetRef}
+          class="container py-10 w-4/5 bg-white p-5 rounded-md justify-center items-center"
+        >
+          <p className=" font-bold color-black text-2xl pb-5">BalanceSheet</p>
           <table class="w-full border-collapse">
             <tr class="text-center">
               <td class="border border-black ps-2 font-bold">Particulars</td>
@@ -198,7 +218,8 @@ const Balancesheet = () => {
                     balancesheetData && balancesheetData.assets.inventory
                   ) +
                     parseInt(
-                      balancesheetData && balancesheetData.assets.inventory
+                      balancesheetData &&
+                        balancesheetData.assets.accountsReceivable
                     )
                 )}
               </td>

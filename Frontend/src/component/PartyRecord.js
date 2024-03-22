@@ -98,7 +98,14 @@ const PartyRecord = () => {
     // Close the modal after processing
     setExcelModalOpen(false);
   };
-
+  useEffect(() => {
+    if (result?.length > 0) {
+      setFilterData(result);
+    } else {
+      setMode("add");
+      setModal(true);
+    }
+  }, [result]);
   if (!result || !Array.isArray(result)) {
     return (
       <>

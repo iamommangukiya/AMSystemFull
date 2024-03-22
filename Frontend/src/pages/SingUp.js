@@ -58,17 +58,14 @@ const Registration = () => {
       {/* <!-- Start Layout --> */}
       <div className="bg-[#f9fbfd] dark:bg-dark text-black min-h-screen relative z-10 ">
         {/* <!-- Start Background Images -->/ */}
-        <div
-          className="  bg-white dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"
-        ></div>
+        <div className="  bg-white dark:bg-purple h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
         {/* <!-- End Background Images --> */}
 
-       
         {/* <!-- Start Header --> */}
         <header>
           <nav className="px-4 lg:px-7 max-w-[1440px] mx-auto">
             <div className="items-center">
-              <a href="index.html" className="flex items-center">
+              <a href="#" className="flex items-center">
                 <img
                   src="assets/images/logo4.png "
                   height={200}
@@ -82,7 +79,6 @@ const Registration = () => {
           </nav>
         </header>
         {/* <!-- End Header --> */}
-
 
         {/* <!-- Start Main Content --> */}
         <div className="min-h-[calc(100vh-134px)] py-4 px-4 sm:px-12 flex justify-center items-center max-w-[1440px] mx-auto">
@@ -138,10 +134,7 @@ const Registration = () => {
               </div>
               <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
             </div>
-            <form
-              onSubmit={handelsubmit}
-              className="grid grid-cols-1 gap-4"
-            >
+            <form onSubmit={handelsubmit} className="grid grid-cols-1 gap-4">
               <div>
                 <input
                   tabIndex={1}
@@ -205,14 +198,12 @@ const Registration = () => {
               </div>
               <p className="text-red-600 col-span-2">{err}</p>
 
-              
               <button
                 type="submit"
                 className="btn w-full text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               >
                 Create an account
               </button>
-              
             </form>
             <p className="text-center mt-5 dark:text-darkmuted">
               Already a member?{" "}

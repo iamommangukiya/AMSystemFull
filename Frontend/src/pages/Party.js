@@ -118,8 +118,6 @@ const Party = ({ data, mode }) => {
 
   const dispatch = useDispatch();
 
- 
-
   const handelSubmit = (e) => {
     e.preventDefault();
 
@@ -614,7 +612,7 @@ const Party = ({ data, mode }) => {
                 onClick={validation}
                 type="submit"
               >
-                Submit
+                Add Party
               </button>
             )}
             {mode === "update" && (
@@ -623,7 +621,7 @@ const Party = ({ data, mode }) => {
                 onClick={validation}
                 type="submit"
               >
-                Update
+                Update Party
               </button>
             )}
           </div>
