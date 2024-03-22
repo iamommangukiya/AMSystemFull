@@ -58,7 +58,7 @@ const Login = () => {
 
         {/* <!-- Start Header --> */}
         <header>
-          <nav className="px-4 lg:px-7 max-w-[1440px] mx-auto">
+          <nav className="px-4 pt-10 lg:px-7 max-w-[1440px] mx-auto">
             <div className="items-center">
               <a href="index.html" className="flex items-center">
                 <img
@@ -83,7 +83,7 @@ const Login = () => {
             <p className="text-center mb-7 dark:text-darkmuted">
               Enter your email and password to sign in!
             </p>
-            <div className="flex flex-wrap items-center gap-4 mb-7">
+            {/* <div className="flex flex-wrap items-center gap-4 mb-7">
               <a
                 href="javaScript:;"
                 className="flex flex-1 items-center gap-1 btn border bg-[#F9F5F6] border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300"
@@ -120,14 +120,14 @@ const Login = () => {
                 </div>
                 <p className="whitespace-nowrap">Sign in with Apple</p>
               </a>
-            </div>
-            <div className="flex items-center mb-7">
+            </div> */}
+            {/* <div className="flex items-center mb-7">
               <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
               <div className="px-5 whitespace-nowrap capitalize dark:text-darkmuted">
                 Or with Email
               </div>
               <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
-            </div>
+            </div> */}
             <form className="space-y-4" onSubmit={handlesubmit}>
               <div>
                 <input

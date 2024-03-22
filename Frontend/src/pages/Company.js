@@ -199,7 +199,7 @@ const Company = () => {
               <div>
                 <label className="inline-flex items-center ps-4">
                   <input
-                    type="radio"
+                    type="checkbox"
                     value="Retailer"
                     checked={organizationType === "Retailer"}
                     onChange={handleOrganizationTypeChange}
@@ -209,7 +209,7 @@ const Company = () => {
                 </label>
                 <label className="inline-flex items-center ps-4">
                   <input
-                    type="radio"
+                    type="checkbox"
                     value="Wholesaler"
                     checked={organizationType === "Wholesaler"}
                     onChange={handleOrganizationTypeChange}

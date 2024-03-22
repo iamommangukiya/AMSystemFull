@@ -93,7 +93,7 @@ const Registration = () => {
             <p className="text-center mb-7 dark:text-darkmuted">
               Enter your email and password to sign up!
             </p>
-            <div className="flex flex-wrap items-center gap-4 mb-7">
+            {/* <div className="flex flex-wrap items-center gap-4 mb-7">
               <a
                 href="javaScript:;"
                 className="flex flex-1 items-center gap-1 btn border bg-[#F9F5F6] border-light dark:text-white dark:hover:text-black rounded-md text-black transition-all duration-300"
@@ -130,14 +130,14 @@ const Registration = () => {
                 </div>
                 <p className="whitespace-nowrap">Sign up with Apple</p>
               </a>
-            </div>
-            <div className="flex items-center mb-7">
+            </div> */}
+            {/* <div className="flex items-center mb-7">
               <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
               <div className="px-5  whitespace-nowrap capitalize dark:text-darkmuted">
                 Or with Email
               </div>
               <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
-            </div>
+            </div> */}
             <form
               onSubmit={handelsubmit}
               className="grid grid-cols-1 gap-4"
@@ -208,7 +208,7 @@ const Registration = () => {
               
               <button
                 type="submit"
-                className="btn w-full text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+                className="btn w-full col-span-2 text-lg bg-[#225777] border-0  rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               >
                 Create an account
               </button>
