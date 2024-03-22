@@ -91,6 +91,7 @@ const Biling = () => {
   // slider item
   useEffect(() => {
     if (editdata) {
+      console.log();
       dispatch(getItemsOfBill(editdata.id));
       setInputs({ ...editdata });
     } else {
@@ -274,6 +275,7 @@ const Biling = () => {
   if (flag === true) {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
+    dispatch(billingaction.clearBillitem()  );
     setTimeout(() => {
       // navigate("/dashboard/PurchaseBill");
       window.history.back();

@@ -194,6 +194,9 @@ const billingSlice = createSlice({
     CleanInsertBill(state) {
       state.result = "";
     },
+    clearBillitem(state) {
+      state.billItems = "";
+    },
   },
   extraReducers: (builder) => {
     builder

@@ -102,8 +102,6 @@ const PartyRecord = () => {
     if (result?.length > 0) {
       setFilterData(result);
     } else {
-      setMode("add");
-      setModal(true);
     }
   }, [result]);
   if (!result || !Array.isArray(result)) {

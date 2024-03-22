@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 const Company = () => {
   const [Inputs, setInputs] = useState({
-    date: [null, null],
+    date: "",
     companyName: "",
     gstNumber: "",
     email: "",
@@ -35,8 +35,12 @@ const Company = () => {
     setStep(step - 1);
   };
 
-  const handleDateChange = (value) => {
-    setInputs((prevInputs) => ({ ...prevInputs, date: value }));
+  const handleDateChange = (e) => {
+    const { name, value } = e.target;
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
   };
   const countryList = Object.values(coutry);
   const successToastPosition = "top-center";
@@ -293,11 +297,12 @@ const Company = () => {
                   End Of Month Date
                 </label>
                 <input
-                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200  border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
-                  value={Inputs.date}
+                  className="form-input bg-transparent backdrop-blur-3xl backdrop-brightness-200 border border-light rounded-md placeholder:text-white focus:border-0 shadow-md"
                   type="date"
+                  id="exampleInputaddress"
                   onChange={handleDateChange}
-                  placeholder="date"
+                  name="date"
+                  value={Inputs.date}
                 />
               </div>
               <div className="mb-4">

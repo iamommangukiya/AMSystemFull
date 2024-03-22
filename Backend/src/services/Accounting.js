@@ -541,26 +541,28 @@ class Accounting {
         itemId,
       ]);
 
-      if (currentInventoryRows.length === 0) {
-        throw new Error("Item not found in inventory");
+      if (!currentInventoryRows || currentInventoryRows.length === 0) {
+        throw new Error("Item not found in inventory or inventory is empty");
       }
-      // console.log(currentInventoryRows);
-      const currentQuantity = currentInventoryRows.openingStock;
+      console.log(currentInventoryRows);
+
+      const currentQuantity =
+        currentInventoryRows[0].openingStock == "null"
+          ? 0
+          : currentInventoryRows[0].openingStock;
+
+      // Handle cases where currentQuantity is null or NaN
+      const numericCurrentQuantity =
+        currentQuantity !== null && !isNaN(currentQuantity)
+          ? parseInt(currentQuantity)
+          : 0;
 
       // Update inventory based on transaction type
       let updatedQuantity;
       if (transactionType === "purchase") {
-        updatedQuantity =
-          parseInt(currentQuantity == "null" ? 0 : currentQuantity) +
-          parseInt(quantity);
-        console.log(updatedQuantity);
+        updatedQuantity = numericCurrentQuantity + parseInt(quantity);
       } else if (transactionType === "sale") {
-        updatedQuantity =
-          parseInt(currentQuantity == "null" ? 0 : currentQuantity) -
-          parseInt(quantity);
-        if (updatedQuantity < 0) {
-          throw new Error("Insufficient inventory for sale");
-        }
+        updatedQuantity = numericCurrentQuantity - parseInt(quantity);
       } else {
         throw new Error("Invalid transaction type");
       }
@@ -571,6 +573,7 @@ class Accounting {
 
       return true; // Return true if inventory update is successful
     } catch (error) {
+      console.log(error);
       throw error; // Propagate error if inventory update fails
     }
   }
@@ -586,7 +589,7 @@ class Accounting {
       item.salePrice,
       cmpid,
     ];
-    await this.dbQuery(q, values);
+    await this.dbQuery(q, values, (err, res) => {});
   }
 
   async dbQuery(sql, values = []) {

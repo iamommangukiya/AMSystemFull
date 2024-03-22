@@ -10,8 +10,8 @@ const CompanyDetail = () => {
   const id = localStorage.getItem("itemid");
 
   useEffect(() => {
-    dispatch(fetchDetailsComapny(id));
     dispatch(getbalancesheet());
+    dispatch(fetchDetailsComapny(id));
   }, []);
 
   const result = useSelector(
