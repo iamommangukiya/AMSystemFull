@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import AppContext from "../context/AppContext";
-
+import { useNavigate } from "react-router-dom";
+import logout from "../assets/images/exit.png";
 const Topbar = () => {
+  const navigate = useNavigate();
   const [comany_name, setcomany_name] = useState();
   const context = useContext(AppContext);
   const {
@@ -53,6 +55,10 @@ const Topbar = () => {
     setTimeout(() => {
       parentLi.style.display = "none";
     }, 300);
+  };
+  const handleLogOut = () => {
+    localStorage.clear();
+    navigate("/");
   };
   const currentYear = new Date().getFullYear();
   const currentnextYear = new Date().getFullYear() + 1;
@@ -157,6 +163,7 @@ const Topbar = () => {
               </svg>
             </button>
           </div>
+
           <div>
             <a
               href="javascript:;"
@@ -194,6 +201,15 @@ const Topbar = () => {
                 ></path>
               </svg>
             </a>
+          </div>
+          <div>
+            <img
+         
+            src={logout}
+              style={{ height: "18px" }}
+              onClick={handleLogOut}
+            ></img>
+            {/* <button onClick={handleLogOut}>Log Out</button> */}
           </div>
           {/* @click.outside="open = false" */}
           {/* <div class="notification h-5" x-data="dropdown">

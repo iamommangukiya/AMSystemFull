@@ -1,10 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { NavLink } from "react-router-dom";
 import AppContext from "../context/AppContext";
 import { hover } from "@testing-library/user-event/dist/hover";
+import Logo1 from "../assets/images/logo5.png";
+import Logo2 from "../assets/images/logo6.png";
 
 const Sidebar = () => {
+  useEffect(() => {
+    console.log("object");
+  }, []);
   const context = useContext(AppContext);
   const { activeMenu, activeSubMenu, updateMenu, updateSubMenu } = context;
 
@@ -15,14 +20,14 @@ const Sidebar = () => {
           <div className="p-4">
             <a href="#" className="main-logo w-full">
               <img
-                src="./assets/images/logo5.png"
+                src={Logo1}
                 height={200}
                 width={130}
                 className="mx-auto dark-logo h-7  dark:hidden"
                 alt="logo"
               />
               <img
-                src="./assets/images/logo6.png"
+                src={Logo2}
                 height={200}
                 width={130}
                 className="mx-auto light-logo h-7 logo hidden dark:block"
@@ -99,8 +104,7 @@ const Sidebar = () => {
                         Soon
                       </span>
                     </a> */}
-                    <NavLink to="/dashboard/itemmaster">Inventories
-</NavLink>
+                    <NavLink to="/dashboard/itemmaster">Inventories</NavLink>
                   </li>
                 </ul>
               </li>
@@ -134,8 +138,7 @@ const Sidebar = () => {
                   className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 "
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/Recipt">Credit transaction
-</NavLink>
+                    <NavLink to="/dashboard/Recipt">Credit transaction</NavLink>
                   </li>
 
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
@@ -149,29 +152,24 @@ const Sidebar = () => {
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/transectionrecord">
-                    Transactions
+                      Transactions
                     </NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/PurchaseBill">
-                    Purchase bill
-
+                      Purchase bill
                     </NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/SaleBill">Sales bill
-</NavLink>
+                    <NavLink to="/dashboard/SaleBill">Sales bill</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/deliveryChallan">
-                    Delivery challan
-
+                      Delivery challan
                     </NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/quotation">
-                    Quotations
-                    </NavLink>
+                    <NavLink to="/dashboard/quotation">Quotations</NavLink>
                   </li>
                 </ul>
               </li>
@@ -206,8 +204,7 @@ const Sidebar = () => {
                     <NavLink to="/dashboard/Purchase">Purchase report</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/Salse">Sales report
-</NavLink>
+                    <NavLink to="/dashboard/Salse">Sales report</NavLink>
                   </li>
                   <li>
                     <NavLink to="/dashboard/gst">Gst report</NavLink>

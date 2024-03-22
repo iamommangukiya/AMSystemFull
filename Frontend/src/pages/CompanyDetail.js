@@ -65,13 +65,13 @@ const CompanyDetail = () => {
         <div className="h-48 p-5 flex justify-center items-center flex-col bg-white">
           <p className="font-bold text-2xl">P/L</p>
           <p className=" text-2xl">
-            ₹{" "}
             {balancesheetData &&
               balancesheetData.sales - balancesheetData.Purchase < 0 &&
               "Loss"}
             {balancesheetData &&
               balancesheetData.sales - balancesheetData.Purchase >= 0 &&
-              "Profit"}
+              "Profit"}{" "}
+            ₹
             {balancesheetData &&
               Math.abs(balancesheetData.sales - balancesheetData.Purchase)}
           </p>

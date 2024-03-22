@@ -133,16 +133,8 @@ const Registration = () => {
                 Or with Email
               </div>
               <div className="w-full h-[2px] bg-white dark:bg-darkborder"></div>
-<<<<<<< HEAD
-            </div>
-            <form onSubmit={handelsubmit} className="grid grid-cols-1 gap-4">
-=======
             </div> */}
-            <form
-              onSubmit={handelsubmit}
-              className="grid grid-cols-1 gap-4"
-            >
->>>>>>> 841fe68aa4605bfe685d02478e22db4212a112e9
+            <form onSubmit={handelsubmit} className="grid grid-cols-1 gap-4">
               <div>
                 <input
                   tabIndex={1}
