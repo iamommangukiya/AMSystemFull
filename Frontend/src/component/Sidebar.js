@@ -90,7 +90,7 @@ const Sidebar = () => {
                   style={{ listStyle: "none" }}
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer">
-                    <NavLink to="/dashboard/party">Party Master</NavLink>
+                    <NavLink to="/dashboard/party">Clients</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     {/* <a href="javascript:;">
@@ -99,7 +99,8 @@ const Sidebar = () => {
                         Soon
                       </span>
                     </a> */}
-                    <NavLink to="/dashboard/itemmaster">Items Master</NavLink>
+                    <NavLink to="/dashboard/itemmaster">Inventories
+</NavLink>
                   </li>
                 </ul>
               </li>
@@ -133,7 +134,8 @@ const Sidebar = () => {
                   className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 "
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/Recipt">Recipt</NavLink>
+                    <NavLink to="/dashboard/Recipt">Credit transaction
+</NavLink>
                   </li>
 
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
@@ -143,29 +145,32 @@ const Sidebar = () => {
                         Soon
                       </span>
                     </a> */}
-                    <NavLink to="/dashboard/Payment">Payment</NavLink>
+                    <NavLink to="/dashboard/Payment">Debit transaction</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/transectionrecord">
-                      transectionrecord
+                    Transactions
                     </NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/PurchaseBill">
-                      Purchase Billing
+                    Purchase bill
+
                     </NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/SaleBill">Sale Billing</NavLink>
+                    <NavLink to="/dashboard/SaleBill">Sales bill
+</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/deliveryChallan">
-                      delivery challan
+                    Delivery challan
+
                     </NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/quotation">
-                      quotation/Estimate
+                    Quotations
                     </NavLink>
                   </li>
                 </ul>
@@ -198,13 +203,14 @@ const Sidebar = () => {
                   className="sub-menu flex flex-col gap-1 text-white dark:text-white/60"
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/Purchase">Purchase Report</NavLink>
+                    <NavLink to="/dashboard/Purchase">Purchase report</NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/Salse">Salse Report</NavLink>
+                    <NavLink to="/dashboard/Salse">Sales report
+</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/gst">GSTR1</NavLink>
+                    <NavLink to="/dashboard/gst">Gst report</NavLink>
                   </li>
                   <li>
                     <NavLink to="/dashboard/gst2">GSTR2</NavLink>
