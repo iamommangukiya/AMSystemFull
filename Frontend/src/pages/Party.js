@@ -14,8 +14,9 @@ import "react-notifications/lib/notifications.css";
 
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
+import { fi } from "date-fns/locale";
 
-const Party = ({ data, mode }) => {
+const Party = ({ data, mode, closeModal }) => {
   const [Inputs, setInputs] = useState({
     partyName: "",
     gstNumber: "",
@@ -66,13 +67,15 @@ const Party = ({ data, mode }) => {
   });
 
   const partyName = useSelector(
-    (state) => state.PartyReducer.resultparty?.flag
+    (state) => state.PartyReducer.resultparty.data?.flag
   );
 
   useEffect(() => {
-    if (partyName === "false") {
+    if (partyName == "false") {
       toast.error("Party Alredy exist", { position: errorToastPosition });
-      dispatch(partyAction.addpartyEmpty());
+      // dispatch(partyAction.addpartyEmpty());
+    } else if (!partyName == "false") {
+      toast.error("Party added", { position: errorToastPosition });
     }
   }, [partyName]);
 
@@ -125,10 +128,12 @@ const Party = ({ data, mode }) => {
       try {
         if (mode === "update") {
           dispatch(updateparty(Inputs));
-          dispatch(partyAction.updatepartyEmpty());
+          closeModal();
+          // dispatch(partyAction.updatepartyEmpty());
         } else {
           dispatch(apiparty(Inputs));
-          dispatch(partyAction.addpartyEmpty());
+          closeModal();
+          // dispatch(partyAction.addpartyEmpty());
           setInputs({
             partyName: "",
             gstNumber: "",
@@ -176,8 +181,8 @@ const Party = ({ data, mode }) => {
           </h2>
           <div className="grid grid-cols-4 gap-3  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1">
             {/* <button className="rounded-full h-10 w-10 bg-black text-white">
-          <Link to="/fetchcompany">go</Link>
-        </button> */}
+            <Link to="/fetchcompany">go</Link>
+          </button> */}
             <div className="mb-4">
               <label className="block text-black text-sm mb-2">PartyName</label>
               <input
@@ -218,6 +223,7 @@ const Party = ({ data, mode }) => {
                   id="exampleInputPhoneNo"
                   inputMode="numeric"
                   pattern="[0-9]*"
+                  required
                   onChange={handelchange}
                   onKeyPress={(e) => {
                     // Allow only numeric characters
@@ -260,29 +266,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.address}
               />
             </div>
-            {/* <div className="mb-4">
-              <label
-                htmlFor="exampleInputcountry"
-                className="block text-black text-sm mb-2"
-              >
-                Country
-              </label>
 
-              <select
-                className="block w-full h-10 p-2 form-input rounded-l-md border border-gray-400 rounded-md"
-                onChange={handelchange}
-                name="country"
-                value={Inputs.country}
-              >
-                <option disabled>Select a country</option>
-                {countryList.map((country) => (
-                  <option key={country.name} value={country.name}>
-                    {country.name}
-                  </option>
-                ))}
-              </select>
-              
-            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInputcity"
@@ -302,21 +286,21 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label
-                htmlFor="exampleInputstatecode"
-                className="block text-black text-sm mb-2"
-              >
-                State Code
-              </label>
-              <input
-                type="number"
-                className="form-input border border-gray-400 w-full h-10 rounded-md"
-                id="exampleInputstatecode"
-                onChange={handelchange}
-                name="statecode"
-                value={Inputs.statecode}
-              />
-            </div> */}
+                <label
+                  htmlFor="exampleInputstatecode"
+                  className="block text-black text-sm mb-2"
+                >
+                  State Code
+                </label>
+                <input
+                  type="number"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
+                  id="exampleInputstatecode"
+                  onChange={handelchange}
+                  name="statecode"
+                  value={Inputs.statecode}
+                />
+              </div> */}
             {mode === "add" && (
               <div className="mb-4">
                 <label
@@ -356,28 +340,28 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Account Group
-              </label>
+                <label className="block text-black text-sm mb-2">
+                  Account Group
+                </label>
 
-              <select
-                className="  form-input border border-gray-400 w-full h-10 rounded-md"
-                onChange={handelchange}
-                re
-                name="accountGroup"
-                value={Inputs.accountGroup}
-              >
-                <option disabled>Select account group </option>
-                {result &&
-                  result.map((items, index) => {
-                    return (
-                      <option key={index} value={items.GroupName}>
-                        {items.GroupName}{" "}
-                      </option>
-                    );
-                  })}
-              </select>
-            </div> */}
+                <select
+                  className="  form-input border border-gray-400 w-full h-10 rounded-md"
+                  onChange={handelchange}
+                  re
+                  name="accountGroup"
+                  value={Inputs.accountGroup}
+                >
+                  <option disabled>Select account group </option>
+                  {result &&
+                    result.map((items, index) => {
+                      return (
+                        <option key={index} value={items.GroupName}>
+                          {items.GroupName}{" "}
+                        </option>
+                      );
+                    })}
+                </select>
+              </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInputEmail1"
@@ -386,6 +370,7 @@ const Party = ({ data, mode }) => {
                 Pan
               </label>
               <input
+                required
                 type="text"
                 className={`form-input border border-gray-400 w-full h-10 rounded-md ${
                   valid.panvalid ? "border-red-500" : ""
@@ -405,6 +390,7 @@ const Party = ({ data, mode }) => {
                 Gst Number
               </label>
               <input
+                required
                 type="text"
                 className={`form-input border border-gray-400 w-full h-10 rounded-md ${
                   valid.gstvalid ? "border-red-500" : ""
@@ -416,17 +402,17 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                NatureOfOrg
-              </label>
-              <input
-                type="text"
-                className="form-input border border-gray-400 w-full h-10 rounded-md"
-                onChange={handelchange}
-                name="natureOfOrg"
-                value={Inputs.natureOfOrg}
-              />
-            </div> */}
+                <label className="block text-black text-sm mb-2">
+                  NatureOfOrg
+                </label>
+                <input
+                  type="text"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
+                  onChange={handelchange}
+                  name="natureOfOrg"
+                  value={Inputs.natureOfOrg}
+                />
+              </div> */}
             <div className="mb-4">
               <label className="block text-black text-sm mb-2">
                 DeliveryAddress
@@ -440,30 +426,30 @@ const Party = ({ data, mode }) => {
               />
             </div>
             {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Distance
-              </label>
-              <input
-                type="text"
-                className="form-input border border-gray-400 w-full h-10 rounded-md"
-                onChange={handelchange}
-                name="distance"
-                value={Inputs.distance}
-              />
-            </div> */}
+                <label className="block text-black text-sm mb-2">
+                  Distance
+                </label>
+                <input
+                  type="text"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
+                  onChange={handelchange}
+                  name="distance"
+                  value={Inputs.distance}
+                />
+              </div> */}
             {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                CreditLimit
-              </label>
-              <input
-                type="number"
-                className="form-input border border-gray-400 w-full h-10 rounded-md"
-                id="exampleInputaddress"
-                onChange={handelchange}
-                name="creditLimit"
-                value={Inputs.creditLimit}
-              />
-            </div> */}
+                <label className="block text-black text-sm mb-2">
+                  CreditLimit
+                </label>
+                <input
+                  type="number"
+                  className="form-input border border-gray-400 w-full h-10 rounded-md"
+                  id="exampleInputaddress"
+                  onChange={handelchange}
+                  name="creditLimit"
+                  value={Inputs.creditLimit}
+                />
+              </div> */}
             <div className="mb-4">
               <label className="block text-black text-sm mb-2">Remark</label>
               <input
@@ -477,27 +463,6 @@ const Party = ({ data, mode }) => {
               />
             </div>
 
-            {/* <div className="mb-4 relative">
-              <label
-                htmlFor="exampleInputstate"
-                className="block text-black text-sm mb-2"
-              >
-                TDS
-              </label>
-              <div className="relative">
-                <input
-                  type="number"
-                  className="form-input border border-gray-400 w-full h-10 rounded-md pr-10"
-                  inputMode="decimal"
-                  onChange={handelchange}
-                  name="tds"
-                  value={Inputs.tds}
-                />
-                <span className="absolute inset-y-0 right-2 flex items-center pr-6 text-gray-400 disabled:">
-                  %
-                </span>
-              </div>
-            </div> */}
             <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
@@ -536,22 +501,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.brokerage}
               />
             </div>
-            {/* <div className="mb-4">
-              <label
-                htmlFor="exampleInputstate"
-                className="block text-black text-sm mb-2"
-              >
-                RF
-              </label>
-              <input
-                type="number"
-                className="form-input border border-gray-400 w-full h-10 rounded-md"
-                inputmode="decimal"
-                onChange={handelchange}
-                name="rf"
-                value={Inputs.rf}
-              />
-            </div> */}
+
             <div className="mb-4">
               <label
                 htmlFor="exampleInputstate"
@@ -568,19 +518,7 @@ const Party = ({ data, mode }) => {
                 value={Inputs.TCSRate}
               />
             </div>
-            {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                OpeningBalance
-              </label>
-              <input
-                type="number"
-                className="form-input border border-gray-400 w-full h-10 rounded-md"
-                inputmode="decimal"
-                onChange={handelchange}
-                name="openingBalance"
-                value={Inputs.openingBalance}
-              />
-            </div> */}
+
             <div className="mb-4">
               <label
                 htmlFor="exampleInput"
@@ -599,13 +537,6 @@ const Party = ({ data, mode }) => {
             </div>
           </div>
           <div className=" text-center mb-3 text-primary text-2xl items-center justify-between ">
-            {/* <button
-              className="btn py-2.5 text-xl bg-purple border border-purple rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
-              onClick={validation}
-              type="submit"
-            >
-              Submit
-            </button> */}
             {mode === "add" && (
               <button
                 className="btn  text-xl bg-[#225777] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"

@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import "sweetalert2/dist/sweetalert2.min.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { saveAs } from "file-saver";
 
+import * as XLSX from "xlsx";
 import { transction_Records } from "../reducer/Trasction_reducer";
 
 const Trasection_Records = () => {
@@ -16,7 +18,19 @@ const Trasection_Records = () => {
   var result = useSelector(
     (state) => state.TransctionReducer.transectionReports?.data
   );
-
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(result);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Transaction Records");
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    saveAs(
+      new Blob([excelBuffer], { type: "application/octet-stream" }),
+      "transaction_records.xlsx"
+    );
+  };
   useEffect(() => {
     dispatch(transction_Records());
   }, []);
@@ -67,7 +81,7 @@ const Trasection_Records = () => {
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
         <div className="grid grid-cols-1 gap-4">
           <div className="bg-white border border-black/10 p-5 rounded dark:bg-darklight dark:border-darkborder">
-            <div className="flex justify-end mt-4">
+            <div className="flex justify-end mt-4 space-x-3">
               <input
                 type="text"
                 placeholder="name..."
@@ -75,6 +89,12 @@ const Trasection_Records = () => {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="p-2 border rounded"
               />
+              <button
+                onClick={exportToExcel}
+                className="bg-[#225777] text-white px-4 py-2 rounded-md mr-2"
+              >
+                Export to Excel
+              </button>
             </div>
 
             <div className="overflow-auto">

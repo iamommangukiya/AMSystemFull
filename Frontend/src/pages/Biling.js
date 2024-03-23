@@ -16,6 +16,7 @@ import { validGst } from "./Regex";
 
 const Biling = () => {
   const navigate = useNavigate();
+  const [errors, setErrors] = useState({});
   const location = useLocation(); // Hook to access the current location object
   const mode = location.state?.mode || ""; // Get the mode from the state
   const editdata = location.state?.data;
@@ -73,16 +74,7 @@ const Biling = () => {
     kasar: "",
     transactionType: "unpaid",
     deliveryAdress: "",
-    items: [
-      {
-        id: 1,
-        item: "",
-        description: "",
-        purchasePrice: "",
-        qty: "",
-        amount: "",
-      },
-    ],
+    items: [],
   });
 
   const [isChecked, setIsChecked] = useState(false);
@@ -91,22 +83,13 @@ const Biling = () => {
   // slider item
   useEffect(() => {
     if (editdata) {
-      console.log();
+      console.log("ineditdata");
       dispatch(getItemsOfBill(editdata.id));
       setInputs({ ...editdata });
     } else {
       setInputs((prevInputs) => ({
         ...prevInputs,
-        items: [
-          {
-            id: 1,
-            item: "",
-            description: "",
-            purchasePrice: "",
-            qty: "",
-            amount: "",
-          },
-        ],
+        items: [],
       }));
     }
   }, [editdata]);
@@ -258,24 +241,46 @@ const Biling = () => {
   const flag = useSelector((state) => state.BillingReducer.result.flag || {});
   const validation = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+
+    // Perform validation
+    const errors = {};
+    if (!Inputs.invoiceNo.trim()) {
+      errors.invoiceNo = "Invoice number is required";
+    }
+    if (!Inputs.bPartyName.trim()) {
+      errors.bPartyName = "Party name is required";
+    }
+    if (
+      Inputs.items.length === 0 ||
+      Inputs.items.some((item) => !item.name || !item.qty || item.qty <= 0)
+    ) {
+      errors.items = "At least one valid item is required";
+    }
+    // Additional validations as needed...
     if (Inputs.isGstBill) {
       const isGst = validGst.test(Inputs.pgstNo);
-
       if (!isGst) {
-      } else {
-        SumbmitHandle();
+        errors.gst = "Please Enter valid GSTIN";
+        // Prevent submission if GST is invalid
       }
     }
-    SumbmitHandle();
+    // If there are errors, set them and prevent form submission
+    if (Object.keys(errors).length > 0) {
+      setErrors(errors);
+      return;
+    }
 
-    // setValid(() => ({
-    //   gstvalid: !isGst,
-    // }));
+    // Clear previous errors if any
+    setErrors({});
+
+    // If no errors, proceed with form submission
+
+    SumbmitHandle();
   };
   if (flag === true) {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
-    dispatch(billingaction.clearBillitem()  );
+    dispatch(billingaction.clearBillitem());
     setTimeout(() => {
       // navigate("/dashboard/PurchaseBill");
       window.history.back();
@@ -390,7 +395,6 @@ const Biling = () => {
         paidAmount: 0,
       }));
     } else {
-      // For other transaction types, update the state normally
       setInputs((prevInputs) => ({
         ...prevInputs,
         transactionType: selectedTransactionType,
@@ -454,7 +458,7 @@ const Biling = () => {
         toggleSlideover={toggleslider}
         inventoryItems={inventoryItems}
       ></Slidover>
-      <div className=" flex-col min-h-screen justify-center flex items-center  dark:bg-darklight dark:border-darkborder">
+      <div className=" flex-col min-h-screen justify-betweens flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
           <p>
@@ -475,7 +479,7 @@ const Biling = () => {
               "purchase Billing"}
           </p>
           {mode !== "deliveryChallan" && (
-            <div className="switch ps-2">
+            <div className="switch ps-2 justify-end">
               <input
                 type="checkbox"
                 className="rounded-sm p-3"
@@ -485,19 +489,30 @@ const Biling = () => {
             </div>
           )}
         </h2>
-        <form className="grid grid-cols-1   dark:bg-darklight dark:text-white dark:border-dark gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 ">
+        <form
+          onSubmit={validation}
+          className="grid grid-cols-1    dark:bg-darklight dark:text-white dark:border-dark gap-3 md:grid-cols-2 py-5 lg:grid-cols-4 xl:grid-cols-4 pt-6  mb-4 "
+        >
           {/* party start */}
           {/* // party name */}
 
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">PartyName:</label>
+            <label className="block text-black text-sm mb-2">
+              PartyName: *
+            </label>
             <input
               type="text"
-              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
+              required
+              className="form-input border focus:border-0  border-gray-400 w-full rounded-md h-10 "
               onChange={handelchange}
               name="bPartyName"
               value={Inputs.bPartyName}
             />
+            {errors.bPartyName && (
+              <p className="text-red-600" htmlFor="">
+                {errors.bPartyName}
+              </p>
+            )}
           </div>
           {/* // Party adress */}
           <div className="mb-4">
@@ -539,12 +554,18 @@ const Biling = () => {
                 Party GSTIN:
               </label>
               <input
+                required
                 type="text"
                 className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
                 onChange={handelchange}
                 name="pgstNo"
                 value={Inputs.pgstNo}
               />
+              {errors.gst && (
+                <>
+                  <p className="text-red-600">{errors.gst}</p>
+                </>
+              )}
             </div>
           )}
 
@@ -555,7 +576,7 @@ const Biling = () => {
           {/* // bill no */}
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              Invoice Number
+              Invoice Number*
             </label>
             <input
               type="number"
@@ -565,6 +586,11 @@ const Biling = () => {
               name="invoiceNo"
               value={Inputs.invoiceNo}
             />
+            {errors.invoiceNo && (
+              <p className="text-red-600" htmlFor="">
+                {errors.invoiceNo}
+              </p>
+            )}
           </div>
           {/* // date */}
           <div className="mb-4">
@@ -606,71 +632,6 @@ const Biling = () => {
             />
           </div>
 
-          {/* gst %? */}
-          {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Total CGST:
-              </label>
-              <input
-                type="number"
-                className="form-input border border-primary w-full rounded-md h-10"
-                onChange={handelchange}
-                name="totalCgst"
-                value={Inputs.totalCgst}
-              />
-            </div> */}
-          {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                Total IGst:
-              </label>
-              <input
-                type="number"
-                className="form-input border border-primary w-full rounded-md h-10"
-                onChange={handelchange}
-                name="totalIGst"
-                value={Inputs.totalIGst}
-              />
-            </div> */}
-
-          {/* bookname */}
-          {/* <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Book Name:
-            </label>
-            <input
-              type="text"
-              className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
-              onChange={handelchange}
-              name="bookName"
-              value={Inputs.bookName}
-            />
-          </div> 
-          {/* pay Amount */}
-          {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                PayAmount:
-              </label>
-              <input
-                type="number"
-                className="form-input border border-primary w-full rounded-md h-10"
-                onChange={handelchange}
-                name="payAmount"
-                value={Inputs.payAmount}
-              />
-            </div> */}
-
-          {/* <div className="mb-4">
-              <label className="block text-black text-sm mb-2">
-                panding:
-              </label>
-              <input
-                type="text"
-                className="form-input border border-primary w-full rounded-md h-10"
-                onChange={handelchange}
-                name="panding"
-                value={Inputs.panding}
-              />
-            </div> */}
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
               deliveryAdress:
@@ -685,11 +646,8 @@ const Biling = () => {
           </div>
         </form>
 
-        <div class="block w-full">
-          <table
-            class="w-full  mb-4 bg-transparent table-hover  dark:bg-darklight dark:text-white dark:border-darkborder bg-white"
-            id="addTable"
-          >
+        <div class="block w-full overflow-x-auto">
+          <table class="w-full mb-4 bg-transparent table-hover dark:bg-darklight dark:text-white dark:border-darkborder bg-white">
             <thead>
               <tr>
                 <th>#</th>
@@ -703,6 +661,7 @@ const Biling = () => {
               </tr>
             </thead>
             <tbody className="tbodyone">
+              {console.log(Inputs.items)}
               {Inputs.items &&
                 Inputs.items.map((row, index) => (
                   <tr key={index}>
@@ -711,70 +670,68 @@ const Biling = () => {
                       <input
                         type="text"
                         name="name"
-                        className=" dark:bg-darklight focus:border-0 w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
                         value={row.name}
+                        disabled
                         onChange={(e) => handelchange(e, index)}
-                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                        // Disable the input if it's the first row and no other product is added
                       />
                     </td>
                     <td>
                       <input
                         type="text"
                         name="description"
-                        className=" dark:bg-darklight focus:border-0 w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
                         value={row.description}
                         onChange={(e) => handelchange(e, index)}
-                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                        // Disable the input if it's the first row and no other product is added
                       />
                     </td>
                     <td>
                       <input
                         type="number"
-                        className=" dark:bg-darklight focus:border-0 w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
                         inputMode="decimal"
                         name="salePrice"
                         value={row.salePrice}
                         onChange={(e) => handelchange(e, index)}
-                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                        // Disable the input if it's the first row and no other product is added
                       />
                     </td>
                     <td>
                       <input
-                        className=" dark:bg-darklight focus:border-0 w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
                         type="number"
                         name="qty"
                         defaultValue={1}
                         value={row.qty}
                         onChange={(e) => handelchange(e, index)}
-                        disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                        // Disable the input if it's the first row and no other product is added
                       />
                     </td>
                     {Inputs.isGstBill == true && (
                       <td>
                         <input
                           type="number"
-                          className=" dark:bg-darklight focus:border-0 w-48"
+                          className="dark:bg-darklight focus:border-0 w-full md:w-48"
                           name="GST"
                           value={row.GST}
                           onChange={(e) => handelchange(e, index)}
-                          disabled={index === 0 && Inputs.items.length === 1} // Disable the input if it's the first row and no other product is added
+                          // Disable the input if it's the first row and no other product is added
                         />
                       </td>
                     )}
                     <td>
                       <input
                         type="number"
-                        className=" dark:bg-darklight focus:border-0 w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
                         disabled
                         value={row.amount}
                         readOnly
                       />
                     </td>
                     {index === 0 ? (
-                      <td>
-                        {/* <button onClick={addRow}>Add</button> */}
-                        <button onClick={toggleslider}>Add</button>
-                      </td>
+                      <td>{/* <button onClick={addRow}>Add</button> */}</td>
                     ) : (
                       <td>
                         <button onClick={() => deleteRow(index)}>Delete</button>
@@ -789,7 +746,16 @@ const Biling = () => {
           <table class="w-full max-w-full   dark:bg-darklight dark:text-white dark:border-darkborder mb-4 bg-transparent table-hover bg-white">
             <tbody>
               <tr className="flex justify-end ">
-                <td className="col-span-9"></td>
+                <td>
+                  <button
+                    className="text-xl text-center px-3 py-2 rounded text- bg-slate-200"
+                    onClick={toggleslider}
+                  >
+                    Add
+                  </button>
+                </td>
+
+                <td className="col-span-8"></td>
 
                 <td colspan="5" class="text-end">
                   Total Item

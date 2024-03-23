@@ -19,9 +19,6 @@ const ItemmasterRecords = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(items_get());
-  }, [dispatch]);
   const closemodal = () => {
     setModal(false);
   };
@@ -37,6 +34,10 @@ const ItemmasterRecords = () => {
     if (result?.length > 0) {
       setFilterDate(result);
     }
+  }, [result]);
+
+  useEffect(() => {
+    dispatch(items_get());
   }, [result]);
 
   if (!result || !Array.isArray(result)) {
@@ -108,7 +109,11 @@ const ItemmasterRecords = () => {
     <>
       <div>
         <React_Modal isOpen={Modal} closeModal={closemodal}>
-          <ItemMaster data={editValues} mode={Mode}></ItemMaster>
+          <ItemMaster
+            data={editValues}
+            mode={Mode}
+            closeModal={closemodal}
+          ></ItemMaster>
         </React_Modal>
       </div>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">

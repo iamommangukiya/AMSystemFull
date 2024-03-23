@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { items_create, items_get, items_update } from "../reducer/Item_reducer";
 import { ToastContainer, toast } from "react-toastify";
 
-const ItemMaster = ({ data, mode, closeBox }) => {
-  console.log(data, "data");
+const ItemMaster = ({ data, mode, closeModal }) => {
   const [inputs, setInput] = useState({
     name: "",
     unit: "",
@@ -42,6 +41,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
     try {
       dispatch(items_create(inputs));
       dispatch(items_get());
+      closeModal();
     } catch {}
 
     if (msg === true) {
@@ -55,7 +55,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
     try {
       dispatch(items_update(inputs));
       dispatch(items_get());
-      closeBox();
+      closeModal();
     } catch {}
 
     if (msg === true) {
@@ -97,6 +97,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               <label className="block text-black text-sm  mb-2">Unit</label>
               <select
                 name="unit"
+                required
                 value={inputs.unit}
                 onChange={handelchange}
                 className="form-input border border-gray-400 w-30 h-10 rounded-md"
@@ -118,6 +119,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               <div className="relative">
                 <input
                   type="number"
+                  required
                   defaultValue={0}
                   name="openingStock"
                   onChange={handelchange}

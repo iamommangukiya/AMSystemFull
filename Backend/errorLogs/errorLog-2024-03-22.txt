@@ -57,3 +57,8 @@
 2024-03-22T16:38:4  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
 2024-03-22T16:40:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
 2024-03-22T16:41:3  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-22T19:37:0  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-22T19:37:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-22T19:37:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-22T19:37:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-22T19:37:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')

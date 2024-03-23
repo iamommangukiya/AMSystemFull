@@ -8,16 +8,19 @@ const GSTR = ({ mode }) => {
   let dispatch = useDispatch();
   let [cmpdata, setcompany] = useState();
   let [data, setdate] = useState([]);
+  let [fromDate, setFromDate] = useState("");
+  let [toDate, setToDate] = useState("");
+
   useEffect(() => {
     dispatch(fetchDetailsComapny());
     dispatch(gstbill());
   }, []);
 
-  // let cmpDate = useSelector((state) => state.CompanyReducer);
   const cdata = useSelector((state) => state.CompanyReducer.result?.data);
   const gstdata = useSelector(
     (state) => state.BillingReducer.gstBilldata?.data
   );
+
   function calculateTotalTaxAmount(items) {
     let totalTax = 0;
     let totalAmount = 0;
@@ -33,24 +36,35 @@ const GSTR = ({ mode }) => {
 
     return { totalTax: totalTax.toFixed(2), gstRate: gstRate }; // Rounding to 2 decimal places
   }
-  let [colspan, setcolspan] = useState();
+
   useEffect(() => {
     if (cdata) {
       setcompany(cdata[0]);
     }
   }, [cdata]);
+
   useEffect(() => {
     if (gstdata) {
       let fildata = [];
-      if (mode == "purchase") {
-        fildata = gstdata.filter((item) => item.bookName == "PurchaseBook");
+      if (mode === "purchase") {
+        fildata = gstdata.filter((item) => item.bookName === "PurchaseBook");
       } else {
-        fildata = gstdata.filter((item) => item.bookName == "SalesBook");
+        fildata = gstdata.filter((item) => item.bookName === "SalesBook");
       }
-      console.log(fildata);
+
+      // Apply date range filter if both from date and to date are selected
+      if (fromDate && toDate) {
+        fildata = fildata.filter((item) => {
+          const itemDate = new Date(item.invoiceDate);
+          const from = new Date(fromDate);
+          const to = new Date(toDate);
+          return itemDate >= from && itemDate <= to;
+        });
+      }
+
       setdate(fildata);
     }
-  }, [gstdata, mode]);
+  }, [gstdata, mode, fromDate, toDate]);
 
   const { toPDF, targetRef } = usePDF({
     filename: "gstR1.pdf",
@@ -62,13 +76,25 @@ const GSTR = ({ mode }) => {
 
   return (
     <section className=" flex  flex-col justify-center items-center ">
-      <section className="flex w-full justify-end mr-64 mb-4 ">
+      <section className="flex space-x-3 w-full justify-end mr-64 mb-4 ">
         <button
           className="bg-[#225777] text-white rounded-lg py-2 px-5 border border-[#225777] transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
           onClick={() => toPDF()}
         >
           GET PDF
         </button>
+        <input
+          className="border rounded"
+          type="date"
+          value={fromDate}
+          onChange={(e) => setFromDate(e.target.value)}
+        />
+        <input
+          className="border rounded"
+          type="date"
+          value={toDate}
+          onChange={(e) => setToDate(e.target.value)}
+        />
       </section>
 
       <section
@@ -118,7 +144,11 @@ const GSTR = ({ mode }) => {
         </section>
 
         <section class="container">
-          <h1 class="text-xl font-bold pb-5">Sale</h1>
+          <h1 class="text-xl font-bold pb-5">
+            {console.log(mode)}
+            {mode == "purchase" && "purchase"}
+            {mode == "salse" && "salse"}
+          </h1>
 
           <table class="text-center">
             <tr>
@@ -197,7 +227,9 @@ const GSTR = ({ mode }) => {
                       <td class="border border-black">₹ 0</td>
                       <td class="border border-black">₹ 0</td>
                       <td rowspan="" class="border border-black">
-                        {party.bStateCode}
+                        {party.bStateCode == "undefined"
+                          ? ""
+                          : party.bStateCode}
                       </td>
                     </>
                   </tr>

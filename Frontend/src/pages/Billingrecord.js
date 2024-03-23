@@ -14,7 +14,7 @@ const Billingrecord = ({ mode }) => {
       // Use === for comparison instead of =
       dispatch(getbilldata("PurchaseBook"));
     } else if (mode === "salse") {
-      dispatch(getbilldata("salesBook")); // Removed redundant dispatch
+      dispatch(getbilldata("SalesBook")); // Removed redundant dispatch
     } else if (mode === "deliveryChallan") {
       dispatch(getbilldata("deliveryChallan"));
     } else if (mode === "quotation") {
@@ -56,7 +56,16 @@ const Billingrecord = ({ mode }) => {
         // console.log("index");
         // console.log(index);
         dispatch(deletebill(index));
-        dispatch(getbilldata());
+        if (mode === "purchase") {
+          // Use === for comparison instead of =
+          dispatch(getbilldata("PurchaseBook"));
+        } else if (mode === "salse") {
+          dispatch(getbilldata("SalesBook")); // Removed redundant dispatch
+        } else if (mode === "deliveryChallan") {
+          dispatch(getbilldata("deliveryChallan"));
+        } else if (mode === "quotation") {
+          dispatch(getbilldata("quotation"));
+        }
       }
     });
   };

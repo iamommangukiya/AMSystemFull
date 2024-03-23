@@ -78,7 +78,7 @@ const PartyRecord = () => {
 
   useEffect(() => {
     dispatch(apipartyGet());
-  }, []);
+  }, [result]);
 
   useEffect(() => {
     if (result?.length > 0) {
@@ -127,7 +127,7 @@ const PartyRecord = () => {
             </button>
           </div>
           <React_Modal isOpen={modal} closeModal={closeModal}>
-            <Party data={editedValues} mode={mode} />
+            <Party data={editedValues} mode={mode} closeModal={closeModal} />
           </React_Modal>
         </div>
       </>
@@ -161,7 +161,7 @@ const PartyRecord = () => {
       />
       <div>
         <React_Modal isOpen={modal} closeModal={closeModal}>
-          <Party data={editedValues} mode={mode} />
+          <Party data={editedValues} mode={mode} closeModal={closeModal} />
         </React_Modal>
       </div>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
@@ -175,12 +175,6 @@ const PartyRecord = () => {
                 placeholder="search "
               />
               <div className="space-x-5">
-                <button
-                  onClick={() => setExcelModalOpen(true)} // Open Excel upload modal
-                  className="btn  py-2 mb-4 px-3 text-sm bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
-                >
-                  Add By Excel
-                </button>
                 <button
                   onClick={() => {
                     setEditedValues("");

@@ -120,6 +120,44 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
               <>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
+                    Account From:
+                  </label>
+
+                  <select
+                    value={inputs.AccountFrom}
+                    name="AccountFrom"
+                    onChange={handelchange}
+                    className="form-input border  border-primary w-full h-10 rounded-md"
+                  >
+                    <option value="">Select </option>
+                    <option value="Bank">Bank</option>
+                    <option value="cash">cash</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                    Account To:
+                  </label>
+                  <select
+                    name="AccountTo"
+                    value={inputs.AccountTo}
+                    onChange={handelchange}
+                    className="form-input border border-primary w-full h-10 rounded-md"
+                  >
+                    <option value="">Select </option>
+                    {party.map((items, index) => (
+                      <option key={index} value={items.partyName}>
+                        {items.partyName}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </>
+            )}
+            {transectionType == "debit" && (
+              <>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2">
                     AccountTo
                   </label>
 

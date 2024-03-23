@@ -1,0 +1,3 @@
+2024-03-23T09:54:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T09:54:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T09:59:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
