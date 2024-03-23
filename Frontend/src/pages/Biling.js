@@ -664,7 +664,6 @@ const Biling = () => {
                 <th>Qty</th>
                 {Inputs.isGstBill == true && <th>GST%</th>}
                 <th>Amount</th>
-                <th> </th>
               </tr>
             </thead>
             <tbody className="tbodyone">
@@ -677,7 +676,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="name"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         value={row.name}
                         disabled
                         onChange={(e) => handelchange(e, index)}
@@ -688,7 +687,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="description"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         value={row.description}
                         onChange={(e) => handelchange(e, index)}
                         // Disable the input if it's the first row and no other product is added
@@ -697,7 +696,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         inputMode="decimal"
                         name="salePrice"
                         value={row.salePrice}
@@ -707,7 +706,7 @@ const Biling = () => {
                     </td>
                     <td>
                       <input
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         type="number"
                         name="qty"
                         defaultValue={1}
@@ -720,7 +719,7 @@ const Biling = () => {
                       <td>
                         <input
                           type="number"
-                          className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                          className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                           name="GST"
                           value={row.GST}
                           onChange={(e) => handelchange(e, index)}
@@ -731,7 +730,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         disabled
                         value={row.amount}
                         readOnly
@@ -755,27 +754,15 @@ const Biling = () => {
               <tr className="flex justify-end ">
                 <td>
                   <button
-                    className="text-xl text-center px-3 py-2 rounded text- bg-slate-200"
+                    className="text-xl text-center px-3 py-2 rounded text- bg-slate-200 w-80"
                     onClick={toggleslider}
                   >
                     Add
                   </button>
                 </td>
 
-                <td className="col-span-8"></td>
-
                 <td colspan="5" class="text-end">
                   Total Item
-                </td>
-                <td class="text-end pr-4">
-                  {/* <input
-                      disabled
-                      class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
-                      onClick={handelchange}
-                      readonly=""
-                      type="number"
-                      value={Inputs.to}
-                    /> */}
                 </td>
 
                 <tr>
@@ -793,7 +780,7 @@ const Biling = () => {
                     />
                   </td>
                 </tr>
-                <td colspan="5" class="text-end">
+                <td colspan="6" class="text-center">
                   Total
                 </td>
                 <td class="text-end pr-4">
@@ -909,7 +896,7 @@ const Biling = () => {
             </tbody>
           </table>
         </div>
-        <div class="flex flex-wrap ">
+        {/* <div class="flex flex-wrap ">
           <div class="md:w-full pr-4 pl-4">
             <div class="input-block mb-3">
               <label class="pt-2 pb-2 mb-0 leading-normal">
@@ -918,7 +905,7 @@ const Biling = () => {
               <textarea class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"></textarea>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex items-center justify-between col-3 pb-3">
           {editdata ? (

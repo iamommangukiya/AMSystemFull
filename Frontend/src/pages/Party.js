@@ -176,15 +176,15 @@ const Party = ({ data, mode, closeModal }) => {
           className="bg-white shadow-md rounded px-2 "
           onSubmit={handelSubmit}
         >
-          <h2 className="col-span-full text-[#225777]   text-center mb-10 text-primary text-2xl font-bold">
+          {/* <h2 className="col-span-full text-[#225777]   text-center mb-10 text-primary text-2xl font-bold">
             PartyMaster
-          </h2>
-          <div className="grid grid-cols-4 gap-3  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1">
+          </h2> */}
+          <div className="grid grid-cols-4 pt-5 gap-3  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 sm:grid-cols-1">
             {/* <button className="rounded-full h-10 w-10 bg-black text-white">
             <Link to="/fetchcompany">go</Link>
           </button> */}
             <div className="mb-4">
-              <label className="block text-black text-sm mb-2">PartyName</label>
+              <label className="block text-black text-sm mb-2">Client Name</label>
               <input
                 type="text"
                 className="form-input border border-gray-400 w-full h-10 rounded-md"
@@ -536,23 +536,23 @@ const Party = ({ data, mode, closeModal }) => {
               />
             </div>
           </div>
-          <div className=" text-center mb-3 text-primary text-2xl items-center justify-between ">
+          <div className=" text-center pt-5 text-primary text-2xl items-center justify-between ">
             {mode === "add" && (
               <button
-                className="btn  text-xl bg-[#225777] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+                className="btn text-sm bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 onClick={validation}
                 type="submit"
               >
-                Add Party
+                ADD CLIENTS
               </button>
             )}
             {mode === "update" && (
               <button
-                className="btn text-xl bg-[#225777] border border-purple rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+                className="btn text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 onClick={validation}
                 type="submit"
               >
-                Update Party
+                Update
               </button>
             )}
           </div>

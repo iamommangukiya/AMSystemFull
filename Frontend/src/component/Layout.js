@@ -82,24 +82,24 @@ const Layout = () => {
                     </li>
                     <li className="text-black font-semibold text-2xl dark:text-white">
                       {pathname === "/dashboard" && "Dashbord"}
-                      {pathname === "/dashboard/party" && "PartyMaster"}
-                      {pathname === "/dashboard/itemmaster" && "Itemmaster"}
-                      {pathname === "/dashboard/Recipt" && "Recipt"}
-                      {pathname === "/dashboard/Payment" && "Payment"}
+                      {pathname === "/dashboard/party" && "Clients"}
+                      {pathname === "/dashboard/itemmaster" && "Inventories"}
+                      {pathname === "/dashboard/Recipt" && "Debit Transaction"}
+                      {pathname === "/dashboard/Payment" && "Credit Transaction"}
                       {pathname === "/dashboard/PurchaseBill" &&
-                        "Purchase Billing"}
+                        "Purchase Bill"}
                       {pathname === "/dashboard/transectionrecord" &&
-                        "Transectionrecord"}
-                      {pathname === "/dashboard/SaleBill" && "SaleBill"}
+                        "Transactions"}  
+                      {pathname === "/dashboard/SaleBill" && "Sales Bill"}
 
                       {pathname === "/dashboard/deliveryChallan" &&
-                        "delivery Challan"}
-                      {pathname === "/dashboard/quotation" && "quotation"}
+                        "Delivery Challan"}
+                      {pathname === "/dashboard/quotation" && "Quotation"}
                       {pathname === "/dashboard/Purchase" && "Purchase"}
-                      {pathname === "/dashboard/Salse" && "Salse"}
-                      {pathname === "/dashboard/gst" && "GST Report"}
-                      {pathname === "/dashboard/gst2" && "GST Report"}
-                      {pathname === "/dashboard/balancesheet" && "balancesheet"}
+                      {pathname === "/dashboard/Salse" && "Sales"}
+                      {pathname === "/dashboard/gst" && "GST Sales"}
+                      {pathname === "/dashboard/gst2" && "GST Purchase"}
+                      {pathname === "/dashboard/balancesheet" && "Balance sheet"}
                       {pathname === "/dashboard/AccountPay" &&
                         "Account Payable"}
                       {pathname === "/dashboard/Accountrec" &&

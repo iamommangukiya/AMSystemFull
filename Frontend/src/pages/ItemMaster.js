@@ -68,10 +68,10 @@ const ItemMaster = ({ data, mode, closeModal }) => {
     <>
       <div>
         <form className=" bg-white rounded mb-8   " onSubmit={handelSubmit}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-2 px-4">
-            <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 pt-10 px-4">
+            {/* <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
               Items
-            </h2>
+            </h2> */}
             <div className="mb-4">
               <label className="block text-black text-sm  mb-2">Name</label>
               <input
@@ -190,13 +190,13 @@ const ItemMaster = ({ data, mode, closeModal }) => {
               </div>
             </div>
           </div>
-          <div className=" flex items-center m-auto justify-center">
+          <div className=" flex items-center m-auto justify-center pt-5">
             {mode == "add" && (
               <button
-                className="btn   flex items-center justify-center text-lg bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+                className="btn   flex items-center justify-center text-sm bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 type="submit"
               >
-                Add Product
+                ADD INVENTORIES
               </button>
             )}
             {mode == "update" && (
@@ -205,7 +205,7 @@ const ItemMaster = ({ data, mode, closeModal }) => {
                 type="button"
                 onClick={handleUpdate}
               >
-                update
+                UPDATE
               </button>
             )}
           </div>

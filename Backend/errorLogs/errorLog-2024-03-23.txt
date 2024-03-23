@@ -1,3 +1,270 @@
+<<<<<<< HEAD
+2024-03-23T14:26:0  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:1  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+2024-03-23T14:26:2  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+=======
 2024-03-23T09:54:1  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
 2024-03-23T09:54:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
 2024-03-23T09:59:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'openingStock')
+>>>>>>> 542f60b683b45d13951b1530dadd09fcff24486a
+2024-03-23T15:43:4  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:4  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:4  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:4  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:4  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:43:5  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:44:0  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:44:0  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:44:0  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:44:0  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:44:0  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:44:0  : D:\AMSystemFull\Backend\errorLog.js : TypeError: Cannot read properties of undefined (reading 'id')
+2024-03-23T15:50:0  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:0  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:0  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:1  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:2  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:2  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:2  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:2  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:2  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:2  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:3  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:3  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:4  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:50:4  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:4  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:50:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:2  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:51:2  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T15:51:3  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T16:19:1  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T16:19:2  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T16:19:4  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T16:19:4  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T16:19:5  : D:\AMSystemFull\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-23T16:19:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T16:19:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T16:19:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T16:19:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25
+2024-03-23T16:19:5  : D:\AMSystemFull\Backend\errorLog.js : Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',
+      '',
+      ''
+    )' at line 25

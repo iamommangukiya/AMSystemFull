@@ -209,10 +209,10 @@ const Sidebar = () => {
                     <NavLink to="/dashboard/Salse">Sales report</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/gst">Gst report</NavLink>
+                    <NavLink to="/dashboard/gst">Gst Sales</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/dashboard/gst2">GSTR2</NavLink>
+                    <NavLink to="/dashboard/gst2">Gst Purchase</NavLink>
                   </li>
                   <li>
                     <NavLink to="/dashboard/balancesheet">
