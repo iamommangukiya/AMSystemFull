@@ -657,7 +657,7 @@ const Biling = () => {
                 <th>Qty</th>
                 {Inputs.isGstBill == true && <th>GST%</th>}
                 <th>Amount</th>
-                <th> </th>
+                
               </tr>
             </thead>
             <tbody className="tbodyone">
@@ -670,7 +670,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="name"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         value={row.name}
                         disabled
                         onChange={(e) => handelchange(e, index)}
@@ -681,7 +681,7 @@ const Biling = () => {
                       <input
                         type="text"
                         name="description"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         value={row.description}
                         onChange={(e) => handelchange(e, index)}
                         // Disable the input if it's the first row and no other product is added
@@ -690,7 +690,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         inputMode="decimal"
                         name="salePrice"
                         value={row.salePrice}
@@ -700,7 +700,7 @@ const Biling = () => {
                     </td>
                     <td>
                       <input
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         type="number"
                         name="qty"
                         defaultValue={1}
@@ -713,7 +713,7 @@ const Biling = () => {
                       <td>
                         <input
                           type="number"
-                          className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                          className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                           name="GST"
                           value={row.GST}
                           onChange={(e) => handelchange(e, index)}
@@ -724,7 +724,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
-                        className="dark:bg-darklight focus:border-0 w-full md:w-48"
+                        className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         disabled
                         value={row.amount}
                         readOnly

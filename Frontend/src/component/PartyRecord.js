@@ -121,9 +121,9 @@ const PartyRecord = () => {
                 setMode("add");
                 setModal(true);
               }}
-              className="btn py-2 px-3 text-lg bg-[#225777] rounded-md text-white transition-all duration-300 hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+              className="btn py-2 px-3 text-lg bg-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
             >
-              ADD PARTY
+              ADD 
             </button>
           </div>
           <React_Modal isOpen={modal} closeModal={closeModal}>
@@ -183,7 +183,7 @@ const PartyRecord = () => {
                   }}
                   className="btn  py-2 mb-4 px-3 text-sm bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]  "
                 >
-                  ADD PARTY
+                  ADD CLIENTS
                 </button>
               </div>
             </div>
