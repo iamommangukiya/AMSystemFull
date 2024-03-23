@@ -165,6 +165,7 @@ const ItemMaster = ({ data, mode, closeModal }) => {
               <div className="relative">
                 <input
                   type="number"
+                  required
                   defaultValue={0}
                   name="purchasePrice"
                   onChange={handelchange}
