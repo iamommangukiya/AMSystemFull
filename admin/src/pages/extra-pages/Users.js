@@ -237,17 +237,14 @@ const Users = () => {
                             <TableBody>
                                 {pageUserData.map((data, i) => (
                                     <TableRow key={data._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                                        <TableCell className="br-line" component="th" scope="row">
-                                            <div className="d-flex align-items-center">
-                                                <div className="position-absolute d-flex align-items-center">
-                                                    <span className="m-3 text-center">{data.firstName}</span>
-                                                    {data.is_verified && (
-                                                        <div className="verified-user">
-                                                            <CheckCircleFilled />
-                                                        </div>
-                                                    )}
+                                        <TableCell className="br-line text-center">
+                                            {' '}
+                                            <span className="m-3 text-center">{data.firstName}</span>{' '}
+                                            {data.is_verified && (
+                                                <div className="verified-user">
+                                                    <CheckCircleFilled />
                                                 </div>
-                                            </div>
+                                            )}
                                         </TableCell>
                                         <TableCell className="br-line text-center">{data.lastName}</TableCell>
                                         <TableCell className="br-line text-center">{data.email}</TableCell>

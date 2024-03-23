@@ -78,11 +78,13 @@ const CompanyFetchacompany = () => {
             className="form-select text-black w-full bg-transparent backdrop-blur-3xl backdrop-brightness-200 border border-black rounded-md "
             onChange={handleSelectChange}
           >
-            <option className="text-black">Select option</option>
+            <option className="text-black" >
+              Select option
+            </option>
 
             {response &&
               response.map((item) => (
-                <option key={item.id} value={item.id} className=" text-black">
+                <option key={item.id} value={item.id} className=" text-black ">
                   {item.companyName}
                 </option>
               ))}

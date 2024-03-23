@@ -69,18 +69,18 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
     <>
       <div className="flex items-center  justify-center mb-0">
         <form
-          className=" bg-white rounded mb-4 w-full h-full"
+          className=" bg-white rounded  w-full h-full"
           onSubmit={handelSubmit}
         >
           <div className="grid grid-cols-2 gap-6 px-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 ">
-            <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
+            <h2 className="col-span-full text-center mb-1 text-[#225777] text-2xl font-bold">
               {transectionType == "debit" && "Recipt"}
               {transectionType == "credit" && "Payment"}
             </h2>
 
             {transectionType == "debit" && (
               <>
-                <div className="mb-4">
+                <div className="mb-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
                     AccountFrom
                   </label>
@@ -95,7 +95,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                     <option value="cash">cash</option>
                   </select>
                 </div>
-                <div className="mb-4">
+                <div className="mb-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
                     AccountTo
                   </label>
@@ -118,7 +118,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
             )}
             {transectionType == "credit" && (
               <>
-                <div className="mb-4">
+                <div className="mb-1">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
                     AccountTo
                   </label>
@@ -134,7 +134,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                     <option value="cash">cash</option>
                   </select>
                 </div>
-                <div className="mb-4">
+                <div className="mb-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
                     AccountFrom
                   </label>
@@ -155,7 +155,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
               </>
             )}
 
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 amount
               </label>
@@ -167,7 +167,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 className="form-input border border-gray-400 w-full h-10 rounded-md"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 invoiceNo
               </label>
@@ -180,7 +180,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
               />
             </div>
 
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 chequeNo
               </label>
@@ -192,7 +192,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 className="form-input border border-gray-400 w-full h-10 rounded-md"
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-1">
               <label className="block text-gray-700 text-sm font-bold mb-2">
                 narration
               </label>
@@ -205,7 +205,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
               />
             </div>
           </div>
-          <div className="  text-center mb-4 text-primary text-2xl font-bold items-center justify-between mt-4">
+          <div className="  text-center  text-primary text-2xl font-bold items-center justify-between mt-2">
             {mode === "add" && (
               <button
                 className="btn py-2.5 text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
