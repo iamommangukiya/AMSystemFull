@@ -210,7 +210,7 @@ const PurchaseReport = ({ mode }) => {
                 <p class="mr-2">Show</p>
                 <select
                   name="noOfrecord"
-                  class="h-8  py-1 px-5 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                  class="h-8  py-1 pr-8 rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                   value={recordsPerPage}
                   onChange={handleRecordsPerPageChange}
                 >

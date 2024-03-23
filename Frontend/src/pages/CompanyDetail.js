@@ -42,7 +42,7 @@ const CompanyDetail = () => {
 
   return (
     <>
-      <div className="grid grid-cols-4 text-center gap-4">
+      {/* <div className="grid grid-cols-4 text-center gap-4">
         <div className="h-48 p-5 flex justify-center items-center flex-col bg-white rounded-md shadow-md">
           <p className="font-bold text-2xl">Inventory</p>
           <p className=" text-2xl">
@@ -75,7 +75,7 @@ const CompanyDetail = () => {
               Math.abs(balancesheetData.sales - balancesheetData.Purchase)}
           </p>
         </div>
-      </div>
+      </div> */}
            <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
@@ -85,29 +85,30 @@ const CompanyDetail = () => {
           </div>
           <div>
             <span class="block text-2xl font-bold">₹{balancesheetData && balancesheetData.assets.inventory}</span>
-            <span class="block text-gray-500">Students</span>
+            <span class="block text-gray-500">Inventory</span>
           </div>
         </div>
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
-          <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
-          </div>
-          <div>
-            <span class="block text-2xl font-bold">₹{balancesheetData && balancesheetData.Purchase}</span>
-            <span class="block text-gray-500">Average mark</span>
-          </div>
-        </div>
-        <div class="flex items-center p-8 bg-white shadow rounded-lg">
+          
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
             <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
             </svg>
           </div>
           <div>
+            <span class="block text-2xl font-bold">₹{balancesheetData && balancesheetData.Purchase}</span>
+            <span class="block text-gray-500">Purchase</span>
+          </div>
+        </div>
+        <div class="flex items-center p-8 bg-white shadow rounded-lg">
+        <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+            </svg>
+          </div>
+          <div>
             <span class="inline-block text-2xl font-bold">₹{balancesheetData && balancesheetData.sales}</span>
-            <span class="block text-gray-500">Underperforming students</span>
+            <span class="block text-gray-500">sales</span>
           </div>
         </div>
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
@@ -126,12 +127,12 @@ const CompanyDetail = () => {
             ₹
             {balancesheetData &&
               Math.abs(balancesheetData.sales - balancesheetData.Purchase)}</span>
-            <span class="block text-gray-500">Finished homeworks</span>
+            <span class="block text-gray-500">Profit / Loss</span>
           </div>
         </div>
       </section>
 
-      <div className="bg-white p-6 rounded-md shadow-md mt-4">
+      <div className="bg-white p-6 rounded-md shadow-md mt-6">
         <div className="grid grid-cols-1 gap-10">
           <div>
             <h2 className="text-xl font-bold mb-2">{companyName}</h2>
