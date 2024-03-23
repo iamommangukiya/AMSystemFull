@@ -168,7 +168,7 @@ const Company = () => {
       }
     }
     if (step == 4) {
-      const isPhoneNumberValid = Validpostcode.test(Inputs.postalCode);
+      const isPhoneNumberValid = Validpostcode.test(Inputs.phoneNumber);
       setValid(() => ({
         phonevalid: !isPhoneNumberValid,
       }));
@@ -383,7 +383,7 @@ const Company = () => {
                   </div>
 
                   <div>
-                    {valid.phonevalid && (
+                    {!valid.phonevalid && (
                       <p className="text-red-500">Invalid Phone number</p>
                     )}
                   </div>

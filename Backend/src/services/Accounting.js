@@ -544,12 +544,11 @@ class Accounting {
       if (!currentInventoryRows || currentInventoryRows.length === 0) {
         throw new Error("Item not found in inventory or inventory is empty");
       }
-      console.log(currentInventoryRows);
 
-      const currentQuantity =
-        currentInventoryRows[0].openingStock == "null"
-          ? 0
-          : currentInventoryRows[0].openingStock;
+      let currentQuantity = 0;
+      if (currentInventoryRows) {
+        const currentQuantity = currentInventoryRows.openingStock;
+      }
 
       // Handle cases where currentQuantity is null or NaN
       const numericCurrentQuantity =

@@ -6,8 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { items_create, items_get, items_update } from "../reducer/Item_reducer";
 import { ToastContainer, toast } from "react-toastify";
 
-const ItemMaster = ({ data, mode, closeBox }) => {
-  console.log(data, "data");
+const ItemMaster = ({ data, mode, closeModal }) => {
   const [inputs, setInput] = useState({
     name: "",
     unit: "",
@@ -42,6 +41,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
     try {
       dispatch(items_create(inputs));
       dispatch(items_get());
+      closeModal();
     } catch {}
 
     if (msg === true) {
@@ -55,7 +55,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
     try {
       dispatch(items_update(inputs));
       dispatch(items_get());
-      closeBox();
+      closeModal();
     } catch {}
 
     if (msg === true) {
@@ -68,10 +68,10 @@ const ItemMaster = ({ data, mode, closeBox }) => {
     <>
       <div>
         <form className=" bg-white rounded mb-8   " onSubmit={handelSubmit}>
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 py-2 px-4">
-            <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
+          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 pt-10 px-4">
+            {/* <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
               Items
-            </h2>
+            </h2> */}
             <div className="mb-4">
               <label className="block text-black text-sm  mb-2">Name</label>
               <input
@@ -97,6 +97,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               <label className="block text-black text-sm  mb-2">Unit</label>
               <select
                 name="unit"
+                required
                 value={inputs.unit}
                 onChange={handelchange}
                 className="form-input border border-gray-400 w-30 h-10 rounded-md"
@@ -118,6 +119,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               <div className="relative">
                 <input
                   type="number"
+                  required
                   defaultValue={0}
                   name="openingStock"
                   onChange={handelchange}
@@ -187,13 +189,13 @@ const ItemMaster = ({ data, mode, closeBox }) => {
               </div>
             </div>
           </div>
-          <div className=" flex items-center m-auto justify-center">
+          <div className=" flex items-center m-auto justify-center pt-5">
             {mode == "add" && (
               <button
-                className="btn   flex items-center justify-center text-lg bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
+                className="btn   flex items-center justify-center text-sm bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
                 type="submit"
               >
-                Add Product
+                ADD INVENTORIES
               </button>
             )}
             {mode == "update" && (
@@ -202,7 +204,7 @@ const ItemMaster = ({ data, mode, closeBox }) => {
                 type="button"
                 onClick={handleUpdate}
               >
-                update
+                UPDATE
               </button>
             )}
           </div>

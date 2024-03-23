@@ -2,9 +2,9 @@ import React from "react";
 import ReactModal from "react-modal";
 import { Modal, ModalFooter, ModalHeader, ModalBody } from "reactstrap";
 
-const React_Modal = ({ isOpen, closeModal, children, height,width }) => {
+const React_Modal = ({ isOpen, closeModal, children, height, width }) => {
   const Defaultheight = "80%";
-  const Defaultwidth ="80%";
+  const Defaultwidth = "80%";
   return (
     <div>
       <ReactModal
@@ -36,25 +36,6 @@ const React_Modal = ({ isOpen, closeModal, children, height,width }) => {
           },
         }}
       >
-        {/* <ModalHeader toggle={closeModal}>
-          <button className="btn btn-danger flex" onClick={closeModal}>
-            <svg
-              className="h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
-        </ModalHeader> */}
         <ModalBody toggle={closeModal}>
           <button className="btn btn-danger flex" onClick={closeModal}>
             <svg
@@ -75,7 +56,6 @@ const React_Modal = ({ isOpen, closeModal, children, height,width }) => {
           </button>
           {children}
         </ModalBody>
-        <ModalFooter></ModalFooter>
       </ReactModal>
     </div>
   );

@@ -66,18 +66,45 @@ const Layout = () => {
                       {pathname === "/dashboard/PurchaseBill" &&
                         "TransectionMaster"}
                       {pathname === "/dashboard/biling" && "TransectionMaster"}
+                      {pathname === "/dashboard/SaleBill" &&
+                        "TransectionMaster"}
+                      {pathname === "/dashboard/deliveryChallan" &&
+                        "TransectionMaster"}
+                      {pathname === "/dashboard/quotation" &&
+                        "TransectionMaster"}
+                      {pathname === "/dashboard/Purchase" && "Report"}
+                      {pathname === "/dashboard/Salse" && "Report"}
+                      {pathname === "/dashboard/gst" && "Report"}
+                      {pathname === "/dashboard/gst2" && "Report"}
+                      {pathname === "/dashboard/balancesheet" && "Report"}
+                      {pathname === "/dashboard/AccountPay" && "Report"}
+                      {pathname === "/dashboard/Accountrec" && "Report"}
                     </li>
                     <li className="text-black font-semibold text-2xl dark:text-white">
                       {pathname === "/dashboard" && "Dashbord"}
-                      {pathname === "/dashboard/party" && "PartyMaster"}
-                      {pathname === "/dashboard/itemmaster" && "Itemmaster"}
-                      {pathname === "/dashboard/Recipt" && "Recipt"}
-                      {pathname === "/dashboard/Payment" && "Payment"}
+                      {pathname === "/dashboard/party" && "Clients"}
+                      {pathname === "/dashboard/itemmaster" && "Inventories"}
+                      {pathname === "/dashboard/Recipt" && "Debit Transaction"}
+                      {pathname === "/dashboard/Payment" && "Credit Transaction"}
                       {pathname === "/dashboard/PurchaseBill" &&
-                        "Purchase Billing"}
+                        "Purchase Bill"}
                       {pathname === "/dashboard/transectionrecord" &&
-                        "Transectionrecord"}
-                      {pathname === "/dashboard/biling" && "Biling"}
+                        "Transactions"}  
+                      {pathname === "/dashboard/SaleBill" && "Sales Bill"}
+
+                      {pathname === "/dashboard/deliveryChallan" &&
+                        "Delivery Challan"}
+                      {pathname === "/dashboard/quotation" && "Quotation"}
+                      {pathname === "/dashboard/Purchase" && "Purchase"}
+                      {pathname === "/dashboard/Salse" && "Sales"}
+                      {pathname === "/dashboard/gst" && "GST Sales"}
+                      {pathname === "/dashboard/gst2" && "GST Purchase"}
+                      {pathname === "/dashboard/balancesheet" && "Balance sheet"}
+                      {pathname === "/dashboard/AccountPay" &&
+                        "Account Payable"}
+                      {pathname === "/dashboard/Accountrec" &&
+                        "Account Receivable"}
+                      {pathname === "/dashboard/help" && "Help"}
                     </li>
                   </ul>
                 </nav>

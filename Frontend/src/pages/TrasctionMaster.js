@@ -67,7 +67,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
 
   return (
     <>
-      <div className="flex items-center  justify-center mb-0">
+      <div className="flex items-center   justify-center mb-0">
         <form
           className=" bg-white rounded  w-full h-full"
           onSubmit={handelSubmit}
@@ -116,16 +116,17 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 </div>
               </>
             )}
+
             {transectionType == "credit" && (
               <>
                 <div className="mb-1">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                    AccountTo
+                    Account From:
                   </label>
 
                   <select
-                    value={inputs.AccountTo}
-                    name="AccountTo"
+                    value={inputs.AccountFrom}
+                    name="AccountFrom"
                     onChange={handelchange}
                     className="form-input border  border-primary w-full h-10 rounded-md"
                   >
@@ -136,11 +137,11 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 </div>
                 <div className="mb-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                    AccountFrom
+                    Account To:
                   </label>
                   <select
-                    name="AccountFrom"
-                    value={inputs.AccountFrom}
+                    name="AccountTo"
+                    value={inputs.AccountTo}
                     onChange={handelchange}
                     className="form-input border border-primary w-full h-10 rounded-md"
                   >

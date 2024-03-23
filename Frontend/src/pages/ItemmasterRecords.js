@@ -19,9 +19,6 @@ const ItemmasterRecords = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(items_get());
-  }, [dispatch]);
   const closemodal = () => {
     setModal(false);
   };
@@ -39,6 +36,10 @@ const ItemmasterRecords = () => {
     }
   }, [result]);
 
+  useEffect(() => {
+    dispatch(items_get());
+  }, [result]);
+
   if (!result || !Array.isArray(result)) {
     return (
       <>
@@ -53,7 +54,7 @@ const ItemmasterRecords = () => {
             }}
             className="btn py-2 px-3 text-lg bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
           >
-            Add Product
+            Add Inventories
           </button>
         </div>
         <div>
@@ -108,7 +109,11 @@ const ItemmasterRecords = () => {
     <>
       <div>
         <React_Modal isOpen={Modal} closeModal={closemodal}>
-          <ItemMaster data={editValues} mode={Mode}></ItemMaster>
+          <ItemMaster
+            data={editValues}
+            mode={Mode}
+            closeModal={closemodal}
+          ></ItemMaster>
         </React_Modal>
       </div>
       <div className="flex flex-col gap-4 min-h-[calc(100vh-212px)]">
@@ -117,7 +122,7 @@ const ItemmasterRecords = () => {
             <div className="flex justify-between">
               <input
                 type="text"
-                placeholder="serch"
+                placeholder="search"
                 className="w-50 rounded-md border-[#225777] placeholder:text-[#225777] focus:border-0"
                 onChange={handelSerchChange}
               />
@@ -128,7 +133,7 @@ const ItemmasterRecords = () => {
                 }}
                 className="btn py-2 px-3 bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
               >
-                ADD PRODUCT
+                ADD INVENTORIES
               </button>
             </div>
             <div className="overflow-auto">
