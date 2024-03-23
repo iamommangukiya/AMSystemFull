@@ -20,7 +20,6 @@ const CompanyDetail = () => {
   const balancesheetData = useSelector(
     (state) => state.BillingReducer.balancesheet?.data
   );
-  console.log(balancesheetData);
 
   //  localStorage.setItem("comanyName",companyName)
 

@@ -67,7 +67,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
 
   return (
     <>
-      <div className="flex items-center  justify-center mb-0">
+      <div className="flex items-center   justify-center mb-0">
         <form
           className=" bg-white rounded mb-4 w-full h-full"
           onSubmit={handelSubmit}
@@ -116,6 +116,7 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                 </div>
               </>
             )}
+
             {transectionType == "credit" && (
               <>
                 <div className="mb-4">
@@ -141,44 +142,6 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
                   <select
                     name="AccountTo"
                     value={inputs.AccountTo}
-                    onChange={handelchange}
-                    className="form-input border border-primary w-full h-10 rounded-md"
-                  >
-                    <option value="">Select </option>
-                    {party.map((items, index) => (
-                      <option key={index} value={items.partyName}>
-                        {items.partyName}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </>
-            )}
-            {transectionType == "debit" && (
-              <>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    AccountTo
-                  </label>
-
-                  <select
-                    value={inputs.AccountTo}
-                    name="AccountTo"
-                    onChange={handelchange}
-                    className="form-input border  border-primary w-full h-10 rounded-md"
-                  >
-                    <option value="">Select </option>
-                    <option value="Bank">Bank</option>
-                    <option value="cash">cash</option>
-                  </select>
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
-                    AccountFrom
-                  </label>
-                  <select
-                    name="AccountFrom"
-                    value={inputs.AccountFrom}
                     onChange={handelchange}
                     className="form-input border border-primary w-full h-10 rounded-md"
                   >
