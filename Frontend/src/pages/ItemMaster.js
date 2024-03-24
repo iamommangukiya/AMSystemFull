@@ -136,6 +136,7 @@ const ItemMaster = ({ data, mode, closeModal }) => {
                 <input
                   type="number"
                   defaultValue={0}
+                  required
                   name="closingStock"
                   onChange={handelchange}
                   value={inputs.closingStock}

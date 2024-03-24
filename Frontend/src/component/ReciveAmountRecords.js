@@ -90,6 +90,7 @@ const ReciveAmount = ({ transectionType }) => {
         <React_Modal isOpen={modal} closeModal={closeModal}>
           <TrasactionMaster
             data={editedValues}
+            closeModal={closeModal}
             mode={mode}
             transectionType={transectionType}
           />
@@ -115,6 +116,7 @@ const ReciveAmount = ({ transectionType }) => {
           <TrasactionMaster
             data={editedValues}
             mode={mode}
+            closeModal={closeModal}
             transectionType={transectionType}
           />
         </React_Modal>

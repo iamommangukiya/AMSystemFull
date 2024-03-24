@@ -194,6 +194,9 @@ const billingSlice = createSlice({
     CleanInsertBill(state) {
       state.result = "";
     },
+    clerarupbill(state) {
+      state.updateBilllog = "";
+    },
     clearBillitem(state) {
       state.billItems = "";
     },

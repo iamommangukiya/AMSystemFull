@@ -426,8 +426,6 @@ class Querys {
     return query;
   };
 
-  
-
   insertTransactionLog = (userInputs) => {
     let { paymentId, billLogId, flag, amount } = userInputs;
     return `INSERT INTO transactionmasterlog(paymentId,billLogId,flag,Amount)VALUES(${paymentId},${billLogId},${flag},${amount});`;
