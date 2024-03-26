@@ -669,7 +669,8 @@ class Accounting {
 
   async updateBilling(userInputs, res) {
     try {
-      const { billId, items } = userInputs;
+      // console.log(userInputs);
+      const { invoiceNo, items } = userInputs;
       const q = query.updateBillLog(userInputs);
       const data = await this.dbQuery(q);
 
@@ -677,9 +678,9 @@ class Accounting {
         await Promise.all(
           items.map(async (item) => {
             const existsQuery = `SELECT * FROM Accounting.BillFullLog WHERE billId = ? AND itemId = ?`;
-            const existsValues = [billId, item.id];
+            const existsValues = [invoiceNo, item.id];
             const existingItem = await this.dbQuery(existsQuery, existsValues);
-
+            // console.log(existingItem, "ex");
             if (existingItem.length > 0) {
               const updateQuery = `UPDATE Accounting.BillFullLog SET gst = ?, amount = ?, qty = ?, unitCost = ? WHERE billId = ? AND itemId = ?`;
               const updateValues = [
@@ -687,24 +688,25 @@ class Accounting {
                 item.amount,
                 item.qty,
                 item.salePrice,
-                billId,
+                invoiceNo,
                 item.id,
               ];
               await this.dbQuery(updateQuery, updateValues);
             } else {
-              await this.insertItemDetails(billId, item);
+              await this.insertItemDetails(userInputs.cmpId, invoiceNo, item);
             }
           })
         );
         res.status(200).json({
           flag: true,
-          message: "Inserted successfully",
+          message: "Updated successfully",
           insertId: data.insertId,
         });
       } else {
         res.status(200).json({ flag: false, message: "Not found" });
       }
     } catch (error) {
+      console.log(error);
       logError(error);
       res.status(200).json({ flag: false, message: "Internal Server error" });
     }

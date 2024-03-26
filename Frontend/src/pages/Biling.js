@@ -77,15 +77,46 @@ const Biling = () => {
     items: [],
   });
 
+  let billname = "";
+  switch (mode) {
+    case "salse":
+      billname = Inputs.isGstBill ? "GST salse Billing" : "salse Billing";
+      break;
+    case "purchase":
+      billname = Inputs.isGstBill ? "GST purchase Billing" : "purchase Billing";
+      break;
+    case "asimat":
+      billname = "AsimatBill";
+      break;
+    case "deliveryChallan":
+      billname = "Delivery Challan";
+      break;
+    case "quotation":
+      billname = Inputs.isGstBill
+        ? "GST quotation Billing"
+        : "quotation Billing";
+      break;
+    default:
+      bookName = "";
+      break;
+  }
   const [isChecked, setIsChecked] = useState(false);
   const [inventoryItems, setInventoryItems] = useState([]);
   const dispatch = useDispatch();
   // slider item
   useEffect(() => {
     if (editdata) {
-      console.log("ineditdata");
+      console.log(editdata);
+      var isGstBills = editdata.isGstBill !== "false";
       dispatch(getItemsOfBill(editdata.id));
       setInputs({ ...editdata });
+      setInputs((prevInputs) => ({
+        ...prevInputs,
+        isGstBill: isGstBills,
+        pgstNo: editdata.gstNo,
+        paidAmount: editdata.payAmount,
+        bStateName: editdata.bStateCode,
+      }));
     } else {
       setInputs((prevInputs) => ({
         ...prevInputs,
@@ -239,6 +270,11 @@ const Biling = () => {
   };
 
   const flag = useSelector((state) => state.BillingReducer.result.flag || {});
+
+  let flagu = useSelector(
+    (state) => state.BillingReducer.updateBilllog?.flag || {}
+  );
+
   const validation = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
@@ -254,7 +290,8 @@ const Biling = () => {
       Inputs.items.length === 0 ||
       Inputs.items.some((item) => !item.name || !item.qty || item.qty <= 0)
     ) {
-      errors.items = "At least one valid item is required";
+      toast.error("At least one item is required");
+      errors.item = "kshdg";
     }
     // Additional validations as needed...
     if (Inputs.isGstBill) {
@@ -277,10 +314,11 @@ const Biling = () => {
 
     SumbmitHandle();
   };
-  if (flag === true) {
+  if (flag === true || flagu == true) {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
     dispatch(billingaction.clearBillitem());
+    dispatch(billingaction.clerarupbill());
     setTimeout(() => {
       // navigate("/dashboard/PurchaseBill");
       window.history.back();
@@ -289,39 +327,36 @@ const Biling = () => {
 
   const handelchange = (e, index) => {
     const { name, value } = e.target;
-    // Ensure paid amount does not exceed total amount
-    if (
-      name === "paidAmount" &&
-      parseFloat(value) > parseFloat(Inputs.gtotalAmount)
-    ) {
-      // If paid amount exceeds total amount, set it to total amount
-      setInputs((prevInputs) => ({
-        ...prevInputs,
-        [name]: prevInputs.gtotalAmount,
-      }));
-      return; // Exit early to prevent further execution
-    }
+
     if (index >= 0) {
-      const updatedItems = Inputs.items.map((item, i) => {
-        if (i === index) {
-          const qty = name === "qty" ? parseFloat(value) || 0 : item.qty;
-          const purchasePrice = parseFloat(item.salePrice) || 0;
-          const GST = name === "GST" ? parseFloat(value) || 0 : item.GST;
-          // Calculate the amount based on whether isGstBill is true or false
-          const amount = Inputs.isGstBill
-            ? (qty * purchasePrice + qty * purchasePrice * (GST / 100)).toFixed(
-                2
-              )
-            : (qty * purchasePrice).toFixed(2);
-          return {
-            ...item,
-            [name]: value,
-            amount,
-          };
-        } else {
-          return item;
-        }
-      });
+      const updatedItems = Inputs.items
+        .map((item, i) => {
+          if (i === index) {
+            const qty = name === "qty" ? parseFloat(value) || 0 : item.qty;
+            const salePrice =
+              name === "salePrice" ? parseFloat(value) || 0 : item.salePrice;
+            const GST = name === "GST" ? parseFloat(value) || 0 : item.GST;
+
+            // Remove item if quantity becomes 0
+            if (qty <= 0) {
+              return null; // Signal to remove this item
+            }
+
+            // Calculate the amount based on whether isGstBill is true or false
+            const amount = Inputs.isGstBill
+              ? (qty * salePrice + qty * salePrice * (GST / 100)).toFixed(2)
+              : (qty * salePrice).toFixed(2);
+
+            return {
+              ...item,
+              [name]: value,
+              amount,
+            };
+          } else {
+            return item;
+          }
+        })
+        .filter(Boolean); // Filter out null values (removed items)
 
       const discountedAmount = Inputs.totalAmount * (Inputs.discount / 100);
 
@@ -437,7 +472,7 @@ const Biling = () => {
     dispatch(UpdateBillog({ ...Inputs, items: filteredItems }));
   };
   useEffect(() => {
-    console.log(Inputs);
+    // console.log(Inputs);
   }, [Inputs]);
   const stateOptions = Object.entries(stateData).map(([code, name]) => ({
     code,
@@ -450,6 +485,7 @@ const Biling = () => {
       bStateName: selectedStateName,
     }));
   };
+
   return (
     <>
       <Slidover
@@ -461,29 +497,13 @@ const Biling = () => {
       <div className=" flex-col min-h-screen justify-betweens flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
         <h2 className="col-span-full flex  justify-between text-2xl font-bold">
-          <p>
-            {mode == "deliveryChallan" && "Delivery Challan "}{" "}
-            {Inputs.isGstBill != true && mode == "salse" && "salse Biling "}{" "}
-            {Inputs.isGstBill != false && mode == "salse" && "GST salse Biling"}
-            {Inputs.isGstBill != true &&
-              mode == "quotation" &&
-              "quotation Biling "}{" "}
-            {Inputs.isGstBill != false &&
-              mode == "quotation" &&
-              "GST quotation Biling"}
-            {Inputs.isGstBill != false &&
-              mode == "purchase" &&
-              "GST purchase Billing"}
-            {Inputs.isGstBill != true &&
-              mode == "purchase" &&
-              "purchase Billing"}
-          </p>
+          <p>{billname}</p>
           {mode !== "deliveryChallan" && (
             <div className="switch ps-2 justify-end">
               <input
                 type="checkbox"
                 className="rounded-sm p-3"
-                value={isChecked}
+                checked={Inputs.isGstBill}
                 onChange={HandleToggle}
               />
             </div>
@@ -646,8 +666,8 @@ const Biling = () => {
           </div>
         </form>
 
-        <div class="block w-full overflow-x-auto">
-          <table class="w-full mb-4 bg-transparent table-hover dark:bg-darklight dark:text-white dark:border-darkborder bg-white">
+        <div className="block w-full overflow-x-auto">
+          <table className="w-full mb-4 bg-transparent table-hover dark:bg-darklight dark:text-white dark:border-darkborder bg-white">
             <thead>
               <tr>
                 <th>#</th>
@@ -660,11 +680,11 @@ const Biling = () => {
               </tr>
             </thead>
             <tbody className="tbodyone">
-              {console.log(Inputs.items)}
+              {/* {console.log(Inputs.items)} */}
               {Inputs.items &&
                 Inputs.items.map((row, index) => (
                   <tr key={index}>
-                    <td>{index}</td>
+                    <td>{index + 1}</td>
                     <td>
                       <input
                         type="text"
@@ -741,8 +761,8 @@ const Biling = () => {
             </tbody>
           </table>
         </div>
-        <div class="block w-full overflow-auto  dark:bg-darklight dark:text-white dark:border-darkborder scrolling-touch">
-          <table class="w-full max-w-full   dark:bg-darklight dark:text-white dark:border-darkborder mb-4 bg-transparent table-hover bg-white">
+        <div className="block w-full overflow-auto  dark:bg-darklight dark:text-white dark:border-darkborder scrolling-touch">
+          <table className="w-full max-w-full   dark:bg-darklight dark:text-white dark:border-darkborder mb-4 bg-transparent table-hover bg-white">
             <tbody>
               <tr className="flex justify-end ">
                 <td>
@@ -754,17 +774,17 @@ const Biling = () => {
                   </button>
                 </td>
 
-                <td colspan="5" class="text-end">
+                <td colspan="5" className="text-end">
                   Total Item
                 </td>
 
                 <tr>
-                  <td colspan="5" class="text-end">
+                  <td colspan="5" className="text-end">
                     Total Qty
                   </td>
-                  <td class="text-end pr-4">
+                  <td className="text-end pr-4">
                     <input
-                      class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
+                      className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
                       readonly=""
                       onChange={handelchange}
                       name="totalQuantity"
@@ -773,13 +793,13 @@ const Biling = () => {
                     />
                   </td>
                 </tr>
-                <td colspan="6" class="text-center">
+                <td colspan="6" className="text-center">
                   Total
                 </td>
-                <td class="text-end pr-4">
+                <td className="text-end pr-4">
                   <input
                     disabled
-                    class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
+                    className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
                     value={Inputs.totalAmount}
                     onChange={handelchange}
                     readonly=""
@@ -789,12 +809,12 @@ const Biling = () => {
               </tr>
 
               <tr>
-                <td colspan="5" class="text-end">
+                <td colspan="5" className="text-end">
                   Tax
                 </td>
-                <td class="text-end pr-4">
+                <td className="text-end pr-4">
                   <input
-                    class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
+                    className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
                     value={Inputs.totalTaxable}
                     onChange={handelchange}
                     defaultValue={0}
@@ -805,32 +825,32 @@ const Biling = () => {
               </tr>
 
               <tr>
-                <td colspan="5" class="text-end">
+                <td colspan="5" className="text-end">
                   Discount %
                 </td>
-                <td class="text-end pe-4">
+                <td className="text-end pe-4">
                   <input
                     pattern="[0-9]*[.,]?[0-9]*"
                     name="discount"
                     defaultValue={"0"}
                     onChange={handelchange}
                     value={Inputs.discount}
-                    class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
+                    className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
                     type="text"
                   />
                 </td>
               </tr>
 
               <tr>
-                <td colspan="5" class="text-end pe-4">
+                <td colspan="5" className="text-end pe-4">
                   <b>Total Amount</b>
                 </td>
-                <td class="text-end tdata-width pe-4">
+                <td className="text-end tdata-width pe-4">
                   <b>{Inputs.gtotalAmount}</b>
                 </td>
               </tr>
               <tr>
-                <td colspan="12" class="text-end ">
+                <td colspan="12" className="text-end ">
                   <input
                     type="radio"
                     name="TransactionType"
@@ -862,12 +882,12 @@ const Biling = () => {
               </tr>
               {Inputs.transactionType !== "unpaid" && (
                 <tr>
-                  <td colspan="5" class="text-end pe-4">
+                  <td colspan="5" className="text-end pe-4">
                     <b>paid Amount</b>
                   </td>
-                  <td class="text-end tdata-width pe-4">
+                  <td className="text-end tdata-width pe-4">
                     <input
-                      class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded "
+                      className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded "
                       type="number"
                       defaultValue={Inputs.gtotalAmount}
                       name="paidAmount"
@@ -879,23 +899,23 @@ const Biling = () => {
               )}
 
               <tr>
-                <td colspan="5" class="text-end pe-4">
+                <td colspan="5" className="text-end pe-4">
                   <b>Due Amount</b>
                 </td>
-                <td class="text-end tdata-width pe-4">
+                <td className="text-end tdata-width pe-4">
                   <b>{Inputs.gtotalAmount - Inputs.paidAmount}</b>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        {/* <div class="flex flex-wrap ">
-          <div class="md:w-full pr-4 pl-4">
-            <div class="input-block mb-3">
-              <label class="pt-2 pb-2 mb-0 leading-normal">
+        {/* <div className="flex flex-wrap ">
+          <div className="md:w-full pr-4 pl-4">
+            <div className="input-block mb-3">
+              <label className="pt-2 pb-2 mb-0 leading-normal">
                 Other Information
               </label>
-              <textarea class="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"></textarea>
+              <textarea className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"></textarea>
             </div>
           </div>
         </div> */}

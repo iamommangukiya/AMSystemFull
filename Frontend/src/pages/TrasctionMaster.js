@@ -13,7 +13,7 @@ import "react-notifications/lib/notifications.css";
 import { ToastContainer, toast } from "react-toastify";
 import { apipartyGet } from "../reducer/Party_reducer";
 import { Translation } from "react-i18next";
-const TrasactionMaster = ({ data, mode, transectionType }) => {
+const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
   console.log(mode);
   const [inputs, setInput] = useState({
     paymentNo: "",
@@ -47,8 +47,10 @@ const TrasactionMaster = ({ data, mode, transectionType }) => {
     try {
       if (mode === "update") {
         dispatch(transction_Update(inputs));
+        closeModal();
       } else {
         dispatch(transction_create(inputs));
+        closeModal();
       }
       dispatch(transction_get());
       setInput({
