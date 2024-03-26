@@ -55,7 +55,7 @@ const Layout = () => {
                 <nav className="w-full">
                   <ul className="space-y-2 detached-breadcrumb">
                     <li className="text-xs dark:text-white/80">
-                      {pathname === "/dashboard" && "Dashbord"}
+                      {pathname === "/dashboard" && "Dashboard"}
                       {pathname === "/dashboard/party" && "Master"}
                       {pathname === "/dashboard/itemmaster" && "Master"}
                       {pathname === "/dashboard/Recipt" && "TransectionMaster"}
@@ -81,7 +81,7 @@ const Layout = () => {
                       {pathname === "/dashboard/Accountrec" && "Report"}
                     </li>
                     <li className="text-black font-semibold text-2xl dark:text-white">
-                      {pathname === "/dashboard" && "Dashbord"}
+                      {pathname === "/dashboard" && "Dashboard"}
                       {pathname === "/dashboard/party" && "Clients"}
                       {pathname === "/dashboard/itemmaster" && "Inventories"}
                       {pathname === "/dashboard/Recipt" && "Debit Transaction"}

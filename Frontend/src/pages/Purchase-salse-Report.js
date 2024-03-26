@@ -218,12 +218,12 @@ const PurchaseReport = ({ mode }) => {
                   <option value="30">30</option>
                   <option value="50">50</option>
                 </select>
-                <p class="ml-2">entries</p>
+                <p class="ml-2">Entries</p>
               </div>
               <input
                 type="text"
                 onChange={handleSearchInputChange}
-                class=" w-50 ml-4 rounded-md mb-3"
+                class=" w-72 ml-4 rounded-md mb-3 placeholder:text-sm placeholder:text-muted"
                 placeholder="Search by name or invoice number"
               />
             </div>
@@ -254,7 +254,7 @@ const PurchaseReport = ({ mode }) => {
                   startDate={startDate}
                   endDate={endDate}
                   placeholderText="Start Date"
-                  className="h-8 py-1 px-3 border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                  className="h-8 py-5 px-3 border text-sm  placeholder:text-sm placeholder:text-muted rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                 />
                 <DatePicker
                   selected={endDate}
@@ -264,12 +264,12 @@ const PurchaseReport = ({ mode }) => {
                   endDate={endDate}
                   minDate={startDate}
                   placeholderText="End Date"
-                  className="h-8 py-1 px-3 border rounded-md ml-2 dark:bg-gray-800 dark:border-gray-600 dark:text-white"
+                  className="h-8 py-5 px-3 ml-2 border text-sm  placeholder:text-sm placeholder:text-muted rounded-md dark:bg-gray-800 dark:border-gray-600 dark:text-white"
                 />
               </div>
             </div>
 
-            <div className="overflow-auto">
+            <div className="overflow-auto pt-5">
               <table className="min-w-[640px] w-full  table-hover">
                 <thead>
                   <tr className="border-separate">

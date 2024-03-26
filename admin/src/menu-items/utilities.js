@@ -48,7 +48,7 @@ const utilities = {
             id: 'util-providers',
             title: 'Issues',
             type: 'item',
-            forPagination: 'providers',
+            forPagination: 'Issues',
             url: '/Issues',
             icon: icons.ProfileOutlined
         }
