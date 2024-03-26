@@ -58,7 +58,7 @@ const CompanyFetchacompany = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen h-80 relative z-10">
-      <div className=" dark:bg-purple bg-[#F9F5F6] h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
+      <div className=" dark:bg-purple bg-white h-full bg-bottom bg-cover w-full -z-10 absolute"></div>
       <div className=" p-5 rounded-xl dark:bg-darklight dark:border-darkborder md:w-2/3 lg:w-1/2 backdrop-blur-xl overflow-hidden bg-[#ffffff14] border backdrop-brightness-110 border-gray-300 shadow-2xl">
         <div className="justify-between flex items-center space-x-2 ">
           <h2 className="text-3xl font-semibold text-[#225777] dark:text-white/80 mb-4 px-4 capitalize flex justify-between">
@@ -78,9 +78,7 @@ const CompanyFetchacompany = () => {
             className="form-select text-black w-full bg-transparent backdrop-blur-3xl backdrop-brightness-200 border border-black rounded-md "
             onChange={handleSelectChange}
           >
-            <option className="text-black" >
-              Select option
-            </option>
+            <option className="text-black">Select option</option>
 
             {response &&
               response.map((item) => (

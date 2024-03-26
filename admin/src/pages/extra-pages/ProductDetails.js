@@ -7,7 +7,7 @@ import { CheckCircleFilled, EyeOutlined } from '@ant-design/icons';
 import { useNavigate } from '../../../node_modules/react-router/dist/index';
 import { Link, useParams } from 'react-router-dom';
 import { DomainContext } from 'App';
-import avatar1 from 'assets/images/users/avatar-1.png';
+// import avatar1 from 'assets/images/users/avatar-1.png';
 
 const ProductDetails = () => {
     const token = JSON.parse(localStorage.getItem('adAnimaLogin'));

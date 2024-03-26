@@ -25,7 +25,7 @@ import Transitions from 'components/@extended/Transitions';
 import ProfileTab from './ProfileTab';
 
 // assets
-import avatar1 from 'assets/images/users/avatar-1.png';
+
 import ProfileLogo from 'assets/images/logo.png';
 import { Modal, Button, Alert } from 'antd';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
