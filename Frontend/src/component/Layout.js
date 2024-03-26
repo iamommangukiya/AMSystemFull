@@ -84,12 +84,12 @@ const Layout = () => {
                       {pathname === "/dashboard" && "Dashboard"}
                       {pathname === "/dashboard/party" && "Clients"}
                       {pathname === "/dashboard/itemmaster" && "Inventories"}
-                      {pathname === "/dashboard/Recipt" && "Debit Transaction"}
-                      {pathname === "/dashboard/Payment" && "Credit Transaction"}
+                      {pathname === "/dashboard/Recipt" && "Credit Transaction"}
+                      {pathname === "/dashboard/Payment" && "Debit Transaction"}
                       {pathname === "/dashboard/PurchaseBill" &&
                         "Purchase Bill"}
                       {pathname === "/dashboard/transectionrecord" &&
-                        "Transactions"}  
+                        "Transactions"}
                       {pathname === "/dashboard/SaleBill" && "Sales Bill"}
 
                       {pathname === "/dashboard/deliveryChallan" &&
@@ -99,7 +99,8 @@ const Layout = () => {
                       {pathname === "/dashboard/Salse" && "Sales"}
                       {pathname === "/dashboard/gst" && "GST Sales"}
                       {pathname === "/dashboard/gst2" && "GST Purchase"}
-                      {pathname === "/dashboard/balancesheet" && "Balance sheet"}
+                      {pathname === "/dashboard/balancesheet" &&
+                        "Balance sheet"}
                       {pathname === "/dashboard/AccountPay" &&
                         "Account Payable"}
                       {pathname === "/dashboard/Accountrec" &&

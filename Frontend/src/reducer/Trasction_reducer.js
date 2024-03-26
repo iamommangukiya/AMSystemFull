@@ -22,6 +22,28 @@ export const transction_create = createAsyncThunk(
     }
   }
 );
+export const selectAllTra = createAsyncThunk(
+  "selectAllTra/tracstion_Slice",
+  async (info) => {
+    try {
+      const auth_token = localStorage.getItem("company");
+      const result = await axios.get(
+        process.env.REACT_APP_API + "/alltra",
+
+        {
+          headers: {
+            com_token: auth_token,
+          },
+        }
+      );
+
+      const response = result.data;
+      return response;
+    } catch (error) {
+      throw error.result.data;
+    }
+  }
+);
 export const transction_Update = createAsyncThunk(
   "transction_Update/tracstion_Slice",
   async (info) => {
@@ -122,6 +144,7 @@ const tracstion_Slice = createSlice({
   initialState: {
     result: {},
     loading: "",
+    Alltra: "",
     error: "",
     trascion_getresult: {},
     trascion_Updateresult: {},
@@ -199,6 +222,19 @@ const tracstion_Slice = createSlice({
         state.error = "";
       })
       .addCase(transction_Records.rejected, (state) => {
+        state.loading = false;
+        state.error = "";
+      })
+      .addCase(selectAllTra.pending, (state) => {
+        state.loading = true;
+        state.error = "";
+      })
+      .addCase(selectAllTra.fulfilled, (state, action) => {
+        state.loading = false;
+        state.Alltra = action.payload;
+        state.error = "";
+      })
+      .addCase(selectAllTra.rejected, (state) => {
         state.loading = false;
         state.error = "";
       });

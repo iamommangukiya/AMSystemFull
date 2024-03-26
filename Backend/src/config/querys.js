@@ -336,8 +336,8 @@ class Querys {
   deleteFinancialYear = (userDate) => {
     return `DELETE FROM Accounting.financialyear WHERE id = ${userDate.id};`;
   };
-  selectFinancialMaster = () => {
-    return `SELECT * FROM transactionMaster`;
+  selectFinancialMaster = (cmp) => {
+    return `SELECT * FROM transactionMaster where companyId =${cmp} `;
   };
   InsertFinancialMaster = (userData) => {
     const currentdate = moment();
@@ -442,6 +442,9 @@ class Querys {
     let query = "SELECT * FROM transactionmasterlog";
 
     if (userDate && userDate.id) {
+      query += ` WHERE id = ${userDate.id}`;
+    }
+    if (userDate && userDate.CmpId) {
       query += ` WHERE id = ${userDate.id}`;
     }
 

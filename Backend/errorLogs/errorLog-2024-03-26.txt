@@ -6,3 +6,6 @@
 2024-03-26T03:58:3  : D:\AMSystemFull\Backend\errorLog.js : Can't add new command when connection is in closed state
 2024-03-26T03:58:3  : D:\AMSystemFull\Backend\errorLog.js : Can't add new command when connection is in closed state
 2024-03-26T03:58:3  : D:\AMSystemFull\Backend\errorLog.js : Can't add new command when connection is in closed state
+2024-03-26T15:25:2  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-26T15:25:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'
+2024-03-26T15:25:5  : E:\projects\clg project\Amsystem\Backend\errorLog.js : Error: Unknown column 'undefined' in 'field list'

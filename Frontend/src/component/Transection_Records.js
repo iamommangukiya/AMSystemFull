@@ -7,17 +7,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { saveAs } from "file-saver";
 
 import * as XLSX from "xlsx";
-import { transction_Records } from "../reducer/Trasction_reducer";
+import { selectAllTra, transction_Records } from "../reducer/Trasction_reducer";
 
 const Trasection_Records = () => {
   const dispatch = useDispatch();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(5); // Number of items to display per page
+  const [itemsPerPage] = useState(20); // Number of items to display per page
 
-  var result = useSelector(
-    (state) => state.TransctionReducer.transectionReports?.data
-  );
+  var result = useSelector((state) => state.TransctionReducer.Alltra?.data);
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(result);
     const workbook = XLSX.utils.book_new();
@@ -32,10 +30,10 @@ const Trasection_Records = () => {
     );
   };
   useEffect(() => {
-    dispatch(transction_Records());
+    dispatch(selectAllTra());
   }, []);
 
-  const tableHeader = ["AccountFrom", "AccountTo", "transectionType", "Amount"];
+  const tableHeader = ["AccountFrom", "AccountTo", "transectionType", "amount"];
 
   // Function to filter transaction records based on search query
   const filterRecords = () => {
@@ -140,57 +138,60 @@ const Trasection_Records = () => {
         </div>
       </div>
       {/* Pagination */}
-      <div className="flex justify-center mt-4">
-        <nav
-          className="isolate inline-flex -space-x-px rounded-md shadow-sm"
-          aria-label="Pagination"
-        >
-          {/* Previous button */}
-          <a
-            href="#"
-            onClick={() => paginate(currentPage - 1)}
-            className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            disabled={currentPage === 1}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-4">
+          <nav
+            className="isolate inline-flex -space-x-px rounded-md shadow-sm"
+            aria-label="Pagination"
           >
-            <span className="sr-only">Previous</span>
-            <svg
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
+            {/* Previous button */}
+            <a
+              href="#"
+              onClick={() => paginate(currentPage - 1)}
+              className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              disabled={currentPage === 1}
             >
-              <path
-                fillRule="evenodd"
-                d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </a>
-          {/* Pagination links */}
-          {paginationLinks}
-          {/* Next button */}
-          <a
-            href="#"
-            onClick={() => paginate(currentPage + 1)}
-            className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
-            disabled={currentPage === totalPages}
-          >
-            <span className="sr-only">Next</span>
-            <svg
-              className="h-5 w-5"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
+              <span className="sr-only">Previous</span>
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
+            {/* Pagination links */}
+            {paginationLinks}
+            {/* Next button */}
+            <a
+              href="#"
+              onClick={() => paginate(currentPage + 1)}
+              className="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+              disabled={currentPage === totalPages}
             >
-              <path
-                fillRule="evenodd"
-                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </a>
-        </nav>
-      </div>
+              <span className="sr-only">Next</span>
+              <svg
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </a>
+          </nav>
+        </div>
+      )}
+
       <ToastContainer
         position="top-center"
         autoClose={5000}

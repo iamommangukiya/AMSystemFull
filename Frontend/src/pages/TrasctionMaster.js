@@ -84,11 +84,12 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
               <>
                 <div className="mb-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                    AccountFrom
+                    Account From
                   </label>
                   <select
                     name="AccountFrom"
                     value={inputs.AccountFrom}
+                    required
                     onChange={handelchange}
                     className="form-input border border-primary w-full h-10 rounded-md"
                   >
@@ -99,12 +100,13 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
                 </div>
                 <div className="mb-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                    AccountTo
+                    Account To
                   </label>
 
                   <select
                     value={inputs.AccountTo}
                     name="AccountTo"
+                    required
                     onChange={handelchange}
                     className="form-input border  border-primary w-full h-10 rounded-md"
                   >
@@ -123,12 +125,13 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
               <>
                 <div className="mb-1">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Account From:
+                    Account To:
                   </label>
 
                   <select
-                    value={inputs.AccountFrom}
-                    name="AccountFrom"
+                    value={inputs.AccountTo}
+                    name="AccountTo"
+                    required
                     onChange={handelchange}
                     className="form-input border  border-primary w-full h-10 rounded-md"
                   >
@@ -139,11 +142,12 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
                 </div>
                 <div className="mb-2">
                   <label className="block text-gray-700 text-sm font-bold mb-2">
-                    Account To:
+                    Account From:
                   </label>
                   <select
-                    name="AccountTo"
-                    value={inputs.AccountTo}
+                    name="AccountFrom"
+                    value={inputs.AccountFrom}
+                    required
                     onChange={handelchange}
                     className="form-input border border-primary w-full h-10 rounded-md"
                   >
@@ -164,6 +168,7 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
               </label>
               <input
                 type="number"
+                required
                 name="amount"
                 onChange={handelchange}
                 value={inputs.amount}
@@ -212,7 +217,7 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
             {mode === "add" && (
               <button
                 className="btn py-2.5 text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
-                onClick={handelSubmit}
+                // onClick={handelSubmit}
                 type="submit"
               >
                 Submit
@@ -221,7 +226,7 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
             {mode === "update" && (
               <button
                 className="btn py-2.5 text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
-                onClick={handelSubmit}
+                // onClick={handelSubmit}
                 type="submit"
               >
                 Update

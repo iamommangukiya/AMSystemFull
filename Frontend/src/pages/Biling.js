@@ -670,7 +670,7 @@ const Biling = () => {
           <table className="w-full mb-4 bg-transparent table-hover dark:bg-darklight dark:text-white dark:border-darkborder bg-white">
             <thead>
               <tr>
-                <th>#</th>
+                <th>sr No</th>
                 <th>Item</th>
                 <th>Description</th>
                 <th>Unit Cost</th>
@@ -689,6 +689,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="text"
+                        readOnly
                         name="name"
                         className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         value={row.name}
@@ -710,6 +711,7 @@ const Biling = () => {
                     <td>
                       <input
                         type="number"
+                        readOnly
                         className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                         inputMode="decimal"
                         name="salePrice"
@@ -735,6 +737,7 @@ const Biling = () => {
                           type="number"
                           className="dark:bg-darklight focus:border-0 w-full md:w-auto lg:w-full rounded-md"
                           name="GST"
+                          readOnly
                           value={row.GST}
                           onChange={(e) => handelchange(e, index)}
                           // Disable the input if it's the first row and no other product is added

@@ -170,6 +170,25 @@ class Accounting {
   //     }
   //   });
   // }
+  async selectAlltra(cmpid, res) {
+    var q = query.selectFinancialMaster(cmpid);
+    db.query(q, (errr, data) => {
+      if (errr) {
+        logError(errr);
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      } else {
+        if (data.length > 0) {
+          res.status(200).json({
+            data: data,
+            flag: true,
+            message: "featch succsessfully",
+          });
+        } else {
+          res.status(200).json({ flag: false, message: "No data match" });
+        }
+      }
+    });
+  }
 
   async selectFinance(cmpid, res, type) {
     // var q = query.selectFinancialMaster();

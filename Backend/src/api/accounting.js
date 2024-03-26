@@ -268,6 +268,11 @@ module.exports = (app) => {
     var id = req.cmp;
     AcountService.showBills(id, res);
   });
+  app.get("/api/alltra", feactCompany, (req, res) => {
+    var id = req.cmp;
+    AcountService.selectAlltra(id, res);
+  });
+
   app.get("/api/balancesheet", feactCompany, (req, res) => {
     id = req.cmp;
     AcountService.GenerateBalanceSheet(id, res);

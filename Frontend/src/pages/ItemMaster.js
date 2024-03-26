@@ -151,6 +151,7 @@ const ItemMaster = ({ data, mode, closeModal }) => {
               <div className="relative">
                 <input
                   type="number"
+                  required
                   defaultValue={0}
                   name="salePrice"
                   onChange={handelchange}
@@ -181,6 +182,7 @@ const ItemMaster = ({ data, mode, closeModal }) => {
                 <input
                   type="number"
                   name="GST"
+                  required
                   onChange={handelchange}
                   value={inputs.GST}
                   className="form-input border border-gray-400 w-full h-10 rounded-md"
