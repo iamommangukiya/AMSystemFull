@@ -265,7 +265,7 @@ const Biling = () => {
   const HandleToggle = () => {
     setInputs((prevInputs) => ({
       ...prevInputs,
-      isGstBill: !Inputs.isGstBill,
+      isGstBill: !prevInputs.isGstBill,
     }));
   };
 
@@ -496,16 +496,37 @@ const Biling = () => {
       ></Slidover>
       <div className=" flex-col min-h-screen justify-betweens flex items-center  dark:bg-darklight dark:border-darkborder">
         {/* <div className=" flex-col flex items-center py-4 bg-white shadow-md rounded   justify-center  "> */}
-        <h2 className="col-span-full flex  justify-between text-2xl font-bold">
+        <h2 className="col-span-full flex w-full justify-between text-2xl font-bold">
+          <p></p>
           <p>{billname}</p>
           {mode !== "deliveryChallan" && (
-            <div className="switch ps-2 justify-end">
-              <input
-                type="checkbox"
-                className="rounded-sm p-3"
-                checked={Inputs.isGstBill}
-                onChange={HandleToggle}
-              />
+            <div className="flex items-center justify-end">
+              <label htmlFor="toggle" className="font-sans mr-2">
+                Gst Bill
+              </label>
+              <div className="relative">
+                <input
+                  id="toggle"
+                  type="checkbox"
+                  className="sr-only"
+                  checked={Inputs.isGstBill}
+                  onChange={HandleToggle}
+                />
+                <div
+                  onClick={HandleToggle}
+                  className={`toggle-switch-background w-12 h-6  rounded-full p-1 flex items-center ${
+                    Inputs.isGstBill ? " bg-green-500" : "bg-gray-400 "
+                  }`}
+                >
+                  <div
+                    className={`toggle-switch-handle w-5 h-5 rounded-full shadow-md transform duration-300 ${
+                      Inputs.isGstBill
+                        ? "translate-x-6 bg-white"
+                        : "translate-x-0 bg-white"
+                    }`}
+                  />
+                </div>
+              </div>
             </div>
           )}
         </h2>
@@ -517,7 +538,12 @@ const Biling = () => {
           {/* // party name */}
 
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">PartyName:*</label>
+            <label className="block text-black text-sm mb-2">
+              PartyName:{" "}
+              <span className="text-red-500 font-bold text-xl text-center align-middle">
+                *
+              </span>
+            </label>
             <input
               type="text"
               required
@@ -569,7 +595,10 @@ const Biling = () => {
           {Inputs.isGstBill == true && (
             <div className="mb-4">
               <label className="block text-black text-sm mb-2">
-                Party GSTIN:
+                Party GSTIN:{" "}
+                <span className="text-red-500 font-bold text-xl text-center align-middle">
+                  *
+                </span>
               </label>
               <input
                 required
@@ -594,7 +623,10 @@ const Biling = () => {
           {/* // bill no */}
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              Invoice Number:*
+              Invoice Number:{" "}
+              <span className="text-red-500 font-bold text-xl text-center align-middle">
+                *
+              </span>
             </label>
             <input
               type="number"

@@ -592,7 +592,6 @@ class Accounting {
 
       return true; // Return true if inventory update is successful
     } catch (error) {
-      console.log(error);
       throw error; // Propagate error if inventory update fails
     }
   }
