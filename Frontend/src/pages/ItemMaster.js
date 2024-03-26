@@ -69,9 +69,9 @@ const ItemMaster = ({ data, mode, closeModal }) => {
       <div>
         <form className=" bg-white rounded mb-8   " onSubmit={handelSubmit}>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 pt-10 px-4">
-            {/* <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
+            <h2 className="col-span-full text-center mb-4 text-[#225777] text-2xl font-bold">
               Items
-            </h2> */}
+            </h2>
             <div className="mb-4">
               <label className="block text-black text-sm  mb-2">Name</label>
               <input

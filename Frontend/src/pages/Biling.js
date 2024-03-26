@@ -677,6 +677,7 @@ const Biling = () => {
                 <th>Qty</th>
                 {Inputs.isGstBill == true && <th>GST%</th>}
                 <th>Amount</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody className="tbodyone">
@@ -749,13 +750,10 @@ const Biling = () => {
                         readOnly
                       />
                     </td>
-                    {index === 0 ? (
-                      <td>{/* <button onClick={addRow}>Add</button> */}</td>
-                    ) : (
-                      <td>
-                        <button onClick={() => deleteRow(index)}>Delete</button>
-                      </td>
-                    )}
+
+                    <td>
+                      <button onClick={() => deleteRow(index)}>Delete</button>
+                    </td>
                   </tr>
                 ))}
             </tbody>
@@ -909,16 +907,6 @@ const Biling = () => {
             </tbody>
           </table>
         </div>
-        {/* <div className="flex flex-wrap ">
-          <div className="md:w-full pr-4 pl-4">
-            <div className="input-block mb-3">
-              <label className="pt-2 pb-2 mb-0 leading-normal">
-                Other Information
-              </label>
-              <textarea className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded"></textarea>
-            </div>
-          </div>
-        </div> */}
 
         <div className="flex items-center justify-between col-3 pb-3">
           {editdata ? (
