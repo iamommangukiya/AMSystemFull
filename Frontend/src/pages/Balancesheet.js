@@ -152,6 +152,18 @@ const Balancesheet = ({ mode }) => {
               <td class="border border-black ps-2"></td>
             </tr>
             <tr>
+              <td class="border border-black ps-2">Opening Balance</td>
+              <td class="border border-black ps-2">
+                {""}
+                {formatAsRupees(
+                  parseInt(
+                    balancesheetData && balancesheetData.assets.OpeningBalance
+                  )
+                )}
+              </td>
+              <td class="border border-black ps-2"></td>
+            </tr>
+            <tr>
               <td class="border border-black ps-2">
                 Cash and Cash Equivalents
               </td>
@@ -220,6 +232,9 @@ const Balancesheet = ({ mode }) => {
                     parseInt(
                       balancesheetData &&
                         balancesheetData.assets.accountsReceivable
+                    ) +
+                    parseInt(
+                      balancesheetData && balancesheetData.assets.OpeningBalance
                     )
                 )}
               </td>

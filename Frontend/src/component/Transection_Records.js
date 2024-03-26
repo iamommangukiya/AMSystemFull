@@ -42,7 +42,7 @@ const Trasection_Records = () => {
     } else {
       return result.filter((item) =>
         tableHeader.some((field) =>
-          item[field]?.toLowerCase().includes(searchQuery.toLowerCase())
+          String(item[field]).toLowerCase().includes(searchQuery.toLowerCase())
         )
       );
     }
@@ -102,7 +102,7 @@ const Trasection_Records = () => {
                     <th className="w-32">Sr No</th>
                     <th className="w-32">AccountFrom</th>
                     <th className="w-32">AccountTo</th>
-                    <th className="w-32">trasctionType</th>
+                    <th className="w-32">TrasctionType</th>
                     <th className="w-24">amount</th>
                   </tr>
                 </thead>

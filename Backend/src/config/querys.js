@@ -76,12 +76,13 @@ class Querys {
       postalCode,
       ownerName,
       ownerEmail,
+      purchaseStock,
       businessType,
     } = userInputs;
     const handleUndefined = (value) =>
       value === undefined ? null : `'${value}'`;
 
-    return `INSERT INTO tblcompany(userId,companyName,gstNumber,email,phoneNumber,address,city,state,country,postalCode,ownerName,ownerEmail,businessType,createDate,UpdateDate) VALUES (${handleUndefined(
+    return `INSERT INTO tblcompany(userId,companyName,gstNumber,email,phoneNumber,address,city,state,country,postalCode,ownerName,ownerEmail,businessType,createDate,UpdateDate,OpeningBalance) VALUES (${handleUndefined(
       id
     )}, ${handleUndefined(companyName)}, ${handleUndefined(
       gstNumber
@@ -95,7 +96,9 @@ class Querys {
       ownerName
     )}, ${handleUndefined(ownerEmail)}, ${handleUndefined(
       businessType
-    )}, '${formattedDate}',' ${formattedDate}');`;
+    )}, '${formattedDate}',' ${formattedDate}',${handleUndefined(
+      purchaseStock
+    )});`;
   };
   updateCompany = (userInputs) => {
     var {

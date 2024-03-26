@@ -203,7 +203,7 @@ const Party = ({ data, mode, closeModal }) => {
                 htmlFor="exampleInputPhoneNo"
                 className="block text-black text-sm mb-2"
               >
-                phone Number
+                Phone Number
               </label>
               <div className="flex ">
                 <select className="form-input border border-gray-400 w-20 h-10 rounded-l-md">

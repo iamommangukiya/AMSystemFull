@@ -213,7 +213,7 @@ const PartyRecord = () => {
                         ))}
                         <td className=" space-x-5 justify-evenly  text-center ">
                           <button
-                            className="text-[#173054] ms-2 px-3 "
+                            className="text-red-600 ms-2 px-3 "
                             onClick={() => handleButtonClick(item["ID"])}
                           >
                             <svg

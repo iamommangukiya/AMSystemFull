@@ -59,7 +59,7 @@ const Biling = () => {
     pgstNo: "",
     totalQuantity: "",
     gtotalAmount: "",
-    discount: 0,
+    discount: "",
     totalTaxable: 0,
     totalSgst: "",
     totalCgst: "",
@@ -80,10 +80,10 @@ const Biling = () => {
   let billname = "";
   switch (mode) {
     case "salse":
-      billname = Inputs.isGstBill ? "GST salse Billing" : "salse Billing";
+      billname = Inputs.isGstBill ? "GST Salse Billing" : "Salse Billing";
       break;
     case "purchase":
-      billname = Inputs.isGstBill ? "GST purchase Billing" : "purchase Billing";
+      billname = Inputs.isGstBill ? "GST Purchase Billing" : "Purchase Billing";
       break;
     case "asimat":
       billname = "AsimatBill";
@@ -93,8 +93,8 @@ const Biling = () => {
       break;
     case "quotation":
       billname = Inputs.isGstBill
-        ? "GST quotation Billing"
-        : "quotation Billing";
+        ? "GST Quotation Billing"
+        : "Quotation Billing";
       break;
     default:
       bookName = "";
@@ -517,9 +517,7 @@ const Biling = () => {
           {/* // party name */}
 
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">
-              PartyName: *
-            </label>
+            <label className="block text-black text-sm mb-2">PartyName:*</label>
             <input
               type="text"
               required
@@ -550,7 +548,7 @@ const Biling = () => {
           {/* // state name */}
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-gray-700 text-sm  mb-2">
               Bill State Name:
             </label>
             <select
@@ -596,7 +594,7 @@ const Biling = () => {
           {/* // bill no */}
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              Invoice Number*
+              Invoice Number:*
             </label>
             <input
               type="number"
@@ -615,7 +613,7 @@ const Biling = () => {
           {/* // date */}
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              Invoice Date
+              Invoice Date:
             </label>
             <input
               type="date"
@@ -627,7 +625,7 @@ const Biling = () => {
           </div>
           {/* // due date */}
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">Due Date</label>
+            <label className="block text-black text-sm mb-2">Due Date:</label>
             <input
               type="date"
               className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
@@ -654,7 +652,7 @@ const Biling = () => {
 
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              deliveryAdress:
+              DeliveryAdress:
             </label>
             <input
               type="text"
@@ -774,26 +772,34 @@ const Biling = () => {
                     Add
                   </button>
                 </td>
-
                 <td colspan="5" className="text-end">
                   Total Item
                 </td>
+                <td className="text-end pr-4">
+                  <input
+                    className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
+                    readonly=""
+                    disabled
+                    onChange={handelchange}
+                    name="totalQuantity"
+                    value={Inputs.items && Inputs.items.length}
+                    type="number"
+                  />
+                </td>
 
-                <tr>
-                  <td colspan="5" className="text-end">
-                    Total Qty
-                  </td>
-                  <td className="text-end pr-4">
-                    <input
-                      className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
-                      readonly=""
-                      onChange={handelchange}
-                      name="totalQuantity"
-                      value={Inputs.totalQuantity}
-                      type="number"
-                    />
-                  </td>
-                </tr>
+                <td colspan="5" className="text-end">
+                  Total Qty
+                </td>
+                <td className="text-end pr-4">
+                  <input
+                    className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
+                    readonly=""
+                    onChange={handelchange}
+                    name="totalQuantity"
+                    value={Inputs.totalQuantity}
+                    type="number"
+                  />
+                </td>
                 <td colspan="6" className="text-center">
                   Total
                 </td>
@@ -820,7 +826,8 @@ const Biling = () => {
                     onChange={handelchange}
                     defaultValue={0}
                     name="totalTaxable"
-                    type="text"
+                    type="number"
+                    inputMode="decimal"
                   />
                 </td>
               </tr>
@@ -831,13 +838,12 @@ const Biling = () => {
                 </td>
                 <td className="text-end pe-4">
                   <input
-                    pattern="[0-9]*[.,]?[0-9]*"
+                    inputmode="decimal"
                     name="discount"
-                    defaultValue={"0"}
                     onChange={handelchange}
                     value={Inputs.discount}
                     className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
-                    type="text"
+                    type="number"
                   />
                 </td>
               </tr>

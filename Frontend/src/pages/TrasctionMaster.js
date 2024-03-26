@@ -83,7 +83,7 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
             {transectionType == "debit" && (
               <>
                 <div className="mb-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                  <label className="block text-gray-700 text-sm  mb-2">
                     Account From
                   </label>
                   <select
@@ -95,11 +95,11 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
                   >
                     <option value="">Select </option>
                     <option value="Bank">Bank</option>
-                    <option value="cash">cash</option>
+                    <option value="cash">Cash</option>
                   </select>
                 </div>
                 <div className="mb-2">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                  <label className="block text-gray-700 text-sm  mb-2">
                     Account To
                   </label>
 
@@ -124,7 +124,7 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
             {transectionType == "credit" && (
               <>
                 <div className="mb-1">
-                  <label className="block text-gray-700 text-sm font-bold mb-2">
+                  <label className="block text-gray-700 text-sm  mb-2">
                     Account To:
                   </label>
 
@@ -137,7 +137,7 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
                   >
                     <option value="">Select </option>
                     <option value="Bank">Bank</option>
-                    <option value="cash">cash</option>
+                    <option value="cash">Cash</option>
                   </select>
                 </div>
                 <div className="mb-2">
@@ -163,8 +163,8 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
             )}
 
             <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                amount
+              <label className="block text-gray-700 text-sm  mb-2">
+                Amount
               </label>
               <input
                 type="number"
@@ -176,8 +176,8 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
               />
             </div>
             <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                invoiceNo
+              <label className="block text-gray-700 text-sm  mb-2">
+                InvoiceNo
               </label>
               <input
                 type="text"
@@ -189,8 +189,8 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
             </div>
 
             <div className="mb-2">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                chequeNo
+              <label className="block text-gray-700 text-sm  mb-2">
+                ChequeNo
               </label>
               <input
                 type="text"
@@ -201,8 +201,8 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
               />
             </div>
             <div className="mb-1">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                narration
+              <label className="block text-gray-700 text-sm  mb-2">
+                Narration
               </label>
               <input
                 type="text"
@@ -213,7 +213,7 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
               />
             </div>
           </div>
-          <div className="  text-center  text-primary text-2xl font-bold items-center justify-between mt-2">
+          <div className="  text-center  text-primary text-2xl  items-center justify-between mt-2">
             {mode === "add" && (
               <button
                 className="btn py-2.5 text-xl bg-[#225777] border border-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"

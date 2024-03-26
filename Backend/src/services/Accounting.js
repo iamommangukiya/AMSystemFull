@@ -4,6 +4,7 @@ const querys = require("../config/querys");
 const database = require("../database/index");
 // const db = database("Accounting");
 const db = database("Accounting");
+const dbuser = database("user");
 const query = new querys();
 
 class Accounting {
@@ -853,7 +854,7 @@ class Accounting {
   }
   async GenerateBalanceSheet(id, res) {
     try {
-      let billLogs, transaction, itemmaster;
+      let billLogs, transaction, itemmaster, cmp;
 
       const getBillLogsPromise = new Promise((resolve, reject) => {
         db.query(
@@ -864,6 +865,20 @@ class Accounting {
               reject(err);
             } else {
               billLogs = data;
+              resolve();
+            }
+          }
+        );
+      });
+      const company = new Promise((resolve, reject) => {
+        dbuser.query(
+          `SELECT * from tblcompany where id =  ${id}`,
+          (err, data) => {
+            if (err) {
+              logError(err);
+              reject(err);
+            } else {
+              cmp = data;
               resolve();
             }
           }
@@ -940,10 +955,12 @@ class Accounting {
           }, 0);
       };
 
-      Promise.all([getBillLogsPromise, getfulltransaction, itempro])
+      Promise.all([getBillLogsPromise, getfulltransaction, itempro, company])
         .then(() => {
+          var OpeningBalance = cmp[0].OpeningBalance;
           const balanceSheet = {
             assets: {
+              OpeningBalance: OpeningBalance,
               inventory: calculateInventoryCost(itemmaster),
               accountsReceivable: accountRecivable(transaction), // Optional
             },

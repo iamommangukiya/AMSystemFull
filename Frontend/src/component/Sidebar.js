@@ -138,7 +138,7 @@ const Sidebar = () => {
                   className="sub-menu flex flex-col gap-1 text-white dark:text-white/60 "
                 >
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
-                    <NavLink to="/dashboard/Recipt">Credit transaction</NavLink>
+                    <NavLink to="/dashboard/Recipt">Debit transaction</NavLink>
                   </li>
 
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
@@ -148,7 +148,9 @@ const Sidebar = () => {
                         Soon
                       </span>
                     </a> */}
-                    <NavLink to="/dashboard/Payment">Debit transaction</NavLink>
+                    <NavLink to="/dashboard/Payment">
+                      Credit transaction
+                    </NavLink>
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/transectionrecord">

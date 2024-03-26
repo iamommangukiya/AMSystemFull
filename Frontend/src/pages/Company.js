@@ -310,7 +310,7 @@ const Company = () => {
                   htmlFor="exampleInputpstock"
                   className="block text-black text-sm mb-2"
                 >
-                  purchaseStock
+                  Opening Balance
                 </label>
                 <input
                   type="text"

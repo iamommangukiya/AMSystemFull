@@ -140,12 +140,12 @@ const ReciveAmount = ({ transectionType }) => {
               <table className="min-w-[640px] w-full mt-4 table-hover">
                 <thead>
                   <tr className="border-separate">
-                    <th className="w-32">index</th>
-                    <th className="w-32">AccountFrom</th>
-                    <th className="w-32">AccountTo</th>
+                    <th className="w-32">Index</th>
+                    <th className="w-32">Account From</th>
+                    <th className="w-32">Account To</th>
 
-                    <th className="w-32">trasctionType</th>
-                    <th className="w-24">amount</th>
+                    <th className="w-32">Trasction Type</th>
+                    <th className="w-24">Amount</th>
                     <th className="w-24">Action</th>
                   </tr>
                 </thead>
@@ -161,7 +161,7 @@ const ReciveAmount = ({ transectionType }) => {
                       ))}
                       <td className=" space-x-5 justify-evenly  text-center ">
                         <button
-                          className="text-[#173054] ms-2 px-3 "
+                          className="text-red-600 ms-2 px-3 "
                           onClick={() => handleButtonClick(item["id"])}
                         >
                           <svg

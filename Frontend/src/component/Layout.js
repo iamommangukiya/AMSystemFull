@@ -84,8 +84,9 @@ const Layout = () => {
                       {pathname === "/dashboard" && "Dashboard"}
                       {pathname === "/dashboard/party" && "Clients"}
                       {pathname === "/dashboard/itemmaster" && "Inventories"}
-                      {pathname === "/dashboard/Recipt" && "Credit Transaction"}
-                      {pathname === "/dashboard/Payment" && "Debit Transaction"}
+                      {pathname === "/dashboard/Recipt" && "Debit Transaction"}
+                      {pathname === "/dashboard/Payment" &&
+                        "Credit Transaction"}
                       {pathname === "/dashboard/PurchaseBill" &&
                         "Purchase Bill"}
                       {pathname === "/dashboard/transectionrecord" &&
