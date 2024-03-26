@@ -117,7 +117,7 @@ const Account_REC_PAY = ({ mode }) => {
                     {mode == "payable" && (
                       <>
                         <th className="w-32">Account from</th>
-                        <th className="w-32">party name</th>
+                        <th className="w-32">Party name</th>
                       </>
                     )}
                     {mode == "recive" && (
@@ -127,7 +127,7 @@ const Account_REC_PAY = ({ mode }) => {
                       </>
                     )}
 
-                    <th className="w-32">transectionType</th>
+                    <th className="w-32">TransectionType</th>
                     <th className="w-24">Amount</th>
                   </tr>
                 </thead>

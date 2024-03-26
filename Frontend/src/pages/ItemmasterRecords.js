@@ -161,7 +161,7 @@ const ItemmasterRecords = () => {
                       <td>{item.GST == "undefined" ? "-" : item.GST + "%"}</td>
                       <td>
                         <button
-                          className="text-[#173054] ms-2"
+                          className="text-red-600 ms-2"
                           onClick={() => handelDeletebtn(item.id)}
                         >
                           <svg

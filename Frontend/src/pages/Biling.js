@@ -80,10 +80,10 @@ const Biling = () => {
   let billname = "";
   switch (mode) {
     case "salse":
-      billname = Inputs.isGstBill ? "GST salse Billing" : "salse Billing";
+      billname = Inputs.isGstBill ? "GST Salse Billing" : "Salse Billing";
       break;
     case "purchase":
-      billname = Inputs.isGstBill ? "GST purchase Billing" : "purchase Billing";
+      billname = Inputs.isGstBill ? "GST Purchase Billing" : "Purchase Billing";
       break;
     case "asimat":
       billname = "AsimatBill";
@@ -93,8 +93,8 @@ const Biling = () => {
       break;
     case "quotation":
       billname = Inputs.isGstBill
-        ? "GST quotation Billing"
-        : "quotation Billing";
+        ? "GST Quotation Billing"
+        : "Quotation Billing";
       break;
     default:
       bookName = "";
@@ -518,7 +518,7 @@ const Biling = () => {
 
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              PartyName: *
+              PartyName:*
             </label>
             <input
               type="text"
@@ -550,7 +550,7 @@ const Biling = () => {
           {/* // state name */}
 
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
+            <label className="block text-gray-700 text-sm  mb-2">
               Bill State Name:
             </label>
             <select
@@ -596,7 +596,7 @@ const Biling = () => {
           {/* // bill no */}
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              Invoice Number*
+              Invoice Number:*
             </label>
             <input
               type="number"
@@ -615,7 +615,7 @@ const Biling = () => {
           {/* // date */}
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              Invoice Date
+              Invoice Date:
             </label>
             <input
               type="date"
@@ -627,7 +627,7 @@ const Biling = () => {
           </div>
           {/* // due date */}
           <div className="mb-4">
-            <label className="block text-black text-sm mb-2">Due Date</label>
+            <label className="block text-black text-sm mb-2">Due Date:</label>
             <input
               type="date"
               className="form-input border focus:border-0 border-gray-400 w-full rounded-md h-10"
@@ -654,7 +654,7 @@ const Biling = () => {
 
           <div className="mb-4">
             <label className="block text-black text-sm mb-2">
-              deliveryAdress:
+              DeliveryAdress:
             </label>
             <input
               type="text"

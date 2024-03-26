@@ -130,7 +130,7 @@ const GSTR = ({ mode }) => {
             </tr>
             <tr>
               <td class="border border-black ps-2">
-                2.(a) Legal name ofthe registered person
+                2.(a) Legal name of the registered person
               </td>
               <td class="border border-black ps-2"></td>
             </tr>
@@ -146,8 +146,8 @@ const GSTR = ({ mode }) => {
         <section class="container">
           <h1 class="text-xl font-bold pb-5">
             {console.log(mode)}
-            {mode == "purchase" && "purchase"}
-            {mode == "salse" && "salse"}
+            {mode == "purchase" && "Purchase"}
+            {mode == "salse" && "Salse"}
           </h1>
 
           <table class="text-center">
