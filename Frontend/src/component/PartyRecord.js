@@ -78,7 +78,7 @@ const PartyRecord = () => {
 
   useEffect(() => {
     dispatch(apipartyGet());
-  }, [result]);
+  }, [modal]);
 
   useEffect(() => {
     if (result?.length > 0) {
@@ -123,7 +123,7 @@ const PartyRecord = () => {
               }}
               className="btn py-2 px-3 text-lg bg-[#225777] rounded-md text-white transition-all duration-300 hover:bg-[#173054] hover:border-[#173054]"
             >
-              ADD 
+              ADD
             </button>
           </div>
           <React_Modal isOpen={modal} closeModal={closeModal}>

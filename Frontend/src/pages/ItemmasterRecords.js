@@ -38,7 +38,7 @@ const ItemmasterRecords = () => {
 
   useEffect(() => {
     dispatch(items_get());
-  }, [result]);
+  }, [Modal]);
 
   if (!result || !Array.isArray(result)) {
     return (
