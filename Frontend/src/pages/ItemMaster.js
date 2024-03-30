@@ -28,9 +28,41 @@ const ItemMaster = ({ data, mode, closeModal }) => {
 
   const handelchange = (e) => {
     const { name, value } = e.target;
-    // If the value is empty, set it to 0
-    const sanitizedValue = value === "" ? "0" : value;
-    setInput({ ...inputs, [name]: sanitizedValue });
+
+    // Validate "name" field to accept only characters
+    if (name === "name") {
+      // Regular expression to match only characters (alphabets)
+      const regex = /^[a-zA-Z\s]*$/;
+      // Check if the input value matches the regular expression
+      if (regex.test(value)) {
+        // Show error message if the value contains non-alphabet characters
+        setInput({ ...inputs, [name]: value });
+        return;
+      } else {
+        return;
+      }
+    }
+
+    // Skip validation for "unit" field
+    if (name === "unit") {
+      setInput({ ...inputs, [name]: value });
+      return;
+    }
+
+    // Convert value to a number for other fields
+    const numericValue = parseFloat(value);
+    // Check if the value is negative
+    if (numericValue < 0) {
+      // Set border color to red
+      e.target.style.borderColor = "red";
+      // Show the error message
+      toast.error("Value should not be negative", { position: "top-center" });
+    } else {
+      // Reset border color to default
+      e.target.style.borderColor = "#CBD5E0"; // You may need to adjust this value according to your design
+      // Update the state with the new value
+      setInput({ ...inputs, [name]: numericValue });
+    }
   };
 
   const msg = useSelector((state) => state.ItemReducer.result["flag"]);
@@ -42,7 +74,9 @@ const ItemMaster = ({ data, mode, closeModal }) => {
       dispatch(items_create(inputs));
       dispatch(items_get());
       closeModal();
-    } catch {}
+    } catch (err) {
+      console.log(err);
+    }
 
     if (msg === true) {
       toast.success("Sucessfull", "sucess");

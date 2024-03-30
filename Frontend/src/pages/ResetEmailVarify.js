@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginAction, REverifyOtp, varifyOtp } from "../reducer/User_reducer";
-import { useLocation } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { LoginAction, REverifyOtp } from "../reducer/User_reducer";
+import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Lottie from "lottie-react";
 import spinner from "../loading.json";
@@ -12,9 +11,10 @@ function ResetEmailVarify() {
   const navigate = useNavigate();
   const location = useLocation();
   const inputs = location.state;
-  const [otp, setOtp] = useState(""); // State variable to store the OTP
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]); // State variable to store the OTP
   const flag = useSelector((state) => state.Loginreducer.REverifyOtp?.flag);
   const loading = useSelector((state) => state.Loginreducer.loading);
+  const otpInputs = useRef([]);
   // Function to handle OTP input change
   useEffect(() => {
     if (flag == true) {
@@ -29,17 +29,32 @@ function ResetEmailVarify() {
       dispatch(LoginAction.clearloading());
     }
   }, [flag]);
+  // Function to handle OTP input change
   const handleOtpChange = (index, value) => {
-    // Create a copy of the OTP string
-    let newOtp = otp;
-    // Update the OTP string at the specified index
-    newOtp = newOtp.substr(0, index) + value + newOtp.substr(index + 1);
-    // Update the state with the new OTP string
+    // Create a copy of the OTP array
+    let newOtp = [...otp];
+    // Update the OTP array at the specified index
+    newOtp[index] = value;
+    // Update the state with the new OTP array
     setOtp(newOtp);
+
+    // If the value is not empty and there exists another input field next to it, move focus to that field
+    if (value !== "" && index < otp.length - 1) {
+      otpInputs.current[index + 1].focus();
+    }
   };
+
+  // Function to handle key down event in OTP input
+  const handleKeyDown = (index, e) => {
+    // If the backspace key is pressed and the current input is empty, move focus to the previous input field
+    if (e.key === "Backspace" && index > 0 && otp[index] === "") {
+      otpInputs.current[index - 1].focus();
+    }
+  };
+
   const handleVarify = (e) => {
     e.preventDefault();
-    dispatch(REverifyOtp({ ...inputs, otp: otp }));
+    dispatch(REverifyOtp({ ...inputs, otp: otp.join("") }));
   };
 
   return (
@@ -57,19 +72,21 @@ function ResetEmailVarify() {
             </div>
 
             <div>
-              <form action="" method="post">
+              <form onSubmit={handleVarify}>
                 <div className="flex flex-col space-y-16">
                   <div className="flex flex-row items-center justify-between mx-auto w-full max-w-xs">
-                    {[0, 1, 2, 3, 4, 5].map((index) => (
+                    {otp.map((_, index) => (
                       <div className="w-16 h-16" key={index}>
                         <input
+                          ref={(el) => (otpInputs.current[index] = el)} // Set the ref for the input field
                           className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                           type="text"
-                          value={otp[index] || ""}
+                          value={otp[index]}
                           maxLength={1}
                           onChange={(e) =>
                             handleOtpChange(index, e.target.value)
                           }
+                          onKeyDown={(e) => handleKeyDown(index, e)}
                         />
                       </div>
                     ))}
@@ -79,7 +96,7 @@ function ResetEmailVarify() {
                     <div>
                       <button
                         className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
-                        onClick={handleVarify}
+                        type="submit"
                       >
                         Verify Account
                       </button>

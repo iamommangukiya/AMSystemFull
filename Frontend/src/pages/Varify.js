@@ -1,21 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginAction, varifyOtp } from "../reducer/User_reducer";
-import { useLocation } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 import { ToastContainer, toast } from "react-toastify";
 import Lottie from "lottie-react";
 import spinner from "../loading.json";
 
 const Varify = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Define navigate variable
   const location = useLocation();
   const inputs = location.state;
-  const [otp, setOtp] = useState(""); // State variable to store the OTP
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]); // State variable to store the OTP
+  const otpInputs = useRef([]); // Ref for OTP input fields
   const flag = useSelector((state) => state.Loginreducer.varify?.flag);
   const loading = useSelector((state) => state.Loginreducer.loading);
+
   // Function to handle OTP input change
+  // Function to handle OTP input change
+  // Function to handle OTP input change
+  const handleOtpChange = (index, value) => {
+    // Create a copy of the OTP array
+    let newOtp = [...otp];
+    // Update the OTP array at the specified index
+    newOtp[index] = value;
+    // Update the state with the new OTP array
+    setOtp(newOtp);
+  };
+
+  // Function to handle key down event in OTP input
+  const handleKeyDown = (index, e) => {
+    // If the value is empty and the backspace key is pressed, move focus to the previous input field
+    if (e.key === "Backspace" && index > 0 && otp[index] === "") {
+      otpInputs.current[index - 1].focus();
+    }
+  };
+
+  // Function to handle key up event in OTP input
+  const handleKeyUp = (index, e) => {
+    // If the value is not empty and there exists another input field next to it, move focus to that field
+    if (e.target.value !== "" && index < otp.length - 1) {
+      otpInputs.current[index + 1].focus();
+    }
+  };
+
   useEffect(() => {
     if (flag === true) {
       toast.success("otp verified successfully", "sucess");
@@ -23,22 +51,15 @@ const Varify = () => {
         navigate("/");
       }, 3000); // Navigate to "/" after 3 seconds
       dispatch(LoginAction.clearloading());
-    } else if (flag == false) {
+    } else if (flag === false) {
       toast.dark("Otp code is wrong", "DANGER");
       dispatch(LoginAction.clearloading());
     }
-  }, [flag]);
-  const handleOtpChange = (index, value) => {
-    // Create a copy of the OTP string
-    let newOtp = otp;
-    // Update the OTP string at the specified index
-    newOtp = newOtp.substr(0, index) + value + newOtp.substr(index + 1);
-    // Update the state with the new OTP string
-    setOtp(newOtp);
-  };
+  }, [flag, dispatch, navigate]);
+
   const handleVarify = (e) => {
     e.preventDefault();
-    dispatch(varifyOtp({ ...inputs, otp: otp }));
+    dispatch(varifyOtp({ ...inputs, otp: otp.join("") }));
   };
 
   return (
@@ -62,13 +83,16 @@ const Varify = () => {
                     {[0, 1, 2, 3, 4, 5].map((index) => (
                       <div className="w-16 h-16" key={index}>
                         <input
+                          ref={(el) => (otpInputs.current[index] = el)} // Set the ref for the input field
                           className="w-full h-full flex flex-col items-center justify-center text-center px-5 outline-none rounded-xl border border-gray-200 text-lg bg-white focus:bg-gray-50 focus:ring-1 ring-blue-700"
                           type="text"
-                          value={otp[index] || ""}
+                          value={otp[index]}
                           maxLength={1}
                           onChange={(e) =>
                             handleOtpChange(index, e.target.value)
                           }
+                          onKeyDown={(e) => handleKeyDown(index, e)}
+                          onKeyUp={(e) => handleKeyUp(index, e)}
                         />
                       </div>
                     ))}

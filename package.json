@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install-backend": " cd Account Management Backend && npm install",
-    "start-backend": "cd Account Management Backend && npm start"
+    "install-front": " cd Frontend && npm run build",
+    "start-backend": " cd Frontend && npm start"
   },
-  "author": "",
+  "author": "om",
   "license": "ISC"
 }

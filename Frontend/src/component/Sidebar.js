@@ -63,7 +63,7 @@ const Sidebar = () => {
                       />
                     </g>
                   </svg>
-                  <span className="pl-1.5 text-white text-lg">Dashboard</span>
+                  <span className="pl-1.5 text-white text-sm">Dashboard</span>
                 </NavLink>
               </div>
               <li className="menu nav-item">
@@ -85,7 +85,9 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-white text-lg">Master</span>
+                    <span className="pl-1.5 text-white text-sm">
+                      PARTIES & INVENTORY
+                    </span>
                   </div>
                 </a>
                 <ul
@@ -127,7 +129,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-lg text-white">
+                    <span className="pl-1.5 text-sm text-white">
                       TrasctionMaster
                     </span>
                   </div>
@@ -194,7 +196,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-lg text-white">Report</span>
+                    <span className="pl-1.5 text-sm text-white">Report</span>
                   </div>
                 </a>
                 <ul
@@ -241,7 +243,7 @@ const Sidebar = () => {
                         fill="currentColor"
                       ></path>
                     </svg>
-                    <span className="pl-1.5 text-white text-lg">Help</span>
+                    <span className="pl-1.5 text-white text-sm">Help</span>
                   </NavLink>
                 </ul>
               </li>
