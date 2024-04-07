@@ -21,7 +21,6 @@ const CompanyDetail = () => {
     (state) => state.BillingReducer.balancesheet?.data
   );
   const opbalance = balancesheetData && balancesheetData.assets.OpeningBalance;
-  console.log(opbalance);
 
   //  localStorage.setItem("comanyName",companyName)
 
@@ -44,40 +43,6 @@ const CompanyDetail = () => {
 
   return (
     <>
-      {/* <div className="grid grid-cols-4 text-center gap-4">
-        <div className="h-48 p-5 flex justify-center items-center flex-col bg-white rounded-md shadow-md">
-          <p className="font-bold text-2xl">Inventory</p>
-          <p className=" text-2xl">
-            ₹{balancesheetData && balancesheetData.assets.inventory}
-          </p>
-        </div>
-        <div className="h-48 p-5 flex justify-center items-center flex-col bg-white rounded-md shadow-md">
-          <p className="font-bold text-2xl">Purchase</p>
-          <p className=" text-2xl">
-            ₹{balancesheetData && balancesheetData.Purchase}
-          </p>
-        </div>
-        <div className="h-48 p-5 flex justify-center items-center flex-col bg-white rounded-md shadow-md">
-          <p className="font-bold text-2xl">sales</p>
-          <p className=" text-2xl">
-            ₹{balancesheetData && balancesheetData.sales}
-          </p>
-        </div>
-        <div className="h-48 p-5 flex justify-center items-center flex-col bg-white rounded-md shadow-md">
-          <p className="font-bold text-2xl">P/L</p>
-          <p className=" text-2xl">
-            {balancesheetData &&
-              balancesheetData.sales - balancesheetData.Purchase < 0 &&
-              "Loss"}
-            {balancesheetData &&
-              balancesheetData.sales - balancesheetData.Purchase >= 0 &&
-              "Profit"}{" "}
-            ₹
-            {balancesheetData &&
-              Math.abs(balancesheetData.sales - balancesheetData.Purchase)}
-          </p>
-        </div>
-      </div> */}
       <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
         <div class="flex items-center p-8 bg-white shadow rounded-lg">
           <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
