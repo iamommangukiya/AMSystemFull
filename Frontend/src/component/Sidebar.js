@@ -130,7 +130,7 @@ const Sidebar = () => {
                       ></path>
                     </svg>
                     <span className="pl-1.5 text-sm text-white">
-                      TrasctionMaster
+                      Trasction Manager
                     </span>
                   </div>
                 </a>
@@ -209,6 +209,12 @@ const Sidebar = () => {
                   </li>
                   <li className=" flex items-center text-white py-1 cursor-pointer ">
                     <NavLink to="/dashboard/Salse">Sales report</NavLink>
+                  </li>
+                  <li className=" flex items-center text-white py-1 cursor-pointer ">
+                    <NavLink to="/dashboard/InventoryReport">
+                      {" "}
+                      Inventory Report
+                    </NavLink>
                   </li>
                   <li>
                     <NavLink to="/dashboard/gst">Gst Sales</NavLink>

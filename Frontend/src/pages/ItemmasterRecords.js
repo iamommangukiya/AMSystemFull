@@ -59,7 +59,11 @@ const ItemmasterRecords = () => {
         </div>
         <div>
           <React_Modal isOpen={Modal} closeModal={closemodal}>
-            <ItemMaster data={editValues} mode={Mode}></ItemMaster>
+            <ItemMaster
+              data={editValues}
+              mode={Mode}
+              closeModal={closemodal}
+            ></ItemMaster>
           </React_Modal>
         </div>
       </>

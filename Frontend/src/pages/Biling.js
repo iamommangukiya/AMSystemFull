@@ -270,6 +270,9 @@ const Biling = () => {
   };
 
   const flag = useSelector((state) => state.BillingReducer.result.flag || {});
+  const message = useSelector(
+    (state) => state.BillingReducer.result.message || {}
+  );
 
   let flagu = useSelector(
     (state) => state.BillingReducer.updateBilllog?.flag || {}
@@ -323,6 +326,12 @@ const Biling = () => {
       // navigate("/dashboard/PurchaseBill");
       window.history.back();
     }, 2000);
+  }
+  if (message == "Insufficient inventory") {
+    toast.warning("Insufficient inventory", "Insufficient inventory");
+    dispatch(billingaction.CleanInsertBill());
+    dispatch(billingaction.clearBillitem());
+    dispatch(billingaction.clerarupbill());
   }
 
   const handelchange = (e, index) => {

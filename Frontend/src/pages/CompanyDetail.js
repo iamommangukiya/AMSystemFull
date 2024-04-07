@@ -20,9 +20,7 @@ const CompanyDetail = () => {
   const balancesheetData = useSelector(
     (state) => state.BillingReducer.balancesheet?.data
   );
-  const opbalance = parseInt(
-    balancesheetData && balancesheetData.assets.OpeningBalance
-  );
+  const opbalance = balancesheetData && balancesheetData.assets.OpeningBalance;
   console.log(opbalance);
 
   //  localStorage.setItem("comanyName",companyName)

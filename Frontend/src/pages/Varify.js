@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { LoginAction, varifyOtp } from "../reducer/User_reducer";
+import { LoginAction, registation, varifyOtp } from "../reducer/User_reducer";
 import { useLocation, useNavigate } from "react-router-dom"; // Import useNavigate
 import { ToastContainer, toast } from "react-toastify";
 import Lottie from "lottie-react";
@@ -57,6 +57,10 @@ const Varify = () => {
     }
   }, [flag, dispatch, navigate]);
 
+  const handleResendOtp = () => {
+    dispatch(registation(inputs));
+  };
+
   const handleVarify = (e) => {
     e.preventDefault();
     dispatch(varifyOtp({ ...inputs, otp: otp.join("") }));
@@ -112,8 +116,7 @@ const Varify = () => {
                       <p>Didn't receive code?</p>{" "}
                       <a
                         className="flex flex-row items-center text-blue-600"
-                        href="http://"
-                        target="_blank"
+                        onClick={() => handleResendOtp(inputs.email)}
                         rel="noopener noreferrer"
                       >
                         Resend

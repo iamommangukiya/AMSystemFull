@@ -38,9 +38,11 @@ const Registration = () => {
     e.preventDefault();
     if (inputs.password?.length < 6) {
       seterr("Password must be at least 6 characters long.");
+      return;
     }
     if (!/^\d{10}$/.test(inputs.mobile)) {
       seterrmp("Please enter a 10-digit mobile number.");
+      return;
     } else {
       try {
         dispatch(registation(inputs));

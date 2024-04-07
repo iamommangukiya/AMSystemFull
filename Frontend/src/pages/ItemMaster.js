@@ -77,10 +77,6 @@ const ItemMaster = ({ data, mode, closeModal }) => {
     } catch (err) {
       console.log(err);
     }
-
-    if (msg === true) {
-      toast.success("Sucessfull", "sucess");
-    }
   };
 
   const handleUpdate = (e) => {

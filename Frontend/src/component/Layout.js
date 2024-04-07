@@ -78,7 +78,8 @@ const Layout = () => {
                       {pathname === "/dashboard/gst2" && "Report"}
                       {pathname === "/dashboard/balancesheet" && "Report"}
                       {pathname === "/dashboard/AccountPay" && "Report"}
-                      {pathname === "/dashboard/Accountrec" && "Report"}
+                      {pathname === "/dashboard/AccountPay" && "Report"}
+                      {pathname === "/dashboard/InventoryReport" && "Report"}
                     </li>
                     <li className="text-black font-semibold text-2xl dark:text-white">
                       {pathname === "/dashboard" && "Dashboard"}
@@ -107,6 +108,8 @@ const Layout = () => {
                       {pathname === "/dashboard/Accountrec" &&
                         "Account Receivable"}
                       {pathname === "/dashboard/help" && "Help"}
+                      {pathname === "/dashboard/InventoryReport" &&
+                        "Inventory Report"}
                     </li>
                   </ul>
                 </nav>

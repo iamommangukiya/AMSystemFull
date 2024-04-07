@@ -30,6 +30,7 @@ import Help from "./pages/Help";
 import ResetPassword from "./pages/ResetPassword";
 import ResetPass from "./pages/ResetPass";
 import ResetEmailVarify from "./pages/ResetEmailVarify";
+import InventoryReport from "./pages/InventoryReport";
 
 const App = () => {
   const context = useContext(AppContext);
@@ -137,6 +138,10 @@ const App = () => {
           <Route
             path="Payment"
             element={<ReciveAmount transectionType={"credit"}></ReciveAmount>}
+          ></Route>
+          <Route
+            path="InventoryReport"
+            element={<InventoryReport></InventoryReport>}
           ></Route>
           <Route
             path="Purchase"

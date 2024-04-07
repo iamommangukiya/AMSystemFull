@@ -87,30 +87,7 @@ const Party = ({ data, mode, closeModal }) => {
     const isPostcode =
       !Inputs.postalCode || Validpostcode.test(Inputs.postalCode);
     const ispan = !Inputs.pan || validpan.test(Inputs.pan);
-    if (!isPhoneNumberValid) {
-      toast.error("Invalid phone number", { position: errorToastPosition });
-    }
 
-    if (!isGst) {
-      toast.error("Invalid GST number", { position: errorToastPosition });
-    }
-
-    if (!isPostcode) {
-      toast.error("Invalid postal code", { position: errorToastPosition });
-    }
-
-    if (!ispan) {
-      toast.error("Invalid PAN", { position: errorToastPosition });
-    }
-
-    if (!isPhoneNumberValid || !isGst || !isPostcode || !ispan) {
-      toast.error(
-        "Invalid input. Please check GST, PAN, phone number, and postal code.",
-        {
-          position: errorToastPosition,
-        }
-      );
-    }
     setValid(() => ({
       phonevalid: !isPhoneNumberValid,
       gstvalid: !isGst,
