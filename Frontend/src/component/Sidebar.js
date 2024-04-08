@@ -5,6 +5,11 @@ import AppContext from "../context/AppContext";
 import { hover } from "@testing-library/user-event/dist/hover";
 import Logo1 from "../assets/images/logo5.png";
 import Logo2 from "../assets/images/logo6.png";
+import transection from "../assets/images/transection.svg";
+import report from "../assets/images/report.svg";
+import help from "../assets/images/help.svg";
+import party from "../assets/images/party.svg";
+import dashboard from "../assets/images/dashboard.svg";
 
 const Sidebar = () => {
   useEffect(() => {
@@ -46,15 +51,15 @@ const Sidebar = () => {
               </h2>
               <div className="flex menu nav-item items-center">
                 <NavLink to="/dashboard">
-                <a href="#" className="flex items-center">
-                <img
-                  src="assets/images/dashboard.svg"
-                  height={20}
-                  width={20}
-                  className="mx-auto dark-logo dark:hidden"
-                  alt="logo"
-                />
-              </a>
+                  <a href="#" className="flex items-center">
+                    <img
+                      src={dashboard}
+                      height={20}
+                      width={20}
+                      className="mx-auto dark-logo dark:hidden"
+                      alt="logo"
+                    />
+                  </a>
                   <span className="text-white text-sm">Dashboard</span>
                 </NavLink>
               </div>
@@ -67,15 +72,15 @@ const Sidebar = () => {
                   onClick={() => updateMenu("Master")}
                 >
                   <div className="flex items-center">
-                  <a href="#" className="flex items-center">
-                <img
-                  src="assets/images/party.svg"
-                  height={20}
-                  width={20}
-                  className="mx-auto dark-logo dark:hidden"
-                  alt="logo"
-                />
-              </a>
+                    <a href="#" className="flex items-center">
+                      <img
+                        src={party}
+                        height={20}
+                        width={20}
+                        className="mx-auto dark-logo dark:hidden"
+                        alt="logo"
+                      />
+                    </a>
                     <span className="pl-1.5 text-white text-sm">
                       Parties & Inventories
                     </span>
@@ -110,15 +115,15 @@ const Sidebar = () => {
                   onClick={() => updateMenu("TrasctionMaster")}
                 >
                   <div className="flex items-center">
-                  <a href="#" className="flex items-center">
-                <img
-                  src="assets/images/transection.svg"
-                  height={20}
-                  width={20}
-                  className="mx-auto dark-logo dark:hidden"
-                  alt="logo"
-                />
-              </a>
+                    <a href="#" className="flex items-center">
+                      <img
+                        src={transection}
+                        height={20}
+                        width={20}
+                        className="mx-auto dark-logo dark:hidden"
+                        alt="logo"
+                      />
+                    </a>
                     <span className="pl-1.5 text-sm text-white">
                       Trasction Manager
                     </span>
@@ -176,15 +181,15 @@ const Sidebar = () => {
                   onClick={() => updateMenu("Report")}
                 >
                   <div className="flex items-center">
-                  <a href="#" className="flex items-center">
-                <img
-                  src="assets/images/report.svg"
-                  height={20}
-                  width={20}
-                  className="mx-auto dark-logo dark:hidden"
-                  alt="logo"
-                />
-              </a>
+                    <a href="#" className="flex items-center">
+                      <img
+                        src={report}
+                        height={20}
+                        width={20}
+                        className="mx-auto dark-logo dark:hidden"
+                        alt="logo"
+                      />
+                    </a>
                     <span className="pl-1.5 text-sm text-white">Report</span>
                   </div>
                 </a>
@@ -228,15 +233,15 @@ const Sidebar = () => {
                   </li>
                   <li></li>
                   <NavLink to="/dashboard/help" className="flex items-center">
-                  <a href="#" className="flex items-center">
-                <img
-                  src="assets/images/help.svg"
-                  height={20}
-                  width={20}
-                  className="mx-auto dark-logo dark:hidden"
-                  alt="logo"
-                />
-              </a>
+                    <a href="#" className="flex items-center">
+                      <img
+                        src={help}
+                        height={20}
+                        width={20}
+                        className="mx-auto dark-logo dark:hidden"
+                        alt="logo"
+                      />
+                    </a>
                     <span className="pl-1.5 text-white text-sm">Help</span>
                   </NavLink>
                 </ul>

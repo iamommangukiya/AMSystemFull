@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { fetchDetailsComapny } from "../reducer/Company_reducer";
 import { getbalancesheet } from "../reducer/billing_reducer";
+import Balancesheet from "./Balancesheet";
 
 const CompanyDetail = () => {
   const dispatch = useDispatch();
@@ -137,11 +138,13 @@ const CompanyDetail = () => {
             <span class="block text-2xl font-bold">
               {" "}
               {balancesheetData &&
-                opbalance - balancesheetData.sales - balancesheetData.Purchase <
+                parseInt(opbalance) +
+                  balancesheetData.sales -
+                  balancesheetData.Purchase <
                   0 &&
                 "Loss"}
               {balancesheetData &&
-                opbalance -
+                parseInt(opbalance) +
                   balancesheetData.sales -
                   balancesheetData.Purchase >=
                   0 &&
@@ -149,9 +152,12 @@ const CompanyDetail = () => {
               ₹
               {balancesheetData &&
                 Math.abs(
-                  opbalance - balancesheetData.sales - balancesheetData.Purchase
+                  parseInt(opbalance) +
+                    balancesheetData.sales -
+                    balancesheetData.Purchase
                 )}
             </span>
+            {console.log(balancesheetData)}
             <span class="block text-gray-500">Profit / Loss</span>
           </div>
         </div>

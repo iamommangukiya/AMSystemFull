@@ -45,6 +45,13 @@ const TrasactionMaster = ({ data, mode, transectionType, closeModal }) => {
   const handelSubmit = (e) => {
     e.preventDefault();
     try {
+      // Check if the amount is negative
+      if (inputs.amount < 0) {
+        // Show alert using toast
+        toast.error("Amount cannot be negative");
+        return;
+      }
+
       if (mode === "update") {
         dispatch(transction_Update(inputs));
         closeModal();

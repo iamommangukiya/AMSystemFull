@@ -278,6 +278,45 @@ const Biling = () => {
     (state) => state.BillingReducer.updateBilllog?.flag || {}
   );
 
+  // const validation = (e) => {
+  //   e.preventDefault(); // Prevent default form submission behavior
+
+  //   // Perform validation
+  //   const errors = {};
+  //   if (!Inputs.invoiceNo.trim()) {
+  //     errors.invoiceNo = "Invoice number is required";
+  //   }
+  //   if (!Inputs.bPartyName.trim()) {
+  //     errors.bPartyName = "Party name is required";
+  //   }
+  //   if (
+  //     Inputs.items.length === 0 ||
+  //     Inputs.items.some((item) => !item.name || !item.qty || item.qty <= 0)
+  //   ) {
+  //     toast.error("At least one item is required");
+  //     errors.item = "kshdg";
+  //   }
+  //   // Additional validations as needed...
+  //   if (Inputs.isGstBill) {
+  //     const isGst = validGst.test(Inputs.pgstNo);
+  //     if (!isGst) {
+  //       errors.gst = "Please Enter valid GSTIN";
+  //       // Prevent submission if GST is invalid
+  //     }
+  //   }
+  //   // If there are errors, set them and prevent form submission
+  //   if (Object.keys(errors).length > 0) {
+  //     setErrors(errors);
+  //     return;
+  //   }
+
+  //   // Clear previous errors if any
+  //   setErrors({});
+
+  //   // If no errors, proceed with form submission
+
+  //   SumbmitHandle();
+  // };
   const validation = (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
@@ -294,7 +333,13 @@ const Biling = () => {
       Inputs.items.some((item) => !item.name || !item.qty || item.qty <= 0)
     ) {
       toast.error("At least one item is required");
-      errors.item = "kshdg";
+    }
+    // Validate paid amount and due amount
+    if (Inputs.paidAmount < 0) {
+      errors.paidAmount = "Paid amount cannot be negative";
+    }
+    if (Inputs.discount < 0) {
+      errors.discount = "discount cannot be negative";
     }
     // Additional validations as needed...
     if (Inputs.isGstBill) {
@@ -304,6 +349,7 @@ const Biling = () => {
         // Prevent submission if GST is invalid
       }
     }
+
     // If there are errors, set them and prevent form submission
     if (Object.keys(errors).length > 0) {
       setErrors(errors);
@@ -314,9 +360,9 @@ const Biling = () => {
     setErrors({});
 
     // If no errors, proceed with form submission
-
     SumbmitHandle();
   };
+
   if (flag === true || flagu == true) {
     toast.success("Sucessfull", "sucess");
     dispatch(billingaction.CleanInsertBill());
@@ -513,7 +559,7 @@ const Biling = () => {
               <label htmlFor="toggle" className="font-sans mr-2">
                 Gst Bill
               </label>
-              <div className="relative">
+              <div className="">
                 <input
                   id="toggle"
                   type="checkbox"
@@ -528,7 +574,7 @@ const Biling = () => {
                   }`}
                 >
                   <div
-                    className={`toggle-switch-handle w-5 h-5 rounded-full shadow-md transform duration-300 ${
+                    className={`toggle-switch-handle w-5 h-5 z-0 rounded-full shadow-md transform duration-300 ${
                       Inputs.isGstBill
                         ? "translate-x-6 bg-white"
                         : "translate-x-0 bg-white"
@@ -886,6 +932,11 @@ const Biling = () => {
                     className="block appearance-none w-full py-1 px-2 mb-1 text-base leading-normal bg-white text-gray-800 border border-gray-200 rounded text-end"
                     type="number"
                   />
+                  {errors.discount && (
+                    <p className="text-red-600" htmlFor="">
+                      {errors.discount}
+                    </p>
+                  )}
                 </td>
               </tr>
 
@@ -942,6 +993,11 @@ const Biling = () => {
                       onChange={handelchange}
                       value={Inputs.paidAmount}
                     />
+                    {errors.paidAmount && (
+                      <p className="text-red-600" htmlFor="">
+                        {errors.paidAmount}
+                      </p>
+                    )}
                   </td>
                 </tr>
               )}

@@ -229,7 +229,7 @@ const Providers = () => {
             <div className="breadcrumb d-flex align-items-center">
                 <p style={{ color: '#000000' }}>{'Issues'}</p>
             </div>
-            <div className="col-lg-12 d-flex flex-wrap align-items-center mb-3">
+            {/* <div className="col-lg-12 d-flex flex-wrap align-items-center mb-3">
                 <div className="col-lg-6 p-2 position-relative">
                     <input
                         className="search-input"
@@ -244,7 +244,7 @@ const Providers = () => {
                         <SearchOutlined />
                     </div>
                 </div>
-            </div>
+            </div> */}
             <Divider orientation="left" className="my-2 text-center">
                 Issues
             </Divider>

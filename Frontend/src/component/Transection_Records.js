@@ -16,19 +16,7 @@ const Trasection_Records = () => {
   const [itemsPerPage] = useState(20); // Number of items to display per page
 
   var result = useSelector((state) => state.TransctionReducer.Alltra?.data);
-  const exportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(result);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Transaction Records");
-    const excelBuffer = XLSX.write(workbook, {
-      bookType: "xlsx",
-      type: "array",
-    });
-    saveAs(
-      new Blob([excelBuffer], { type: "application/octet-stream" }),
-      "transaction_records.xlsx"
-    );
-  };
+
   useEffect(() => {
     dispatch(selectAllTra());
   }, []);
@@ -47,7 +35,19 @@ const Trasection_Records = () => {
       );
     }
   };
-
+  const exportToExcel = () => {
+    const worksheet = XLSX.utils.json_to_sheet(filterRecords());
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Transaction Records");
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+    saveAs(
+      new Blob([excelBuffer], { type: "application/octet-stream" }),
+      "transaction_records.xlsx"
+    );
+  };
   // Get current items based on pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;

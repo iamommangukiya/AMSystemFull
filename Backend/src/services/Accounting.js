@@ -1,10 +1,11 @@
+const { promises } = require("nodemailer/lib/xoauth2");
 const logError = require("../../errorLog");
 const Querys = require("../config/querys");
 const querys = require("../config/querys");
 const database = require("../database/index");
 // const db = database("Accounting");
 const db = database("Accounting");
-const dbuser = database("user");
+const userdb = database("user");
 const query = new querys();
 
 class Accounting {
@@ -171,25 +172,6 @@ class Accounting {
   //     }
   //   });
   // }
-  async selectAlltra(cmpid, res) {
-    var q = query.selectFinancialMaster(cmpid);
-    db.query(q, (errr, data) => {
-      if (errr) {
-        logError(errr);
-        res.status(200).json({ flag: false, message: "Internal Server error" });
-      } else {
-        if (data.length > 0) {
-          res.status(200).json({
-            data: data,
-            flag: true,
-            message: "featch succsessfully",
-          });
-        } else {
-          res.status(200).json({ flag: false, message: "No data match" });
-        }
-      }
-    });
-  }
 
   async selectFinance(cmpid, res, type) {
     // var q = query.selectFinancialMaster();
@@ -518,6 +500,7 @@ class Accounting {
   }
 
   async inserbillLog(userInputs, res) {
+    let alredy = false;
     try {
       const q = query.inserbillLog(userInputs);
       const data = await this.dbQuery(q);
@@ -531,7 +514,16 @@ class Accounting {
               await this.updateInventory(item.id, item.qty, "purchase");
             } else if (transactionType === "SalesBook") {
               // Decrement inventory for sale
-              await this.updateInventory(item.id, item.qty, "sale");
+              try {
+                await this.updateInventory(item.id, item.qty, "sale");
+              } catch (error) {
+                alredy = true;
+                // If inventory is not sufficient, return an error and don't insert the bill log record
+                await this.deleteBillLogRecord(data.insertId); // Delete the inserted bill log record
+                return res
+                  .status(200)
+                  .json({ flag: false, message: "Insufficient inventory" });
+              }
             }
             // Insert item details in fullbilllog table
             await this.insertItemDetails(
@@ -551,8 +543,14 @@ class Accounting {
       }
     } catch (error) {
       logError(error);
-      res.status(200).json({ flag: false, message: "Internal Server error" });
+      if (!alredy) {
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      }
     }
+  }
+  async deleteBillLogRecord(id) {
+    let q = `delete from Accounting.Billlog where id = ${id}`;
+    db.query(q);
   }
   async updateInventory(itemId, quantity, transactionType) {
     try {
@@ -561,27 +559,28 @@ class Accounting {
         itemId,
       ]);
 
-      if (!currentInventoryRows || currentInventoryRows.length === 0) {
-        throw new Error("Item not found in inventory or inventory is empty");
+      if (currentInventoryRows.length === 0) {
+        throw new Error("Item not found in inventory");
       }
-
-      let currentQuantity = 0;
-      if (currentInventoryRows) {
-        const currentQuantity = currentInventoryRows.openingStock;
-      }
-
-      // Handle cases where currentQuantity is null or NaN
-      const numericCurrentQuantity =
-        currentQuantity !== null && !isNaN(currentQuantity)
-          ? parseInt(currentQuantity)
-          : 0;
-
+      // console.log(currentInventoryRows);
+      console.log(currentInventoryRows);
+      const currentQuantity =
+        currentInventoryRows.openingStock == "null"
+          ? 0
+          : currentInventoryRows.openingStock;
+      console.log(currentQuantity);
       // Update inventory based on transaction type
-      let updatedQuantity;
+      let updatedQuantity = 0;
       if (transactionType === "purchase") {
-        updatedQuantity = numericCurrentQuantity + parseInt(quantity);
+        updatedQuantity =
+          parseInt(currentQuantity == "null" ? 0 : currentQuantity) +
+          parseInt(quantity);
+        console.log(updatedQuantity);
       } else if (transactionType === "sale") {
-        updatedQuantity = numericCurrentQuantity - parseInt(quantity);
+        updatedQuantity = parseInt(currentQuantity) - parseInt(quantity);
+        if (updatedQuantity < 0) {
+          throw new Error("Inventory is not sufficient");
+        }
       } else {
         throw new Error("Invalid transaction type");
       }
@@ -592,6 +591,7 @@ class Accounting {
 
       return true; // Return true if inventory update is successful
     } catch (error) {
+      console.log(error);
       throw error; // Propagate error if inventory update fails
     }
   }
@@ -607,7 +607,7 @@ class Accounting {
       item.salePrice,
       cmpid,
     ];
-    await this.dbQuery(q, values, (err, res) => {});
+    await this.dbQuery(q, values);
   }
 
   async dbQuery(sql, values = []) {
@@ -688,8 +688,8 @@ class Accounting {
 
   async updateBilling(userInputs, res) {
     try {
-      // console.log(userInputs);
-      const { invoiceNo, items } = userInputs;
+      console.log(userInputs);
+      const { billId, items } = userInputs;
       const q = query.updateBillLog(userInputs);
       const data = await this.dbQuery(q);
 
@@ -697,9 +697,9 @@ class Accounting {
         await Promise.all(
           items.map(async (item) => {
             const existsQuery = `SELECT * FROM Accounting.BillFullLog WHERE billId = ? AND itemId = ?`;
-            const existsValues = [invoiceNo, item.id];
+            const existsValues = [billId, item.id];
             const existingItem = await this.dbQuery(existsQuery, existsValues);
-            // console.log(existingItem, "ex");
+
             if (existingItem.length > 0) {
               const updateQuery = `UPDATE Accounting.BillFullLog SET gst = ?, amount = ?, qty = ?, unitCost = ? WHERE billId = ? AND itemId = ?`;
               const updateValues = [
@@ -707,25 +707,24 @@ class Accounting {
                 item.amount,
                 item.qty,
                 item.salePrice,
-                invoiceNo,
+                billId,
                 item.id,
               ];
               await this.dbQuery(updateQuery, updateValues);
             } else {
-              await this.insertItemDetails(userInputs.cmpId, invoiceNo, item);
+              await this.insertItemDetails(userInputs.cmpId, billId, item);
             }
           })
         );
         res.status(200).json({
           flag: true,
-          message: "Updated successfully",
+          message: "Inserted successfully",
           insertId: data.insertId,
         });
       } else {
         res.status(200).json({ flag: false, message: "Not found" });
       }
     } catch (error) {
-      console.log(error);
       logError(error);
       res.status(200).json({ flag: false, message: "Internal Server error" });
     }
@@ -851,9 +850,28 @@ class Accounting {
       throw error; // Re-throw the error for proper handling in the Express route
     }
   }
+  async selectAlltra(cmpid, res) {
+    var q = query.selectFinancialMaster(cmpid);
+    db.query(q, (errr, data) => {
+      if (errr) {
+        logError(errr);
+        res.status(200).json({ flag: false, message: "Internal Server error" });
+      } else {
+        if (data.length > 0) {
+          res.status(200).json({
+            data: data,
+            flag: true,
+            message: "featch succsessfully",
+          });
+        } else {
+          res.status(200).json({ flag: false, message: "No data match" });
+        }
+      }
+    });
+  }
   async GenerateBalanceSheet(id, res) {
     try {
-      let billLogs, transaction, itemmaster, cmp;
+      let billLogs, transaction, itemmaster, openbalance;
 
       const getBillLogsPromise = new Promise((resolve, reject) => {
         db.query(
@@ -864,20 +882,6 @@ class Accounting {
               reject(err);
             } else {
               billLogs = data;
-              resolve();
-            }
-          }
-        );
-      });
-      const company = new Promise((resolve, reject) => {
-        dbuser.query(
-          `SELECT * from tblcompany where id =  ${id}`,
-          (err, data) => {
-            if (err) {
-              logError(err);
-              reject(err);
-            } else {
-              cmp = data;
               resolve();
             }
           }
@@ -898,6 +902,21 @@ class Accounting {
           }
         );
       });
+      const OpeningBalance = new Promise((resolve, reject) => {
+        userdb.query(
+          `select OpeningBalance from tblcompany where id =${id} `,
+          (err, data) => {
+            if (err) {
+              logError(err);
+              reject(err);
+            } else {
+              console.log(data);
+              openbalance = data[0].OpeningBalance;
+              resolve();
+            }
+          }
+        );
+      });
       const itempro = new Promise((resolve, reject) => {
         db.query(
           `SELECT * from itemmaster where CompanyId=${id} `,
@@ -912,6 +931,7 @@ class Accounting {
           }
         );
       });
+
       function calculateInventoryCost(items) {
         return items.reduce((totalCost, item) => {
           if (
@@ -954,12 +974,16 @@ class Accounting {
           }, 0);
       };
 
-      Promise.all([getBillLogsPromise, getfulltransaction, itempro, company])
+      Promise.all([
+        getBillLogsPromise,
+        getfulltransaction,
+        itempro,
+        OpeningBalance,
+      ])
         .then(() => {
-          var OpeningBalance = cmp[0].OpeningBalance;
           const balanceSheet = {
             assets: {
-              OpeningBalance: OpeningBalance,
+              OpeningBalance: openbalance,
               inventory: calculateInventoryCost(itemmaster),
               accountsReceivable: accountRecivable(transaction), // Optional
             },

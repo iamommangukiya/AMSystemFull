@@ -171,10 +171,7 @@ const PrintBill = () => {
           GET PDF
         </button>
       </section>
-      <div
-        ref={targetRef}
-        className="flex bg-white p-6 h-full w-full justify-center"
-      >
+      <div ref={targetRef} className="flex  p-6 h-full w-full justify-center">
         <div className="h-3/4 w-3/4 ">
           <section class="bill ">
             <div class="border-t-4 border border-red-700"></div>
