@@ -16,8 +16,8 @@ const redisClient = redis.createClient({
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "gkusomg@gmail.com",
-    pass: "cwhm pykw vghi nupo",
+    user: "",
+    pass: "",
   },
 });
 redisClient.connect();
